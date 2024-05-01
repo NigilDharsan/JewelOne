@@ -1,0 +1,1 @@
+ /Users/nigildharsan/Documents/Flutter\ Project/JewelOne/.dart_tool/flutter_build/8e96972728d391686ae05eb9102fbf0f/native_assets.yaml: 
