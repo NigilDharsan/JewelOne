@@ -59,3 +59,11 @@ const Color blue6 = Color.fromRGBO(228, 241, 255, 1);
 const Color pink1 = Color.fromRGBO(250, 237, 237, 1);
 const Color pink2 = Color.fromRGBO(255, 0, 13, 1);
 const Color pink3 = Color.fromRGBO(250, 237, 237, 1);
+
+
+//BACKGROUND COLOR
+const Color backGroundColor = Color.fromRGBO(249, 249, 249, 1);
+
+//GRADIENT COLOR
+const Color gradient2 = Color.fromRGBO(238, 182, 79, 1);
+const Color gradient1 = Color.fromRGBO(159, 33, 44, 1);
