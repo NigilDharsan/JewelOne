@@ -12,6 +12,10 @@ const Color white7 = Color.fromRGBO(235, 235, 235, 1);
 //Black
 const Color Black = Color.fromRGBO(0, 0, 0, 1);
 const Color Black1 = Color.fromRGBO(54, 52, 53, 1);
+const Color BlackNormal = Color.fromRGBO(45, 45, 45, 1);
+const Color BlackBold = Color.fromRGBO(24, 24, 24, 1);
+
+
 //GREY
 const Color grey1 = Color.fromRGBO(108, 117, 125, 1);
 const Color grey2 = Color.fromRGBO(108, 117, 125, 1);

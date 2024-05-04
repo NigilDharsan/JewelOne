@@ -1,22 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
 
-
 //HEADING STYLE
-TextStyle Heading_Style = TextStyle(fontFamily: 'Metropolis', fontSize: 24, color: Color.fromRGBO(24, 24, 24, 1), fontWeight: FontWeight.w700);
+TextStyle Heading_Style = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 24,
+    color: Color.fromRGBO(24, 24, 24, 1),
+    fontWeight: FontWeight.w700);
 
 //SUB TEXT STYLE
-TextStyle Sub_TextStyle = TextStyle(fontFamily: 'Metropolis', fontSize: 16, color: Color.fromRGBO(24, 24, 24, 1), fontWeight: FontWeight.w400);
-TextStyle Sub_TextStyleBT = TextStyle(fontFamily: 'Metropolis', fontSize: 16, color: gradient1, fontWeight: FontWeight.w600);
+TextStyle Sub_TextStyle = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 16,
+    color: Color.fromRGBO(24, 24, 24, 1),
+    fontWeight: FontWeight.w400);
+TextStyle Sub_TextStyleBT = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 16,
+    color: gradient1,
+    fontWeight: FontWeight.w600);
 
 //PHONE NUMBER
-TextStyle phone_ST = TextStyle(fontFamily: 'Metropolis', fontSize: 20, color: Color.fromRGBO(24, 24, 24, 1), fontWeight: FontWeight.w500);
+TextStyle phone_ST = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 20,
+    color: Color.fromRGBO(24, 24, 24, 1),
+    fontWeight: FontWeight.w500);
 
 //SKIP STYLE
-TextStyle skip_ST = TextStyle(fontFamily: 'Inter', fontSize: 16, color: Color.fromRGBO(45, 45, 45, 1), fontWeight: FontWeight.w500);
-
-
-
+TextStyle skip_ST = TextStyle(
+    fontFamily: 'Inter',
+    fontSize: 16,
+    color: Color.fromRGBO(45, 45, 45, 1),
+    fontWeight: FontWeight.w500);
 
 TextStyle appTitle = TextStyle(
     fontFamily: 'Roboto',
@@ -28,8 +44,6 @@ TextStyle appTitle2 = TextStyle(
     fontSize: 18,
     color: white1,
     fontWeight: FontWeight.w500);
-
-
 
 TextStyle phoneHT = TextStyle(
     fontFamily: 'Roboto',
@@ -60,6 +74,19 @@ TextStyle ButtonT = TextStyle(
     color: white1,
     fontWeight: FontWeight.w700);
 
+TextStyle BlackTextColorLowSize = TextStyle(
+  fontFamily: 'Metropolis',
+  fontSize: 14,
+  color: BlackNormal,
+  fontWeight: FontWeight.w500,
+);
+
+TextStyle BlackTextColor = TextStyle(
+  fontFamily: 'Inter',
+  fontSize: 16,
+  color: BlackNormal,
+  fontWeight: FontWeight.w500,
+);
 
 TextStyle TBlack = TextStyle(
     fontFamily: 'Inter',
@@ -72,12 +99,10 @@ TextStyle TBlack1 = TextStyle(
     color: Color.fromRGBO(0, 0, 0, 1),
     fontWeight: FontWeight.w700);
 
-
-
 //HEADING
-Widget Heading_Text(context,{required String Title}){
+Widget Heading_Text(context, {required String Title}) {
   return Container(
-    width: MediaQuery.sizeOf(context).width/1.2,
+    width: MediaQuery.sizeOf(context).width / 1.2,
     child: Text(
       Title,
       style: Heading_Style,
@@ -85,6 +110,7 @@ Widget Heading_Text(context,{required String Title}){
     ),
   );
 }
+
 //TEXTFIELD HEADING
 Widget Title_Style({required String Title, required bool? isStatus}) {
   return Padding(
