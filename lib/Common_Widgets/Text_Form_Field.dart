@@ -27,11 +27,11 @@ Widget textFormField(
         hintText: hintText,
         hintStyle: phoneHT,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(5),
           borderSide: BorderSide(color: Colors.white),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(5),
           borderSide: BorderSide(color: Colors.white),
         ),
         fillColor: Colors.white,
