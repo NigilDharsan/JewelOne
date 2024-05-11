@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:jewelone/Common_Widgets/Image_Path.dart';
 
 import '../utilits/Common_Colors.dart';
 import '../utilits/Text_Style.dart';
@@ -12,6 +13,7 @@ Widget textFormField(
     bool? isEnabled,
     void Function(String)? onChanged,
     required String hintText,
+      Widget? prefixIcon,
     List<TextInputFormatter>? inputFormatters,
     required TextInputType keyboardtype}) {
   return Container(
@@ -26,6 +28,7 @@ Widget textFormField(
         contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
         hintText: hintText,
         hintStyle: phoneHT,
+        prefixIcon: prefixIcon,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
           borderSide: BorderSide(color: Colors.white),
@@ -344,9 +347,9 @@ Widget dropDownField(
 }) {
   return Container(
     height: 50,
-    width: MediaQuery.of(context).size.width,
+    width: MediaQuery.of(context).size.width/2.5,
     decoration:
-        BoxDecoration(borderRadius: BorderRadius.circular(10), color: white1),
+        BoxDecoration(borderRadius: BorderRadius.circular(10), color: backGroundColor),
     child: DropdownButtonFormField<String>(
       value: value,
       isExpanded: true,
@@ -358,21 +361,18 @@ Widget dropDownField(
       ),
       icon: Padding(
         padding: const EdgeInsets.only(right: 10),
-        child: Icon(
-          Icons.keyboard_arrow_down_sharp,
-          color: Colors.black,
-          size: 35,
+        child: Center(
+          child: Icon(
+            Icons.keyboard_arrow_down_sharp,
+            color: gradient1,
+            size: 35,
+          ),
         ),
       ),
       items: listValue?.map((String option) {
         return DropdownMenuItem<String>(
           value: option,
-          child: Padding(
-            padding: const EdgeInsets.only(
-              left: 10,
-            ),
-            child: Text(option),
-          ),
+          child: Center(child: Text(option,style: dropDownST,)),
         );
       }).toList(),
       onChanged: onChanged,
@@ -380,212 +380,4 @@ Widget dropDownField(
   );
 }
 
-// Widget dropDownField1(
-//   context, {
-//   required String? value,
-//   required List<Clients>? listValue,
-//   required void Function(String?)? onChanged,
-//   required String hintT,
-// }) {
-//   return Container(
-//     height: 50,
-//     width: MediaQuery.of(context).size.width,
-//     decoration:
-//         BoxDecoration(borderRadius: BorderRadius.circular(10), color: white1),
-//     child: DropdownButtonFormField<String>(
-//       value: value,
-//       isExpanded: true,
-//       decoration: InputDecoration(
-//         border: InputBorder.none,
-//         contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
-//         hintStyle: phoneHT,
-//         hintText: hintT,
-//       ),
-//       icon: Padding(
-//         padding: const EdgeInsets.only(right: 10),
-//         child: Icon(
-//           Icons.keyboard_arrow_down_sharp,
-//           color: Colors.black,
-//           size: 35,
-//         ),
-//       ),
-//       items: listValue?.map((Clients option) {
-//         return DropdownMenuItem<String>(
-//           value: option.cusFirstName,
-//           child: Padding(
-//             padding: const EdgeInsets.only(
-//               left: 10,
-//             ),
-//             child: Text(option.cusFirstName ?? ""),
-//           ),
-//         );
-//       }).toList(),
-//       onChanged: onChanged,
-//     ),
-//   );
-// }
 
-// Widget dropDownField2(
-//   context, {
-//   required String? value,
-//   required List<Companies>? listValue,
-//   required void Function(String?)? onChanged,
-//   required String hintT,
-// }) {
-//   return Container(
-//     height: 50,
-//     width: MediaQuery.of(context).size.width,
-//     decoration:
-//         BoxDecoration(borderRadius: BorderRadius.circular(10), color: white1),
-//     child: DropdownButtonFormField<String>(
-//       value: value,
-//       isExpanded: true,
-//       decoration: InputDecoration(
-//         border: InputBorder.none,
-//         contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
-//         hintStyle: phoneHT,
-//         hintText: hintT,
-//       ),
-//       icon: Padding(
-//         padding: const EdgeInsets.only(right: 10),
-//         child: Icon(
-//           Icons.keyboard_arrow_down_sharp,
-//           color: Colors.black,
-//           size: 35,
-//         ),
-//       ),
-//       items: listValue?.map((Companies option) {
-//         return DropdownMenuItem<String>(
-//           value: option.companyBranch,
-//           child: Padding(
-//             padding: const EdgeInsets.only(
-//               left: 10,
-//             ),
-//             child: Text(option.companyBranch ?? ""),
-//           ),
-//         );
-//       }).toList(),
-//       onChanged: onChanged,
-//     ),
-//   );
-// }
-
-// Widget dropDownField3(
-//   context, {
-//   required String? value,
-//   required List<Executives>? listValue,
-//   required void Function(String?)? onChanged,
-//   required String hintT,
-// }) {
-//   return Container(
-//     height: 50,
-//     width: MediaQuery.of(context).size.width,
-//     decoration:
-//         BoxDecoration(borderRadius: BorderRadius.circular(10), color: white1),
-//     child: DropdownButtonFormField<String>(
-//       value: value,
-//       isExpanded: true,
-//       decoration: InputDecoration(
-//         border: InputBorder.none,
-//         contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
-//         hintStyle: phoneHT,
-//         hintText: hintT,
-//       ),
-//       icon: Padding(
-//         padding: const EdgeInsets.only(right: 10),
-//         child: Icon(
-//           Icons.keyboard_arrow_down_sharp,
-//           color: Colors.black,
-//           size: 35,
-//         ),
-//       ),
-//       items: listValue?.map((Executives option) {
-//         return DropdownMenuItem<String>(
-//           value: option.name,
-//           child: Padding(
-//             padding: const EdgeInsets.only(
-//               left: 10,
-//             ),
-//             child: Text(option.name ?? ""),
-//           ),
-//         );
-//       }).toList(),
-//       onChanged: onChanged,
-//     ),
-//   );
-// }
-
-// class MultiSelectDropdown extends StatefulWidget {
-//   final List<Executives> items;
-//   final List<Executives> selectedItems;
-//   final ValueChanged<List<Executives>> onChanged;
-
-//   MultiSelectDropdown({
-//     required this.items,
-//     required this.selectedItems,
-//     required this.onChanged,
-//   });
-
-//   @override
-//   _MultiSelectDropdownState createState() => _MultiSelectDropdownState();
-// }
-
-// class _MultiSelectDropdownState extends State<MultiSelectDropdown> {
-//   late List<bool> _isCheckedList;
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     _isCheckedList = List<bool>.filled(widget.items.length, false);
-//     for (int i = 0; i < widget.selectedItems.length; i++) {
-//       int index = widget.items.indexOf(widget.selectedItems[i]);
-//       if (index != -1) {
-//         _isCheckedList[index] = true;
-//       }
-//     }
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Column(
-//       crossAxisAlignment: CrossAxisAlignment.stretch,
-//       children: <Widget>[
-//         InputDecorator(
-//           decoration: InputDecoration(
-//             labelText: 'Select Executive',
-//             border: OutlineInputBorder(),
-//           ),
-//           child: SizedBox(
-//             height: 200, // Adjust the height as needed
-//             child: SingleChildScrollView(
-//               child: Column(
-//                 children: List<Widget>.generate(
-//                   widget.items.length,
-//                   (int index) {
-//                     return CheckboxListTile(
-//                       title: Text(widget.items[index].name ?? ""),
-//                       value: _isCheckedList[index],
-//                       onChanged: (bool? value) {
-//                         setState(() {
-//                           _isCheckedList[index] = value ?? false;
-
-//                           List<Executives> selectedItems = [];
-//                           for (int i = 0; i < widget.items.length; i++) {
-//                             if (_isCheckedList[i]) {
-//                               selectedItems.add(widget.items[i]);
-//                             }
-//                           }
-//                           widget.onChanged(selectedItems);
-//                         });
-//                       },
-//                     );
-//                   },
-//                 ),
-//               ),
-//             ),
-//           ),
-//         ),
-//       ],
-//     );
-//   }
-// }

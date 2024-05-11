@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:jewelone/Common_Widgets/Image_Path.dart';
 
 import '../utilits/Common_Colors.dart';
 import '../utilits/Text_Style.dart';
 
 class Custom_AppBar extends StatefulWidget implements PreferredSizeWidget {
-  String? title;
+
   bool? isNav;
-  bool? isGreen;
   List<Widget>? actions;
   Custom_AppBar(
       {Key? key,
-      required this.title,
       required this.actions,
-      required this.isGreen,
       required this.isNav})
       : preferredSize = Size.fromHeight(kToolbarHeight),
         super(key: key);
@@ -28,7 +26,7 @@ class _CustomAppBarState extends State<Custom_AppBar> {
   Widget build(BuildContext context) {
     return AppBar(
       primary: true,
-      backgroundColor: widget.isGreen == true ? brown1 : white5,
+      backgroundColor: backGroundColor,
       automaticallyImplyLeading: false,
       elevation: 0,
       systemOverlayStyle: SystemUiOverlayStyle(
@@ -39,17 +37,12 @@ class _CustomAppBarState extends State<Custom_AppBar> {
       leading: widget.isNav == true
           ? InkWell(
               onTap: () => Navigator.pop(context),
-              child: Icon(
-                Icons.arrow_back_ios,
-                color: widget.isGreen == true ? white1 : Colors.black,
-              ))
+              child: ImgPathSvg('back.svg'),
+      )
           : null,
       centerTitle: true,
       actions: widget.actions,
-      title: Text(
-        widget.title.toString(),
-        style: widget.isGreen == true ? appTitle2 : appTitle,
-      ),
+
     );
   }
 }
