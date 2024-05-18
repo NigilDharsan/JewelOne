@@ -122,6 +122,18 @@ TextStyle ButtonT = TextStyle(
     color: white1,
     fontWeight: FontWeight.w700);
 
+TextStyle ButtonT2 = TextStyle(
+    fontFamily: 'Inter',
+    fontSize: 14,
+    color: white1,
+    fontWeight: FontWeight.w600);
+
+TextStyle ButtonT3 = TextStyle(
+    fontFamily: 'Inter',
+    fontSize: 14,
+    color: Colors.black,
+    fontWeight: FontWeight.w600);
+
 TextStyle BlackTextColorLowSize = TextStyle(
   fontFamily: 'Metropolis',
   fontSize: 14,
@@ -223,3 +235,102 @@ Widget CheckBoxes(
     ),
   );
 }
+
+//ONLINE EMI PAYMENT
+//CONTAINER TEXTS
+TextStyle plan1 = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 18,
+    color: Color.fromRGBO(45, 45, 45, 1),
+    fontWeight: FontWeight.w600);
+
+TextStyle plantexts = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 12,
+    color: Color.fromRGBO(130, 130, 130, 1),
+    fontWeight: FontWeight.w500);
+
+TextStyle plancode = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 12,
+    color: Color.fromRGBO(45, 45, 45, 1),
+    fontWeight: FontWeight.w500);
+
+TextStyle plantexts2 = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 14,
+    color: Color.fromRGBO(141, 141, 141, 1),
+    fontWeight: FontWeight.w500);
+
+TextStyle rate = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 25,
+    color: Color.fromRGBO(12, 167, 80, 1),
+    fontWeight: FontWeight.w900);
+
+TextStyle rate2 = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 14,
+    color: Color.fromRGBO(45, 45, 45, 1),
+    fontWeight: FontWeight.w500);
+
+TextStyle maintext = TextStyle(
+    fontFamily: 'Inter',
+    fontSize: 16,
+    color: Color.fromRGBO(45, 45, 45, 1),
+    fontWeight: FontWeight.w600);
+
+//FAQ TEXT
+TextStyle texts = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 15,
+    color: Color.fromRGBO(16, 24, 40, 1),
+    fontWeight: FontWeight.w500);
+
+TextStyle texts2 = TextStyle(
+    fontFamily: 'Inter',
+    fontSize: 16,
+    color: Color.fromRGBO(45, 45, 45, 1),
+    fontWeight: FontWeight.w500);
+
+//FAQ CONTACT US
+TextStyle lighttext = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 14,
+    color: Color.fromRGBO(116, 116, 116, 1),
+    fontWeight: FontWeight.w400);
+
+//FAQ CONTAINER HEADING
+TextStyle colortexts = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 14,
+    color: Color.fromRGBO(217, 154, 38, 1),
+    fontWeight: FontWeight.w500);
+
+//MOBILE NUMBER
+TextStyle Num = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 24,
+    color: Color.fromRGBO(45, 45, 45, 1),
+    fontWeight: FontWeight.w600);
+
+//MY SSP
+TextStyle sspplan = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 18,
+    color: Color.fromRGBO(145, 26, 29, 1),
+    fontWeight: FontWeight.w600);
+
+//VIEW DETAILS
+TextStyle Viewdetails = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 15,
+    color: Color.fromRGBO(217, 154, 38, 1),
+    fontWeight: FontWeight.w600);
+
+//HEIP
+TextStyle help = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 16,
+    color: Color.fromRGBO(117, 117, 117, 1),
+    fontWeight: FontWeight.w500);

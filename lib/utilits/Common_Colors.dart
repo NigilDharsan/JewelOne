@@ -8,6 +8,7 @@ const Color white4 = Color.fromRGBO(200, 200, 200, 1);
 const Color white5 = Color.fromRGBO(246, 247, 249, 1);
 const Color white6 = Color.fromRGBO(251, 255, 255, 1);
 const Color white7 = Color.fromRGBO(235, 235, 235, 1);
+const Color white8 = Color.fromRGBO(239, 239, 239, 1);
 
 //Black
 const Color Black = Color.fromRGBO(0, 0, 0, 1);
@@ -21,7 +22,8 @@ const Color grey1 = Color.fromRGBO(140, 140, 140, 1);
 const Color grey2 = Color.fromRGBO(108, 117, 125, 1);
 const Color grey3 = Color.fromRGBO(136, 136, 136, 1);
 const Color grey4 = Color.fromRGBO(243, 240, 240, 240);
-const Color grey5 = Color.fromRGBO(85, 82, 82, 1);
+const Color grey5 = Color.fromRGBO(233, 233, 233, 1);
+
 
 //BLACK
 const Color black1 = Color.fromRGBO(52, 52, 52, 1);
@@ -60,13 +62,15 @@ const Color blue5 = Color.fromRGBO(0, 114, 176, 1);
 const Color blue6 = Color.fromRGBO(228, 241, 255, 1);
 
 //PINK
-const Color pink1 = Color.fromRGBO(250, 237, 237, 1);
+const Color pink1 = Color.fromRGBO(243, 236, 231, 1);
 const Color pink2 = Color.fromRGBO(255, 0, 13, 1);
 const Color pink3 = Color.fromRGBO(250, 237, 237, 1);
-
+const Color pink4 = Color.fromRGBO(229, 210, 194, 1);
+const Color pink5 = Color.fromRGBO(229, 210, 194, 1);
 
 //BACKGROUND COLOR
-const Color backGroundColor = Color.fromRGBO(232, 219, 208, 1);
+// const Color backGroundColor = Color.fromRGBO(232, 219, 208, 1);
+const Color backGroundColor = Color.fromRGBO(255, 255, 255, 1);
 
 //GRADIENT COLOR
 const Color gradient2 = Color.fromRGBO(248, 146, 28, 1);

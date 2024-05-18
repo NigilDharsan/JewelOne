@@ -1,0 +1,164 @@
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/material.dart';
+import 'package:jewelone/Common_Widgets/Image_Path.dart';
+import 'package:jewelone/utilits/Text_Style.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
+import '../../Common_Widgets/Common_Button.dart';
+import '../../utilits/Common_Colors.dart';
+class New_SSP_Screen extends StatefulWidget {
+  const New_SSP_Screen({super.key});
+
+  @override
+  State<New_SSP_Screen> createState() => _New_SSP_ScreenState();
+}
+
+class _New_SSP_ScreenState extends State<New_SSP_Screen> {
+  int myCurrentPage = 0;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: white2,
+      appBar: AppBar(
+        leading: Icon(Icons.arrow_back_ios),
+      ),
+      body: _Mainbody(),
+    );
+  }
+
+  Widget _Mainbody (){
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.only(left: 10,right: 10,top: 20,bottom: 20),
+        child: Column(
+          children: [
+            //BANNER
+            CarouselSlider(
+                items: [
+                  _carouselImg(context,),
+                  _carouselImg(context,),
+                  _carouselImg(context,),
+                  _carouselImg(context,),
+                ],
+                options: CarouselOptions(
+                  autoPlay: true,
+                  viewportFraction: 1,
+                  enlargeCenterPage: true,
+                  aspectRatio: 16/9,
+                  autoPlayAnimationDuration:Duration(milliseconds: 700),
+                  onPageChanged: (index,reason){
+                    setState(() {
+                      myCurrentPage = index;
+                    });
+                  },
+                )),
+            Padding(
+              padding: const EdgeInsets.only(top: 15,bottom: 10),
+              child: Center(
+                child: AnimatedSmoothIndicator(
+                  activeIndex: myCurrentPage,
+                  count: 4,
+                  effect: ExpandingDotsEffect(
+                      dotHeight: 5,
+                      dotWidth: 5,
+                      activeDotColor: gradient2
+                  ),
+                ),
+              ),
+            ),
+
+            //JOIN NOW CONTAINER
+            Container(
+              width: MediaQuery.sizeOf(context).width,
+              decoration: BoxDecoration(
+                  color: white1,
+                  borderRadius: BorderRadius.circular(5)
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 15, bottom: 10,right: 10,left: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    ImgPathSvg('Rupees.svg'),
+                    const SizedBox(width: 10,),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Plan 1",style: plan1,),
+                        Container(
+                            width: MediaQuery.sizeOf(context).width/2.5,
+                            child: Text('Gold Ornaments Purchase Advance Scheme',style: lighttext,maxLines: 2,)),
+                      ],
+                    ),
+                    const Spacer(),
+                    Paynowcommonbutton1 (context,
+                        onPress: () {
+                          // Navigator.push(context, MaterialPageRoute(builder: (context)=>Home_DashBoard_Screen()));
+                        }, titleName: 'Join Now')
+                  ],
+                ),
+              ),
+            ),
+
+            //REGISTER NOW CONTAINERS
+            plancontainer(context, texts: 'Plan 1'),
+            plancontainer(context, texts: 'Plan 2'),
+            plancontainer(context, texts: 'Plan 3'),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+//CAROUSEL IMG STACK
+Widget _carouselImg(context){
+  return Padding(
+    padding: const EdgeInsets.only(left: 10,right: 10),
+    child: Container(
+      width: MediaQuery.of(context).size.width,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(25),
+        image: DecorationImage(image: AssetImage('lib/assets/New_SSP_Banner.png'),
+            fit: BoxFit.fill),
+      ),
+    ),
+  );
+}
+
+//REGISTER NOW CONTAINER
+Widget plancontainer (context,{required String texts}){
+  return Padding(
+    padding: const EdgeInsets.only(top: 10,),
+    child: Container(
+      width: MediaQuery.sizeOf(context).width,
+      decoration: BoxDecoration(
+          color: white1,
+          borderRadius: BorderRadius.circular(5)
+      ),
+      child: Padding(
+        padding: const EdgeInsets.only(top: 15, bottom: 10,right: 15,left: 10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            ImgPathSvg('Rupees.svg'),
+            const SizedBox(width: 10,),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(texts,style: plan1,),
+                Container(
+                    width: MediaQuery.sizeOf(context).width/2.5,
+                    child: Text('Gold Ornaments Purchase Advance Scheme',style: lighttext,maxLines: 2,)),
+              ],
+            ),
+            const Spacer(),
+            Text('Register Now >',style: colortexts,)
+          ],
+        ),
+      ),
+    ),
+  );
+}

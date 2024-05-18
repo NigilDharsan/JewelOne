@@ -240,8 +240,6 @@ Widget _carouselImg(context){
       borderRadius: BorderRadius.circular(15),
       image: DecorationImage(image: AssetImage('lib/assets/banner1.png'),
       fit: BoxFit.cover),
-
     ),
-
   );
 }
