@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:jewelone/Common_Widgets/Custom_App_Bar.dart';
+import 'package:jewelone/Common_Widgets/Image_Path.dart';
+import 'package:jewelone/Src/Home_DashBoard_Ui/Home_DashBoard_Screen.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
 
 import '../../utilits/Text_Style.dart';
+
 class Contact_Us_Screen extends StatefulWidget {
   const Contact_Us_Screen({super.key});
 
@@ -14,13 +18,21 @@ class _Contact_Us_ScreenState extends State<Contact_Us_Screen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: white2,
-      appBar: AppBar(
-        leading: Icon(Icons.arrow_back_ios),
+      appBar: Custom_AppBar(
+        isNav: true,
+        isTwoLine: false,
+        title1: '',
+        title2: '',
+        actionLogo: 'home.svg',
+        isWhite: true,
+        ActiononTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>Home_DashBoard_Screen()));
+        },
       ),
       body: Padding(
-        padding: const EdgeInsets.only(top: 20,left: 20,right: 20,bottom: 30),
+        padding:
+            const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 30),
         child: SingleChildScrollView(
-
           //MAINBODY
           child: _Mainbody(),
         ),
@@ -28,16 +40,26 @@ class _Contact_Us_ScreenState extends State<Contact_Us_Screen> {
     );
   }
 
-  Widget _Mainbody (){
+  Widget _Mainbody() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-
         //TIMING
-        Text('Business Timings',style: texts2,),
-        const SizedBox(height: 15,),
-        Text('Monday - Saturday   10:00 AM - 06:30 PM',style: lighttext,),
-
+        Text(
+          'Business Timings',
+          style: texts2,
+        ),
+        Text(
+          'Monday - Saturday   10:00 AM - 06:30 PM',
+          style: lighttext,
+        ),
+        //DIVIDER
+        Padding(
+          padding: const EdgeInsets.only(top: 20),
+          child: SizedBox(
+              width: MediaQuery.sizeOf(context).width,
+              child: ImgPathSvg('dottedline.svg')),
+        ),
         //ADDRESS CONTAINER
         Address(context),
 
@@ -47,30 +69,31 @@ class _Contact_Us_ScreenState extends State<Contact_Us_Screen> {
         Scheme(context),
 
         //GENDRAL ENQUIRE
-        contactus(context, heading: 'General Enquiries', number: '1800 1033916'),
+        contactus(context,
+            heading: 'General Enquiries', number: '1800 1033916'),
 
         //WHATSAPP US
         contactus(context, heading: 'WhatsApp Us', number: '+91 73972 73272'),
 
         //MAIL US
-        contactus(context, heading: 'Mail Us', number: 'retail.crm@ejindia.com'),
+        contactus(context,
+            heading: 'Mail Us', number: 'retail.crm@ejindia.com'),
       ],
     );
   }
 }
 
-Widget contactus (context,{required String heading,required String number}){
+Widget contactus(context, {required String heading, required String number}) {
   return Padding(
-    padding: const EdgeInsets.only(top: 10,bottom: 10),
+    padding: const EdgeInsets.only(top: 10, bottom: 10),
     child: Container(
         width: MediaQuery.sizeOf(context).width,
         decoration: BoxDecoration(
             color: white1,
-            border: Border.all(width: 1,color: white8),
-            borderRadius: BorderRadius.circular(10)
-        ),
+            border: Border.all(width: 1, color: white8),
+            borderRadius: BorderRadius.circular(10)),
         child: Padding(
-          padding: const EdgeInsets.only(left: 15,top: 10,bottom: 10),
+          padding: const EdgeInsets.only(left: 15, top: 10, bottom: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -78,50 +101,68 @@ Widget contactus (context,{required String heading,required String number}){
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(bottom: 10),
-                    child: Text(heading,style: colortexts,),
+                    child: Text(
+                      heading,
+                      style: colortexts,
+                    ),
                   ),
                   const Spacer(),
                   Padding(
                     padding: const EdgeInsets.only(right: 15),
-                    child: Text('Copy',style: texts2,),
+                    child: Text(
+                      'Copy',
+                      style: texts2,
+                    ),
                   ),
                 ],
               ),
-              Text(number,style: Num,)
+              Text(
+                number,
+                style: Num,
+              )
             ],
           ),
-        )
+        )),
+  );
+}
+
+Widget Contactustext() {
+  return Padding(
+    padding: const EdgeInsets.only(bottom: 15, top: 15),
+    child: Text(
+      'Contact Us',
+      style: texts2,
     ),
   );
 }
 
-Widget Contactustext (){
+Widget Address(context) {
   return Padding(
-    padding: const EdgeInsets.only(bottom: 15,top: 15),
-    child: Text('Contact Us',style: texts2,),
-  );
-}
-
-Widget Address (context){
-  return Padding(
-    padding: const EdgeInsets.only(top: 30,),
+    padding: const EdgeInsets.only(
+      top: 20,
+    ),
     child: Container(
       width: MediaQuery.sizeOf(context).width,
       decoration: BoxDecoration(
           color: white1,
-          border: Border.all(width: 1,color: white8),
-          borderRadius: BorderRadius.circular(10)
-      ),
+          border: Border.all(width: 1, color: white8),
+          borderRadius: BorderRadius.circular(10)),
       child: Padding(
-        padding: const EdgeInsets.only(left: 15,top: 15,bottom: 15),
+        padding: const EdgeInsets.only(left: 15, top: 15, bottom: 15),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('JewelOne Corporate Office:',style: texts2,),
+            Text(
+              'JewelOne Corporate Office:',
+              style: texts2,
+            ),
             Divider(
               endIndent: 10,
             ),
-            Text('231, 1, E TV Swamy Rd, R.S. Puram, Coimbatore,Tamil Nadu 642002',style: lighttext,)
+            Text(
+              '231, 1, E TV Swamy Rd, R.S. Puram, Coimbatore,Tamil Nadu 642002',
+              style: lighttext,
+            )
           ],
         ),
       ),
@@ -129,41 +170,50 @@ Widget Address (context){
   );
 }
 
-Widget Scheme (context){
+Widget Scheme(context) {
   return Container(
     width: MediaQuery.sizeOf(context).width,
     decoration: BoxDecoration(
         color: white1,
-        border: Border.all(width: 1,color: white8),
-        borderRadius: BorderRadius.circular(10)
-    ),
+        border: Border.all(width: 1, color: white8),
+        borderRadius: BorderRadius.circular(10)),
     child: Padding(
-      padding: const EdgeInsets.only(left: 15,top: 15,bottom: 15),
+      padding: const EdgeInsets.only(left: 15, top: 15, bottom: 15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
             padding: const EdgeInsets.only(bottom: 10),
-            child: Text('Scheme related Enquiries',style: colortexts,),
+            child: Text(
+              'Scheme related Enquiries',
+              style: colortexts,
+            ),
           ),
           Row(
             children: [
               Padding(
                 padding: const EdgeInsets.only(bottom: 10),
-                child: Text('Mr. Rajasekar',style: lighttext,),
+                child: Text(
+                  'Mr. Rajasekar',
+                  style: lighttext,
+                ),
               ),
               const Spacer(),
               Padding(
                 padding: const EdgeInsets.only(right: 15),
-                child: Text('Copy',style: texts2,),
+                child: Text(
+                  'Copy',
+                  style: texts2,
+                ),
               ),
             ],
           ),
-          Text('+91 95974 44855',style: Num,)
+          Text(
+            '+91 95974 44855',
+            style: Num,
+          )
         ],
       ),
     ),
   );
 }
-
-

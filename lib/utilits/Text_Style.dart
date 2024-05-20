@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jewelone/Common_Widgets/Image_Path.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
 
 //HEADING STYLE
@@ -14,6 +15,14 @@ TextStyle Heading_Style1 = TextStyle(
     fontSize: 20,
     color: Color.fromRGBO(24, 24, 24, 1),
     fontWeight: FontWeight.w700);
+
+//PLAN STYLE
+//HEADING STYLE
+TextStyle Plan_Style = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 20,
+    color: Font_Primary_Color,
+    fontWeight: FontWeight.w600);
 
 //SUB TEXT STYLE
 TextStyle Sub_TextStyle = TextStyle(
@@ -68,6 +77,20 @@ TextStyle gramST = TextStyle(
     fontSize: 15,
     color: Colors.black,
     fontWeight: FontWeight.w500);
+
+//GOLD WEIGHT
+TextStyle gram_Weight_Style = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 13,
+    color: Colors.black,
+    fontWeight: FontWeight.w500);
+
+TextStyle gold_Gram_Wt = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 13,
+    color: Font_Primary_Color,
+    fontWeight: FontWeight.w500);
+
 TextStyle gramrateST = TextStyle(
     fontFamily: 'Inter',
     fontSize: 15,
@@ -103,6 +126,14 @@ TextStyle Textfield_Style = TextStyle(
     fontSize: 14,
     color: Colors.black,
     fontWeight: FontWeight.w400);
+
+//AMOUNT T
+TextStyle Amount_Style = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 14,
+    color: Colors.black,
+    fontWeight: FontWeight.w600);
+
 TextStyle TextField_Title = TextStyle(
     fontFamily: 'Montserrat',
     fontSize: 16,
@@ -314,6 +345,13 @@ TextStyle Num = TextStyle(
     color: Color.fromRGBO(45, 45, 45, 1),
     fontWeight: FontWeight.w600);
 
+//HEADING 2
+TextStyle Heading2 = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 24,
+    color: Color.fromRGBO(45, 45, 45, 1),
+    fontWeight: FontWeight.w800);
+
 //MY SSP
 TextStyle sspplan = TextStyle(
     fontFamily: 'Metropolis',
@@ -334,3 +372,78 @@ TextStyle help = TextStyle(
     fontSize: 16,
     color: Color.fromRGBO(117, 117, 117, 1),
     fontWeight: FontWeight.w500);
+
+
+//PLAN ACTIVE
+Widget Plan_Active(){
+  return  Row(
+    children: [
+      ImgPathSvg('calendar2.svg'),
+      const SizedBox(width: 10),
+      Text('2 Plan Active',style: rate2,),
+    ],
+  );
+}
+
+//PLAN ACTIVE
+Widget Weight_Gold(context,{required String goldWt}){
+  return  Padding(
+    padding: const EdgeInsets.only(bottom: 20),
+    child: Row(
+      children: [
+        Container(
+          width: MediaQuery.sizeOf(context).width/3.45,
+            child: Text('Equivalent Weight : ',style: gram_Weight_Style,maxLines: 2,)),
+        Text(goldWt,style: gold_Gram_Wt,),
+      ],
+    ),
+  );
+}
+
+//HELP CENTER
+Widget HelpContainer(context){
+  return Padding(
+    padding: const EdgeInsets.only(top: 20,bottom: 30),
+    child: Container(
+      width: MediaQuery.sizeOf(context).width,
+      decoration: BoxDecoration(
+          color: white2,
+          border: Border.all(width: 1,color: pink5),
+          borderRadius: BorderRadius.circular(10)
+      ),
+      child: Padding(
+        padding: const EdgeInsets.only(left: 10,right: 10,top: 10,bottom: 10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Help',style: help,),
+            Help(text: 'View Frequently Asked Questions'),
+            Help(text: 'How to Repay?'),
+          ],
+        ),
+      ),
+    ),
+  );
+}
+
+Widget Help ({required String text}){
+  return Row(
+    children: [
+      Radio(value: 1, groupValue: 1, onChanged: null),
+      Text(text,style: rate2,),
+    ],
+  );
+}
+
+//TOTAL AMMOUNT
+Widget Total_Plan_Amount({required String amount}){
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.start,
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text('Total INR',style: maintext,),
+      const Spacer(),
+      Text('₹${amount}',style: texts2,),
+    ],
+  );
+}

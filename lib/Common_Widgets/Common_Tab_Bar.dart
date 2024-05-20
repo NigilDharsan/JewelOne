@@ -43,7 +43,7 @@ class _TabBarWithSearchState extends State<TabBarWithSearch>
                 labelColor: blue3,
                 // labelStyle: TabT,
                 indicator: BoxDecoration(
-                    color: white5, borderRadius: BorderRadius.circular(10)),
+                    color: white2, borderRadius: BorderRadius.circular(10)),
                 indicatorColor: white1,
                 unselectedLabelColor: white1,
                 indicatorPadding: EdgeInsets.zero,

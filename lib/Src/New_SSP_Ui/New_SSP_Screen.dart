@@ -1,6 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:jewelone/Common_Widgets/Custom_App_Bar.dart';
 import 'package:jewelone/Common_Widgets/Image_Path.dart';
+import 'package:jewelone/Src/FAQ_Ui/FAQ_Screen.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -19,9 +21,11 @@ class _New_SSP_ScreenState extends State<New_SSP_Screen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: white2,
-      appBar: AppBar(
-        leading: Icon(Icons.arrow_back_ios),
-      ),
+      appBar: Custom_AppBar(isNav: true, isTwoLine: false, title1: 'New Purchase Plan', title2: '',
+        actionLogo: 'info.svg', isWhite: false,
+        ActiononTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>Faq_Screen()));
+        },),
       body: _Mainbody(),
     );
   }
@@ -29,7 +33,7 @@ class _New_SSP_ScreenState extends State<New_SSP_Screen> {
   Widget _Mainbody (){
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.only(left: 10,right: 10,top: 20,bottom: 20),
+        padding: const EdgeInsets.only(left: 20,right: 20,top: 20,bottom: 20),
         child: Column(
           children: [
             //BANNER
@@ -121,7 +125,7 @@ Widget _carouselImg(context){
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(25),
         image: DecorationImage(image: AssetImage('lib/assets/New_SSP_Banner.png'),
-            fit: BoxFit.fill),
+            fit: BoxFit.cover),
       ),
     ),
   );

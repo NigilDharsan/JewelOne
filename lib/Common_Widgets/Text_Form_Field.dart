@@ -174,9 +174,9 @@ Widget textFieldPassword(
             borderSide: BorderSide(color: white2),
             borderRadius: BorderRadius.circular(10)),
         suffixIcon: IconButton(
-          icon: Icon(
-            obscure ? Icons.lock : Icons.lock_open,
-            color: white1,
+          icon:obscure ? ImgPathSvg("eyeclose.svg") : Icon(
+             Icons.remove_red_eye_outlined,
+            color: Colors.black,
           ),
           onPressed: onPressed,
         ),

@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:jewelone/Common_Widgets/Common_Card.dart';
 import 'package:jewelone/Common_Widgets/Image_Path.dart';
 import 'package:jewelone/Common_Widgets/Text_Form_Field.dart';
+import 'package:jewelone/Src/Emi_Payment_Ui/Emi_Plan1_Screen.dart';
+import 'package:jewelone/Src/My_SSP_Ui/My_SSP_Screen.dart';
+import 'package:jewelone/Src/New_SSP_Ui/New_SSP_Screen.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -27,32 +30,32 @@ class _Home_DashBoard_ScreenState extends State<Home_DashBoard_Screen> {
   final double itemWidth = 100.0; // Width of each item
   final double scrollIncrement = 1.0; // Scroll increment for each timer tick
 
-  @override
-  void initState() {
-    super.initState();
-    _timer = Timer.periodic(Duration(milliseconds: 20), (timer) {
-      _scrollList();
-    });
-  }
-
-  @override
-  void dispose() {
-    _timer.cancel();
-    super.dispose();
-  }
-
-  void _scrollList() {
-    double maxScrollExtent = _scrollController.position.maxScrollExtent;
-    double currentScroll = _scrollController.position.pixels;
-
-    if (currentScroll >= maxScrollExtent) {
-      _scrollController.jumpTo(0);
-      _counter = 0;
-    } else {
-      _scrollController.jumpTo(currentScroll + scrollIncrement);
-      _counter++;
-    }
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _timer = Timer.periodic(Duration(milliseconds: 20), (timer) {
+  //     _scrollList();
+  //   });
+  // }
+  //
+  // @override
+  // void dispose() {
+  //   _timer.cancel();
+  //   super.dispose();
+  // }
+  //
+  // void _scrollList() {
+  //   double maxScrollExtent = _scrollController.position.maxScrollExtent;
+  //   double currentScroll = _scrollController.position.pixels;
+  //
+  //   if (currentScroll >= maxScrollExtent) {
+  //     _scrollController.jumpTo(0);
+  //     _counter = 0;
+  //   } else {
+  //     _scrollController.jumpTo(currentScroll + scrollIncrement);
+  //     _counter++;
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -60,12 +63,10 @@ class _Home_DashBoard_ScreenState extends State<Home_DashBoard_Screen> {
       backgroundColor: backGroundColor,
       appBar: AppBar(
         backgroundColor: white2,
-        toolbarHeight: 140,
+        toolbarHeight: 100,
         leading: Icon(Icons.menu_outlined),
         centerTitle: true,
-        title: Container(
-          child: ImgPathSvg('logo.svg'),
-        ),
+        title: App_Logo(context),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 20, left: 15),
@@ -101,9 +102,26 @@ class _Home_DashBoard_ScreenState extends State<Home_DashBoard_Screen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Plan_Card(context, Img: 'plan1.svg', planT: 'Online EMI Payment',),
-                          Plan_Card(context, Img: 'plan2.svg', planT: 'New Swarna Sakthi Purchase Plan',),
-                          Plan_Card(context, Img: 'plan3.svg', planT: 'My Swarna Sakthi Plan',),
+                          //ONLINE PAYMENT
+                          InkWell(
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>Emi_Plan1_Screen()));
+                            },
+                              child: Plan_Card(context, Img: 'plan1.svg', planT: 'Online EMI Payment',)),
+
+                          //NEW SWARNA
+                          InkWell(
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>New_SSP_Screen()));
+                            },
+                              child: Plan_Card(context, Img: 'plan2.svg', planT: 'New Swarna Sakthi Purchase Plan',)),
+
+                          //MY SWARNA
+                          InkWell(
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>My_SSP_Screen()));
+                            },
+                              child: Plan_Card(context, Img: 'plan3.svg', planT: 'My Swarna Sakthi Plan',)),
                         ],
                       ),
                     ),

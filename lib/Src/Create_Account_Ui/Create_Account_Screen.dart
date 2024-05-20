@@ -4,6 +4,8 @@ import 'package:jewelone/Common_Widgets/Common_Button.dart';
 import 'package:jewelone/Common_Widgets/Custom_App_Bar.dart';
 import 'package:jewelone/Common_Widgets/Image_Path.dart';
 import 'package:jewelone/Common_Widgets/Text_Form_Field.dart';
+import 'package:jewelone/Src/Home_DashBoard_Ui/Home_DashBoard_Screen.dart';
+import 'package:jewelone/Src/Login_Ui/LoginScreen.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
 import 'package:intl/intl.dart';
@@ -40,6 +42,8 @@ class _Create_Account_ScreenState extends State<Create_Account_Screen> {
       _obscurePassword = !_obscurePassword;
     });
   }
+  final _formKey = GlobalKey<FormState>();
+
 
   RegExp passwordSpecial = RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$])(?=.*[0-9]).*$');
   RegExp passwordLength = RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$])(?=.*[0-9]).{8,15}$');
@@ -48,15 +52,18 @@ class _Create_Account_ScreenState extends State<Create_Account_Screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backGroundColor,
+      backgroundColor: white2,
       // appBar: Custom_AppBar(actions: [], isNav: true,),
-      body: SingleChildScrollView(
-        child: Container(
-          width: MediaQuery.sizeOf(context).width,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 20,right: 20),
-            child: _MainBody(),
+      body: Form(
+        key: _formKey,
+        child: SingleChildScrollView(
+          child: Container(
+            width: MediaQuery.sizeOf(context).width,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 20,right: 20),
+              child: _MainBody(),
 
+            ),
           ),
         ),
       ),
@@ -68,13 +75,10 @@ class _Create_Account_ScreenState extends State<Create_Account_Screen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(top: 50),
-          child: ImgPathSvg('back.svg'),
-        ),
+        Back_Logo(context),
 
         //LOGO
-        Center(child: ImgPathSvg("logo.svg")),
+        Center(child: Logo(context)),
         const SizedBox(
           height: 50,
         ),
@@ -249,7 +253,11 @@ class _Create_Account_ScreenState extends State<Create_Account_Screen> {
 
         // Login Button with Gradient
         CommonContainerButton(context,
-            onPress: () {}, titleName: 'Sign Up'),
+            onPress: () {
+          if(_formKey.currentState!.validate()){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>Home_DashBoard_Screen()));
+          }
+            }, titleName: 'Sign Up'),
         SizedBox(height: 16),
 
         // Don't have an account? Sign Up Now Text
@@ -259,7 +267,7 @@ class _Create_Account_ScreenState extends State<Create_Account_Screen> {
             Text('Already have an account? ',style: Sub_TextStyle,),
             InkWell(
               onTap: () {
-                // Implement sign up action
+               Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
               },
               child: Text(
                 'Login',

@@ -69,13 +69,16 @@ class _Verify_OTP_ScreenState extends State<Verify_OTP_Screen> {
   TextEditingController _OTP5 = TextEditingController();
   TextEditingController _OTP6 = TextEditingController();
 
+  final _formKey = GlobalKey<FormState>();
+
+
   Widget _textFieldOTP({bool? first, bool? last, controllers}) {
     return Container(
       height: 45,
       width: 45,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: white2,
+        color: white1,
       ),
 
       // margin: EdgeInsets.only(left: 10),
@@ -101,12 +104,13 @@ class _Verify_OTP_ScreenState extends State<Verify_OTP_Screen> {
           FilteringTextInputFormatter.digitsOnly
         ],
         decoration: InputDecoration(
+          fillColor: white1,
           counter: Offstage(),
           enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(width: 1, color: white2),
+              borderSide: BorderSide(width: 1, color: white1),
               borderRadius: BorderRadius.circular(10)),
           focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(width: 1, color: white2),
+              borderSide: BorderSide(width: 1, color: white1),
               borderRadius: BorderRadius.circular(10)),
         ),
       ),
@@ -117,15 +121,18 @@ class _Verify_OTP_ScreenState extends State<Verify_OTP_Screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backGroundColor,
-      body: SingleChildScrollView(
-        child: Container(
-          height: MediaQuery.sizeOf(context).height,
-          width: MediaQuery.sizeOf(context).width,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 20,right: 20),
-            child: _MainBody(),
+      backgroundColor: white2,
+      body: Form(
+        key: _formKey,
+        child: SingleChildScrollView(
+          child: Container(
+            height: MediaQuery.sizeOf(context).height,
+            width: MediaQuery.sizeOf(context).width,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 20,right: 20),
+              child: _MainBody(),
 
+            ),
           ),
         ),
       ),
@@ -137,13 +144,10 @@ class _Verify_OTP_ScreenState extends State<Verify_OTP_Screen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(top: 50),
-          child: ImgPathSvg('back.svg'),
-        ),
+        Back_Logo(context),
 
         //LOGO
-        Center(child: ImgPathSvg("logo.svg")),
+        Center(child: Logo(context),),
         const SizedBox(
           height: 50,
         ),
@@ -181,7 +185,9 @@ class _Verify_OTP_ScreenState extends State<Verify_OTP_Screen> {
         // BUTTON
         CommonContainerButton(context,
             onPress: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>Create_Password_Screen()));
+          if(_formKey.currentState!.validate()){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>Create_Password_Screen()));
+          }
             }, titleName: 'Continue'),
 
         const SizedBox(height: 15),
