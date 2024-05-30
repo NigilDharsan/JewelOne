@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:jewelone/Common_Widgets/Image_Path.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
 
 //HEADING STYLE
@@ -77,6 +76,12 @@ TextStyle gramrateST = TextStyle(
 
 //RADIO T
 TextStyle radioST = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 14,
+    color: Color.fromRGBO(45, 45, 45, 1),
+    fontWeight: FontWeight.w400);
+
+TextStyle radioST1 = TextStyle(
     fontFamily: 'Metropolis',
     fontSize: 14,
     color: Color.fromRGBO(45, 45, 45, 1),
@@ -211,13 +216,12 @@ TextStyle pdfT = TextStyle(
     color: Color.fromRGBO(0, 0, 0, 1),
     fontWeight: FontWeight.w600);
 
-
 // CHECK BOX
 Widget CheckBoxes(
     {required bool? value,
-      required void Function(bool?)? onChanged,
-      required String checkBoxText,
-      void Function()? onTap}) {
+    required void Function(bool?)? onChanged,
+    required String checkBoxText,
+    void Function()? onTap}) {
   return Padding(
     padding: const EdgeInsets.only(bottom: 20),
     child: Row(
