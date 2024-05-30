@@ -48,7 +48,7 @@ Widget Wallet_Card(context){
           const SizedBox(height: 20,),
           Text("Hi Vinoth Kumar",style: UserST,),
           Container(
-            width: 200,
+            width: 60,
             margin: EdgeInsets.only(top: 15,bottom: 15),
             child: Divider(
               thickness: 2,

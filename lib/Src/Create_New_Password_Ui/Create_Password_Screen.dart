@@ -27,15 +27,18 @@ class _Create_Password_ScreenState extends State<Create_Password_Screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backGroundColor,
-      body: SingleChildScrollView(
-        child: Container(
-          height: MediaQuery.sizeOf(context).height,
-          width: MediaQuery.sizeOf(context).width,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 20,right: 20),
-            child: _MainBody(),
+      backgroundColor: white2,
+      body: Form(
+        key: _formKey,
+        child: SingleChildScrollView(
+          child: Container(
+            height: MediaQuery.sizeOf(context).height,
+            width: MediaQuery.sizeOf(context).width,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 20,right: 20),
+              child: _MainBody(),
 
+            ),
           ),
         ),
       ),
@@ -47,13 +50,10 @@ class _Create_Password_ScreenState extends State<Create_Password_Screen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(top: 50),
-          child: ImgPathSvg('back.svg'),
-        ),
+        Back_Logo(context),
 
         //LOGO
-        Center(child: ImgPathSvg("logo.svg")),
+        Center(child: Logo(context)),
         const SizedBox(
           height: 50,
         ),
@@ -107,7 +107,9 @@ class _Create_Password_ScreenState extends State<Create_Password_Screen> {
         // BUTTON
         CommonContainerButton(context,
             onPress: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
+          if(_formKey.currentState!.validate()){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
+          }
             }, titleName: 'Save'),
 
       ],

@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 
@@ -18,8 +19,30 @@ Widget ImgPathSvg(String pathSVG){
  Widget LoginScreenImage(){
   return ImgPathSvg("LoginscreenImg.svg");
  }
-Widget Logo(){
-  return ImgPathSvg("logo.svg");
+Widget Logo(context){
+  return Container(
+      height: MediaQuery.sizeOf(context).height/8,
+      // width: MediaQuery.sizeOf(context).width/3,
+      child: ImgPathPng("logo.png"));
+}
+
+Widget App_Logo(context){
+  return Container(
+      height: MediaQuery.sizeOf(context).height/12,
+      // width: MediaQuery.sizeOf(context).width/3,
+      child: ImgPathPng("logo.png"));
+}
+
+//BACK LOGO
+Widget Back_Logo(context){
+  return  Padding(
+    padding: const EdgeInsets.only(top: 50),
+    child: InkWell(
+      onTap: (){
+        Navigator.pop(context);
+      },
+        child: ImgPathSvg('back.svg')),
+  );
 }
 
 

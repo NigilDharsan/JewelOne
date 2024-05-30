@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:jewelone/Src/Advance_Payment_Ui/Advance_Payment_Screen.dart';
+import 'package:jewelone/Src/Online_Emi_Payment_Ui/Online_Emi_Payment_Screen.dart';
 import '../../Common_Widgets/Common_Button.dart';
 import '../../Common_Widgets/Image_Path.dart';
 import '../../utilits/Common_Colors.dart';
@@ -16,14 +18,11 @@ class _Emi_Plan1_ScreenState extends State<Emi_Plan1_Screen> {
     return Scaffold(
       backgroundColor: white2,
       appBar: AppBar(
-        backgroundColor: backGroundColor,
+        backgroundColor: white2,
         toolbarHeight: 100,
         leading: Icon(Icons.menu_outlined),
         centerTitle: true,
-        title: Container(
-          height: 70,width: 140,
-          child: ImgPathPng('logo.png'),
-        ),
+        title: App_Logo(context),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 20, left: 15),
@@ -213,7 +212,7 @@ Widget Pay_now_container (context,{required String text,required String date,req
 
             Paynowcommonbutton1 (context,
                 onPress: () {
-                  // Navigator.push(context, MaterialPageRoute(builder: (context)=>Home_DashBoard_Screen()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Online_Emi_Payment_Screen()));
                 }, titleName: 'Pay Now')
           ],
         ),
@@ -251,7 +250,7 @@ Widget Pay_now_container2 (context,{required String text,required String text2,}
 
             Paynowcommonbutton2 (context,
                 onPress: () {
-                  // Navigator.push(context, MaterialPageRoute(builder: (context)=>Home_DashBoard_Screen()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Advance_Payment_Screen()));
                 }, titleName: 'Pay Now')
           ],
         ),

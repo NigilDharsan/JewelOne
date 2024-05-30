@@ -29,6 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
       _obscurePassword = !_obscurePassword;
     });
   }
+  final _formKey = GlobalKey<FormState>();
 
   RegExp passwordSpecial = RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$])(?=.*[0-9]).*$');
   RegExp passwordLength = RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$])(?=.*[0-9]).{8,15}$');
@@ -36,15 +37,18 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backGroundColor,
-      body: SingleChildScrollView(
-        child: Container(
-          height: MediaQuery.sizeOf(context).height,
-          width: MediaQuery.sizeOf(context).width,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 20,right: 20),
-            child: _MainBody(),
+      backgroundColor: white2,
+      body: Form(
+        key: _formKey,
+        child: SingleChildScrollView(
+          child: Container(
+            height: MediaQuery.sizeOf(context).height,
+            width: MediaQuery.sizeOf(context).width,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 20,right: 20),
+              child: _MainBody(),
 
+            ),
           ),
         ),
       ),
@@ -171,7 +175,9 @@ class _LoginScreenState extends State<LoginScreen> {
         // Login Button with Gradient
         CommonContainerButton(context,
             onPress: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>Home_DashBoard_Screen()));
+              if(_formKey.currentState!.validate()){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>Home_DashBoard_Screen()));
+              }
             }, titleName: 'Login'),
         SizedBox(height: 16),
 
@@ -182,7 +188,9 @@ class _LoginScreenState extends State<LoginScreen> {
             Text('Don’t have an account? ',style: Sub_TextStyle,),
             InkWell(
               onTap: () {
+
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>Create_Account_Screen()));
+
               },
               child: Text(
                 'Sign Up Now',

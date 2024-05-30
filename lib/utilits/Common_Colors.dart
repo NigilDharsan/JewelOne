@@ -3,11 +3,7 @@ import 'package:flutter/material.dart';
 // WHITE
 const Color white1 = Color.fromRGBO(255, 255, 255, 1);
 const Color white2 = Color.fromRGBO(245, 245, 245, 1);
-const Color white3 = Color.fromRGBO(223, 223, 223, 1);
-const Color white4 = Color.fromRGBO(200, 200, 200, 1);
-const Color white5 = Color.fromRGBO(246, 247, 249, 1);
-const Color white6 = Color.fromRGBO(251, 255, 255, 1);
-const Color white7 = Color.fromRGBO(235, 235, 235, 1);
+const Color white3 = Color.fromRGBO(224, 224, 224, 1);
 const Color white8 = Color.fromRGBO(239, 239, 239, 1);
 
 //Black
@@ -69,9 +65,19 @@ const Color pink3 = Color.fromRGBO(250, 237, 237, 1);
 const Color pink4 = Color.fromRGBO(229, 210, 194, 1);
 const Color pink5 = Color.fromRGBO(229, 210, 194, 1);
 
+//FONT PRIMARY COLOR
+const Color Font_Primary_Color = Color.fromRGBO(159, 33, 44, 1);
+
 //BACKGROUND COLOR
 // const Color backGroundColor = Color.fromRGBO(232, 219, 208, 1);
 const Color backGroundColor = Color.fromRGBO(255, 255, 255, 1);
+const Gradient appGradient = LinearGradient(
+  begin: Alignment.topLeft,
+    end: Alignment.topRight,
+    colors: [
+      gradient1,
+      gradient2,
+    ]);
 
 //GRADIENT COLOR
 const Color gradient2 = Color.fromRGBO(248, 146, 28, 1);
