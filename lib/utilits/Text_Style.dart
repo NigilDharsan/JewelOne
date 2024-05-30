@@ -334,3 +334,16 @@ TextStyle help = TextStyle(
     fontSize: 16,
     color: Color.fromRGBO(117, 117, 117, 1),
     fontWeight: FontWeight.w500);
+
+//NEW SSP TEXTS
+TextStyle Gramage = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 26,
+    color: Color.fromRGBO(247, 198, 118, 1),
+    fontWeight: FontWeight.w600);
+
+TextStyle Content1 = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 14,
+    color: Color.fromRGBO(255, 255, 255, 1),
+    fontWeight: FontWeight.w400);

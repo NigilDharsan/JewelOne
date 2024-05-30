@@ -52,6 +52,7 @@ const Color brown1 = Color.fromRGBO(62, 13, 10, 1);
 //RED
 const Color red1 = Color.fromRGBO(239, 83, 80, 1);
 const Color red2 = Color.fromRGBO(255, 30, 86, 1);
+const Color red3 = Color.fromRGBO(160, 34, 44, 1);
 
 //BLUE
 const Color blue1 = Color.fromRGBO(0, 160, 226, 1);

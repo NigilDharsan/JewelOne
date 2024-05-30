@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:jewelone/Common_Widgets/Image_Path.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
 import '../../Common_Widgets/Common_Button.dart';
 import '../../utilits/Common_Colors.dart';
 class New_SSP_Screen extends StatefulWidget {
