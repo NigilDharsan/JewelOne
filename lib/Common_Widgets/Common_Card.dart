@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:jewelone/Common_Widgets/Image_Path.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
-
 import 'Common_Button.dart';
 
 
@@ -73,6 +72,40 @@ Widget Wallet_Card(context){
               ],
             ),
           ),
+        ],
+      ),
+    ),
+  );
+}
+
+Widget New_SSP_Images (context,{required String image}){
+  return  Container(
+    height: MediaQuery.sizeOf(context).height/4,
+    width: MediaQuery.sizeOf(context).width,
+    decoration: BoxDecoration(
+      image: DecorationImage(
+          fit: BoxFit.fill,
+          image: AssetImage(image)),
+    ),
+  );
+}
+
+Widget New_SSP_Image_Content ({required String text,required String heading, required bool isHeadingneeded}){
+  return Container(
+    color: red3,
+    child: Padding(
+      padding: const EdgeInsets.all(25),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          isHeadingneeded == true? Text(heading,style: Gramage,):Container(),
+          Text(text,style: Content1,),
+          
+          Column(
+            children: [
+
+            ],
+          )
         ],
       ),
     ),

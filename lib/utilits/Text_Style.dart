@@ -155,15 +155,41 @@ TextStyle BlackTextColor = TextStyle(
 );
 
 TextStyle TBlack = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 24,
+    color: Color.fromRGBO(45, 45, 45, 1),
+    fontWeight: FontWeight.w800);
+
+TextStyle Total_Plan_amount = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 18,
+    color: Color.fromRGBO(45, 45, 45, 1),
+    fontWeight: FontWeight.w600);
+
+TextStyle Plan_Style = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 20,
+    color: Color.fromRGBO(145, 26, 29, 1),
+    fontWeight: FontWeight.w600);
+
+TextStyle Tamount = TextStyle(
     fontFamily: 'Inter',
     fontSize: 20,
     color: Color.fromRGBO(0, 0, 0, 1),
     fontWeight: FontWeight.w600);
+
 TextStyle TBlack1 = TextStyle(
     fontFamily: 'Inter',
     fontSize: 22,
     color: Color.fromRGBO(0, 0, 0, 1),
     fontWeight: FontWeight.w700);
+
+TextStyle Goldweight = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 13,
+    color: Color.fromRGBO(145, 26, 29, 1),
+    fontWeight: FontWeight.w500);
+
 
 //HEADING
 Widget Heading_Text(context, {required String Title}) {
@@ -176,6 +202,8 @@ Widget Heading_Text(context, {required String Title}) {
     ),
   );
 }
+
+
 
 //TEXTFIELD HEADING
 Widget Title_Style({required String Title, required bool? isStatus}) {
@@ -277,7 +305,7 @@ TextStyle rate2 = TextStyle(
     fontFamily: 'Metropolis',
     fontSize: 14,
     color: Color.fromRGBO(45, 45, 45, 1),
-    fontWeight: FontWeight.w500);
+    fontWeight: FontWeight.w600);
 
 TextStyle maintext = TextStyle(
     fontFamily: 'Inter',
@@ -347,8 +375,36 @@ TextStyle Gramage = TextStyle(
     color: Color.fromRGBO(247, 198, 118, 1),
     fontWeight: FontWeight.w600);
 
+TextStyle Gramage2 = TextStyle(
+    fontFamily: 'Metropolis',
+    fontStyle: FontStyle.italic,
+    fontSize: 15,
+    color: Color.fromRGBO(160, 34, 44, 1),
+    fontWeight: FontWeight.w700);
+
+
+TextStyle stackT = TextStyle(
+    fontFamily: 'Canela Trial',
+    fontSize: 40,
+    color: Color.fromRGBO(158, 89, 36, 1),
+    fontWeight: FontWeight.w400);
+
+TextStyle stackT2 = TextStyle(
+    fontFamily: 'Canela Trial',
+    fontStyle: FontStyle.italic,
+    fontSize: 20,
+    color: Color.fromRGBO(158, 89, 36, 1),
+    fontWeight: FontWeight.w400);
+
 TextStyle Content1 = TextStyle(
     fontFamily: 'Metropolis',
     fontSize: 14,
     color: Color.fromRGBO(255, 255, 255, 1),
     fontWeight: FontWeight.w400);
+
+
+TextStyle TandC = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 16,
+    color: Color.fromRGBO(138, 138, 138, 1),
+    fontWeight: FontWeight.w500);

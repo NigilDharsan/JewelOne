@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:jewelone/Common_Widgets/Custom_App_Bar.dart';
-import 'package:jewelone/Src/Home_DashBoard_Ui/Home_DashBoard_Screen.dart';
 import 'package:readmore/readmore.dart';
 
 import '../../Common_Widgets/Image_Path.dart';
@@ -17,10 +15,10 @@ class _My_SSP_ScreenState extends State<My_SSP_Screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: white2,
-      appBar: Custom_AppBar(isNav: true, isTwoLine: false, title1: 'My Purchase Plan', title2: '', actionLogo: 'home.svg', isWhite: false, ActiononTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>Home_DashBoard_Screen()));
-      },),
+      backgroundColor: pink3,
+      appBar: AppBar(
+        leading: Icon(Icons.arrow_back_ios),
+      ),
       body: _Mainbody(),
     );
   }
@@ -30,8 +28,13 @@ class _My_SSP_ScreenState extends State<My_SSP_Screen> {
         padding: const EdgeInsets.only(left: 20,right: 20,top: 15),
         child: Column(
           children: [
-            //PLAN ACTIVE
-            Plan_Active(),
+            Row(
+              children: [
+                ImgPathSvg('calendar2.svg'),
+                const SizedBox(width: 10),
+                Text('2 Plan Active',style: rate2,),
+              ],
+            ),
 
             //PLAN1 CONTAINER
             Plan1(context),
@@ -147,6 +150,36 @@ Widget ssp_plan_details ({required String text,required String text2}){
    );
  }
 
+ Widget Help ({required String text}){
+  return Row(
+    children: [
+      Radio(value: 0, groupValue: 1, onChanged: null),
+      Text(text,style: rate2,),
+    ],
+  );
+ }
 
-
-
+ Widget HelpContainer(context){
+  return Padding(
+    padding: const EdgeInsets.only(top: 20,bottom: 30),
+    child: Container(
+      width: MediaQuery.sizeOf(context).width,
+      decoration: BoxDecoration(
+          color: pink4,
+          border: Border.all(width: 1,color: pink5),
+          borderRadius: BorderRadius.circular(10)
+      ),
+      child: Padding(
+        padding: const EdgeInsets.only(left: 10,right: 10,top: 10,bottom: 10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Help',style: help,),
+            Help(text: 'View Frequently Asked Questions'),
+            Help(text: 'How to Repay?'),
+          ],
+        ),
+      ),
+    ),
+  );
+ }

@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:jewelone/Common_Widgets/Custom_App_Bar.dart';
 import 'package:jewelone/Common_Widgets/Image_Path.dart';
 import 'package:jewelone/Src/FAQ_Ui/FAQ_Screen.dart';
+import 'package:jewelone/Src/New_SSP_Ui/New_SSP_Plan1_Screen.dart';
+import 'package:jewelone/Src/New_SSP_Ui/New_SSP_Plan2_Screen.dart';
+import 'package:jewelone/Src/New_SSP_Ui/New_SSP_Plan3_Screen.dart';
+import 'package:jewelone/Src/New_SSP_Ui/New_SSP_Plan4_Screen.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../Common_Widgets/Common_Button.dart';
@@ -97,7 +101,7 @@ class _New_SSP_ScreenState extends State<New_SSP_Screen> {
                     const Spacer(),
                     Paynowcommonbutton1 (context,
                         onPress: () {
-                          // Navigator.push(context, MaterialPageRoute(builder: (context)=>Home_DashBoard_Screen()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>New_SSP_Plan1_Screen()));
                         }, titleName: 'Join Now')
                   ],
                 ),
@@ -105,9 +109,25 @@ class _New_SSP_ScreenState extends State<New_SSP_Screen> {
             ),
 
             //REGISTER NOW CONTAINERS
-            plancontainer(context, texts: 'Plan 1'),
-            plancontainer(context, texts: 'Plan 2'),
-            plancontainer(context, texts: 'Plan 3'),
+            InkWell(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>New_SSP_Plan2_Screen()));
+                },
+                child: plancontainer(context, texts: 'Plan 2')),
+
+
+            InkWell(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>New_SSP_Plan3_Screen()));
+                },
+                child: plancontainer(context, texts: 'Plan 3')),
+
+
+            InkWell(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>New_SSP_Plan4_Screen()));
+                },
+                child: plancontainer(context, texts: 'Plan 4')),
           ],
         ),
       ),

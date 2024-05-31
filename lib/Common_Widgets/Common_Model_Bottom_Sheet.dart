@@ -28,14 +28,14 @@ Widget Total_Amount_Bottom_Sheet(context,{required void Function()? onPress}){
                   },
                   child: Icon(Icons.close))),
           //TOTAL AMMOUNT
-          Text('Total Amount',style: Heading2,),
+          Text('Total Amount',style: TBlack,),
           //TRANSACTION FOR
           Padding(
             padding: const EdgeInsets.only(top: 10,bottom: 10),
             child: Text('Here is the amount breakup of your transaction for 9944x xxxxx',style: Textfield_Style2,),
           ),
-          //TOTAL AMMOUNT
-          Total_Plan_Amount(amount: '5,000.00'),
+          //TOTAL AMOUNT
+          Total_Amount(Amount: '5,00,000'),
           //BUTTON
           Padding(
             padding: const EdgeInsets.only(top: 25),
@@ -44,5 +44,15 @@ Widget Total_Amount_Bottom_Sheet(context,{required void Function()? onPress}){
         ],
       ),
     ),
+  );
+}
+
+Widget Total_Amount ({required String Amount}){
+  return Row(
+    children: [
+      Text('Total',style: Total_Plan_amount,),
+      const Spacer(),
+      Text(Amount,style: Total_Plan_amount,)
+    ],
   );
 }

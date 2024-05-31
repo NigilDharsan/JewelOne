@@ -4,6 +4,7 @@ import 'package:jewelone/Common_Widgets/Common_Button.dart';
 import 'package:jewelone/Common_Widgets/Common_Model_Bottom_Sheet.dart';
 import 'package:jewelone/Common_Widgets/Custom_App_Bar.dart';
 import 'package:jewelone/Common_Widgets/Image_Path.dart';
+import 'package:jewelone/Src/My_SSP_Ui/My_SSP_Screen.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
 
@@ -65,7 +66,7 @@ class _Online_Emi_Payment_ScreenState extends State<Online_Emi_Payment_Screen> {
                 //ACTIVE PLAN
                 Padding(
                   padding: const EdgeInsets.only(top: 20,bottom: 20),
-                  child: Plan_Active(),
+                 // child: Plan_Active(),
                 ),
                 //LIST OF PLAN
                 Container(
@@ -76,7 +77,7 @@ class _Online_Emi_Payment_ScreenState extends State<Online_Emi_Payment_Screen> {
                 HelpContainer(context),
                 const SizedBox(height: 10,),
                 //TOTAL AMOUNT
-                Total_Plan_Amount(amount: '5,000.00'),
+                //Total_Plan_amount(amount: '5,000.00'),
 
                 //BUTTON
                 Padding(
@@ -112,7 +113,7 @@ class _Online_Emi_Payment_ScreenState extends State<Online_Emi_Payment_Screen> {
               color: white1
           ),
           child: Padding(
-            padding: const EdgeInsets.only(left: 20,right: 20),
+            padding: const EdgeInsets.only(left: 10,right: 20),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -151,7 +152,7 @@ class _Online_Emi_Payment_ScreenState extends State<Online_Emi_Payment_Screen> {
                     const Spacer(),
 
                     //AMOUNT
-                    Text("INR ₹5000",style: Amount_Style,)
+                    Text("INR ₹5000",style: rate2,)
 
                   ],
                 ),
@@ -167,10 +168,16 @@ class _Online_Emi_Payment_ScreenState extends State<Online_Emi_Payment_Screen> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+
                     //WEIGHT OF GOLD
                     Padding(
-                      padding: const EdgeInsets.only(left: 40,right: 5),
-                      child: Weight_Gold(context,goldWt: '1.4 gm'),
+                      padding: const EdgeInsets.only(left: 40),
+                      child: Row(
+                        children: [
+                          Text('Equivalent Weight : ',style: planST,),
+                          Text('0.794 gm',style: Goldweight,)
+                        ],
+                      ),
                     ),
                     const Spacer(),
                     //INCREMENT OF EMI
