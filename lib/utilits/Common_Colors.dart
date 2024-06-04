@@ -5,6 +5,7 @@ const Color white1 = Color.fromRGBO(255, 255, 255, 1);
 const Color white2 = Color.fromRGBO(245, 245, 245, 1);
 const Color white3 = Color.fromRGBO(224, 224, 224, 1);
 const Color white8 = Color.fromRGBO(239, 239, 239, 1);
+const Color white9 = Color.fromRGBO(126, 126, 126, 1);
 
 //Black
 const Color Black = Color.fromRGBO(0, 0, 0, 1);
@@ -64,7 +65,7 @@ const Color pink2 = Color.fromRGBO(255, 0, 13, 1);
 const Color pink3 = Color.fromRGBO(250, 237, 237, 1);
 const Color pink4 = Color.fromRGBO(229, 210, 194, 1);
 const Color pink5 = Color.fromRGBO(229, 210, 194, 1);
-
+const Color pink6 = Color.fromRGBO(243, 237, 231, 1);
 //FONT PRIMARY COLOR
 const Color Font_Primary_Color = Color.fromRGBO(159, 33, 44, 1);
 

@@ -5,7 +5,7 @@ import 'package:jewelone/Common_Widgets/Image_Path.dart';
 import '../utilits/Common_Colors.dart';
 import '../utilits/Text_Style.dart';
 
-//TEXTFORM FIELD
+//TEXTFORM FIELD maks
 
 Widget textFormField(
     {TextEditingController? Controller,
@@ -27,15 +27,15 @@ Widget textFormField(
       decoration: InputDecoration(
         contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
         hintText: hintText,
-        hintStyle: phoneHT,
+        hintStyle: lighttext,
         prefixIcon: prefixIcon,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
-          borderSide: BorderSide(color: Colors.white),
+          borderSide: BorderSide(color: grey5),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
-          borderSide: BorderSide(color: Colors.white),
+          borderSide: BorderSide(color: grey5),
         ),
         fillColor: Colors.white,
         filled: true,
@@ -195,12 +195,10 @@ Widget textFieldPassword(
 Widget textfieldDescription(
     {TextEditingController? Controller,
     String? Function(String?)? validating,
-    required String hintText,
-    required bool readOnly}) {
+    required String hintText,}) {
   return Container(
     // height: 50,
     child: TextFormField(
-      readOnly: readOnly,
       controller: Controller,
       textCapitalization: TextCapitalization.none,
       maxLines: 5,
@@ -347,7 +345,7 @@ Widget dropDownField(
 }) {
   return Container(
     height: 50,
-    width: MediaQuery.of(context).size.width/2.5,
+    width: MediaQuery.of(context).size.width,
     decoration:
         BoxDecoration(borderRadius: BorderRadius.circular(10), color: backGroundColor),
     child: DropdownButtonFormField<String>(
@@ -360,13 +358,11 @@ Widget dropDownField(
         hintText: hintT,
       ),
       icon: Padding(
-        padding: const EdgeInsets.only(right: 10),
-        child: Center(
-          child: Icon(
-            Icons.keyboard_arrow_down_sharp,
-            color: gradient1,
-            size: 35,
-          ),
+        padding: const EdgeInsets.only(right: 10,left: 40),
+        child: Icon(
+          Icons.keyboard_arrow_down_sharp,
+          color: Font_Primary_Color,
+          size: 30,
         ),
       ),
       items: listValue?.map((String option) {
@@ -376,6 +372,47 @@ Widget dropDownField(
         );
       }).toList(),
       onChanged: onChanged,
+    ),
+  );
+}
+
+Widget SSPtextFormField(
+    {TextEditingController? Controller,
+      String? Function(String?)? validating,
+      bool? isEnabled,
+      void Function(String)? onChanged,
+      required String hintText,
+      Widget? prefixIcon,
+      List<TextInputFormatter>? inputFormatters,
+      required TextInputType keyboardtype}) {
+  return Container(
+    // height: 50,
+    child: TextFormField(
+      enabled: isEnabled,
+      controller: Controller,
+      textCapitalization: TextCapitalization.none,
+      inputFormatters: inputFormatters,
+      validator: validating,
+      decoration: InputDecoration(
+        contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+        hintText: hintText,
+        hintStyle: phoneHT,
+        prefixIcon: prefixIcon,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(5),
+          borderSide: BorderSide(color: grey5),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(5),
+          borderSide: BorderSide(color: grey5),
+        ),
+        fillColor: Colors.white,
+        filled: true,
+      ),
+      onChanged: onChanged,
+      textInputAction: TextInputAction.next,
+      style: Textfield_Style,
+      keyboardType: keyboardtype,
     ),
   );
 }

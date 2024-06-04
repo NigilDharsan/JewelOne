@@ -30,9 +30,9 @@ TextStyle Sub_TextStyleBT = TextStyle(
 //DROPDOWNT T
 TextStyle dropDownST = TextStyle(
     fontFamily: 'Metropolis',
-    fontSize: 18,
-    color: gradient1,
-    fontWeight: FontWeight.w700);
+    fontSize: 14,
+    color: Font_Primary_Color,
+    fontWeight: FontWeight.w600);
 
 //PHONE NUMBER
 TextStyle phone_ST = TextStyle(
@@ -44,6 +44,12 @@ TextStyle phone_ST = TextStyle(
 //SKIP STYLE
 TextStyle skip_ST = TextStyle(
     fontFamily: 'Inter',
+    fontSize: 16,
+    color: Color.fromRGBO(45, 45, 45, 1),
+    fontWeight: FontWeight.w500);
+
+TextStyle bottomotext = TextStyle(
+    fontFamily: 'Metropolis',
     fontSize: 16,
     color: Color.fromRGBO(45, 45, 45, 1),
     fontWeight: FontWeight.w500);
@@ -61,6 +67,12 @@ TextStyle planST = TextStyle(
     fontSize: 12,
     color: Color.fromRGBO(45, 45, 45, 1),
     fontWeight: FontWeight.w600);
+
+TextStyle walletT2 = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 12,
+    color: Color.fromRGBO(136, 136, 136, 1),
+    fontWeight: FontWeight.w500);
 
 //GRAM
 TextStyle gramST = TextStyle(
@@ -99,16 +111,17 @@ TextStyle appTitle2 = TextStyle(
     fontWeight: FontWeight.w500);
 
 TextStyle phoneHT = TextStyle(
-    fontFamily: 'Roboto',
-    fontSize: 16,
-    color: Color.fromRGBO(140, 140, 140, 1),
-    fontWeight: FontWeight.w400);
+    fontFamily: 'Metropolis',
+    fontSize: 14,
+    color: Color.fromRGBO(45, 45, 45, 1),
+    fontWeight: FontWeight.w500);
 
 TextStyle Textfield_Style = TextStyle(
     fontFamily: 'Inter',
     fontSize: 14,
     color: Colors.black,
     fontWeight: FontWeight.w400);
+
 TextStyle TextField_Title = TextStyle(
     fontFamily: 'Montserrat',
     fontSize: 16,
@@ -119,7 +132,7 @@ TextStyle Textfield_Style2 = TextStyle(
     fontSize: 14,
     color: Colors.black,
     fontWeight: FontWeight.w500);
-TextStyle StarT = TextStyle(color: Colors.red, fontSize: 25);
+TextStyle StarT = TextStyle(color: Colors.red, fontSize: 16);
 
 //BUTTON TEXT
 TextStyle ButtonT = TextStyle(
@@ -313,6 +326,12 @@ TextStyle maintext = TextStyle(
     color: Color.fromRGBO(45, 45, 45, 1),
     fontWeight: FontWeight.w600);
 
+TextStyle TabbarT = TextStyle(
+    fontFamily: 'Inter',
+    fontSize: 16,
+    color: Color.fromRGBO(126, 126, 126, 1),
+    fontWeight: FontWeight.w600);
+
 //FAQ TEXT
 TextStyle texts = TextStyle(
     fontFamily: 'Metropolis',
@@ -407,4 +426,22 @@ TextStyle TandC = TextStyle(
     fontFamily: 'Metropolis',
     fontSize: 16,
     color: Color.fromRGBO(138, 138, 138, 1),
+    fontWeight: FontWeight.w500);
+
+TextStyle GPlanT = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 18,
+    color: Color.fromRGBO(159, 33, 44, 1),
+    fontWeight: FontWeight.w600);
+
+TextStyle WalletT = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 14,
+    color: Color.fromRGBO(159, 33, 44, 1),
+    fontWeight: FontWeight.w500);
+
+TextStyle WalletT1 = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 14,
+    color: Color.fromRGBO(89, 89, 89, 1),
     fontWeight: FontWeight.w500);

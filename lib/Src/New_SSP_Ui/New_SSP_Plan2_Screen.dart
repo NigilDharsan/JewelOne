@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:jewelone/Common_Widgets/Common_Button.dart';
 import 'package:jewelone/Common_Widgets/Common_Card.dart';
 import 'package:jewelone/Common_Widgets/Image_Path.dart';
+import 'package:jewelone/Common_Widgets/Text_Form_Field.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
 class New_SSP_Plan2_Screen extends StatefulWidget {
@@ -12,6 +14,10 @@ class New_SSP_Plan2_Screen extends StatefulWidget {
 }
 
 class _New_SSP_Plan2_ScreenState extends State<New_SSP_Plan2_Screen> {
+  TextEditingController _amount = TextEditingController();
+  TextEditingController _MobileNumber = TextEditingController();
+  TextEditingController _message = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,7 +62,109 @@ class _New_SSP_Plan2_ScreenState extends State<New_SSP_Plan2_Screen> {
                     children: [
                       Paynowcommonbutton1 (context,
                           onPress: () {
-                            // Navigator.push(context, MaterialPageRoute(builder: (context)=>Online_Emi_Payment_Screen()));
+
+                        //BOTTOM SHEET
+                            showModalBottomSheet(context: (context), builder: (context)=>
+                                Container(
+                                  height:MediaQuery.sizeOf(context).height/1,
+                                  width: MediaQuery.sizeOf(context).width,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(10),
+                                      topLeft: Radius.circular(10)
+                                    )
+                                  ),
+                                  child: SingleChildScrollView(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          width: MediaQuery.sizeOf(context).width,
+                                          decoration: BoxDecoration(
+                                            color: pink6,
+                                          borderRadius: BorderRadius.only(
+                                          topRight: Radius.circular(10),
+                                          topLeft: Radius.circular(10)
+                                          )
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(top: 10,bottom: 10),
+                                            child: Column(
+                                              children: [
+                                                Text('Plan 2',style: sspplan,),
+                                                Container(
+                                                  width: MediaQuery.sizeOf(context).width/1.2,
+                                                    child: Text('One -Time Lump-Sum Advance Plan (Tenure: 330 Days)',style: texts2,maxLines: 2,textAlign: TextAlign.center,))
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(left: 10,right: 10,bottom: 15),
+                                          child: Column(
+                                            children: [
+                                              //INTRESTED AMOUNT
+                                              Title_Style(Title: 'Interested Amount', isStatus: null),
+                                              textFormField(
+                                                hintText: 'example Rs.1,30,000',
+                                                keyboardtype: TextInputType.number,
+                                                inputFormatters: [
+                                                  LengthLimitingTextInputFormatter(10),
+                                                ],
+                                                Controller: _amount,
+                                                validating: (value) {
+                                                  if (value == null || value.isEmpty) {
+                                                    return "Please Enter Amount";
+                                                  }
+                                                  else if (value == null) {
+                                                    return "Please Enter valid Amout";
+                                                  }
+                                                  return null;
+                                                },
+                                                onChanged: null,
+                                              ),
+
+                                              //CONTACT DETAILS
+                                              Title_Style(Title: 'contact Details', isStatus: null),
+                                              textFormField(hintText: 'Enter Mobile*',
+                                                  keyboardtype: TextInputType.phone,
+                                                  Controller: _MobileNumber,
+                                                  inputFormatters: [
+                                                    LengthLimitingTextInputFormatter(10),
+                                                    FilteringTextInputFormatter.digitsOnly],
+                                                  onChanged: null,
+                                                  validating:(value){
+                                                    if (value!.isEmpty) {
+                                                      return 'Please enter a mobile number';
+                                                    } else if (!RegExp(r'^[0-9]{10}$').hasMatch(value)) {
+                                                      return 'Please enter a valid 10-digit mobile number';
+                                                    }
+                                                    return null;
+                                                  }
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(top: 20,bottom: 20),
+                                                child: textfieldDescription(
+                                                  hintText: 'Message*',
+                                                  Controller:_message,
+                                                ),
+                                              ),
+
+                                              //const Spacer(),
+
+                                              bottombutton(context,
+                                                  onPress: () {
+                                                    {}
+                                                  }, titleName: 'Submit'),
+                                            ],
+                                          ),
+                                        )
+
+                                      ],
+                                    ),
+                                  ),
+                                )
+                            );
                           }, titleName: 'Enquiry Now'),
                       Text('Tenure up to 11 months',style: lighttext,)
                     ],
