@@ -1,5 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:jewelone/Common_Widgets/Common_Button.dart';
+import 'package:jewelone/Common_Widgets/Common_Pop_Up.dart';
+import 'package:jewelone/Common_Widgets/Image_Path.dart';
 import 'package:jewelone/Common_Widgets/Text_Form_Field.dart';
 import 'package:jewelone/Src/Home_DashBoard_Ui/Home_DashBoard_Screen.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
@@ -70,7 +73,7 @@ class _Password_ScreenState extends State<Password_Screen> {
                      ),
                  ),
                ),
-               
+
                H_texts(text: 'Current password'),
                textFieldPasswordechange(
                  Controller: _currentpassword,
@@ -134,7 +137,9 @@ class _Password_ScreenState extends State<Password_Screen> {
                CommonContainerButton(context,
                    onPress: () {
                      if(_formKey.currentState!.validate()){
-                       //Navigator.push(context, MaterialPageRoute(builder: (context)=>Home_DashBoard_Screen()));
+                       
+                       //DIALOUGE BOX
+                       PopUp(context);
                      }
                    }, titleName: 'Proceed'),
              ],
