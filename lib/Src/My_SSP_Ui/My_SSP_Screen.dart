@@ -25,7 +25,7 @@ class _My_SSP_ScreenState extends State<My_SSP_Screen> {
   Widget _Mainbody (){
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.only(left: 20,right: 20,top: 15),
+        padding: const EdgeInsets.all(20),
         child: Column(
           children: [
             Row(
@@ -43,7 +43,7 @@ class _My_SSP_ScreenState extends State<My_SSP_Screen> {
             plan2(context),
 
             //HELP CONTAINER
-            HelpContainer(context),
+            HelpContainer(context, Color: pink4),
           ],
         ),
       ),
@@ -159,13 +159,13 @@ Widget ssp_plan_details ({required String text,required String text2}){
   );
  }
 
- Widget HelpContainer(context){
+ Widget HelpContainer(context,{required dynamic Color}){
   return Padding(
     padding: const EdgeInsets.only(top: 20,bottom: 30),
     child: Container(
       width: MediaQuery.sizeOf(context).width,
       decoration: BoxDecoration(
-          color: pink4,
+          color: Color,
           border: Border.all(width: 1,color: pink5),
           borderRadius: BorderRadius.circular(10)
       ),

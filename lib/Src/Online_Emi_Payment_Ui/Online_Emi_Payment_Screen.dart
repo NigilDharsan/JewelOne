@@ -74,7 +74,7 @@ class _Online_Emi_Payment_ScreenState extends State<Online_Emi_Payment_Screen> {
                 ),
                 const SizedBox(height: 35,),
                 //HELP CONTAINER
-                HelpContainer(context),
+                HelpContainer(context, Color: pink4),
                 const SizedBox(height: 10,),
                 //TOTAL AMOUNT
                 //Total_Plan_amount(amount: '5,000.00'),

@@ -314,6 +314,12 @@ TextStyle rate = TextStyle(
     color: Color.fromRGBO(12, 167, 80, 1),
     fontWeight: FontWeight.w900);
 
+TextStyle success = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 10,
+    color: Color.fromRGBO(12, 167, 80, 1),
+    fontWeight: FontWeight.w600);
+
 TextStyle rate2 = TextStyle(
     fontFamily: 'Metropolis',
     fontSize: 14,
