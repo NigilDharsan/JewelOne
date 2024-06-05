@@ -173,11 +173,11 @@ Widget textFieldPassword(
         enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(color: white2),
             borderRadius: BorderRadius.circular(10)),
-        suffixIcon: IconButton(
-          icon:obscure ? ImgPathSvg("eyeclose.svg") : Icon(
-             Icons.remove_red_eye_outlined,
-            color: Colors.black,
-          ),
+          suffixIcon: IconButton(
+            icon:obscure ? ImgPathSvg("eyeclose.svg") : Icon(
+               Icons.remove_red_eye_outlined,
+              color: Colors.black,
+            ),
           onPressed: onPressed,
         ),
         fillColor: white1,
@@ -187,6 +187,51 @@ Widget textFieldPassword(
       textInputAction: TextInputAction.next,
       keyboardType: keyboardtype,
       style: Textfield_Style,
+    ),
+  );
+}
+
+Widget textFieldPasswordechange(
+    {TextEditingController? Controller,
+      String? Function(String?)? validating,
+      void Function(String)? onChanged,
+      required bool obscure,
+      required void Function()? onPressed,
+      required String hintText,
+      required TextInputType keyboardtype}) {
+  return Padding(
+    padding: const EdgeInsets.only(bottom: 15),
+    child: Container(
+      // height: 50,
+      child: TextFormField(
+        controller: Controller,
+        obscureText: obscure,
+        validator: validating,
+        decoration: InputDecoration(
+          contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+          hintText: hintText,
+          hintStyle: password2,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: white2),
+              borderRadius: BorderRadius.circular(10)),
+          suffixIcon: IconButton(
+            icon:obscure ? ImgPathSvg("eyeclose.svg") : Icon(
+              Icons.remove_red_eye_outlined,
+              color: Colors.black,
+            ),
+            onPressed: onPressed,
+          ),
+          fillColor: white1,
+          filled: true,
+        ),
+        onChanged: onChanged,
+        textInputAction: TextInputAction.next,
+        keyboardType: keyboardtype,
+        style: Textfield_Style,
+      ),
     ),
   );
 }

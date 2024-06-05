@@ -48,6 +48,12 @@ TextStyle skip_ST = TextStyle(
     color: Color.fromRGBO(45, 45, 45, 1),
     fontWeight: FontWeight.w500);
 
+TextStyle follow = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 15,
+    color: Color.fromRGBO(45, 45, 45, 1),
+    fontWeight: FontWeight.w400);
+
 TextStyle bottomotext = TextStyle(
     fontFamily: 'Metropolis',
     fontSize: 16,
@@ -116,6 +122,7 @@ TextStyle phoneHT = TextStyle(
     color: Color.fromRGBO(45, 45, 45, 1),
     fontWeight: FontWeight.w500);
 
+
 TextStyle Textfield_Style = TextStyle(
     fontFamily: 'Inter',
     fontSize: 14,
@@ -173,6 +180,12 @@ TextStyle TBlack = TextStyle(
     color: Color.fromRGBO(45, 45, 45, 1),
     fontWeight: FontWeight.w800);
 
+TextStyle TBlack1 = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 24,
+    color: Color.fromRGBO(45, 45, 45, 1),
+    fontWeight: FontWeight.w600);
+
 TextStyle Total_Plan_amount = TextStyle(
     fontFamily: 'Metropolis',
     fontSize: 18,
@@ -191,11 +204,11 @@ TextStyle Tamount = TextStyle(
     color: Color.fromRGBO(0, 0, 0, 1),
     fontWeight: FontWeight.w600);
 
-TextStyle TBlack1 = TextStyle(
+TextStyle TBlack2 = TextStyle(
     fontFamily: 'Inter',
-    fontSize: 22,
+    fontSize: 24,
     color: Color.fromRGBO(0, 0, 0, 1),
-    fontWeight: FontWeight.w700);
+    fontWeight: FontWeight.w600);
 
 TextStyle Goldweight = TextStyle(
     fontFamily: 'Metropolis',
@@ -326,6 +339,13 @@ TextStyle rate2 = TextStyle(
     color: Color.fromRGBO(45, 45, 45, 1),
     fontWeight: FontWeight.w600);
 
+TextStyle underline = TextStyle(
+    decoration: TextDecoration.underline,
+    fontFamily: 'Metropolis',
+    fontSize: 14,
+    color: Color.fromRGBO(45, 45, 45, 1),
+    fontWeight: FontWeight.w500);
+
 TextStyle maintext = TextStyle(
     fontFamily: 'Inter',
     fontSize: 16,
@@ -371,6 +391,18 @@ TextStyle Num = TextStyle(
     fontSize: 24,
     color: Color.fromRGBO(45, 45, 45, 1),
     fontWeight: FontWeight.w600);
+
+TextStyle password = TextStyle(
+    fontFamily: 'Inter',
+    fontSize: 20,
+    color: Color.fromRGBO(45, 45, 45, 1),
+    fontWeight: FontWeight.w500);
+
+TextStyle password2 = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 14,
+    color: Color.fromRGBO(168, 168, 168, 1),
+    fontWeight: FontWeight.w500);
 
 //MY SSP
 TextStyle sspplan = TextStyle(
@@ -426,6 +458,12 @@ TextStyle Content1 = TextStyle(
     fontSize: 14,
     color: Color.fromRGBO(255, 255, 255, 1),
     fontWeight: FontWeight.w400);
+
+TextStyle appbarT = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 20,
+    color: Color.fromRGBO(255, 255, 255, 1),
+    fontWeight: FontWeight.w600);
 
 
 TextStyle TandC = TextStyle(
