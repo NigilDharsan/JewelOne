@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jewelone/Common_Widgets/Common_Button.dart';
 import 'package:jewelone/Common_Widgets/Image_Path.dart';
+import 'package:jewelone/Src/Security_Setting_Ui/Password_Screen.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
 class Settings_Screen extends StatefulWidget {
@@ -112,7 +113,12 @@ class _Settings_ScreenState extends State<Settings_Screen> {
                     ),
 
                     //SETTINGS CONTAINER
-                    Settingscontainer(context,text: 'Change Password', image: 'lock.svg', image2: 'rightarrow2.svg'),
+                    InkWell(
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>Password_Screen()));
+                      },
+
+                        child: Settingscontainer(context,text: 'Change Password', image: 'lock.svg', image2: 'rightarrow2.svg')),
                     Settingscontainer(context,text: 'KYC', image: 'kyc.svg', image2: 'rightarrow2.svg'),
                     Settingscontainer(context,text: 'About JewelOne', image: 'aboutjweleone.svg', image2: 'rightarrow2.svg'),
                   ],

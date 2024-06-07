@@ -122,6 +122,24 @@ TextStyle phoneHT = TextStyle(
     color: Color.fromRGBO(45, 45, 45, 1),
     fontWeight: FontWeight.w500);
 
+TextStyle locationT = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 24,
+    color: Color.fromRGBO(40, 40, 40, 1),
+    fontWeight: FontWeight.w700);
+
+TextStyle locationT1 = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 16,
+    color: Color.fromRGBO(40, 40, 40, 1),
+    fontWeight: FontWeight.w600);
+
+TextStyle delete = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 14,
+    color: Color.fromRGBO(255, 0, 0, 1),
+    fontWeight: FontWeight.w500);
+
 
 TextStyle Textfield_Style = TextStyle(
     fontFamily: 'Inter',
@@ -378,6 +396,13 @@ TextStyle lighttext = TextStyle(
     color: Color.fromRGBO(116, 116, 116, 1),
     fontWeight: FontWeight.w400);
 
+
+TextStyle location_Phone = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 12,
+    color: Color.fromRGBO(184, 133, 46, 1),
+    fontWeight: FontWeight.w400);
+
 //FAQ CONTAINER HEADING
 TextStyle colortexts = TextStyle(
     fontFamily: 'Metropolis',
@@ -438,6 +463,12 @@ TextStyle Gramage2 = TextStyle(
     fontSize: 15,
     color: Color.fromRGBO(160, 34, 44, 1),
     fontWeight: FontWeight.w700);
+
+TextStyle hours = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 13,
+    color: Color.fromRGBO(160, 34, 44, 1),
+    fontWeight: FontWeight.w500);
 
 
 TextStyle stackT = TextStyle(

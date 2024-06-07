@@ -94,59 +94,111 @@ Widget textFormField2(
 }
 
 //TEXTFIELD DATE PICKER
-Widget TextFieldDatePicker(
-    {TextEditingController? Controller,
-    String? Function(String?)? validating,
-    void Function(String)? onChanged,
-    required String hintText,
-    void Function()? onTap}) {
-  return TextFormField(
-    controller: Controller,
-    autovalidateMode: AutovalidateMode.onUserInteraction,
-    onTap: onTap,
-    readOnly: true,
-    keyboardType: TextInputType.number,
-    maxLength: 15,
-    decoration: InputDecoration(
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10),
-        borderSide: BorderSide(color: white1),
+Widget TextFieldDatePicker({TextEditingController? Controller,
+  String? Function(String?)? validating,
+  void Function(String)? onChanged,required String hintText,void Function()? onTap}){
+  return  Container(
+    width: 165,
+    child: TextFormField(
+      controller:Controller ,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      onTap: onTap,
+      readOnly: true,
+      keyboardType: TextInputType.number,
+      maxLength: 15,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(5),
+          borderSide: BorderSide(color: pink1),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(5),
+          borderSide: BorderSide(color: pink1),
+        ),
+        counterText: "",
+        hintText: '00/00/0000',
+        //helperStyle: HintST,
+        suffixIcon: Icon(Icons.calendar_month,
+          color:grey1,
+          size: 24,),
+        hintStyle: const TextStyle(
+          fontFamily: "Inter",
+          fontWeight: FontWeight.w400,
+          fontSize: 12.0,
+          color: Colors.grey,
+        ),
+        errorMaxLines: 1,
+        contentPadding: const EdgeInsets.only(
+            top: 8.0, bottom: 8.0, left: 16.0, right: 16.0),
+        fillColor: white1,
+        filled: true,
       ),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10),
-        borderSide: BorderSide(color: white1),
-      ),
-      counterText: "",
-      hintText: 'DD / MM / YYYY',
-      helperStyle: phoneHT,
-      prefixIcon: Icon(
-        Icons.calendar_month,
-        color: grey1,
-        size: 24,
-      ),
-      hintStyle: const TextStyle(
+      validator: validating,
+      onChanged: onChanged,
+      textInputAction: TextInputAction.next,
+      style: const TextStyle(
         fontFamily: "Inter",
         fontWeight: FontWeight.w400,
-        fontSize: 12.0,
-        color: Colors.grey,
+        fontSize: 14.0,
+        color: Colors.black,
       ),
-      errorMaxLines: 1,
-      contentPadding:
-          const EdgeInsets.only(top: 8.0, bottom: 8.0, left: 16.0, right: 16.0),
-      fillColor: white1,
-      filled: true,
-    ),
-    validator: validating,
-    onChanged: onChanged,
-    textInputAction: TextInputAction.next,
-    style: const TextStyle(
-      fontFamily: "Inter",
-      fontWeight: FontWeight.w400,
-      fontSize: 14.0,
-      color: Colors.black,
     ),
   );
 }
+
+Widget TextFieldDatePickerprofile({
+  TextEditingController? Controller,
+  String? Function(String?)? validating,
+  void Function(String)? onChanged,required String hintText,void Function()? onTap}){
+  return  Container(
+    width: 165,
+    child: TextFormField(
+      controller:Controller ,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      onTap: onTap,
+      readOnly: true,
+      keyboardType: TextInputType.number,
+      maxLength: 15,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(5),
+          borderSide: BorderSide(color: pink1),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(5),
+          borderSide: BorderSide(color: pink1),
+        ),
+        counterText: "",
+        hintText: '00/00/0000',
+        //helperStyle: HintST,
+        suffixIcon: Icon(Icons.calendar_month,
+          color:grey1,
+          size: 24,),
+        hintStyle: const TextStyle(
+          fontFamily: "Inter",
+          fontWeight: FontWeight.w400,
+          fontSize: 12.0,
+          color: Colors.grey,
+        ),
+        errorMaxLines: 1,
+        contentPadding: const EdgeInsets.only(
+            top: 8.0, bottom: 8.0, left: 16.0, right: 16.0),
+        fillColor: white1,
+        filled: true,
+      ),
+      validator: validating,
+      onChanged: onChanged,
+      textInputAction: TextInputAction.next,
+      style: const TextStyle(
+        fontFamily: "Inter",
+        fontWeight: FontWeight.w400,
+        fontSize: 14.0,
+        color: Colors.black,
+      ),
+    ),
+  );
+}
+
 
 // TEXT FIELD PASSWORD
 Widget textFieldPassword(
@@ -242,24 +294,23 @@ Widget textfieldDescription(
     String? Function(String?)? validating,
     required String hintText,}) {
   return Container(
-    // height: 50,
     child: TextFormField(
       controller: Controller,
       textCapitalization: TextCapitalization.none,
       maxLines: 5,
-      minLines: 3,
+      minLines: 2,
       keyboardType: TextInputType.multiline,
       validator: validating,
       decoration: InputDecoration(
         contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
         hintText: hintText,
-        hintStyle: phoneHT,
+        hintStyle: lighttext,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(5),
         ),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: white1),
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(5),
         ),
         fillColor: white1,
         filled: true,
@@ -461,5 +512,47 @@ Widget SSPtextFormField(
     ),
   );
 }
+
+Widget dropDownFieldprofileedit(
+    context, {
+      required dynamic width,
+      required String? value,
+      required List<String>? listValue,
+      required void Function(String?)? onChanged,
+      required String hintT,
+    }) {
+  return Container(
+    height: 45,
+    width: width,
+    decoration:
+    BoxDecoration(borderRadius: BorderRadius.circular(5), color: backGroundColor),
+    child: DropdownButtonFormField<String>(
+      value: value,
+      isExpanded: true,
+      decoration: InputDecoration(
+        border: InputBorder.none,
+        contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+        hintStyle: lighttext,
+        hintText: hintT,
+      ),
+      icon: Padding(
+        padding: const EdgeInsets.only(right: 10,),
+        child: Icon(
+          Icons.keyboard_arrow_down_sharp,
+          color: Colors.black,
+          size: 20,
+        ),
+      ),
+      items: listValue?.map((String option) {
+        return DropdownMenuItem<String>(
+          value: option,
+          child: Center(child: Text(option,style: radioST,)),
+        );
+      }).toList(),
+      onChanged: onChanged,
+    ),
+  );
+}
+
 
 

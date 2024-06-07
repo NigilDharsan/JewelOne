@@ -137,7 +137,7 @@ class _Password_ScreenState extends State<Password_Screen> {
                CommonContainerButton(context,
                    onPress: () {
                      if(_formKey.currentState!.validate()){
-                       
+
                        //DIALOUGE BOX
                        PopUp(context);
                      }
