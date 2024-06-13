@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:jewelone/Common_Widgets/Common_Button.dart';
 import 'package:jewelone/Common_Widgets/Common_Pop_Up.dart';
+import 'package:jewelone/Common_Widgets/Custom_App_Bar.dart';
 import 'package:jewelone/Common_Widgets/Image_Path.dart';
 import 'package:jewelone/Common_Widgets/Text_Form_Field.dart';
+import 'package:jewelone/Src/FAQ_Ui/FAQ_Screen.dart';
 import 'package:jewelone/Src/Home_DashBoard_Ui/Home_DashBoard_Screen.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
@@ -52,8 +54,14 @@ class _Password_ScreenState extends State<Password_Screen> {
   Widget build(BuildContext context) {
     return Scaffold(
      backgroundColor: white2,
+      appBar: Custom_AppBar(isNav: true, isTwoLine: false, title1: 'Settings', title2: '',
+        actionLogo: 'info.svg', isWhite: false,
+        ActiononTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>Faq_Screen()));
+        },
+      ),
        body: Padding(
-         padding: const EdgeInsets.only(left: 20,right: 20,bottom: 30),
+         padding: const EdgeInsets.only(left: 20,right: 20,bottom: 30,top: 20),
          child: Form(
            key:  _formKey,
            child: Column(

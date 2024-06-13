@@ -161,10 +161,10 @@ TextStyle StarT = TextStyle(color: Colors.red, fontSize: 16);
 
 //BUTTON TEXT
 TextStyle ButtonT = TextStyle(
-    fontFamily: 'Inter',
-    fontSize: 20,
+    fontFamily: 'Metropolis',
+    fontSize: 16,
     color: white1,
-    fontWeight: FontWeight.w700);
+    fontWeight: FontWeight.w500);
 
 TextStyle ButtonT2 = TextStyle(
     fontFamily: 'Inter',
@@ -408,7 +408,7 @@ TextStyle colortexts = TextStyle(
     fontFamily: 'Metropolis',
     fontSize: 14,
     color: Color.fromRGBO(217, 154, 38, 1),
-    fontWeight: FontWeight.w500);
+    fontWeight: FontWeight.w500,);
 
 //MOBILE NUMBER
 TextStyle Num = TextStyle(

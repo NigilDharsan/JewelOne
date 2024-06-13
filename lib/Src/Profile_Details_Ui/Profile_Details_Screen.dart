@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:jewelone/Common_Widgets/Common_Button.dart';
+import 'package:jewelone/Common_Widgets/Custom_App_Bar.dart';
 import 'package:jewelone/Common_Widgets/Image_Path.dart';
 import 'package:jewelone/Common_Widgets/Text_Form_Field.dart';
+import 'package:jewelone/Src/FAQ_Ui/FAQ_Screen.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
 class Profile_Details_Screen extends StatefulWidget {
@@ -67,9 +69,15 @@ class _Profile_Details_ScreenState extends State<Profile_Details_Screen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: white2,
+      appBar: Custom_AppBar(isNav: true, isTwoLine: false, title1: 'Edit Profile', title2: '',
+        actionLogo: 'info.svg', isWhite: false,
+        ActiononTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>Faq_Screen()));
+        },
+      ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(left: 20,right: 20,top: 15,bottom: 30),
+          padding: const EdgeInsets.only(left: 20,right: 20,top: 20,bottom: 30),
           child: Container(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

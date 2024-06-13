@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:jewelone/Common_Widgets/Custom_App_Bar.dart';
 import 'package:jewelone/Common_Widgets/Image_Path.dart';
+import 'package:jewelone/Src/FAQ_Ui/FAQ_Screen.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
 class Wallet_screen extends StatefulWidget {
@@ -14,6 +16,12 @@ class _Wallet_screenState extends State<Wallet_screen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: white2,
+      appBar: Custom_AppBar(isNav: true, isTwoLine: false, title1: 'My Wallet', title2: '',
+        actionLogo: 'info.svg', isWhite: false,
+        ActiononTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>Faq_Screen()));
+        },
+      ),
       body: _Mainbody(),
     );
   }

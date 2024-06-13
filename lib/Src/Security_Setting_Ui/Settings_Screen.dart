@@ -41,6 +41,7 @@ class _Settings_ScreenState extends State<Settings_Screen> {
                           colors: [
                             gradient1,
                             gradient2,
+
                           ]
                       ),
                     ),

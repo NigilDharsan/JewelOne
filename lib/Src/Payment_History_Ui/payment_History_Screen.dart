@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:jewelone/Common_Widgets/Common_Button.dart';
+import 'package:jewelone/Common_Widgets/Custom_App_Bar.dart';
 import 'package:jewelone/Common_Widgets/Image_Path.dart';
+import 'package:jewelone/Src/FAQ_Ui/FAQ_Screen.dart';
 import 'package:jewelone/Src/My_SSP_Ui/My_SSP_Screen.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
@@ -16,6 +18,12 @@ class _paymrnt_History_ScreenState extends State<paymrnt_History_Screen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: white2,
+      appBar: Custom_AppBar(isNav: true, isTwoLine: false, title1: 'Payment History', title2: '',
+        actionLogo: 'info.svg', isWhite: false,
+        ActiononTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>Faq_Screen()));
+        },
+      ),
       body: _Mainbody(),
     );
   }
@@ -23,7 +31,7 @@ class _paymrnt_History_ScreenState extends State<paymrnt_History_Screen> {
   Widget _Mainbody (){
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.only(left: 20,right: 20,bottom: 20),
+        padding: const EdgeInsets.only(left: 20,right: 20,bottom: 20,top: 20),
         child: Container(
           child: Column(
             children: [
@@ -82,6 +90,7 @@ class _paymrnt_History_ScreenState extends State<paymrnt_History_Screen> {
 
                                 Column(
                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   //crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text('SS/2425JO/000198',style: planST,),

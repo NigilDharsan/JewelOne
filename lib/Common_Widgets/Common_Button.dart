@@ -92,3 +92,62 @@ Widget Paynowcommonbutton2 (context,{ required void Function()? onPress,required
     ),
   );
 }
+
+Widget bottombutton (context,{ required void Function()? onPress,required String titleName}){
+  return InkWell(
+    onTap: onPress,
+    child: Container(
+      height: 40,
+      width: MediaQuery.sizeOf(context).width,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(25),
+        gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.topRight,
+            colors: [
+              gradient1,
+              gradient2,
+            ]
+        ),
+      ),
+      child: Center(child: Text(titleName,style: ButtonT,)),
+    ),
+  );
+}
+
+Widget upload (context,{ required void Function()? onPress,required String titleName}){
+  return InkWell(
+    onTap: onPress,
+    child: Container(
+      height: 45,
+      width: MediaQuery.sizeOf(context).width/2.7,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(25),
+        gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.topRight,
+            colors: [
+              gradient1,
+              gradient2,
+            ]
+        ),
+      ),
+      child: Center(child: Text(titleName,style: ButtonT,)),
+    ),
+  );
+}
+
+Widget cancel (context,{ required void Function()? onPress,required String titleName}){
+  return InkWell(
+    onTap: onPress,
+    child: Container(
+      height: 45,
+      width: MediaQuery.sizeOf(context).width/2.7,
+      decoration: BoxDecoration(
+        border: Border.all(width: 1,color: grey5),
+        borderRadius: BorderRadius.circular(25),
+      ),
+      child: Center(child: Text(titleName,style: lighttext,)),
+    ),
+  );
+}

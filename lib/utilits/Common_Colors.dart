@@ -21,6 +21,9 @@ const Color grey3 = Color.fromRGBO(136, 136, 136, 1);
 const Color grey4 = Color.fromRGBO(243, 240, 240, 240);
 const Color grey5 = Color.fromRGBO(233, 233, 233, 1);
 
+//GOLDEN
+
+const Color arrow = Color.fromRGBO(217, 154, 38, 1);
 
 //BLACK
 const Color black1 = Color.fromRGBO(52, 52, 52, 1);
@@ -83,3 +86,4 @@ const Gradient appGradient = LinearGradient(
 //GRADIENT COLOR
 const Color gradient2 = Color.fromRGBO(248, 146, 28, 1);
 const Color gradient1 = Color.fromRGBO(1, 42, 122, 1);
+const Color gradient3 = Color.fromRGBO(174, 134, 86, 1);

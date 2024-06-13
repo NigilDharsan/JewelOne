@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:jewelone/Common_Widgets/Common_Button.dart';
 import 'package:jewelone/Common_Widgets/Common_Card.dart';
+import 'package:jewelone/Common_Widgets/Custom_App_Bar.dart';
 import 'package:jewelone/Common_Widgets/Image_Path.dart';
+import 'package:jewelone/Src/FAQ_Ui/FAQ_Screen.dart';
+import 'package:jewelone/Src/New_SSP_Ui/Grammage_Plan_Screen.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
 class New_SSP_Plan1_Screen extends StatefulWidget {
@@ -16,9 +19,14 @@ class _New_SSP_Plan1_ScreenState extends State<New_SSP_Plan1_Screen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: white2,
-      appBar: AppBar(
-        leading: Icon(Icons.arrow_back_ios),
-      ),
+      appBar:Custom_AppBar(
+          isNav: true,
+          isTwoLine: true,
+          title1: "Plan 1",
+          title2: 'Gold Ornaments Purchase Advance Scheme',
+          actionLogo: 'info.svg', isWhite: false, ActiononTap: (){
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>Faq_Screen()));
+      },),
 
       //BOTTOM BAR
       bottomNavigationBar: Container(
@@ -30,7 +38,7 @@ class _New_SSP_Plan1_ScreenState extends State<New_SSP_Plan1_Screen> {
           child: Container(
             decoration: BoxDecoration(
               color: pink3,
-              border: Border.all(width: 1,color: gradient2),
+              border: Border.all(width: 1,color: gradient3),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Row(
@@ -59,7 +67,7 @@ class _New_SSP_Plan1_ScreenState extends State<New_SSP_Plan1_Screen> {
                     children: [
                       Paynowcommonbutton1 (context,
                           onPress: () {
-                            // Navigator.push(context, MaterialPageRoute(builder: (context)=>Online_Emi_Payment_Screen()));
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>Grammage_Plan_Screen()));
                           }, titleName: 'Join Now'),
                       Text('Tenure up to 11 months',style: lighttext,)
                     ],
@@ -140,7 +148,7 @@ class _New_SSP_Plan1_ScreenState extends State<New_SSP_Plan1_Screen> {
 
             //MATURITY BENIFITS IMAGE
             Padding(
-              padding: const EdgeInsets.only(left: 5,right: 5),
+              padding: const EdgeInsets.only(left: 5,right: 5,bottom: 50),
               child: ImgPathSvg('Benifits.svg'),
             ),
           ],

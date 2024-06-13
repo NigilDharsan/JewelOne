@@ -113,21 +113,21 @@ class _New_SSP_ScreenState extends State<New_SSP_Screen> {
                 onTap: (){
                   Navigator.push(context, MaterialPageRoute(builder: (context)=>New_SSP_Plan2_Screen()));
                 },
-                child: plancontainer(context, texts: 'Plan 2')),
+                child: plancontainer(context, texts: 'Plan 2', planname: 'One-Time Lump-Sum Advance Plan')),
 
 
             InkWell(
                 onTap: (){
                   Navigator.push(context, MaterialPageRoute(builder: (context)=>New_SSP_Plan3_Screen()));
                 },
-                child: plancontainer(context, texts: 'Plan 3')),
+                child: plancontainer(context, texts: 'Plan 3', planname: 'Old Gold Advance Plan')),
 
 
             InkWell(
                 onTap: (){
                   Navigator.push(context, MaterialPageRoute(builder: (context)=>New_SSP_Plan4_Screen()));
                 },
-                child: plancontainer(context, texts: 'Plan 4')),
+                child: plancontainer(context, texts: 'Plan 4', planname: 'Wedding Jewellery Plan')),
           ],
         ),
       ),
@@ -151,7 +151,7 @@ Widget _carouselImg(context){
 }
 
 //REGISTER NOW CONTAINER
-Widget plancontainer (context,{required String texts}){
+Widget plancontainer (context,{required String texts,required String planname}){
   return Padding(
     padding: const EdgeInsets.only(top: 10,),
     child: Container(
@@ -161,24 +161,28 @@ Widget plancontainer (context,{required String texts}){
           borderRadius: BorderRadius.circular(5)
       ),
       child: Padding(
-        padding: const EdgeInsets.only(top: 15, bottom: 10,right: 15,left: 10),
+        padding: const EdgeInsets.only(top: 15, bottom: 10,left: 10,right: 10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            ImgPathSvg('Rupees.svg'),
-            const SizedBox(width: 10,),
+            Padding(
+              padding: const EdgeInsets.only(right: 10),
+              child: ImgPathSvg('Rupees.svg'),
+            ),
+            //const SizedBox(width: 10,),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(texts,style: plan1,),
                 Container(
-                    width: MediaQuery.sizeOf(context).width/2.5,
-                    child: Text('Gold Ornaments Purchase Advance Scheme',style: lighttext,maxLines: 2,)),
+                    width: MediaQuery.sizeOf(context).width/2.8,
+                    child: Text(planname,style: lighttext,maxLines: 2,)),
               ],
             ),
             const Spacer(),
-            Text('Register Now >',style: colortexts,)
+            Text('Register Now ',style: colortexts,),
+            Icon(Icons.arrow_forward_ios,color: arrow,size: 20,),
           ],
         ),
       ),

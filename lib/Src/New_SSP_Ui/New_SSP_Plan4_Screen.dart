@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:jewelone/Common_Widgets/Common_Button.dart';
 import 'package:jewelone/Common_Widgets/Common_Card.dart';
+import 'package:jewelone/Common_Widgets/Custom_App_Bar.dart';
 import 'package:jewelone/Common_Widgets/Image_Path.dart';
+import 'package:jewelone/Src/FAQ_Ui/FAQ_Screen.dart';
 import 'package:jewelone/Src/New_SSP_Ui/New_SSP_Plan1_Screen.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
@@ -17,6 +19,14 @@ class _New_SSP_Plan4_ScreenState extends State<New_SSP_Plan4_Screen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: white2,
+      appBar:Custom_AppBar(
+        isNav: true,
+        isTwoLine: true,
+        title1: "Wedding Jewellery Plan",
+        title2: 'One -Time Lump-Sum Advance Plan (Tenure: 330 Days)',
+        actionLogo: 'info.svg', isWhite: false, ActiononTap: (){
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>Faq_Screen()));
+      },),
       bottomNavigationBar: Container(
         height: 150,
         width: MediaQuery.sizeOf(context).width,
@@ -26,7 +36,7 @@ class _New_SSP_Plan4_ScreenState extends State<New_SSP_Plan4_Screen> {
           child: Container(
             decoration: BoxDecoration(
               color: pink3,
-              border: Border.all(width: 1,color: gradient2),
+              border: Border.all(width: 1,color: gradient3),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Padding(

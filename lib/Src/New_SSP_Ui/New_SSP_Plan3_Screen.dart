@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:jewelone/Common_Widgets/Common_Button.dart';
+import 'package:jewelone/Common_Widgets/Custom_App_Bar.dart';
 import 'package:jewelone/Common_Widgets/Image_Path.dart';
+import 'package:jewelone/Src/FAQ_Ui/FAQ_Screen.dart';
 import 'package:jewelone/Src/New_SSP_Ui/New_SSP_Plan1_Screen.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
@@ -18,6 +20,14 @@ class _New_SSP_Plan3_ScreenState extends State<New_SSP_Plan3_Screen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: white2,
+      appBar:Custom_AppBar(
+        isNav: true,
+        isTwoLine: true,
+        title1: "Plan 3",
+        title2: 'Old Gold Advance Plan (Tenure: 330 days)',
+        actionLogo: 'info.svg', isWhite: false, ActiononTap: (){
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>Faq_Screen()));
+      },),
       bottomNavigationBar: Container(
         height: 150,
         width: MediaQuery.sizeOf(context).width,
@@ -27,7 +37,7 @@ class _New_SSP_Plan3_ScreenState extends State<New_SSP_Plan3_Screen> {
           child: Container(
             decoration: BoxDecoration(
               color: pink3,
-              border: Border.all(width: 1,color: gradient2),
+              border: Border.all(width: 1,color: gradient3),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Padding(
@@ -42,10 +52,10 @@ class _New_SSP_Plan3_ScreenState extends State<New_SSP_Plan3_Screen> {
                       children: [
                         Container(
                             width: MediaQuery.sizeOf(context).width/3,
-                            child: Text('Old Gold Advance Plan Tenure: 330 days)',style: rate2,maxLines: 2,)),
+                            child: Text('Old Gold Advance Plan Tenure: 330)',style: rate2,maxLines: 2,)),
                         Padding(
                           padding: const EdgeInsets.only(top: 10),
-                          child: Text('EMA from ₹5,000 /month',style: lighttext,),
+                          child: Text('EMA from ₹5,000 / month',style: lighttext,),
                         ),
                       ],
                     ),
@@ -133,7 +143,7 @@ class _New_SSP_Plan3_ScreenState extends State<New_SSP_Plan3_Screen> {
             ),
             New_SSP_Images(context, image: 'lib/assets/Exchange.png'),
             Padding(
-              padding: const EdgeInsets.only(left: 20,right: 20,top: 10),
+              padding: const EdgeInsets.only(left: 20,right: 20,top: 10,bottom: 30),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -189,7 +199,6 @@ Widget Terms_and_Conditions (context,{required String TCtext}){
       ),
       Container(
         width: MediaQuery.sizeOf(context).width/1.2,
-        // color: Colors.green,
         child: Content(content: TCtext),
       )
     ],

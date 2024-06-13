@@ -10,10 +10,6 @@ import 'package:jewelone/utilits/Common_Colors.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
 import 'package:intl/intl.dart';
 
-
-
-
-
 class Create_Account_Screen extends StatefulWidget {
   const Create_Account_Screen({super.key});
 

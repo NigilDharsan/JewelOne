@@ -63,7 +63,7 @@ class _CustomAppBarState extends State<Custom_AppBar> {
           ),
         )
             : null,
-        centerTitle: true,
+        centerTitle: false,
         title:widget.isTwoLine == true? Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
