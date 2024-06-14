@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:  New_SSP_Plan1_Screen(),
+      home:  LoginScreen(),
     );
   }
 }
