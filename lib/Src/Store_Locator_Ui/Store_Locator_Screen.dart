@@ -110,7 +110,8 @@ Widget Location_Container (context,{required String mainaddress,
                     ImgPathSvg('map.svg')
                   ],
                 ),
-                Divider(indent: 20,endIndent: 20,),
+                Divider(),
+
                 Text(address,style: lighttext,),
                 Row(
                   children: [
@@ -121,7 +122,6 @@ Widget Location_Container (context,{required String mainaddress,
                       padding: const EdgeInsets.only(left: 5),
                       child: Text(number,style: location_Phone,),
                     ),
-
                   ],
                 ),
                 //TIMING

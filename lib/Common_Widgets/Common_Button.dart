@@ -44,7 +44,47 @@ Widget CommonContainerButton(context,{ required void Function()? onPress,require
         ]
     ),
     ),
-      child: Center(child: Text(titleName,style: ButtonT,)),
+      child:
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Center(child: Text(titleName,style: ButtonT,)),
+        ],
+      )
+
+    ),
+  );
+}
+
+Widget buttonIcon(context,{ required void Function()? onPress,required String titleName}){
+  return InkWell(
+    onTap: onPress,
+    child: Container(
+        height: 50,
+        width: MediaQuery.sizeOf(context).width,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(25),
+          gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.topRight,
+              colors: [
+                gradient1,
+                gradient2,
+              ]
+          ),
+        ),
+        child:
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(right: 8),
+              child: ImgPathSvg('logout.svg')
+            ),
+            Center(child: Text(titleName,style: ButtonT,)),
+          ],
+        )
+
     ),
   );
 }
@@ -120,7 +160,7 @@ Widget upload (context,{ required void Function()? onPress,required String title
     onTap: onPress,
     child: Container(
       height: 45,
-      width: MediaQuery.sizeOf(context).width/2.7,
+      width: MediaQuery.sizeOf(context).width/3,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(25),
         gradient: LinearGradient(

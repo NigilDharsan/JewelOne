@@ -28,6 +28,7 @@ Widget textFormField(
         contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
         hintText: hintText,
         hintStyle: lighttext,
+        labelText: 'Email',
         prefixIcon: prefixIcon,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
@@ -38,6 +39,80 @@ Widget textFormField(
           borderSide: BorderSide(color: grey5),
         ),
         fillColor: Colors.white,
+        filled: true,
+      ),
+      onChanged: onChanged,
+      textInputAction: TextInputAction.next,
+      style: Textfield_Style,
+      keyboardType: keyboardtype,
+    ),
+  );
+}
+
+Widget textField(
+    {TextEditingController? Controller,
+      String? Function(String?)? validating,
+      bool? isEnabled,
+      void Function(String)? onChanged,
+      required String hintText,
+      Widget? prefixIcon,
+      List<TextInputFormatter>? inputFormatters,
+      required TextInputType keyboardtype}) {
+  return Container(
+    child: TextFormField(
+      enabled: isEnabled,
+      controller: Controller,
+      textCapitalization: TextCapitalization.none,
+      inputFormatters: inputFormatters,
+      validator: validating,
+      decoration: InputDecoration(
+        enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: white10)),
+        contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+        hintText: hintText,
+        hintStyle: phoneHT,
+        prefixIcon: prefixIcon,
+        fillColor: Colors.white,
+        filled: true,
+      ),
+      onChanged: onChanged,
+      textInputAction: TextInputAction.next,
+      style: Textfield_Style,
+      keyboardType: keyboardtype,
+    ),
+  );
+}
+
+Widget droptextFormField(
+    {TextEditingController? Controller,
+      String? Function(String?)? validating,
+      bool? isEnabled,
+      void Function(String)? onChanged,
+      required String hintText,
+      Widget? prefixIcon,
+      List<TextInputFormatter>? inputFormatters,
+      required TextInputType keyboardtype}) {
+  return Container(
+    // height: 50,
+    child: TextFormField(
+      enabled: isEnabled,
+      controller: Controller,
+      textCapitalization: TextCapitalization.none,
+      inputFormatters: inputFormatters,
+      validator: validating,
+      decoration: InputDecoration(
+        contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+        hintText: hintText,
+        hintStyle: lighttext,
+        prefixIcon: prefixIcon,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: grey5),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: grey5),
+        ),
+        fillColor: white2,
         filled: true,
       ),
       onChanged: onChanged,
@@ -270,9 +345,7 @@ Widget textFieldPasswordechange(
               borderSide: BorderSide(color: white2),
               borderRadius: BorderRadius.circular(10)),
           suffixIcon: IconButton(
-            icon:obscure ? ImgPathSvg("eyeclose.svg") : Icon(
-              Icons.remove_red_eye_outlined,
-              color: Colors.black,
+            icon:obscure ? ImgPathSvg("eye.svg") : Icon(Icons.remove_red_eye_outlined, color: eye,
             ),
             onPressed: onPressed,
           ),
@@ -297,7 +370,7 @@ Widget textfieldDescription(
     child: TextFormField(
       controller: Controller,
       textCapitalization: TextCapitalization.none,
-      maxLines: 5,
+      maxLines: 10,
       minLines: 2,
       keyboardType: TextInputType.multiline,
       validator: validating,
@@ -306,13 +379,13 @@ Widget textfieldDescription(
         hintText: hintText,
         hintStyle: lighttext,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(5),
+          borderRadius: BorderRadius.circular(10)  ,
         ),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: white1),
-          borderRadius: BorderRadius.circular(5),
+          borderRadius: BorderRadius.circular(10),
         ),
-        fillColor: white1,
+        fillColor: white2,
         filled: true,
       ),
       textInputAction: TextInputAction.next,
@@ -437,34 +510,29 @@ Widget dropDownField(
   required String? value,
   required List<String>? listValue,
   required void Function(String?)? onChanged,
-  required String hintT,
 }) {
   return Container(
     height: 50,
-    width: MediaQuery.of(context).size.width,
+    width: MediaQuery.of(context).size.width/2.8,
     decoration:
         BoxDecoration(borderRadius: BorderRadius.circular(10), color: backGroundColor),
     child: DropdownButtonFormField<String>(
       value: value,
-      isExpanded: true,
+      isExpanded: false,
       decoration: InputDecoration(
         border: InputBorder.none,
         contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
         hintStyle: phoneHT,
-        hintText: hintT,
       ),
-      icon: Padding(
-        padding: const EdgeInsets.only(right: 10,left: 40),
-        child: Icon(
-          Icons.keyboard_arrow_down_sharp,
-          color: Font_Primary_Color,
-          size: 30,
-        ),
+      icon: Icon(
+        Icons.keyboard_arrow_down_sharp,
+        color: Font_Primary_Color,
+        size: 30,
       ),
       items: listValue?.map((String option) {
         return DropdownMenuItem<String>(
           value: option,
-          child: Center(child: Text(option,style: dropDownST,)),
+          child: Text(option,style: dropDownST,),
         );
       }).toList(),
       onChanged: onChanged,
@@ -492,7 +560,7 @@ Widget SSPtextFormField(
       decoration: InputDecoration(
         contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
         hintText: hintText,
-        hintStyle: phoneHT,
+        hintStyle: light,
         prefixIcon: prefixIcon,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),

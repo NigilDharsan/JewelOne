@@ -19,6 +19,7 @@ class _New_SSP_Plan2_ScreenState extends State<New_SSP_Plan2_Screen> {
   TextEditingController _amount = TextEditingController();
   TextEditingController _MobileNumber = TextEditingController();
   TextEditingController _message = TextEditingController();
+  TextEditingController _email = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -79,6 +80,7 @@ class _New_SSP_Plan2_ScreenState extends State<New_SSP_Plan2_Screen> {
                                   height:MediaQuery.sizeOf(context).height/1,
                                   width: MediaQuery.sizeOf(context).width,
                                   decoration: BoxDecoration(
+                                    color: white1,
                                     borderRadius: BorderRadius.only(
                                       topRight: Radius.circular(10),
                                       topLeft: Radius.circular(10)
@@ -110,12 +112,12 @@ class _New_SSP_Plan2_ScreenState extends State<New_SSP_Plan2_Screen> {
                                           ),
                                         ),
                                         Padding(
-                                          padding: const EdgeInsets.only(left: 10,right: 10,bottom: 15),
+                                          padding: const EdgeInsets.only(left: 30,right: 30,bottom: 30),
                                           child: Column(
                                             children: [
                                               //INTRESTED AMOUNT
                                               Title_Style(Title: 'Interested Amount', isStatus: null),
-                                              textFormField(
+                                              droptextFormField(
                                                 hintText: 'example Rs.1,30,000',
                                                 keyboardtype: TextInputType.number,
                                                 inputFormatters: [
@@ -135,8 +137,8 @@ class _New_SSP_Plan2_ScreenState extends State<New_SSP_Plan2_Screen> {
                                               ),
 
                                               //CONTACT DETAILS
-                                              Title_Style(Title: 'contact Details', isStatus: null),
-                                              textFormField(hintText: 'Enter Mobile*',
+                                              Title_Style(Title: 'Contact Details', isStatus: null),
+                                              droptextFormField(hintText: 'Enter Mobile*',
                                                   keyboardtype: TextInputType.phone,
                                                   Controller: _MobileNumber,
                                                   inputFormatters: [
@@ -152,15 +154,37 @@ class _New_SSP_Plan2_ScreenState extends State<New_SSP_Plan2_Screen> {
                                                     return null;
                                                   }
                                               ),
+
+
+                                              //EMAIL
                                               Padding(
-                                                padding: const EdgeInsets.only(top: 20,bottom: 20),
+                                                padding: const EdgeInsets.only(top: 10),
+                                                child: droptextFormField(hintText: 'Enter Email*',
+                                                    keyboardtype: TextInputType.phone,
+                                                    Controller: _email,
+                                                    inputFormatters: [
+                                                      FilteringTextInputFormatter.digitsOnly],
+                                                    onChanged: null,
+                                                  validating: (value){
+                                                    if(value==null||value.isEmpty){
+                                                      return "Enter Email";
+                                                    }else if(!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)){
+                                                      return "Please Enter valid Email ";
+                                                    }else{
+                                                      return null;
+                                                    }
+                                                  },
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(top: 10,bottom: 20),
                                                 child: textfieldDescription(
                                                   hintText: 'Message*',
                                                   Controller:_message,
                                                 ),
                                               ),
 
-                                              //const Spacer(),
+                                              const SizedBox(height: 30,),
 
                                               bottombutton(context,
                                                   onPress: () {

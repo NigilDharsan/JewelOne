@@ -122,6 +122,12 @@ TextStyle phoneHT = TextStyle(
     color: Color.fromRGBO(45, 45, 45, 1),
     fontWeight: FontWeight.w500);
 
+TextStyle light = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 12,
+    color: Color.fromRGBO(181, 181, 181, 1),
+    fontWeight: FontWeight.w400);
+
 TextStyle locationT = TextStyle(
     fontFamily: 'Metropolis',
     fontSize: 24,
@@ -490,12 +496,30 @@ TextStyle Content1 = TextStyle(
     color: Color.fromRGBO(255, 255, 255, 1),
     fontWeight: FontWeight.w400);
 
+TextStyle profilenum = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 16,
+    color: Color.fromRGBO(255, 255, 255, 1),
+    fontWeight: FontWeight.w400);
+
+TextStyle noticount = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 13,
+    color: Color.fromRGBO(255, 255, 255, 1),
+    fontWeight: FontWeight.w500);
+
 TextStyle appbarT = TextStyle(
     fontFamily: 'Metropolis',
     fontSize: 20,
     color: Color.fromRGBO(255, 255, 255, 1),
     fontWeight: FontWeight.w600);
 
+
+TextStyle profilT = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 24,
+    color: Color.fromRGBO(255, 255, 255, 1),
+    fontWeight: FontWeight.w600);
 
 TextStyle TandC = TextStyle(
     fontFamily: 'Metropolis',

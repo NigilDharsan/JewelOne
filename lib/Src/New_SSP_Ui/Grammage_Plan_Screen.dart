@@ -33,135 +33,156 @@ class _Grammage_Plan_ScreenState extends State<Grammage_Plan_Screen> {
         ActiononTap: () {
           Navigator.push(context, MaterialPageRoute(builder: (context)=>Faq_Screen()));
         },),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.only(left: 20,right: 20,top: 15,bottom: 30),
-          child: Container(
-            height: MediaQuery.sizeOf(context).height,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  width: MediaQuery.sizeOf(context).width/1.5,
-                    child: Text('Swarna Sakthi Plan ID (Grammage Plan)',style: Heading_Style1,)),
+      body: Padding(
+        padding: const EdgeInsets.only(left: 20,right: 20,top: 15,bottom: 30),
+        child: Container(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                width: MediaQuery.sizeOf(context).width/1.5,
+                  child: Text('Swarna Sakthi Plan ID (Grammage Plan)',style: Heading_Style1,)),
 
-                Padding(
-                  padding: const EdgeInsets.only(top: 10,bottom: 10),
-                  child: Container(
-                    width: MediaQuery.sizeOf(context).width,
-                    decoration: BoxDecoration(
-                      color: white1,
-                      border: Border.all(width: 1,color: grey5),
-                      borderRadius: BorderRadius.circular(10)
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 20,right: 20,top: 15,bottom: 15),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 15),
-                            child: Text('Mr. Vinoth Kumar',style: GPlanT,),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 10),
-                            child: Text('Enter Custom name for your plan',style: radioST,),
-                          ),
-                          SSPtextFormField(hintText: "Eg: Your Daughter's name: “Meena”", keyboardtype: TextInputType.text),
-                        ],
-                      ),
+              Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child: Container(
+                  width: MediaQuery.sizeOf(context).width,
+                  decoration: BoxDecoration(
+                    color: white1,
+                    border: Border.all(width: 1,color: grey5),
+                    borderRadius: BorderRadius.circular(10)
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20,right: 20,top: 15,bottom: 15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 15),
+                          child: Text('Mr. Vinoth Kumar',style: GPlanT,),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 10),
+                          child: Text('Enter Custom name for your plan',style: radioST,),
+                        ),
+                        SSPtextFormField(hintText: "Eg: Your Daughter's name: “Meena”", keyboardtype: TextInputType.text),
+                      ],
                     ),
                   ),
                 ),
+              ),
 
-                //ENTER MONTHLY EMI
-                Padding(
-                  padding: const EdgeInsets.only(top: 10,bottom: 10),
-                  child: Container(
-                    width: MediaQuery.sizeOf(context).width,
-                    decoration: BoxDecoration(
-                      color: white1,
-                      border: Border.all(width: 1,color: grey5),
-                      borderRadius: BorderRadius.circular(10)
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 10,bottom: 10,left: 20,right: 20),
-                      child: Row(
-                        children: [
-                          Text('Enter Monthly EMA',style: radioST,),
+              //ENTER MONTHLY EMI
+              Padding(
+                padding: const EdgeInsets.only(top: 10,bottom: 10),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: white1,
+                    border: Border.all(width: 1,color: grey5),
+                    borderRadius: BorderRadius.circular(10)
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20,right: 20),
+                    child: Row(
+                      children: [
+                        Text('Enter Monthly EMA',style: radioST,),
 
-                          const Spacer(),
+                        const Spacer(),
 
-                          Container(
-                            width: MediaQuery.sizeOf(context).width/3,
+                        Padding(
+                          padding: const EdgeInsets.only(top: 15,bottom: 15),
+                          child: Container(
                             decoration: BoxDecoration(
                                 border: Border.all(width: 1,color: Font_Primary_Color),
                               borderRadius: BorderRadius.circular(10),
                               color: white1
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.all(10),
+                              padding: const EdgeInsets.only(left: 30,top: 5,bottom: 5,right: 30),
                               child: Center(child: Text('5000',style: lighttext,)),
                             ),
-                          )
-                        ],
-                      ),
+                          ),
+                        )
+                      ],
                     ),
                   ),
                 ),
+              ),
 
-                //SELECT LOCATION
-                dropDownField(
-                  context,
-                  value: locationval,
-                  listValue: locationOption,
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      locationval = newValue;
-                    });
-                  }, hintT: 'Select Branch  '
+              Container(
+                width: MediaQuery.sizeOf(context).width,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: white1,
                 ),
-
-                //INFO
-                Padding(
-                  padding: const EdgeInsets.only(left: 7,bottom: 5,top: 10),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 20),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      ImgPathSvg('info2.svg'),
-                      Text('Tenure for the scheme completion is 11 month’s',style: radioST,)
+
+                      Text('Select Branch',style: radioST,),
+
+                      const Spacer(),
+                      //SELECT LOCATION
+                      dropDownField(
+                          context,
+                          value: locationval,
+                          listValue: locationOption,
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              locationval = newValue;
+                            });
+                          },
+                      ),
                     ],
                   ),
                 ),
+              ),
 
-                //CHECK BOX
-                Row(
+              //INFO
+              Padding(
+                padding: const EdgeInsets.only(bottom: 5,top: 30,left: 6),
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Checkbox(
-                        value: isCheked,
-                        activeColor: Font_Primary_Color,
-                        onChanged: (newvalue){
-                      setState(() {
-                        isCheked = newvalue;
-                      });
-                    }
-                    ),
-                    Text('I agree with terms & conditions',style: radioST,),
+                    ImgPathSvg('info2.svg'),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 5,),
+                      child: Text('Tenure for the scheme completion is 11 month',style: radioST,maxLines: 2,),
+                    )
                   ],
                 ),
+              ),
 
-                const Spacer(),
+              //CHECK BOX
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Checkbox(
+                      side: BorderSide(width: 1,color: checkbox),
+                      value: isCheked,
+                      activeColor: Font_Primary_Color,
+                      onChanged: (newvalue){
+                    setState(() {
+                      isCheked = newvalue;
+                    });
+                  }
+                  ),
+                  Text('I agree with terms & conditions',style: radioST,),
+                ],
+              ),
 
-                CommonContainerButton(context,
-                    onPress: () {
-                   {
-                    //Navigator.push(context, MaterialPageRoute(builder: (context)=>Verify_OTP_Screen()));
-                      }
-                    }, titleName: 'Proceed to Buy'),
-              ],
-            ),
+              const Spacer(),
+
+              CommonContainerButton(context,
+                  onPress: () {
+                 {
+                  //Navigator.push(context, MaterialPageRoute(builder: (context)=>Verify_OTP_Screen()));
+                    }
+                  }, titleName: 'Proceed to Buy'),
+            ],
           ),
         ),
       ),

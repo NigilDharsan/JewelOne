@@ -6,13 +6,16 @@ const Color white2 = Color.fromRGBO(245, 245, 245, 1);
 const Color white3 = Color.fromRGBO(224, 224, 224, 1);
 const Color white8 = Color.fromRGBO(239, 239, 239, 1);
 const Color white9 = Color.fromRGBO(126, 126, 126, 1);
+const Color white10 = Color.fromRGBO(228, 228, 228, 1);
 
 //Black
 const Color Black = Color.fromRGBO(0, 0, 0, 1);
 const Color Black1 = Color.fromRGBO(54, 52, 53, 1);
 const Color BlackNormal = Color.fromRGBO(45, 45, 45, 1);
 const Color BlackBold = Color.fromRGBO(24, 24, 24, 1);
+const Color borderclr = Color.fromRGBO(121, 121, 121, 1);
 
+const Color uploadborder = Color.fromRGBO(249, 249, 249, 1);
 
 //GREY
 const Color grey1 = Color.fromRGBO(140, 140, 140, 1);
@@ -71,7 +74,8 @@ const Color pink5 = Color.fromRGBO(229, 210, 194, 1);
 const Color pink6 = Color.fromRGBO(243, 237, 231, 1);
 //FONT PRIMARY COLOR
 const Color Font_Primary_Color = Color.fromRGBO(159, 33, 44, 1);
-
+const Color checkbox = Color.fromRGBO(95, 95, 95, 1);
+const Color eye = Color.fromRGBO(168, 168, 168, 1);
 //BACKGROUND COLOR
 // const Color backGroundColor = Color.fromRGBO(232, 219, 208, 1);
 const Color backGroundColor = Color.fromRGBO(255, 255, 255, 1);

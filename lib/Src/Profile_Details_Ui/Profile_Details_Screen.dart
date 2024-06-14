@@ -397,10 +397,12 @@ class _Profile_Details_ScreenState extends State<Profile_Details_Screen> {
                   },
                 ),
 
+                const SizedBox(height: 50,),
                 //SAVE BUTTON
                 CommonContainerButton(context,
                     onPress: () {
-                      if(_formKey.currentState!.validate()){
+                      if(_formKey.currentState!.validate())
+                      {
                        // Navigator.push(context, MaterialPageRoute(builder: (context)=>Home_DashBoard_Screen()));
                       }
                     }, titleName: 'Save'),
