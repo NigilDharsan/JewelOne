@@ -1,3 +1,4 @@
+import 'package:country_list_pick/country_list_pick.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -34,14 +35,6 @@ class _Profile_Details_ScreenState extends State<Profile_Details_Screen> {
   List<String> mrmrsOption = [
     "Mr",
     "Mrs",
-  ];
-
-  //COUNTRY
-  String? countryVal;
-  List<String> countryOption = [
-    "India",
-    "America",
-    "England",
   ];
 
   void _showErrorDialog(String message) {
@@ -303,18 +296,28 @@ class _Profile_Details_ScreenState extends State<Profile_Details_Screen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Heading(text: 'Country'),
-                        dropDownFieldprofileedit(
-                          context,
+                        Container(
+                          //height: 50,
                           width: MediaQuery.sizeOf(context).width/2.3,
-                          hintT: 'Country',
-                          value: countryVal,
-                          listValue: countryOption,
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              countryVal = newValue;
-                            });
-                          },
-                        ),
+                          decoration: BoxDecoration(
+                            color: white1,
+                            borderRadius: BorderRadius.circular(5),
+                            border: Border.all(width: 1,color: borderclr)
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 8,bottom: 8,),
+                            child: CountryListPick(
+                              initialSelection: '+91',
+                              onChanged: (CountryCode? CountryCode){
+                              },
+                              theme: CountryTheme(
+                                initialSelection: '+91',
+                                isShowCode: false,
+                                isShowTitle: true,
+                              ),
+                            ),
+                          ),
+                        )
                       ],
                     ),
 
@@ -349,6 +352,8 @@ class _Profile_Details_ScreenState extends State<Profile_Details_Screen> {
                     ),
                   ],
                 ),
+
+
 
                 //NOMINEE NAME
                 Heading(text: 'Nominee name'),
@@ -409,6 +414,7 @@ class _Profile_Details_ScreenState extends State<Profile_Details_Screen> {
 
                 //DELETE TEXT
                 deleteT(),
+
               ],
             ),
           ),

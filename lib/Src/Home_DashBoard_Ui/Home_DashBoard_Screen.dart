@@ -6,8 +6,10 @@ import 'package:jewelone/Common_Widgets/Common_Card.dart';
 import 'package:jewelone/Common_Widgets/Image_Path.dart';
 import 'package:jewelone/Common_Widgets/Text_Form_Field.dart';
 import 'package:jewelone/Src/Emi_Payment_Ui/Emi_Plan1_Screen.dart';
+import 'package:jewelone/Src/Menu_Ui/Menu_Screen.dart';
 import 'package:jewelone/Src/My_SSP_Ui/My_SSP_Screen.dart';
 import 'package:jewelone/Src/New_SSP_Ui/New_SSP_Screen.dart';
+import 'package:jewelone/Src/Notification_Ui/Notification_Screen.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -64,14 +66,20 @@ class _Home_DashBoard_ScreenState extends State<Home_DashBoard_Screen> {
       appBar: AppBar(
         backgroundColor: white2,
         toolbarHeight: 100,
-        leading: Icon(Icons.menu_outlined),
+        leading: InkWell(
+          onTap: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>Menu_Screen()));
+          },
+            child: Icon(Icons.menu_outlined)),
         centerTitle: true,
         title: App_Logo(context),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 20, left: 15),
             child: InkWell(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Notification_Screen()));
+                },
                 child: ImgPathSvg("notification.svg")),
           ),
         ],

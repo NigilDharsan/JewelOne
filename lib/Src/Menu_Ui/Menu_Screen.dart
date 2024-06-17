@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:jewelone/Common_Widgets/Common_Button.dart';
 import 'package:jewelone/Common_Widgets/Image_Path.dart';
+import 'package:jewelone/Src/FAQ_Ui/FAQ_Screen.dart';
+import 'package:jewelone/Src/Home_DashBoard_Ui/Home_DashBoard_Screen.dart';
+import 'package:jewelone/Src/Login_Ui/LoginScreen.dart';
+import 'package:jewelone/Src/Notification_Ui/Notification_Screen.dart';
+import 'package:jewelone/Src/Payment_History_Ui/payment_History_Screen.dart';
+import 'package:jewelone/Src/Security_Setting_Ui/Settings_Screen.dart';
+import 'package:jewelone/Src/Store_Locator_Ui/Store_Locator_Screen.dart';
+import 'package:jewelone/Src/Wallet_Ui/Wallet_Screen.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
 class Menu_Screen extends StatefulWidget {
@@ -66,7 +74,11 @@ class _Menu_ScreenState extends State<Menu_Screen> {
                             ],
                           ),
                           const Spacer(),
-                          ImgPathSvg('cancel.svg')
+                          InkWell(
+                            onTap: (){
+                              Navigator.pop(context);
+                            },
+                              child: ImgPathSvg('cancel.svg'))
                         ],
                       ),
                     ],
@@ -77,7 +89,9 @@ class _Menu_ScreenState extends State<Menu_Screen> {
                 padding: const EdgeInsets.only(left: 20,right: 20,top: 5,bottom: 30),
                 child: Column(
                   children: [
-                    Settingscontainer(context,text: 'Home', image: 'profilehome.svg', image2: 'rightarrow2.svg'),
+                    Settingscontainer(context,text: 'Home', image: 'profilehome.svg', image2: 'rightarrow2.svg', onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>Home_DashBoard_Screen()));
+                    }),
 
                     Padding(
                       padding: const EdgeInsets.only(top: 10,bottom: 10),
@@ -91,15 +105,25 @@ class _Menu_ScreenState extends State<Menu_Screen> {
                           padding: const EdgeInsets.only(left: 20,right: 20,top: 10,bottom: 10),
                           child: Column(
                             children: [
-                              NavContainer(image1: 'notification2.svg', text: 'Notifications'),
+                              NavContainer(image1: 'notification2.svg', text: 'Notifications', onTap: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=>Notification_Screen()));
+                              }),
                               Divider(),
-                              NavContainer(image1: 'wallet2.svg', text: 'Wallet'),
+                              NavContainer(image1: 'wallet2.svg', text: 'Wallet', onTap: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=>Wallet_screen()));
+                              }),
                               Divider(),
-                              NavContainer(image1: 'ema.svg', text: 'Pay EMA'),
+                              NavContainer(image1: 'ema.svg', text: 'Pay EMA', onTap: () {
+                                //Navigator.push(context, MaterialPageRoute(builder: (context)=>Menureen()));
+                              }),
                               Divider(),
-                              NavContainer(image1: 'history.svg', text: 'Payment History'),
+                              NavContainer(image1: 'history.svg', text: 'Payment History', onTap: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=>paymrnt_History_Screen()));
+                              }),
                               Divider(),
-                              NavContainer(image1: 'settings.svg', text: 'Settings'),
+                              NavContainer(image1: 'settings.svg', text: 'Settings', onTap: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=>Settings_Screen()));
+                              }),
                             ],
                           ),
                         ),
@@ -119,22 +143,28 @@ class _Menu_ScreenState extends State<Menu_Screen> {
                           padding: const EdgeInsets.only(left: 20,right: 20,top: 10,bottom: 10),
                           child: Column(
                             children: [
-                              NavContainer(image1: 'storeL.svg', text: 'Store Locator'),
+                              NavContainer(image1: 'storeL.svg', text: 'Store Locator', onTap: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=>Store_Locator_Screen()));
+                              }),
                               Divider(),
-                              NavContainer(image1: 'contact.svg', text: 'Contact Us'),
+                              NavContainer(image1: 'contact.svg', text: 'Contact Us', onTap: () {  }),
                               Divider(),
-                              NavContainer(image1: 'faq.svg', text: 'FAQs'),
+                              NavContainer(image1: 'faq.svg', text: 'FAQs', onTap: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=>Faq_Screen()));
+                              }),
                               Divider(),
-                              NavContainer(image1: 'support.svg', text: 'Support'),
+                              NavContainer(image1: 'support.svg', text: 'Support', onTap: () {  }),
                               Divider(),
-                              NavContainer(image1: 'dth.svg', text: 'DTH / Experience Center'),
+                              NavContainer(image1: 'dth.svg', text: 'DTH / Experience Center', onTap: () {  }),
                             ],
                           ),
                         ),
                       ),
                     ),
 
-                    Settingscontainer(context,text: 'Home', image: 'aboutone.svg', image2: 'rightarrow2.svg'),
+                    Settingscontainer(context,text: 'About JewelOne', image: 'aboutone.svg', image2: 'rightarrow2.svg', onTap: () {
+                      //Navigator.pop(context);
+                    }),
 
                     Padding(
                       padding: const EdgeInsets.only(left: 25,right: 25,bottom: 20,top: 10),
@@ -175,7 +205,7 @@ class _Menu_ScreenState extends State<Menu_Screen> {
                       child: buttonIcon(context,
                           onPress: () {
                             {
-                              //Navigator.push(context, MaterialPageRoute(builder: (context)=>Home_DashBoard_Screen()));
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
                             }
                           }, titleName: 'Logout'),
                     ),
@@ -190,47 +220,56 @@ class _Menu_ScreenState extends State<Menu_Screen> {
   }
 }
 
-Widget Settingscontainer (context,{required String text,required String image,required String image2}){
+Widget Settingscontainer (context,{required String text,
+  required String image,
+  required String image2,
+  required void Function()? onTap}){
   return Padding(
     padding: const EdgeInsets.only(top: 10,bottom: 10),
-    child: Container(
-      width: MediaQuery.sizeOf(context).width,
-      decoration: BoxDecoration(
-          color: white1,
-          border: Border.all(width: 1,color: grey5),
-          borderRadius: BorderRadius.circular(10)
-      ),
-      child: Padding(
-        padding: const EdgeInsets.only(left: 20,right: 20,top: 10,bottom: 10),
-        child: Row(
-          children: [
-            ImgPathSvg(image),
-            Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: Text(text,style: rate2,),
-            ),
-            const Spacer(),
-            ImgPathSvg(image2)
-          ],
+    child: InkWell(
+      onTap: onTap,
+      child: Container(
+        width: MediaQuery.sizeOf(context).width,
+        decoration: BoxDecoration(
+            color: white1,
+            border: Border.all(width: 1,color: grey5),
+            borderRadius: BorderRadius.circular(10)
+        ),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 20,right: 20,top: 10,bottom: 10),
+          child: Row(
+            children: [
+              ImgPathSvg(image),
+              Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: Text(text,style: rate2,),
+              ),
+              const Spacer(),
+              ImgPathSvg(image2)
+            ],
+          ),
         ),
       ),
     ),
   );
 }
 
-Widget NavContainer ({required String image1,required String text}){
+Widget NavContainer ({required String image1,required String text,required void Function()? onTap}){
   return Padding(
     padding: const EdgeInsets.only(top: 10,bottom: 10),
-    child: Row(
-      children: [
-        ImgPathSvg(image1),
-        Padding(
-          padding: const EdgeInsets.only(left: 15),
-          child: Text(text),
-        ),
-        const Spacer(),
-        ImgPathSvg('rightarrow2.svg')
-      ],
+    child: InkWell(
+      onTap: onTap,
+      child: Row(
+        children: [
+          ImgPathSvg(image1),
+          Padding(
+            padding: const EdgeInsets.only(left: 15),
+            child: Text(text),
+          ),
+          const Spacer(),
+          ImgPathSvg('rightarrow2.svg')
+        ],
+      ),
     ),
   );
 }

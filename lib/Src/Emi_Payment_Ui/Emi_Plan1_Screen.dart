@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jewelone/Src/Advance_Payment_Ui/Advance_Payment_Screen.dart';
+import 'package:jewelone/Src/Menu_Ui/Menu_Screen.dart';
+import 'package:jewelone/Src/Notification_Ui/Notification_Screen.dart';
 import 'package:jewelone/Src/Online_Emi_Payment_Ui/Online_Emi_Payment_Screen.dart';
 import '../../Common_Widgets/Common_Button.dart';
 import '../../Common_Widgets/Image_Path.dart';
@@ -20,14 +22,20 @@ class _Emi_Plan1_ScreenState extends State<Emi_Plan1_Screen> {
       appBar: AppBar(
         backgroundColor: white2,
         toolbarHeight: 100,
-        leading: Icon(Icons.menu_outlined),
+        leading: InkWell(
+          onTap: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>Menu_Screen()));
+          },
+            child: Icon(Icons.menu_outlined)),
         centerTitle: true,
         title: App_Logo(context),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 20, left: 15),
             child: InkWell(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Notification_Screen()));
+                },
                 child: ImgPathSvg("notification.svg")),
           ),
         ],

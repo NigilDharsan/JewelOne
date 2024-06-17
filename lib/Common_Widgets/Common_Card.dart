@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jewelone/Common_Widgets/Image_Path.dart';
+import 'package:jewelone/Src/Wallet_Ui/Wallet_Screen.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
 import 'Common_Button.dart';
@@ -65,7 +66,9 @@ Widget Wallet_Card(context){
                 Container(
                   width:MediaQuery.sizeOf(context).width/2,
                   child: CommonContainerButton(context,
-                      onPress: () {}, titleName: 'View my Wallet'),
+                      onPress: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>Wallet_screen()));
+                      }, titleName: 'View my Wallet'),
                 ),
                 const Spacer(),
                 ImgPathSvg('wallet.svg'),

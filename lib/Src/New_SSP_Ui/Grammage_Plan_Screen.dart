@@ -5,6 +5,7 @@ import 'package:jewelone/Common_Widgets/Custom_App_Bar.dart';
 import 'package:jewelone/Common_Widgets/Image_Path.dart';
 import 'package:jewelone/Common_Widgets/Text_Form_Field.dart';
 import 'package:jewelone/Src/FAQ_Ui/FAQ_Screen.dart';
+import 'package:jewelone/Src/KYC_Ui/KYC_Screen.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
 class Grammage_Plan_Screen extends StatefulWidget {
@@ -179,7 +180,7 @@ class _Grammage_Plan_ScreenState extends State<Grammage_Plan_Screen> {
               CommonContainerButton(context,
                   onPress: () {
                  {
-                  //Navigator.push(context, MaterialPageRoute(builder: (context)=>Verify_OTP_Screen()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>KYC_Screen()));
                     }
                   }, titleName: 'Proceed to Buy'),
             ],

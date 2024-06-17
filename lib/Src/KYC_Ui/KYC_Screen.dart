@@ -4,6 +4,7 @@ import 'package:jewelone/Common_Widgets/Common_Button.dart';
 import 'package:jewelone/Common_Widgets/Custom_App_Bar.dart';
 import 'package:jewelone/Common_Widgets/Text_Form_Field.dart';
 import 'package:jewelone/Src/FAQ_Ui/FAQ_Screen.dart';
+import 'package:jewelone/Src/KYC_Ui/ID_Proof_Screen.dart';
 import 'package:jewelone/Src/Verify_OTP_Ui/Verify_OTP_Screen.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
@@ -33,13 +34,13 @@ class _KYC_ScreenState extends State<KYC_Screen> {
         ActiononTap: () {
           Navigator.push(context, MaterialPageRoute(builder: (context)=>Faq_Screen()));
         },),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.only(left: 20,right: 20,top: 20,bottom: 30),
-          child: Container(
-            height: MediaQuery.sizeOf(context).height,
-            child: Form(
-              key: _formkey,
+      body: Form(
+        key: _formkey,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 20,right: 20,top: 20,bottom: 30),
+            child: Container(
+              height: MediaQuery.sizeOf(context).height,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -162,15 +163,12 @@ class _KYC_ScreenState extends State<KYC_Screen> {
                     },
                     onChanged: null,
                   ),
-
-                  const Spacer(),
-
+                  const SizedBox(height: 150),
                   //BUTTON
                   CommonContainerButton(context,
                       onPress: () {
-                        {
-                          if(_formkey.currentState!.validate());
-                          //Navigator.push(context, MaterialPageRoute(builder: (context)=>Verify_OTP_Screen()));
+                        if(_formkey.currentState!.validate()) {
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>ID_Proof_Screen()));
                         }
                       }, titleName: 'Continue'),
                 ],

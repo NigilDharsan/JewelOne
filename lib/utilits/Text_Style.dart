@@ -366,7 +366,7 @@ TextStyle rate2 = TextStyle(
 TextStyle underline = TextStyle(
     decoration: TextDecoration.underline,
     fontFamily: 'Metropolis',
-    fontSize: 14,
+    fontSize: 13,
     color: Color.fromRGBO(45, 45, 45, 1),
     fontWeight: FontWeight.w500);
 
@@ -426,6 +426,12 @@ TextStyle Num = TextStyle(
 TextStyle password = TextStyle(
     fontFamily: 'Inter',
     fontSize: 20,
+    color: Color.fromRGBO(45, 45, 45, 1),
+    fontWeight: FontWeight.w500);
+
+TextStyle planlist = TextStyle(
+    fontFamily: 'Inter',
+    fontSize: 14,
     color: Color.fromRGBO(45, 45, 45, 1),
     fontWeight: FontWeight.w500);
 

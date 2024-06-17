@@ -188,7 +188,7 @@ class _New_SSP_Plan2_ScreenState extends State<New_SSP_Plan2_Screen> {
 
                                               bottombutton(context,
                                                   onPress: () {
-                                                    {}
+                                                    Navigator.pop(context);
                                                   }, titleName: 'Submit'),
                                             ],
                                           ),

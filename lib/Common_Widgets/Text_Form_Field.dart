@@ -28,15 +28,14 @@ Widget textFormField(
         contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
         hintText: hintText,
         hintStyle: lighttext,
-        labelText: 'Email',
         prefixIcon: prefixIcon,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
-          borderSide: BorderSide(color: grey5),
+          borderSide: BorderSide(color: borderclr),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
-          borderSide: BorderSide(color: grey5),
+          borderSide: BorderSide(color: borderclr),
         ),
         fillColor: Colors.white,
         filled: true,
@@ -593,7 +592,11 @@ Widget dropDownFieldprofileedit(
     height: 45,
     width: width,
     decoration:
-    BoxDecoration(borderRadius: BorderRadius.circular(5), color: backGroundColor),
+    BoxDecoration(
+        borderRadius: BorderRadius.circular(5),
+        color: backGroundColor,
+      border: Border.all(width: 1,color: borderclr),
+    ),
     child: DropdownButtonFormField<String>(
       value: value,
       isExpanded: true,

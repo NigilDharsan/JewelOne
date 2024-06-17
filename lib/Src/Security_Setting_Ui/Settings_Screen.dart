@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:jewelone/Common_Widgets/Common_Button.dart';
 import 'package:jewelone/Common_Widgets/Image_Path.dart';
+import 'package:jewelone/Src/FAQ_Ui/FAQ_Screen.dart';
+import 'package:jewelone/Src/KYC_Ui/KYC_Details_Screen.dart';
+import 'package:jewelone/Src/KYC_Ui/KYC_Screen.dart';
+import 'package:jewelone/Src/Login_Ui/LoginScreen.dart';
 import 'package:jewelone/Src/Profile_Details_Ui/Profile_Details_Screen.dart';
 import 'package:jewelone/Src/Security_Setting_Ui/Password_Screen.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
@@ -56,14 +60,22 @@ class _Settings_ScreenState extends State<Settings_Screen> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(top: 15,left: 15),
-                        child: ImgPathSvg('backbutton.svg'),
+                        child: InkWell(
+                          onTap: (){
+                            Navigator.pop(context);
+                          },
+                            child: ImgPathSvg('backbutton.svg')),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 15,left: 15),
                         child: Text('Settings',style: appbarT,),
                       ),
                       const Spacer(),
-                      ImgPathSvg('info.svg'),
+                      InkWell(
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>Faq_Screen()));
+                        },
+                          child: ImgPathSvg('info.svg')),
                     ],
                   ),
                 ),
@@ -124,14 +136,15 @@ class _Settings_ScreenState extends State<Settings_Screen> {
                   ),
 
                   //SETTINGS CONTAINER
-                  InkWell(
-                    onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>Password_Screen()));
-                    },
-
-                      child: Settingscontainer(context,text: 'Change Password', image: 'lock.svg', image2: 'rightarrow2.svg')),
-                  Settingscontainer(context,text: 'KYC', image: 'kyc.svg', image2: 'rightarrow2.svg'),
-                  Settingscontainer(context,text: 'About JewelOne', image: 'aboutjweleone.svg', image2: 'rightarrow2.svg'),
+                  Settingscontainer(context,text: 'Change Password', image: 'lock.svg', image2: 'rightarrow2.svg', onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>Password_Screen()));
+                  }),
+                  Settingscontainer(context,text: 'KYC', image: 'kyc.svg', image2: 'rightarrow2.svg', onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>KYC_Screen()));
+                  }),
+                  Settingscontainer(context,text: 'About JewelOne', image: 'aboutjweleone.svg', image2: 'rightarrow2.svg', onTap: () {
+                    //Navigator.push(context, MaterialPageRoute(builder: (context)=>Password_Screen()));
+                  }),
                 ],
               ),
             ),
@@ -177,7 +190,7 @@ class _Settings_ScreenState extends State<Settings_Screen> {
               child: buttonIcon(context,
                   onPress: () {
                     {
-                      //Navigator.push(context, MaterialPageRoute(builder: (context)=>Home_DashBoard_Screen()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
                     }
                   }, titleName: 'Logout'),
             ),
@@ -188,28 +201,31 @@ class _Settings_ScreenState extends State<Settings_Screen> {
   }
 }
 
-Widget Settingscontainer (context,{required String text,required String image,required String image2}){
+Widget Settingscontainer (context,{required String text,required String image,required String image2,required void Function()? onTap}){
   return Padding(
     padding: const EdgeInsets.only(top: 10,),
-    child: Container(
-      width: MediaQuery.sizeOf(context).width,
-      decoration: BoxDecoration(
-          color: white1,
-          border: Border.all(width: 1,color: grey5),
-          borderRadius: BorderRadius.circular(10)
-      ),
-      child: Padding(
-        padding: const EdgeInsets.only(left: 20,right: 20,top: 10,bottom: 10),
-        child: Row(
-          children: [
-            ImgPathSvg(image),
-            Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: Text(text,style: rate2,),
-            ),
-            const Spacer(),
-            ImgPathSvg(image2)
-          ],
+    child: InkWell(
+      onTap: onTap,
+      child: Container(
+        width: MediaQuery.sizeOf(context).width,
+        decoration: BoxDecoration(
+            color: white1,
+            border: Border.all(width: 1,color: grey5),
+            borderRadius: BorderRadius.circular(10)
+        ),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 20,right: 20,top: 10,bottom: 10),
+          child: Row(
+            children: [
+              ImgPathSvg(image),
+              Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: Text(text,style: rate2,),
+              ),
+              const Spacer(),
+              ImgPathSvg(image2)
+            ],
+          ),
         ),
       ),
     ),

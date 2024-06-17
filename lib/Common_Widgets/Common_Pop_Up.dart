@@ -18,7 +18,6 @@ import 'package:jewelone/utilits/Text_Style.dart';
                    color: white1,
                    borderRadius: BorderRadius.circular(15)
                ),
-
                child: Padding(
                  padding: const EdgeInsets.all(20),
                  child: Column(
@@ -41,4 +40,6 @@ import 'package:jewelone/utilits/Text_Style.dart';
          }
      );
  }
+
+
 
