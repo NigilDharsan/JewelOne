@@ -42,10 +42,9 @@ class _LoginScreenState extends State<LoginScreen> {
         key: _formKey,
         child: SingleChildScrollView(
           child: Container(
-            height: MediaQuery.sizeOf(context).height,
             width: MediaQuery.sizeOf(context).width,
             child: Padding(
-              padding: const EdgeInsets.only(left: 20,right: 20),
+              padding: const EdgeInsets.only(left: 20,right: 20,bottom: 30),
               child: _MainBody(),
 
             ),
@@ -150,6 +149,7 @@ class _LoginScreenState extends State<LoginScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             CheckBoxes(
+              context,
                 value: _isChecked,
                 onChanged: (value) {
                   setState(() {
@@ -157,8 +157,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   });
                 },
                 onTap: (){},
-                checkBoxText: 'Remember me'),
-            Spacer(),
+                checkBoxText: 'Remember me', width: null),
+             const Spacer(),
             InkWell(
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>Forgot_Password_Screen()));

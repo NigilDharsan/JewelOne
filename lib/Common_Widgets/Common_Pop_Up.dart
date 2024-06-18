@@ -3,7 +3,7 @@ import 'package:jewelone/Common_Widgets/Common_Button.dart';
 import 'package:jewelone/Common_Widgets/Image_Path.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
- Future PopUp (context){
+ Future PopUp (context,{required String text}){
    return
      showDialog(context: context,
          builder:(BuildContext context){
@@ -24,7 +24,7 @@ import 'package:jewelone/utilits/Text_Style.dart';
                    mainAxisAlignment: MainAxisAlignment.center,
                    children: [
                      ImgPathSvg('popup.svg'),
-                     Text('Your password was Successfully changed',style: Heading_Style1,maxLines: 2,textAlign: TextAlign.center,),
+                     Text(text,style: Heading_Style1,maxLines: 2,textAlign: TextAlign.center,),
                      const Spacer(),
                      CommonContainerButton(context,
                          onPress: () {

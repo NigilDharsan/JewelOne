@@ -25,9 +25,9 @@ class _Create_Account_ScreenState extends State<Create_Account_Screen> {
   TextEditingController _phoneNumber = TextEditingController();
   TextEditingController _fullName = TextEditingController();
   TextEditingController _Email = TextEditingController();
-  TextEditingController _Dob = TextEditingController();
   TextEditingController _password = TextEditingController();
   TextEditingController _ConfirmPassword = TextEditingController();
+  TextEditingController _Dateofbirth = TextEditingController();
 
   bool _obscurePassword = true;
   bool _isChecked = false;// Initially hide the password
@@ -148,8 +148,9 @@ class _Create_Account_ScreenState extends State<Create_Account_Screen> {
 
         //DATE OF BIRTH
         Title_Style(Title: 'Date of Birth', isStatus: true),
-        TextFieldDatePicker(
-          Controller: _Dob,
+        TextFieldDatePickerF(
+          context,
+          Controller: _Dateofbirth,
           onChanged: null,
           hintText: 'dd/MM/yyyy',
           onTap: () async {
@@ -165,7 +166,7 @@ class _Create_Account_ScreenState extends State<Create_Account_Screen> {
               DateFormat("dd/MM/yyyy").format(pickedDate);
               if (mounted) {
                 setState(() {
-                  _Dob.text = formattedDate;
+                  _Dateofbirth.text = formattedDate;
                 });
               }
               DateTime currentDate = DateTime.now();
@@ -236,6 +237,7 @@ class _Create_Account_ScreenState extends State<Create_Account_Screen> {
         const SizedBox(height: 15),
 
         CheckBoxes(
+          context,
             value: _isChecked,
             onChanged: (value) {
               setState(() {
@@ -243,7 +245,7 @@ class _Create_Account_ScreenState extends State<Create_Account_Screen> {
               });
             },
             onTap: (){},
-            checkBoxText: 'By Registering, You agree to our Terms & Conditions*'),
+            checkBoxText: 'By Registering, You agree to our Terms & Conditions*', width: MediaQuery.sizeOf(context).width/1.5),
 
         SizedBox(height: 15),
 
@@ -288,7 +290,7 @@ class _Create_Account_ScreenState extends State<Create_Account_Screen> {
           actions: [
             TextButton(
               onPressed: () {
-                _Dob.text = "";
+                _Dateofbirth.text = "";
                 Navigator.of(context).pop();
               },
               child: Text("OK"),

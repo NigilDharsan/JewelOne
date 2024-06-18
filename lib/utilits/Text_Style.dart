@@ -278,12 +278,16 @@ Widget Title_Style({required String Title, required bool? isStatus}) {
   );
 }
 
-Widget RadioText(String txt) {
+Widget RadioText(String txt,{required double? width}) {
   return Padding(
     padding: const EdgeInsets.only(left: 5),
-    child: Text(
-      txt,
-      style: radioST,
+    child: Container(
+      width:width ,
+      child: Text(
+        txt,
+        style: radioST,
+        maxLines: 2,
+      ),
     ),
   );
 }
@@ -296,10 +300,11 @@ TextStyle pdfT = TextStyle(
 
 // CHECK BOX
 Widget CheckBoxes(
+    context,
     {required bool? value,
     required void Function(bool?)? onChanged,
     required String checkBoxText,
-    void Function()? onTap}) {
+    void Function()? onTap,required double? width}) {
   return Padding(
     padding: const EdgeInsets.only(bottom: 20),
     child: Row(
@@ -313,7 +318,8 @@ Widget CheckBoxes(
           visualDensity: VisualDensity(horizontal: -4, vertical: -4),
           materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         ),
-        InkWell(onTap: onTap, child: RadioText(checkBoxText)),
+        InkWell(onTap: onTap,
+            child: RadioText(checkBoxText, width:width )),
       ],
     ),
   );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jewelone/Common_Widgets/Common_Button.dart';
+import 'package:jewelone/Common_Widgets/Common_Pop_Up.dart';
 import 'package:jewelone/Common_Widgets/Custom_App_Bar.dart';
 import 'package:jewelone/Common_Widgets/Image_Path.dart';
 import 'package:jewelone/Src/FAQ_Ui/FAQ_Screen.dart';
@@ -87,7 +88,7 @@ class _ID_Proof_ScreenState extends State<ID_Proof_Screen> {
                 CommonContainerButton(context,
                     onPress: () {
                       {
-                        //Navigator.push(context, MaterialPageRoute(builder: (context)=>Home_DashBoard_Screen()));
+                        PopUp(context, text: 'Swarna Sakthi Plan 1 Activated Successfully');
                       }
                     }, titleName: 'Submit'),
               ],

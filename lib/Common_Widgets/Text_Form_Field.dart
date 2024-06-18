@@ -48,6 +48,52 @@ Widget textFormField(
   );
 }
 
+Widget textFormFieldwwithlabelT(
+    {TextEditingController? Controller,
+      String? Function(String?)? validating,
+      bool? isEnabled,
+      void Function(String)? onChanged,
+      required String hintText,
+      required String labeltext,
+      Widget? prefixIcon,
+      List<TextInputFormatter>? inputFormatters,
+      required TextInputType keyboardtype}) {
+  return Padding(
+    padding: const EdgeInsets.only(top: 10,bottom: 10),
+    child: Container(
+      // height: 50,
+      child: TextFormField(
+        enabled: isEnabled,
+        controller: Controller,
+        textCapitalization: TextCapitalization.none,
+        inputFormatters: inputFormatters,
+        validator: validating,
+        decoration: InputDecoration(
+          contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+          hintText: hintText,
+          hintStyle: lighttext,
+          labelText: labeltext,
+          prefixIcon: prefixIcon,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(5),
+            borderSide: BorderSide(color: borderclr),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(5),
+            borderSide: BorderSide(color: borderclr),
+          ),
+          fillColor: Colors.white,
+          filled: true,
+        ),
+        onChanged: onChanged,
+        textInputAction: TextInputAction.next,
+        style: Textfield_Style,
+        keyboardType: keyboardtype,
+      ),
+    ),
+  );
+}
+
 Widget textField(
     {TextEditingController? Controller,
       String? Function(String?)? validating,
@@ -80,6 +126,8 @@ Widget textField(
     ),
   );
 }
+
+
 
 Widget droptextFormField(
     {TextEditingController? Controller,
@@ -167,12 +215,64 @@ Widget textFormField2(
   );
 }
 
-//TEXTFIELD DATE PICKER
 Widget TextFieldDatePicker({TextEditingController? Controller,
   String? Function(String?)? validating,
   void Function(String)? onChanged,required String hintText,void Function()? onTap}){
   return  Container(
     width: 165,
+    child: TextFormField(
+      controller:Controller ,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      onTap: onTap,
+      readOnly: true,
+      keyboardType: TextInputType.number,
+      maxLength: 15,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(5),
+          borderSide: BorderSide(color: pink1),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(5),
+          borderSide: BorderSide(color: pink1),
+        ),
+        counterText: "",
+        hintText: '00/00/0000',
+        //helperStyle: HintST,
+        suffixIcon: Icon(Icons.calendar_month,
+          color:grey1,
+          size: 24,),
+        hintStyle: const TextStyle(
+          fontFamily: "Inter",
+          fontWeight: FontWeight.w400,
+          fontSize: 12.0,
+          color: Colors.grey,
+        ),
+        errorMaxLines: 1,
+        contentPadding: const EdgeInsets.only(
+            top: 8.0, bottom: 8.0, left: 16.0, right: 16.0),
+        fillColor: white1,
+        filled: true,
+      ),
+      validator: validating,
+      onChanged: onChanged,
+      textInputAction: TextInputAction.next,
+      style: const TextStyle(
+        fontFamily: "Inter",
+        fontWeight: FontWeight.w400,
+        fontSize: 14.0,
+        color: Colors.black,
+      ),
+    ),
+  );
+}
+
+//TEXTFIELD DATE PICKER
+Widget TextFieldDatePickerF(context,{TextEditingController? Controller,
+  String? Function(String?)? validating,
+  void Function(String)? onChanged,required String hintText,void Function()? onTap}){
+  return  Container(
+    width: MediaQuery.sizeOf(context).width,
     child: TextFormField(
       controller:Controller ,
       autovalidateMode: AutovalidateMode.onUserInteraction,

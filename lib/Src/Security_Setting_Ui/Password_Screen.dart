@@ -147,7 +147,7 @@ class _Password_ScreenState extends State<Password_Screen> {
                      if(_formKey.currentState!.validate()){
 
                        //DIALOUGE BOX
-                       PopUp(context);
+                       PopUp(context, text: 'Your password was Successfully changed');
                      }
                    }, titleName: 'Proceed'),
              ],

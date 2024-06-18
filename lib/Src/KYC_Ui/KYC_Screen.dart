@@ -40,7 +40,6 @@ class _KYC_ScreenState extends State<KYC_Screen> {
           child: Padding(
             padding: const EdgeInsets.only(left: 20,right: 20,top: 20,bottom: 30),
             child: Container(
-              height: MediaQuery.sizeOf(context).height,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -83,8 +82,8 @@ class _KYC_ScreenState extends State<KYC_Screen> {
                   Text('Please provide your accurate information',style: lighttext,),
 
                   //FULL NAME
-                  Title_Style(Title: 'Full name', isStatus: null,),
-                  textFormField(hintText: '',
+                  //Title_Style(Title: 'Full name', isStatus: null,),
+                  textFormFieldwwithlabelT(hintText: '',
                     keyboardtype: TextInputType.text,
                     Controller: _Name,
                     inputFormatters: [
@@ -99,12 +98,12 @@ class _KYC_ScreenState extends State<KYC_Screen> {
                       }
                       return null;
                     },
-                    onChanged: null,
+                    onChanged: null, labeltext: 'Full Name',
                   ),
 
                   //MOBILE NUMBER
-                  Title_Style(Title: 'Mobile Number', isStatus: null,),
-                  textFormField(
+                  //Title_Style(Title: 'Mobile Number', isStatus: null,),
+                  textFormFieldwwithlabelT(
                     // isEnabled: false,
                       hintText: "",
                       keyboardtype: TextInputType.phone,
@@ -120,12 +119,12 @@ class _KYC_ScreenState extends State<KYC_Screen> {
                           return 'Please enter a valid 10-digit mobile number';
                         }
                         return null;
-                      }
+                      }, labeltext: 'Mobile NUmber'
                   ),
 
                   //EMAIL
-                  Title_Style(Title: 'Email', isStatus: null,),
-                  textFormField(hintText: '',
+                  //Title_Style(Title: 'Email', isStatus: null,),
+                  textFormFieldwwithlabelT(hintText: '',
                     keyboardtype: TextInputType.text,
                     Controller: _email,
                     inputFormatters: [
@@ -139,12 +138,12 @@ class _KYC_ScreenState extends State<KYC_Screen> {
                       }else{
                         return null;
                       }
-                    },
+                    }, labeltext: 'Email',
                   ),
 
                   //PINCODE
-                  Title_Style(Title: 'Pincode', isStatus: null,),
-                  textFormField(
+                  //Title_Style(Title: 'Pincode', isStatus: null,),
+                  textFormFieldwwithlabelT(
                     // isEnabled: false,
                       hintText: "",
                       keyboardtype: TextInputType.number,
@@ -161,7 +160,7 @@ class _KYC_ScreenState extends State<KYC_Screen> {
                       }
                       return null;
                     },
-                    onChanged: null,
+                    onChanged: null, labeltext: 'Pincode',
                   ),
                   const SizedBox(height: 150),
                   //BUTTON
