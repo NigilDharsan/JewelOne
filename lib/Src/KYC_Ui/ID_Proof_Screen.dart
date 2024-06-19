@@ -85,7 +85,8 @@ class _ID_Proof_ScreenState extends State<ID_Proof_Screen> {
                 const SizedBox(height: 50,),
 
                 //BUTTON
-                CommonContainerButton(context,
+                CommonContainerButton(
+                    context,
                     onPress: () {
                       {
                         PopUp(context, text: 'Swarna Sakthi Plan 1 Activated Successfully');

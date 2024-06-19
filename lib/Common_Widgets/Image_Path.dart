@@ -28,7 +28,7 @@ Widget Logo(context){
 
 Widget App_Logo(context){
   return Container(
-      height: MediaQuery.sizeOf(context).height/12,
+      height: 50,
       // width: MediaQuery.sizeOf(context).width/3,
       child: ImgPathPng("logo.png"));
 }

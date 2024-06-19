@@ -40,41 +40,47 @@ Widget Wallet_Card(context){
       color: white1,
     ),
     child: Padding(
-      padding: const EdgeInsets.only(left: 20,right: 20),
-      child: Column(
+      padding: const EdgeInsets.only(left: 24,right: 24),
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 20,),
-          Text("Hi Vinoth Kumar",style: UserST,),
-          Container(
-            width: 60,
-            margin: EdgeInsets.only(top: 15,bottom: 15),
-            child: Divider(
-              thickness: 2,
-              color: gradient2,
-            ),
-          ),
-          Text('Gold balance - 0.0000 gms',style: gramST,),
-
-          Padding(
-            padding: const EdgeInsets.only(top: 15,bottom: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  width:MediaQuery.sizeOf(context).width/2,
-                  child: CommonContainerButton(context,
-                      onPress: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>Wallet_screen()));
-                      }, titleName: 'View my Wallet'),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 20,),
+              Text("Hi Vinoth Kumar",style: UserST,),
+              Container(
+                width: 60,
+                margin: EdgeInsets.only(top: 15,bottom: 15),
+                child: Divider(
+                  thickness: 2,
+                  color: gradient2,
                 ),
-                const Spacer(),
-                ImgPathSvg('wallet.svg'),
-              ],
-            ),
+              ),
+              Text('Gold balance - 0.0000 gms',style: gramST,),
+              Container(
+                margin: EdgeInsets.only(top: 20,bottom: 20),
+                width:MediaQuery.sizeOf(context).width/2.5,
+                child: CommonContainerButton2(context,
+                    onPress: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>Wallet_screen()));
+                    }, titleName: 'View my Wallet'),
+              ),
+            ],
           ),
+          const Spacer(),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 92),
+                child: ImgPathSvg('wallet.svg'),
+              ),
+            ],
+          ),
+
         ],
       ),
     ),

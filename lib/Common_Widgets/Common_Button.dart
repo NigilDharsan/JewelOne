@@ -55,6 +55,31 @@ Widget CommonContainerButton(context,{ required void Function()? onPress,require
     ),
   );
 }
+Widget CommonContainerButton2(context,{ required void Function()? onPress,required String titleName}){
+  return InkWell(
+    onTap: onPress,
+    child: Container(
+      width: MediaQuery.sizeOf(context).width,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(25),
+        gradient: LinearGradient(
+        begin: Alignment.topLeft,
+        end: Alignment.topRight,
+        colors: [
+          gradient1,
+          gradient2,
+        ]
+    ),
+    ),
+      child:
+      Padding(
+        padding: const EdgeInsets.only(top: 10,bottom: 10),
+        child: Center(child: Text(titleName,style: ButtonT2,)),
+      )
+
+    ),
+  );
+}
 
 Widget buttonIcon(context,{ required void Function()? onPress,required String titleName}){
   return InkWell(

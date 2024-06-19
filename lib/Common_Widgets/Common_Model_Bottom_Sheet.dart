@@ -8,6 +8,7 @@ import 'Common_Button.dart';
 //TOTAL AMOUNT
 Widget Total_Amount_Bottom_Sheet(context,{required void Function()? onPress}){
   return  Container(
+    height: MediaQuery.sizeOf(context).height/2.5,
     decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         color: white1

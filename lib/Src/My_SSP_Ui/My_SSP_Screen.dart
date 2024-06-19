@@ -261,7 +261,7 @@ Widget ssp_plan_details ({required String text,required String text2}){
                 ImgPathSvg('radio.svg'),
                 Padding(
                   padding: const EdgeInsets.only(left: 7),
-                  child: Text('View Frequently Asked Questions',style: underline,),
+                  child: Text('View Frequently Asked Questions'),
                 )
               ],
             ),
@@ -270,7 +270,7 @@ Widget ssp_plan_details ({required String text,required String text2}){
                 ImgPathSvg('radio.svg'),
                 Padding(
                   padding: const EdgeInsets.only(left: 7),
-                  child: Text('How to Repay?',style: underline,),
+                  child: Text('How to Repay?'),
                 )
               ],
             )

@@ -4,6 +4,8 @@ import 'package:jewelone/Common_Widgets/Common_Button.dart';
 import 'package:jewelone/Common_Widgets/Common_Model_Bottom_Sheet.dart';
 import 'package:jewelone/Common_Widgets/Custom_App_Bar.dart';
 import 'package:jewelone/Common_Widgets/Image_Path.dart';
+import 'package:jewelone/Src/Advance_Payment_Ui/Advance_Payment_Screen.dart';
+import 'package:jewelone/Src/Home_DashBoard_Ui/Home_DashBoard_Screen.dart';
 import 'package:jewelone/Src/My_SSP_Ui/My_SSP_Screen.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
@@ -47,13 +49,16 @@ class _Online_Emi_Payment_ScreenState extends State<Online_Emi_Payment_Screen> {
     return Scaffold(
       backgroundColor: white2,
       appBar: Custom_AppBar(
-          isNav: true,
-          isTwoLine: false,
-          title1: 'EMI payment',
-          title2: "",
-          actionLogo: null,
-          isWhite: false,
-          ActiononTap: null),
+        isNav: true,
+        isTwoLine: false,
+        title1: 'EMI payment',
+        title2: '',
+        actionLogo: 'home.svg',
+        isWhite: false,
+        ActiononTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>Home_DashBoard_Screen()));
+        },
+      ),
       body: SingleChildScrollView(
         child: Container(
           width: MediaQuery.sizeOf(context).width,
@@ -63,9 +68,19 @@ class _Online_Emi_Payment_ScreenState extends State<Online_Emi_Payment_Screen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 15),
+                  child: Row(
+                    children: [
+                      ImgPathSvg('calendar2.svg'),
+                      const SizedBox(width: 10),
+                      Text('2 Plan Active',style: rate2,),
+                    ],
+                  ),
+                ),
                 //ACTIVE PLAN
                 Padding(
-                  padding: const EdgeInsets.only(top: 20,bottom: 20),
+                  padding: const EdgeInsets.only(bottom: 20),
                  // child: Plan_Active(),
                 ),
                 //LIST OF PLAN
@@ -80,7 +95,7 @@ class _Online_Emi_Payment_ScreenState extends State<Online_Emi_Payment_Screen> {
                 const SizedBox(height: 10,),
 
                 //TOTAL AMOUNT
-                //Total_Plan_amount(amount: '5,000.00'),
+                Total(),
 
                 //BUTTON
                 Padding(
@@ -177,7 +192,9 @@ class _Online_Emi_Payment_ScreenState extends State<Online_Emi_Payment_Screen> {
                       padding: const EdgeInsets.only(left: 40),
                       child: Row(
                         children: [
-                          Text('Equivalent Weight : ',style: planST,),
+                          Container(
+                            width: MediaQuery.sizeOf(context).width/3.5,
+                              child: Text('Equivalent Weight : ',style: planST,)),
                           Text('0.794 gm',style: Goldweight,)
                         ],
                       ),

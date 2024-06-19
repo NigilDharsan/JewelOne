@@ -10,6 +10,7 @@ import 'package:jewelone/Src/Menu_Ui/Menu_Screen.dart';
 import 'package:jewelone/Src/My_SSP_Ui/My_SSP_Screen.dart';
 import 'package:jewelone/Src/New_SSP_Ui/New_SSP_Screen.dart';
 import 'package:jewelone/Src/Notification_Ui/Notification_Screen.dart';
+import 'package:jewelone/Src/Online_Emi_Payment_Ui/Online_Emi_Payment_Screen.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -26,46 +27,12 @@ class _Home_DashBoard_ScreenState extends State<Home_DashBoard_Screen> {
   String selectedItem = 'Coimbatore';
   int myCurrentPage = 0;
 
-  final ScrollController _scrollController = ScrollController();
-  int _counter = 0;
-  late Timer _timer;
-  final double itemWidth = 100.0; // Width of each item
-  final double scrollIncrement = 1.0; // Scroll increment for each timer tick
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _timer = Timer.periodic(Duration(milliseconds: 20), (timer) {
-  //     _scrollList();
-  //   });
-  // }
-  //
-  // @override
-  // void dispose() {
-  //   _timer.cancel();
-  //   super.dispose();
-  // }
-  //
-  // void _scrollList() {
-  //   double maxScrollExtent = _scrollController.position.maxScrollExtent;
-  //   double currentScroll = _scrollController.position.pixels;
-  //
-  //   if (currentScroll >= maxScrollExtent) {
-  //     _scrollController.jumpTo(0);
-  //     _counter = 0;
-  //   } else {
-  //     _scrollController.jumpTo(currentScroll + scrollIncrement);
-  //     _counter++;
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backGroundColor,
       appBar: AppBar(
         backgroundColor: white2,
-        toolbarHeight: 100,
         leading: InkWell(
           onTap: (){
             Navigator.push(context, MaterialPageRoute(builder: (context)=>Menu_Screen()));
@@ -96,7 +63,7 @@ class _Home_DashBoard_ScreenState extends State<Home_DashBoard_Screen> {
               _Location_Dropdown(),
           
               //GOLD PRICE SCROLL
-              _Gold_Scroll_Price(),
+              GoldScrollPriceWidget(),
           
           
               Container(
@@ -113,7 +80,7 @@ class _Home_DashBoard_ScreenState extends State<Home_DashBoard_Screen> {
                           //ONLINE PAYMENT
                           InkWell(
                             onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=>Emi_Plan1_Screen()));
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>Online_Emi_Payment_Screen()));
                             },
                               child: Plan_Card(context, Img: 'plan1.svg', planT: 'Online EMI Payment',)),
 
@@ -186,11 +153,6 @@ class _Home_DashBoard_ScreenState extends State<Home_DashBoard_Screen> {
                       ),
                     ),
 
-                    //GOLD PRICE SCROLL
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20,right: 20,top: 20,bottom: 50),
-                      child: _Gold_Scroll_Price(),
-                    ),
                   ],
                 ),
               ),
@@ -221,16 +183,72 @@ Widget _Location_Dropdown(){
     );
 }
 
-//GOLD PRICE SCROLL
-Widget _Gold_Scroll_Price(){
+}
+
+
+//CAROUSEL IMG STACK
+Widget _carouselImg(context){
+  return Container(
+    height: 185,
+    width: MediaQuery.of(context).size.width,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(15),
+      image: DecorationImage(image: AssetImage('lib/assets/banner1.png'),
+      fit: BoxFit.cover),
+    ),
+  );
+}
+
+
+
+class GoldScrollPriceWidget extends StatefulWidget {
+  @override
+  _GoldScrollPriceWidgetState createState() => _GoldScrollPriceWidgetState();
+}
+
+class _GoldScrollPriceWidgetState extends State<GoldScrollPriceWidget> {
+  Timer? _timer;
+  final ScrollController _scrollController = ScrollController();
+  int _counter = 0;
+  double scrollIncrement = 2.0;
+
+  @override
+  void initState() {
+    super.initState();
+    _timer = Timer.periodic(Duration(milliseconds: 20), (timer) {
+      _scrollList();
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  void _scrollList() {
+    double maxScrollExtent = _scrollController.position.maxScrollExtent;
+    double currentScroll = _scrollController.position.pixels;
+
+    if (currentScroll >= maxScrollExtent) {
+      _scrollController.jumpTo(0);
+      _counter = 0;
+    } else {
+      _scrollController.jumpTo(currentScroll + scrollIncrement);
+      _counter++;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       height: 40,
-      color: white1,
-      child:  Center(
+      color: Colors.white,
+      child: Center(
         child: ListView.builder(
           controller: _scrollController,
           scrollDirection: Axis.horizontal,
-          itemCount: 3,
+          itemCount: 3, // Adjust itemCount to have enough items to wrap around
           itemBuilder: (context, index) {
             return  Padding(
               padding: const EdgeInsets.only(right: 15,left: 10),
@@ -253,19 +271,5 @@ Widget _Gold_Scroll_Price(){
         ),
       ),
     );
-}
-}
-
-
-//CAROUSEL IMG STACK
-Widget _carouselImg(context){
-  return Container(
-    height: 185,
-    width: MediaQuery.of(context).size.width,
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(15),
-      image: DecorationImage(image: AssetImage('lib/assets/banner1.png'),
-      fit: BoxFit.cover),
-    ),
-  );
+  }
 }
