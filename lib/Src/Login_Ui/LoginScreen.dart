@@ -70,9 +70,15 @@ class _LoginScreenState extends State<LoginScreen> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               //SKIP
-              Text(
-                'Skip Login',
-                style: skip_ST,
+              InkWell(
+                onTap: (){
+                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>
+                      Home_DashBoard_Screen()), (route) => false);
+                },
+                child: Text(
+                  'Skip Login',
+                  style: skip_ST,
+                ),
               ),
               const Icon(
                 Icons.arrow_forward_ios,
@@ -117,7 +123,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 return 'Please enter a valid 10-digit Phone Number';
               }
               return null;
-            }, prefixIcon: Icon(Icons.phone_android_sharp)),
+            }, prefixIcon: Icon(Icons.phone_android_sharp,color: white11,)),
 
 
         // Password Text and TextField

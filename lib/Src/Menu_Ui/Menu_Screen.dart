@@ -27,8 +27,9 @@ class _Menu_ScreenState extends State<Menu_Screen> {
         child: Container(
           child: Column(
             children: [
+
               Container(
-                height: 150,
+                height: 180,
                 width: MediaQuery.sizeOf(context).width,
                 decoration: BoxDecoration(
                    borderRadius: BorderRadius.only(
@@ -50,6 +51,7 @@ class _Menu_ScreenState extends State<Menu_Screen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      const SizedBox(height: 20,),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,

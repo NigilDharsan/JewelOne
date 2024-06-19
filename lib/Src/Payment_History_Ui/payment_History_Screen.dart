@@ -142,6 +142,7 @@ class _paymrnt_History_ScreenState extends State<paymrnt_History_Screen> {
 
               //BUTTON
               CommonContainerButton(context, onPress: (){
+                Navigator.pop(context);
               },
                   titleName: "Back"),
             ],

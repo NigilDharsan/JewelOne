@@ -7,6 +7,7 @@ const Color white3 = Color.fromRGBO(224, 224, 224, 1);
 const Color white8 = Color.fromRGBO(239, 239, 239, 1);
 const Color white9 = Color.fromRGBO(126, 126, 126, 1);
 const Color white10 = Color.fromRGBO(228, 228, 228, 1);
+const Color white11 = Color.fromRGBO(179, 179, 179, 1);
 
 //Black
 const Color Black = Color.fromRGBO(0, 0, 0, 1);

@@ -31,11 +31,11 @@ Widget textFormField(
         prefixIcon: prefixIcon,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
-          borderSide: BorderSide(color: borderclr),
+          borderSide: BorderSide(color: white1),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
-          borderSide: BorderSide(color: borderclr),
+          borderSide: BorderSide(color: white1),
         ),
         fillColor: Colors.white,
         filled: true,
@@ -392,13 +392,14 @@ Widget textFieldPassword(
       decoration: InputDecoration(
         contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
         hintText: hintText,
-        hintStyle: phoneHT,
+        hintStyle: lighttext,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
         enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(color: white2),
             borderRadius: BorderRadius.circular(10)),
+          prefixIcon: Icon(Icons.lock,color: white11,),
           suffixIcon: IconButton(
             icon:obscure ? ImgPathSvg("eyeclose.svg") : Icon(
                Icons.remove_red_eye_outlined,
@@ -410,6 +411,7 @@ Widget textFieldPassword(
         filled: true,
       ),
       onChanged: onChanged,
+      
       textInputAction: TextInputAction.next,
       keyboardType: keyboardtype,
       style: Textfield_Style,
