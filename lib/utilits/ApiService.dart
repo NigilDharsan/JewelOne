@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jewelone/Model/LoginModel.dart';
+import 'package:jewelone/utilits/MakeApiCall.dart';
 
 import 'ConstantsApi.dart';
 
@@ -120,37 +122,58 @@ class ApiService {
     return _requestPOST2<T>(path, data: data);
   }
 
-  Future<T> login<T>(String path, FormData data) async {
-    Dio dio = Dio();
-
-    dio.options = BaseOptions(
-      baseUrl: ConstantApi.SERVER_ONE, // Your base URL
-      validateStatus: (status) {
-        // Return true if the status code is between 200 and 299 (inclusive)
-        // Return false if you want to throw an error for this status code
-        return status! >= 200 && status < 300 || status == 404;
-      },
-    );
-
-    try {
-      Response response = await dio.post(path, data: data);
-      // Handle successful response
-
-      print(response.data);
-      return _fromJson<T>(response.data);
-    } on DioException catch (e) {
-      if (e.response != null && e.response!.statusCode == 404) {
-        // Handle 404 error
-
-        print('Resource not found');
-        return _fromJson<T>(e.response!.data);
-      } else {
-        // Handle other Dio errors
-        print('Error: ${e.message}');
-        throw e;
+  Future<LoginModel> LoginApi(FormData formData) async {
+    final result = await requestMultiPart(
+        url: ConstantApi.servicesStore, formData: formData);
+    if (result["success"] == true) {
+      print("resultOTP:$result");
+      print("resultOTPsss:${result["success"]}");
+      return LoginModel?.fromJson(result["response"]);
+    } else {
+      try {
+        var resultval = LoginModel.fromJson(result["response"]);
+        // Toast.show(resultval.message.toString(), context);
+        print(result["response"]);
+        return resultval;
+      } catch (e) {
+        print(result["response"]);
+        // Toast.show(result["response"], context);
       }
     }
+    return LoginModel();
   }
+
+  // Future<T> login<T>(String path, FormData data) async {
+  //   Dio dio = Dio();
+
+  //   dio.options = BaseOptions(
+  //     baseUrl: ConstantApi.SERVER_ONE, // Your base URL
+  //     validateStatus: (status) {
+  //       // Return true if the status code is between 200 and 299 (inclusive)
+  //       // Return false if you want to throw an error for this status code
+  //       return status! >= 200 && status < 300 || status == 404;
+  //     },
+  //   );
+
+  //   try {
+  //     Response response = await dio.post(path, data: data);
+  //     // Handle successful response
+
+  //     print(response.data);
+  //     return _fromJson<T>(response.data);
+  //   } on DioException catch (e) {
+  //     if (e.response != null && e.response!.statusCode == 404) {
+  //       // Handle 404 error
+
+  //       print('Resource not found');
+  //       return _fromJson<T>(e.response!.data);
+  //     } else {
+  //       // Handle other Dio errors
+  //       print('Error: ${e.message}');
+  //       throw e;
+  //     }
+  //   }
+  // }
 
 //   Future<SuccessModel> getUserLogApi(FormData formData) async {
 //     final result = await requestPOST(
