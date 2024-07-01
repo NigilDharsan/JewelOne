@@ -4,6 +4,8 @@ class ConstantApi {
   static Map<String, dynamic> _config = _Config.debugConstants;
   //JOB CONSTANT API
   static String loginUrl = SERVER_ONE + "customersettings/customer_login/";
+  static String signupUrl = SERVER_ONE + "customersettings/customer_signup/";
+
 
   static String SOMETHING_WRONG = "Some thing wrong";
   static String NO_INTERNET = "No internet Connection";

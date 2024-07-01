@@ -1,23 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jewelone/Common_Widgets/Common_Button.dart';
 import 'package:jewelone/Common_Widgets/Custom_App_Bar.dart';
 import 'package:jewelone/Common_Widgets/Image_Path.dart';
 import 'package:jewelone/Common_Widgets/Text_Form_Field.dart';
 import 'package:jewelone/Src/Home_DashBoard_Ui/Home_DashBoard_Screen.dart';
 import 'package:jewelone/Src/Login_Ui/LoginScreen.dart';
+import 'package:jewelone/utilits/ApiProvider.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
+import 'package:jewelone/utilits/Generic.dart';
+import 'package:jewelone/utilits/Loading_Overlay.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
 import 'package:intl/intl.dart';
 
-class Create_Account_Screen extends StatefulWidget {
+class Create_Account_Screen extends ConsumerStatefulWidget {
   const Create_Account_Screen({super.key});
 
   @override
-  State<Create_Account_Screen> createState() => _Create_Account_ScreenState();
+  ConsumerState<Create_Account_Screen> createState() => _Create_Account_ScreenState();
 }
 
-class _Create_Account_ScreenState extends State<Create_Account_Screen> {
+class _Create_Account_ScreenState extends ConsumerState<Create_Account_Screen> {
 
   String NewPassword = '';
   String ReEnterPassword = '';
@@ -30,7 +34,8 @@ class _Create_Account_ScreenState extends State<Create_Account_Screen> {
   TextEditingController _Dateofbirth = TextEditingController();
 
   bool _obscurePassword = true;
-  bool _isChecked = false;// Initially hide the password
+  bool _isChecked = false;
+
 
   //PASSWORD VISIBILITY FUNCTION
   void _togglePasswordVisibility() {
@@ -193,6 +198,8 @@ class _Create_Account_ScreenState extends State<Create_Account_Screen> {
             }
           },
         ),
+
+
         //ENTER NEW PASSWORD
         Title_Style(Title: 'Password', isStatus: true),
         textFormField(
@@ -249,11 +256,29 @@ class _Create_Account_ScreenState extends State<Create_Account_Screen> {
 
         SizedBox(height: 15),
 
-        // Login Button with Gradient
-        CommonContainerButton(context,
-            onPress: () {
+        // Sign up Button with Gradient
+        CommonContainerButton(context, onPress: () async {
           if(_formKey.currentState!.validate()){
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>Home_DashBoard_Screen()));
+            LoadingOverlay.show(context);
+
+            Map<String, dynamic> formData = {
+              "firstname": _fullName.text,
+              "lastname": '',
+              "email": _Email.text,
+              "mobile": _phoneNumber.text,
+              "date_of_birth": _Dateofbirth.text,
+              "confirm_password": _ConfirmPassword.text,
+            };
+
+            final result = await ref.read(signupPostProvider(formData).future);
+            LoadingOverlay.forcedStop();
+            if (result?.success == true) {
+              // ShowToastMessage(result?.message ?? "");
+              Navigator.push(context, MaterialPageRoute(builder: (context) => Home_DashBoard_Screen()));
+            } else {
+              // Handle failure
+              ShowToastMessage("Incorrect username/password");
+            }
           }
             }, titleName: 'Sign Up'),
         SizedBox(height: 16),
