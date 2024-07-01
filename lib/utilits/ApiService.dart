@@ -122,9 +122,9 @@ class ApiService {
     return _requestPOST2<T>(path, data: data);
   }
 
-  Future<LoginModel> LoginApi(FormData formData) async {
-    final result = await requestMultiPart(
-        url: ConstantApi.servicesStore, formData: formData);
+  Future<LoginModel> LoginApi(Map<String, dynamic> formData) async {
+    final result = await requestPOST3(
+        url: ConstantApi.loginUrl, formData: formData, dio: _dio);
     if (result["success"] == true) {
       print("resultOTP:$result");
       print("resultOTPsss:${result["success"]}");

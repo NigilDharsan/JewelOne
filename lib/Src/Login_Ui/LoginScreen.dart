@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -150,11 +149,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           validating: (value) {
             if (value!.isEmpty) {
               return 'Please Enter a Password';
-            } else if (!passwordSpecial.hasMatch(value)) {
-              return 'Password should be with the combination of Aa@#1';
-            } else if (!passwordLength.hasMatch(value)) {
-              return "Password should be with minimum 8 and maximum 15 characters";
             }
+            // else if (!passwordSpecial.hasMatch(value)) {
+            //   return 'Password should be with the combination of Aa@#1';
+            // } else if (!passwordLength.hasMatch(value)) {
+            //   return "Password should be with minimum 8 and maximum 15 characters";
+            // }
             return null;
           },
         ),
@@ -192,22 +192,23 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           if (_formKey.currentState!.validate()) {
             LoadingOverlay.show(context);
 
-            var formData = FormData.fromMap({
-              "requirement": _phoneNumber.text,
-              "client_id": _password.text,
-            });
+            Map<String, dynamic> formData = {
+              "username": _phoneNumber.text,
+              "password": _password.text,
+            };
 
             final result = await ref.read(loginPostProvider(formData).future);
             LoadingOverlay.forcedStop();
             // Handle the result
-            if (result?.success == true) {
-              ShowToastMessage(result?.message ?? "");
-              Navigator.pop(context, true);
-
-              // Handle success
+            if (result?.redirect == true) {
+              // ShowToastMessage(result?.message ?? "");
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => Home_DashBoard_Screen()));
             } else {
               // Handle failure
-              ShowToastMessage(result?.message ?? "");
+              ShowToastMessage("Incorrect username/password");
             }
           }
         }, titleName: 'Login'),

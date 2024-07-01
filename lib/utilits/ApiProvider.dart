@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jewelone/Model/LoginModel.dart';
 import 'package:jewelone/utilits/ApiService.dart';
@@ -9,7 +8,7 @@ final apiServiceProvider = Provider<ApiService>((ref) {
 });
 
 final loginPostProvider = FutureProvider.autoDispose
-    .family<LoginModel?, FormData>((ref, formData) async {
+    .family<LoginModel?, Map<String, dynamic>>((ref, formData) async {
   return ref.watch(apiServiceProvider).LoginApi(formData);
 });
 

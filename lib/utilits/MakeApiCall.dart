@@ -73,6 +73,7 @@ Future<dynamic> requestPOST(
     {required String url, required FormData formData, required Dio dio}) async {
   try {
     String? accessToken = await getToken();
+    Dio dio = new Dio();
 
     dio.options.headers = {
       'Accept': 'application/json',
@@ -151,9 +152,10 @@ Future<dynamic> requestPOST(
 }
 
 Future<dynamic> requestPOST2(
-    {required String url, required Object formData, required Dio dio}) async {
+    {required String url, required Object formData}) async {
   try {
     String? accessToken = await getToken();
+    Dio dio = Dio();
 
     dio.options.headers = {
       'Accept': 'application/json',
@@ -161,6 +163,64 @@ Future<dynamic> requestPOST2(
       'Authorization': 'Bearer $accessToken'
     };
     dio.options.baseUrl = url;
+    print(url);
+
+    final response = await dio.post(url, data: formData);
+    print(response);
+    switch (response.statusCode) {
+      case 200:
+        final jsonResponse = {'success': true, 'response': response.data};
+        return jsonResponse;
+      case 201:
+        final jsonResponse = {'success': true, 'response': response.data};
+        return jsonResponse;
+      default:
+        final jsonResponse = {'success': false, 'response': response.data};
+        return jsonResponse;
+    }
+  } on SocketException {
+    final jsonResponse = {
+      'success': false,
+      'response': ConstantApi.NO_INTERNET
+    };
+    return jsonResponse;
+  } on FormatException {
+    final jsonResponse = {
+      'success': false,
+      'response': ConstantApi.BAD_RESPONSE
+    };
+    return jsonResponse;
+  } on HttpException {
+    final jsonResponse = {
+      'success': false,
+      'response': ConstantApi.SOMETHING_WRONG //Server not responding
+    };
+    return jsonResponse;
+  } on DioError catch (e) {
+    if (e.response?.statusCode == 400) {
+      print(e.response?.statusCode);
+      print(e.response?.data);
+
+      final jsonResponse = {
+        'success': false,
+        'response': e.response?.data //Server not responding
+      };
+      return jsonResponse;
+    } else {
+      final jsonResponse = {
+        'success': false,
+        'response': ConstantApi.SOMETHING_WRONG //Server not responding
+      };
+      return jsonResponse;
+    }
+  }
+}
+
+Future<dynamic> requestPOST3(
+    {required String url,
+    required Map<String, dynamic> formData,
+    required Dio dio}) async {
+  try {
     print(url);
 
     final response = await dio.post(url, data: formData);
