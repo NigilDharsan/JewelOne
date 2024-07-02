@@ -15,7 +15,8 @@ class Forgot_Password_Screen extends StatefulWidget {
 }
 
 class _Forgot_Password_ScreenState extends State<Forgot_Password_Screen> {
-  TextEditingController _phoneNumber = TextEditingController();
+
+  TextEditingController _email = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
 
@@ -58,27 +59,26 @@ class _Forgot_Password_ScreenState extends State<Forgot_Password_Screen> {
 
 
         Padding(
-          padding: const EdgeInsets.only(top: 25,bottom: 40),
+          padding: const EdgeInsets.only(top: 30,bottom: 30),
           child: textFormField(
-            // isEnabled: false,
-              hintText: "Phone Number",
-              keyboardtype: TextInputType.phone,
-              Controller: _phoneNumber,
-              inputFormatters: [
-                LengthLimitingTextInputFormatter(10),
-                FilteringTextInputFormatter.digitsOnly
-              ],
-              onChanged: null,
+              hintText: 'Enter your Email',
+              keyboardtype: TextInputType.text,
+              inputFormatters: null,
+              Controller: _email,
               validating: (value) {
                 if (value!.isEmpty) {
-                  return 'Please Enter a Phone Number';
-                } else if (!RegExp(r'^[0-9]{10}$').hasMatch(value)) {
-                  return 'Please enter a valid 10-digit Phone Number';
+                  return "Please Enter a Email Address";
+                } else if (!RegExp(
+                    r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                    .hasMatch(value)) {
+                  return "Please Enter a Valid Email Address";
                 }
                 return null;
-              }, prefixIcon: Icon(Icons.phone_android_sharp,color: grey1,)),
+              },
+              onChanged: null,
+              prefixIcon: Icon(Icons.mail,color: grey1,)
+          ),
         ),
-
 
         // BUTTON
         CommonContainerButton(context,
