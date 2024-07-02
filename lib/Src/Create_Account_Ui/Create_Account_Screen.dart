@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jewelone/Common_Widgets/Common_Button.dart';
-import 'package:jewelone/Common_Widgets/Custom_App_Bar.dart';
 import 'package:jewelone/Common_Widgets/Image_Path.dart';
 import 'package:jewelone/Common_Widgets/Text_Form_Field.dart';
 import 'package:jewelone/Src/Home_DashBoard_Ui/Home_DashBoard_Screen.dart';
@@ -28,6 +27,7 @@ class _Create_Account_ScreenState extends ConsumerState<Create_Account_Screen> {
 
   TextEditingController _phoneNumber = TextEditingController();
   TextEditingController _fullName = TextEditingController();
+  TextEditingController _LastName = TextEditingController();
   TextEditingController _Email = TextEditingController();
   TextEditingController _password = TextEditingController();
   TextEditingController _ConfirmPassword = TextEditingController();
@@ -107,6 +107,26 @@ class _Create_Account_ScreenState extends ConsumerState<Create_Account_Screen> {
           prefixIcon: Icon(Icons.person,color: grey1,)
         ),
 
+        //LAST NAME
+        Title_Style(Title: 'Last name', isStatus: false),
+        textFormField(
+            hintText: 'Enter your last name',
+            keyboardtype: TextInputType.text,
+            inputFormatters: null,
+            Controller: _LastName,
+            validating: (value) {
+              if (value == null || value.isEmpty) {
+                return "Please Enter ${'Name'}";
+              }
+              if (!onlyText.hasMatch(value)) {
+                return "Please Enter Your Name (Special Characters are Not Allowed)";
+              }
+              return null;
+            },
+            onChanged: null,
+            prefixIcon: Icon(Icons.person,color: grey1,)
+        ),
+
         //Email
         Title_Style(
             Title: 'Email',
@@ -168,7 +188,7 @@ class _Create_Account_ScreenState extends ConsumerState<Create_Account_Screen> {
             );
             if (pickedDate != null) {
               String formattedDate =
-              DateFormat("dd/MM/yyyy").format(pickedDate);
+              DateFormat("yyyy-MM-dd").format(pickedDate);
               if (mounted) {
                 setState(() {
                   _Dateofbirth.text = formattedDate;
@@ -187,7 +207,7 @@ class _Create_Account_ScreenState extends ConsumerState<Create_Account_Screen> {
               return 'Please Select Date of Birth';
             } else {
               DateTime selectedDate =
-              DateFormat("dd/MM/yyyy").parse(value);
+              DateFormat("yyyy-MM-dd").parse(value);
               DateTime currentDate = DateTime.now();
               int age = currentDate.year - selectedDate.year;
               if (age < 18) {
@@ -263,7 +283,7 @@ class _Create_Account_ScreenState extends ConsumerState<Create_Account_Screen> {
 
             Map<String, dynamic> formData = {
               "firstname": _fullName.text,
-              "lastname": '',
+              "lastname": _LastName.text,
               "email": _Email.text,
               "mobile": _phoneNumber.text,
               "date_of_birth": _Dateofbirth.text,
