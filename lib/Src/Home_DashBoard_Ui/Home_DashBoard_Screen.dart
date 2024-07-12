@@ -2,33 +2,37 @@ import 'dart:async';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jewelone/Common_Widgets/Common_Card.dart';
 import 'package:jewelone/Common_Widgets/Image_Path.dart';
 import 'package:jewelone/Common_Widgets/Text_Form_Field.dart';
+import 'package:jewelone/Model/GoldRateMmodel.dart';
 import 'package:jewelone/Src/Emi_Payment_Ui/Emi_Plan1_Screen.dart';
 import 'package:jewelone/Src/Menu_Ui/Menu_Screen.dart';
 import 'package:jewelone/Src/My_SSP_Ui/My_SSP_Screen.dart';
 import 'package:jewelone/Src/New_SSP_Ui/New_SSP_Screen.dart';
 import 'package:jewelone/Src/Notification_Ui/Notification_Screen.dart';
 import 'package:jewelone/Src/Online_Emi_Payment_Ui/Online_Emi_Payment_Screen.dart';
+import 'package:jewelone/utilits/ApiProvider.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class Home_DashBoard_Screen extends StatefulWidget {
+class Home_DashBoard_Screen extends ConsumerStatefulWidget {
   const Home_DashBoard_Screen({super.key});
 
   @override
-  State<Home_DashBoard_Screen> createState() => _Home_DashBoard_ScreenState();
+  ConsumerState<Home_DashBoard_Screen> createState() => _Home_DashBoard_ScreenState();
 }
 
-class _Home_DashBoard_ScreenState extends State<Home_DashBoard_Screen> {
+class _Home_DashBoard_ScreenState extends ConsumerState<Home_DashBoard_Screen> {
   final List<String> items = ['Coimbatore', 'Salem', 'Chennai'];
   String selectedItem = 'Coimbatore';
   int myCurrentPage = 0;
 
   @override
   Widget build(BuildContext context) {
+    final priceRate = ref.watch(GoldrateProvider);
     return Scaffold(
       backgroundColor: backGroundColor,
       appBar: AppBar(
@@ -63,7 +67,13 @@ class _Home_DashBoard_ScreenState extends State<Home_DashBoard_Screen> {
               _Location_Dropdown(),
           
               //GOLD PRICE SCROLL
-              GoldScrollPriceWidget(),
+              priceRate.when(data: (data){
+                return GoldScrollPriceWidget(data: data,);
+              }, error: (Object error, StackTrace stackTrace){
+                return Text("ERROR");
+              }, loading: (){
+                return CircularProgressIndicator();
+              }) ,
           
           
               Container(
@@ -201,12 +211,15 @@ Widget _carouselImg(context){
 
 
 
-class GoldScrollPriceWidget extends StatefulWidget {
+class GoldScrollPriceWidget extends ConsumerStatefulWidget {
+  GoldRateModel? data;
+  GoldScrollPriceWidget({required this.data});
+
   @override
   _GoldScrollPriceWidgetState createState() => _GoldScrollPriceWidgetState();
 }
 
-class _GoldScrollPriceWidgetState extends State<GoldScrollPriceWidget> {
+class _GoldScrollPriceWidgetState extends ConsumerState<GoldScrollPriceWidget> {
   Timer? _timer;
   final ScrollController _scrollController = ScrollController();
   int _counter = 0;
@@ -241,17 +254,17 @@ class _GoldScrollPriceWidgetState extends State<GoldScrollPriceWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+      return Container(
       height: 40,
       color: Colors.white,
       child: Center(
         child: ListView.builder(
           controller: _scrollController,
           scrollDirection: Axis.horizontal,
-          itemCount: 3, // Adjust itemCount to have enough items to wrap around
+          itemCount: 3,
           itemBuilder: (context, index) {
             return  Padding(
-              padding: const EdgeInsets.only(right: 15,left: 10),
+              padding: const EdgeInsets.only(right: 5,left: 5),
               child: Center(
                 child: Row(
                   children: [
@@ -260,7 +273,25 @@ class _GoldScrollPriceWidgetState extends State<GoldScrollPriceWidget> {
                       style: gramST,
                     ),
                     Text(
-                      '₹5800.00',
+                      '₹ ${widget.data?.data?.gold22ct ?? ""}',
+                      style: gramrateST,
+                    ),
+                    const SizedBox(width: 10,),
+                    Text(
+                      '1 (G) Silver : ',
+                      style: gramST,
+                    ),
+                    Text(
+                      '₹ ${widget.data?.data?.silverG ?? ""}',
+                      style: gramrateST,
+                    ),
+                    const SizedBox(width: 10,),
+                    Text(
+                      'Platinum : ',
+                      style: gramST,
+                    ),
+                    Text(
+                      '₹ ${widget.data?.data?.platinum ?? ""}',
                       style: gramrateST,
                     ),
                   ],

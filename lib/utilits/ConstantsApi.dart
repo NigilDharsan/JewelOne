@@ -5,6 +5,10 @@ class ConstantApi {
   //JOB CONSTANT API
   static String loginUrl = SERVER_ONE + "customersettings/customer_login/";
   static String signupUrl = SERVER_ONE + "customersettings/customer_signup/";
+  static String forgetpasswordUrl = SERVER_ONE + "core/cus_forgot_pass/";
+  static String verifyotpdUrl = SERVER_ONE + "core/cus_otp_verify/";
+  static String bannerUrl = SERVER_ONE + "retailmaster/banners/";
+  static String goldrateUrl = SERVER_ONE + "retailmaster/metal_rates/?latest";
 
 
   static String SOMETHING_WRONG = "Some thing wrong";

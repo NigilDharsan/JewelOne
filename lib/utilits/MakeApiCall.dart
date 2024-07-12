@@ -15,7 +15,7 @@ Future<dynamic> requestGET({required String url, required Dio dio}) async {
     dio.options.headers = {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer $accessToken'
+      'Authorization': 'Token $accessToken'
     };
 
     final response = await dio.get(url);

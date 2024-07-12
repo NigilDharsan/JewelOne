@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
 import 'Common_Colors.dart';
 
 final FlutterSecureStorage _secureStorage = FlutterSecureStorage();
@@ -145,18 +144,5 @@ Widget buildLoadingIndicator() {
   );
 }
 
-// Future<void> readall() async{
-// final all =await _secureStorage.readAll(aOptions: _androidOptions());
-// }
-
-// void tokenVal(tokens, farmerId) async {
-//   final prefs = await SharedPreferences.getInstance();
-//   await prefs.setString("tokenval", tokens);
-//   await prefs.setInt("farmerID", farmerId);
-//   final _tokenval = await prefs.getString("tokenval");
-//   final _idVal = await prefs.getInt("farmerID");
-//   print(_tokenval);
-//   print(_idVal);
-// }
 
 
