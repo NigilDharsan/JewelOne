@@ -16,6 +16,7 @@ import 'package:jewelone/Src/Online_Emi_Payment_Ui/Online_Emi_Payment_Screen.dar
 import 'package:jewelone/utilits/ApiProvider.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
+import 'package:scroll_loop_auto_scroll/scroll_loop_auto_scroll.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class Home_DashBoard_Screen extends ConsumerStatefulWidget {
@@ -30,9 +31,18 @@ class _Home_DashBoard_ScreenState extends ConsumerState<Home_DashBoard_Screen> {
   String selectedItem = 'Coimbatore';
   int myCurrentPage = 0;
 
+  String? location;
+  List<String> locationoption = [
+    "Coimbatore",
+    "Salem",
+    "Erode",
+  ];
+
   @override
   Widget build(BuildContext context) {
     final priceRate = ref.watch(GoldrateProvider);
+    final bannerimagedata = ref.watch(BannerDataProvider);
+    final activelocationdata = ref.watch(ActivelocationProvider);
     return Scaffold(
       backgroundColor: backGroundColor,
       appBar: AppBar(
@@ -64,8 +74,14 @@ class _Home_DashBoard_ScreenState extends ConsumerState<Home_DashBoard_Screen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               //LOCATION DROPDOWN
-              _Location_Dropdown(),
-          
+              activelocationdata.when(data: (data){
+                return _Location_Dropdown();
+              }, error: (Object error, StackTrace stackTrace){
+                return Text('ERROR');
+              }, loading: (){
+                return CircularProgressIndicator();
+               }),
+
               //GOLD PRICE SCROLL
               priceRate.when(data: (data){
                 return GoldScrollPriceWidget(data: data,);
@@ -116,59 +132,63 @@ class _Home_DashBoard_ScreenState extends ConsumerState<Home_DashBoard_Screen> {
                       child: Wallet_Card(context),
                     ),
                     //CAROSEL BANNER
-                    Container(
-                      color: white1,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 20,right: 20),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            const SizedBox(height: 20,),
-                            //CAROSEL SLIDER
-                            CarouselSlider(
-                                items: [
-                                  _carouselImg(context,),
-                                  _carouselImg(context,),
-                                  _carouselImg(context,),
-                                  _carouselImg(context,),
-                                ],
-                                options: CarouselOptions(
-                                  autoPlay: true,
-                                  viewportFraction: 1,
-                                  enlargeCenterPage: true,
-                                  aspectRatio: 16/9,
-                                  autoPlayAnimationDuration:Duration(milliseconds: 800),
-                                  onPageChanged: (index,reason){
-                                    setState(() {
-                                      myCurrentPage = index;
-                                    });
-                                  },
-                                )),
-                            const SizedBox(height: 10,),
-                            Center(
-                              child: AnimatedSmoothIndicator(
-                                activeIndex: myCurrentPage,
-                                count: 4,
-                                effect: ExpandingDotsEffect(
-                                    dotHeight: 5,
-                                    dotWidth: 5,
-                                    activeDotColor: gradient1
+                    bannerimagedata.when(data: (imagedata){
+                      return Container(
+                        color: white1,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 20,right: 20),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              const SizedBox(height: 20,),
+                              //CAROSEL SLIDER
+                              CarouselSlider(
+                                  items: imagedata?.data?.map((i) {
+                                    return Builder(
+                                      builder: (BuildContext context) {
+                                        return _carouselImg(context,
+                                            image:
+                                            i.bannerImg ?? "");
+                                      },
+                                    );
+                                  }).toList(),
+                                  options: CarouselOptions(
+                                    autoPlay: true,
+                                    viewportFraction: 1,
+                                    enlargeCenterPage: true,
+                                    aspectRatio: 16/9,
+                                    autoPlayAnimationDuration:Duration(milliseconds: 800),
+                                    onPageChanged: (index,reason){
+                                      setState(() {
+                                        myCurrentPage = index;
+                                      });
+                                    },
+                                  )),
+                              const SizedBox(height: 10,),
+                              Center(
+                                child: AnimatedSmoothIndicator(
+                                  activeIndex: myCurrentPage,
+                                  count: imagedata?.data?.length ?? 0,
+                                  effect: ExpandingDotsEffect(
+                                      dotHeight: 5,
+                                      dotWidth: 5,
+                                      activeDotColor: gradient1
+                                  ),
                                 ),
                               ),
-                            ),
-                            const SizedBox(height: 20,),
-
-                          ],
+                              const SizedBox(height: 20,),
+                            ],
+                          ),
                         ),
-                      ),
-                    ),
-
+                      );
+                    }, error: (Object error, StackTrace stackTrace){
+                      return Text("ERROR");
+                    }, loading: (){
+                      return Center(child: CircularProgressIndicator());
+                    })
                   ],
                 ),
               ),
-
-          
-          
             ],
           ),
         ),
@@ -184,9 +204,20 @@ Widget _Location_Dropdown(){
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Today Gold Rate -",style: skip_ST,),
-            Text('Coimbatore',style: dropDownST,),
-            Icon(Icons.keyboard_arrow_down_outlined,color: gradient1,size: 30,),
+            Text("Today Gold Rate  -",style: skip_ST,),
+
+            homedropDownFieldprofileedit(
+              context,
+              width: MediaQuery.sizeOf(context).width/3,
+              hintT: 'Coimbatore',
+              value: location,
+              listValue: locationoption,
+              onChanged: (String? newValue) {
+                setState(() {
+                  location = newValue;
+                });
+              },
+            ),
           ],
         ),
       ),
@@ -197,13 +228,13 @@ Widget _Location_Dropdown(){
 
 
 //CAROUSEL IMG STACK
-Widget _carouselImg(context){
+Widget _carouselImg(context,{required String image}){
   return Container(
     height: 185,
     width: MediaQuery.of(context).size.width,
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(15),
-      image: DecorationImage(image: AssetImage('lib/assets/banner1.png'),
+      image: DecorationImage(image: NetworkImage(image),
       fit: BoxFit.cover),
     ),
   );
@@ -220,87 +251,77 @@ class GoldScrollPriceWidget extends ConsumerStatefulWidget {
 }
 
 class _GoldScrollPriceWidgetState extends ConsumerState<GoldScrollPriceWidget> {
-  Timer? _timer;
-  final ScrollController _scrollController = ScrollController();
-  int _counter = 0;
-  double scrollIncrement = 2.0;
-
-  @override
-  void initState() {
-    super.initState();
-    _timer = Timer.periodic(Duration(milliseconds: 20), (timer) {
-      _scrollList();
-    });
-  }
-
-  @override
-  void dispose() {
-    _timer?.cancel();
-    super.dispose();
-  }
-
-  void _scrollList() {
-    double maxScrollExtent = _scrollController.position.maxScrollExtent;
-    double currentScroll = _scrollController.position.pixels;
-
-    if (currentScroll >= maxScrollExtent) {
-      _scrollController.jumpTo(0);
-      _counter = 0;
-    } else {
-      _scrollController.jumpTo(currentScroll + scrollIncrement);
-      _counter++;
-    }
-  }
+  // Timer? _timer;
+  // final ScrollController _scrollController = ScrollController();
+  // int _counter = 0;
+  // double scrollIncrement = 2.0;
+  //
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _timer = Timer.periodic(Duration(milliseconds: 20), (timer) {
+  //     _scrollList();
+  //   });
+  // }
+  //
+  // @override
+  // void dispose() {
+  //   _timer?.cancel();
+  //   super.dispose();
+  // }
+  //
+  // void _scrollList() {
+  //   double maxScrollExtent = _scrollController.position.maxScrollExtent;
+  //   double currentScroll = _scrollController.position.pixels;
+  //
+  //   if (currentScroll >= maxScrollExtent) {
+  //     _scrollController.jumpTo(0);
+  //     _counter = 0;
+  //   } else {
+  //     _scrollController.jumpTo(currentScroll + scrollIncrement);
+  //     _counter++;
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
-      return Container(
-      height: 40,
-      color: Colors.white,
-      child: Center(
-        child: ListView.builder(
-          controller: _scrollController,
-          scrollDirection: Axis.horizontal,
-          itemCount: 3,
-          itemBuilder: (context, index) {
-            return  Padding(
-              padding: const EdgeInsets.only(right: 5,left: 5),
-              child: Center(
-                child: Row(
-                  children: [
-                    Text(
-                      '1 GRM (22KT) Gold : ',
-                      style: gramST,
-                    ),
-                    Text(
-                      '₹ ${widget.data?.data?.gold22ct ?? ""}',
-                      style: gramrateST,
-                    ),
-                    const SizedBox(width: 10,),
-                    Text(
-                      '1 (G) Silver : ',
-                      style: gramST,
-                    ),
-                    Text(
-                      '₹ ${widget.data?.data?.silverG ?? ""}',
-                      style: gramrateST,
-                    ),
-                    const SizedBox(width: 10,),
-                    Text(
-                      'Platinum : ',
-                      style: gramST,
-                    ),
-                    Text(
-                      '₹ ${widget.data?.data?.platinum ?? ""}',
-                      style: gramrateST,
-                    ),
-                  ],
-                ),
-              ),
-            );
-          },
+      return ScrollLoopAutoScroll(
+        scrollDirection: Axis.horizontal,
+        duration: Duration(seconds: 70),
+        delay: Duration(microseconds: 1),
+        reverseScroll: false,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              '1 GRM (22KT) Gold : ',
+              style: gramST,
+            ),
+            Text(
+              '₹ ${widget.data?.data?.gold22ct ?? ""}',
+              style: gramrateST,
+            ),
+            const SizedBox(width: 20,),
+            Text(
+              '1 (G) Silver : ',
+              style: gramST,
+            ),
+            Text(
+              '₹ ${widget.data?.data?.silverG ?? ""}',
+              style: gramrateST,
+            ),
+            const SizedBox(width: 20,),
+            Text(
+              'Platinum : ',
+              style: gramST,
+            ),
+            Text(
+              '₹ ${widget.data?.data?.platinum ?? ""}',
+              style: gramrateST,
+            ),
+          ],
         ),
-      ),
-    );
+      );
   }
 }

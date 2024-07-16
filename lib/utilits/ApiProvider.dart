@@ -1,8 +1,11 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jewelone/Model/ActiveLocationMOdel.dart';
+import 'package:jewelone/Model/ActivePlanModel.dart';
 import 'package:jewelone/Model/BannerModel.dart';
 import 'package:jewelone/Model/ForgotPasswwordModel.dart';
 import 'package:jewelone/Model/GoldRateMmodel.dart';
 import 'package:jewelone/Model/LoginModel.dart';
+import 'package:jewelone/Model/MyPlanModel.dart';
 import 'package:jewelone/Model/SignUpModel.dart';
 import 'package:jewelone/utilits/ApiService.dart';
 
@@ -36,7 +39,7 @@ final verifyotpPostProvider = FutureProvider.autoDispose
 });
 
 //BANNER IMAGE
-final BannerDataProvider = FutureProvider<BannerModel?>((ref) async {
+final BannerDataProvider = FutureProvider<BannerImageModel?>((ref) async {
   return ref.watch(apiServiceProvider).HomeBannerApi();
 });
 
@@ -44,4 +47,19 @@ final BannerDataProvider = FutureProvider<BannerModel?>((ref) async {
 //GOLD RATE
 final GoldrateProvider = FutureProvider<GoldRateModel?>((ref) async {
   return ref.watch(apiServiceProvider).GoldrateApi();
+});
+
+//ACTIVE LOCATION
+final ActivelocationProvider = FutureProvider<ActiveLocationModel?>((ref) async {
+  return ref.watch(apiServiceProvider).ActivelocationApi();
+});
+
+//MY PLAN
+final MyplanProvider = FutureProvider<MyPlanModel?>((ref) async {
+  return ref.watch(apiServiceProvider).MyplanApi();
+});
+
+//ACTIVE PLAN
+final ActiveplanProvider = FutureProvider<ActivePlanModel?>((ref) async {
+  return ref.watch(apiServiceProvider).ActiveplanApi();
 });

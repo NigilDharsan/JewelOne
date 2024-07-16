@@ -201,11 +201,14 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             LoadingOverlay.forcedStop();
             // Handle the result
             if (result?.redirect == true) {
+              await accessToken(result?.token);
+              await UserId2(result?.customer);
               // ShowToastMessage(result?.message ?? "");
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => Home_DashBoard_Screen()));
+                      builder: (context) => Home_DashBoard_Screen(
+                      )));
             } else {
               // Handle failure
               ShowToastMessage("Incorrect username/password");

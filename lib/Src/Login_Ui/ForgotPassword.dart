@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jewelone/Common_Widgets/Common_Button.dart';
 import 'package:jewelone/Common_Widgets/Image_Path.dart';
 import 'package:jewelone/Common_Widgets/Text_Form_Field.dart';
 import 'package:jewelone/Src/Verify_OTP_Ui/Verify_OTP_Screen.dart';
+import 'package:jewelone/utilits/ApiProvider.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
+import 'package:jewelone/utilits/Generic.dart';
+import 'package:jewelone/utilits/Loading_Overlay.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
 
-class Forgot_Password_Screen extends StatefulWidget {
+class Forgot_Password_Screen extends ConsumerStatefulWidget {
   const Forgot_Password_Screen({super.key});
 
   @override
-  State<Forgot_Password_Screen> createState() => _Forgot_Password_ScreenState();
+  ConsumerState<Forgot_Password_Screen> createState() => _Forgot_Password_ScreenState();
 }
 
-class _Forgot_Password_ScreenState extends State<Forgot_Password_Screen> {
+class _Forgot_Password_ScreenState extends ConsumerState<Forgot_Password_Screen> {
 
   TextEditingController _email = TextEditingController();
 
@@ -82,9 +86,27 @@ class _Forgot_Password_ScreenState extends State<Forgot_Password_Screen> {
 
         // BUTTON
         CommonContainerButton(context,
-            onPress: () {
+            onPress: () async {
           if(_formKey.currentState!.validate()){
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>Verify_OTP_Screen()));
+            LoadingOverlay.show(context);
+
+            Map<String, dynamic> formData = {
+              "user": _email.text
+            };
+
+            final result = await ref.read(ForgotpasswordPostProvider(formData).future);
+            LoadingOverlay.forcedStop();
+            // Handle the result
+            if (result?.errorDetail == true) {
+              // ShowToastMessage(result?.message ?? "");
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => Verify_OTP_Screen(Email_id: _email.text,)));
+            } else {
+              // Handle failure
+              ShowToastMessage("Invalid Email");
+            }
           }
             }, titleName: 'Get OTP'),
 

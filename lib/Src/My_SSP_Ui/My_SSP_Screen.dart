@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jewelone/Common_Widgets/Custom_App_Bar.dart';
 import 'package:jewelone/Src/Home_DashBoard_Ui/Home_DashBoard_Screen.dart';
+import 'package:jewelone/utilits/ApiProvider.dart';
 import 'package:readmore/readmore.dart';
 
 import '../../Common_Widgets/Image_Path.dart';
 import '../../utilits/Common_Colors.dart';
 import '../../utilits/Text_Style.dart';
-class My_SSP_Screen extends StatefulWidget {
+class My_SSP_Screen extends ConsumerStatefulWidget {
   const My_SSP_Screen({super.key});
 
   @override
-  State<My_SSP_Screen> createState() => _My_SSP_ScreenState();
+  ConsumerState<My_SSP_Screen> createState() => _My_SSP_ScreenState();
 }
 
-class _My_SSP_ScreenState extends State<My_SSP_Screen> {
+class _My_SSP_ScreenState extends ConsumerState<My_SSP_Screen> {
   bool _Custom_icon = false;
   bool _Custom_icon2 = false;
 
@@ -31,174 +33,111 @@ class _My_SSP_ScreenState extends State<My_SSP_Screen> {
     );
   }
   Widget _Mainbody (){
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                ImgPathSvg('calendar2.svg'),
-                const SizedBox(width: 10),
-                Text('2 Plan Active',style: rate2,),
-              ],
-            ),
-
-            //PLAN1 CONTAINER
-            Padding(
-              padding: const EdgeInsets.only(top: 10,bottom: 10 ),
-              child: Container(
-                width: MediaQuery.sizeOf(context).width,
-                decoration: BoxDecoration(
-                  border: Border.all(width: 1,color: arrow),
-                  borderRadius: BorderRadius.circular(10),
-                  color: white1,
-                ),
-                child: Theme(
-                  data: ThemeData(dividerColor:Colors.transparent),
-                  child: ExpansionTile(
-                    trailing:   SizedBox.shrink(),
-                    onExpansionChanged: (bool expanded){
-                      setState(() {
-                        _Custom_icon = expanded;
-                      });
-                    },
-                    title: Padding(
-                      padding:EdgeInsets.zero,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              Text('Plan 1',style: Plan_Style,),
-                              const Spacer(),
-                              _Custom_icon == true ? ImgPathSvg('downarrow.svg') : ImgPathSvg('rightarrow.svg'),
-                            ],
-                          ),
-                          Text('Gold Ornaments Purchase Advance Scheme',style: phoneHT,),
-                          Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(right: 10),
-                                child: Text('View details',style: colortexts,),
-                              ),
-                              ImgPathSvg('rightarrow2.svg'),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                    tilePadding: EdgeInsets.only(left: 20,right: 0),
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(15),
-                        child: Column(
-                          children: [
-                            Divider(),
-                            Row_List(text1: 'ID number', text2: 'SS/2324/JO/000475'),
-                            Divider(),
-                            Row_List(text1: 'A/c name', text2: 'Mr. Vinoth Kumar V'),
-                            Divider(),
-                            Row_List(text1: 'Location', text2: 'Coimbatore'),
-                            Divider(),
-                            Row_List(text1: 'Total plan amount', text2: '₹55,000'),
-                            Divider(),
-                            Row_List(text1: 'Monthly EMA', text2: '₹5,000'),
-                            Divider(),
-                            Row_List(text1: 'Tenure', text2: 'up to 11 months'),
-                            Divider(),
-                            Row_List(text1: 'Gold saved till date', text2: '9.863 g'),
-                          ],
-                        ),
-                      )
-                    ],
-
-                  ),
-                ),
+    final myplandata = ref.watch(MyplanProvider);
+    return myplandata.when(data: (data){
+      return SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  ImgPathSvg('calendar2.svg'),
+                  const SizedBox(width: 10),
+                  Text('2 Plan Active',style: rate2,),
+                ],
               ),
-            ),
-
-            //PLAN2 CONTAINER
-            Padding(
-              padding: const EdgeInsets.only(top: 10,bottom: 10 ),
-              child: Container(
-                width: MediaQuery.sizeOf(context).width,
-                decoration: BoxDecoration(
-                  border: Border.all(width: 1,color: arrow),
-                  borderRadius: BorderRadius.circular(10),
-                  color: white1,
-                ),
-                child: Theme(
-                  data: ThemeData(dividerColor:Colors.transparent),
-                  child: ExpansionTile(
-
-                    trailing:   SizedBox.shrink(),
-                    onExpansionChanged: (bool expanded){
-                      setState(() {
-                        _Custom_icon2 = expanded;
-                      });
-                    },
-                    title: Padding(
-                      padding:EdgeInsets.zero,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              Text('Plan 2',style: Plan_Style,),
-                              const Spacer(),
-                              _Custom_icon2 == true ? ImgPathSvg('downarrow.svg') : ImgPathSvg('rightarrow.svg'),
-                            ],
+                 ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: data?.data?.length ?? 0,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 10,bottom: 10 ),
+                        child: Container(
+                          width: MediaQuery.sizeOf(context).width,
+                          decoration: BoxDecoration(
+                            border: Border.all(width: 1,color: arrow),
+                            borderRadius: BorderRadius.circular(10),
+                            color: white1,
                           ),
-                          Text('Gold Ornaments Purchase Advance Scheme',style: phoneHT,),
-                          Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(right: 10),
-                                child: Text('View details',style: colortexts,),
+                          child: Theme(
+                            data: ThemeData(dividerColor:Colors.transparent),
+                            child: ExpansionTile(
+                              trailing:   SizedBox.shrink(),
+                              onExpansionChanged: (bool expanded){
+                                setState(() {
+                                  _Custom_icon = expanded;
+                                });
+                              },
+                              title: Padding(
+                                padding:EdgeInsets.zero,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Text('Plan 1',style: Plan_Style,),
+                                        const Spacer(),
+                                        _Custom_icon == true ? ImgPathSvg('downarrow.svg') : ImgPathSvg('rightarrow.svg'),
+                                      ],
+                                    ),
+                                    Text('Gold Ornaments Purchase Advance Scheme',style: phoneHT,),
+                                    Row(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.only(right: 10),
+                                          child: Text('View details',style: colortexts,),
+                                        ),
+                                        ImgPathSvg('rightarrow2.svg'),
+                                      ],
+                                    )
+                                  ],
+                                ),
                               ),
-                              ImgPathSvg('rightarrow2.svg'),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                    tilePadding: EdgeInsets.only(left: 20,right: 0),
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(15),
-                        child: Column(
-                          children: [
-                            Divider(),
-                            Row_List(text1: 'ID number', text2: 'SS/2324/JO/000475'),
-                            Divider(),
-                            Row_List(text1: 'A/c name', text2: 'Mr. Vinoth Kumar V'),
-                            Divider(),
-                            Row_List(text1: 'Location', text2: 'Coimbatore'),
-                            Divider(),
-                            Row_List(text1: 'Total plan amount', text2: '₹55,000'),
-                            Divider(),
-                            Row_List(text1: 'Monthly EMA', text2: '₹5,000'),
-                            Divider(),
-                            Row_List(text1: 'Tenure', text2: 'up to 11 months'),
-                            Divider(),
-                            Row_List(text1: 'Gold saved till date', text2: '9.863 g'),
-                          ],
+                              tilePadding: EdgeInsets.only(left: 20,right: 0),
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(15),
+                                  child: Column(
+                                    children: [
+                                      Divider(),
+                                      Row_List(text1: 'ID number', text2: "njkcnjknc"),
+                                      Divider(),
+                                      Row_List(text1: 'A/c name', text2: data?.data?[index].schemeName ?? ""),
+                                      Divider(),
+                                      Row_List(text1: 'Location', text2: 'Coimbatore'),
+                                      Divider(),
+                                      Row_List(text1: 'Total plan amount', text2: '₹55,000'),
+                                      Divider(),
+                                      Row_List(text1: 'Monthly EMA', text2: '₹5,000'),
+                                      Divider(),
+                                      Row_List(text1: 'Tenure', text2: 'up to 11 months'),
+                                      Divider(),
+                                      Row_List(text1: 'Gold saved till date', text2: '9.863 g'),
+                                    ],
+                                  ),
+                                )
+                              ],
+
+                            ),
+                          ),
                         ),
-                      )
-                    ],
+                      );
+                    }),
 
-                  ),
-                ),
-              ),
-            ),
-
-            //HELP CONTAINER
-            HelpContainer(context, Color: pink4),
-          ],
+              //HELP CONTAINER
+              HelpContainer(context, Color: pink4),
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    }, error: (Object error, StackTrace stackTrace){
+      return Text("ERROR $error");
+    }, loading: (){
+      return CircularProgressIndicator();
+    }) ;
   }
 }
 

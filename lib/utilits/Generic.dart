@@ -35,11 +35,12 @@ Future<dynamic> getToken() async {
   return gettoken!;
 }
 
-UserId(dynamic val) async {
+UserId2(dynamic val) async {
   await _secureStorage.write(
       key: userId!, value: val!, aOptions: _androidOptions());
   print("value!:${val!}" + "$userId");
 }
+
 
 Future<dynamic> getuserId() async {
   dynamic user_id =

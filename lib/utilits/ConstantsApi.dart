@@ -9,6 +9,10 @@ class ConstantApi {
   static String verifyotpdUrl = SERVER_ONE + "core/cus_otp_verify/";
   static String bannerUrl = SERVER_ONE + "retailmaster/banners/";
   static String goldrateUrl = SERVER_ONE + "retailmaster/metal_rates/?latest";
+  static String activelocationUrl = SERVER_ONE + "retailmaster/active_branch/";
+  static String myplanUrl = SERVER_ONE + "managescheme/customer_account/";
+  static String activeplanUrl = SERVER_ONE + "scheme/list/?status";
+
 
 
   static String SOMETHING_WRONG = "Some thing wrong";

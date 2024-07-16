@@ -2,21 +2,26 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jewelone/Common_Widgets/Common_Button.dart';
 import 'package:jewelone/Common_Widgets/Image_Path.dart';
 import 'package:jewelone/Common_Widgets/Text_Form_Field.dart';
 import 'package:jewelone/Src/Create_New_Password_Ui/Create_Password_Screen.dart';
+import 'package:jewelone/utilits/ApiProvider.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
+import 'package:jewelone/utilits/Generic.dart';
+import 'package:jewelone/utilits/Loading_Overlay.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
 
-class Verify_OTP_Screen extends StatefulWidget {
-  const Verify_OTP_Screen({super.key});
+class Verify_OTP_Screen extends ConsumerStatefulWidget {
+  final String Email_id;
+   Verify_OTP_Screen({super.key,required this.Email_id});
 
   @override
-  State<Verify_OTP_Screen> createState() => _Verify_OTP_ScreenState();
+  ConsumerState<Verify_OTP_Screen> createState() => _Verify_OTP_ScreenState();
 }
 
-class _Verify_OTP_ScreenState extends State<Verify_OTP_Screen> {
+class _Verify_OTP_ScreenState extends ConsumerState<Verify_OTP_Screen> {
 
   int _timeLeft = 30; // Timer duration in seconds
   bool _isTimerActive = false;
@@ -184,9 +189,29 @@ class _Verify_OTP_ScreenState extends State<Verify_OTP_Screen> {
 
         // BUTTON
         CommonContainerButton(context,
-            onPress: () {
+            onPress: () async {
           if(_formKey.currentState!.validate()){
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>Create_Password_Screen()));
+            LoadingOverlay.show(context);
+
+            Map<String, dynamic> formData = {
+              "otp": '${_OTP1.text}${_OTP2.text}${_OTP3.text}${_OTP4.text}${_OTP5.text}${_OTP6.text}',
+              "email":widget.Email_id,
+              "forgotpass_otp":true,
+            };
+
+            final result = await ref.read(verifyotpPostProvider(formData).future);
+            LoadingOverlay.forcedStop();
+            // Handle the result
+            if (result?.errorDetail == true) {
+              // ShowToastMessage(result?.message ?? "");
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => Create_Password_Screen()));
+            } else {
+              // Handle failure
+              ShowToastMessage("Incorrect OTP");
+            }
           }
             }, titleName: 'Continue'),
 

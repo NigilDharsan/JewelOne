@@ -1,10 +1,14 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jewelone/Model/ActiveLocationMOdel.dart';
+import 'package:jewelone/Model/ActivePlanModel.dart';
 import 'package:jewelone/Model/BannerModel.dart';
 import 'package:jewelone/Model/ForgotPasswwordModel.dart';
 import 'package:jewelone/Model/GoldRateMmodel.dart';
 import 'package:jewelone/Model/LoginModel.dart';
+import 'package:jewelone/Model/MyPlanModel.dart';
 import 'package:jewelone/Model/SignUpModel.dart';
+import 'package:jewelone/utilits/Generic.dart';
 import 'package:jewelone/utilits/MakeApiCall.dart';
 import 'ConstantsApi.dart';
 
@@ -108,15 +112,15 @@ class ApiService {
   }
 
   //BANNER IMAGE
-  Future<BannerModel> HomeBannerApi() async {
+  Future<BannerImageModel> HomeBannerApi() async {
     final result = await requestGET(url: ConstantApi.bannerUrl, dio: _dio);
     if (result["success"] == true) {
       print("resultOTP:$result");
       print("resultOTPsss:${result["success"]}");
-      return BannerModel?.fromJson(result["response"]);
+      return BannerImageModel?.fromJson(result["response"]);
     } else {
       try {
-        var resultval = BannerModel.fromJson(result["response"]);
+        var resultval = BannerImageModel.fromJson(result["response"]);
         // Toast.show(resultval.message.toString(), context);
         print(result["response"]);
         return resultval;
@@ -125,7 +129,7 @@ class ApiService {
         // Toast.show(result["response"], context);
       }
     }
-    return BannerModel();
+    return BannerImageModel();
   }
 
 
@@ -148,6 +152,76 @@ class ApiService {
       }
     }
     return GoldRateModel();
+  }
+
+  //ACTIVE LOCATION
+  Future<ActiveLocationModel> ActivelocationApi() async {
+    final result = await requestGET(url: ConstantApi.activelocationUrl, dio: _dio);
+    if (result["success"] == true) {
+      print("resultOTP:$result");
+      print("resultOTPsss:${result["success"]}");
+      return ActiveLocationModel?.fromJson(result["response"]);
+    } else {
+      try {
+        var resultval = ActiveLocationModel.fromJson(result["response"]);
+        // Toast.show(resultval.message.toString(), context);
+        print(result["response"]);
+        return resultval;
+      } catch (e) {
+        print(result["response"]);
+        // Toast.show(result["response"], context);
+      }
+    }
+    return ActiveLocationModel();
+  }
+
+
+  //MY PLANS
+  Future<MyPlanModel> MyplanApi() async {
+    var formData = <String, dynamic>{
+      "customer": await UserId2(UserId2),
+    };
+
+    final result = await requestPOST2(
+        url: ConstantApi.myplanUrl, formData: formData, dio: _dio);
+
+    if (result["success"] == true) {
+      print("resultOTP:$result");
+      print("resultOTPsss:${result["success"]}");
+      return MyPlanModel?.fromJson(result["response"]);
+    } else {
+      try {
+        var resultval = MyPlanModel.fromJson(result["response"]);
+        // Toast.show(resultval.message.toString(), context);
+        print(result["response"]);
+        return resultval;
+      } catch (e) {
+        print(result["response"]);
+        // Toast.show(result["response"], context);
+      }
+    }
+    return MyPlanModel();
+  }
+
+  //ACTIVE PLANS
+  Future<ActivePlanModel> ActiveplanApi() async {
+    final result = await requestGET(url: ConstantApi.activeplanUrl, dio: _dio);
+    if (result["success"] == true) {
+      print("resultOTP:$result");
+      print("resultOTPsss:${result["success"]}");
+      return ActivePlanModel?.fromJson(result["response"]);
+    } else {
+      try {
+        var resultval = ActivePlanModel.fromJson(result["response"]);
+        // Toast.show(resultval.message.toString(), context);
+        print(result["response"]);
+        return resultval;
+      } catch (e) {
+        print(result["response"]);
+        // Toast.show(result["response"], context);
+      }
+    }
+    return ActivePlanModel();
   }
 
 }

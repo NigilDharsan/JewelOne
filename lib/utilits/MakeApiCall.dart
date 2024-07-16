@@ -152,7 +152,7 @@ Future<dynamic> requestPOST(
 }
 
 Future<dynamic> requestPOST2(
-    {required String url, required Object formData}) async {
+    {required String url, required Object formData, required Dio dio}) async {
   try {
     String? accessToken = await getToken();
     Dio dio = Dio();

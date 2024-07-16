@@ -727,5 +727,48 @@ Widget dropDownFieldprofileedit(
   );
 }
 
+Widget homedropDownFieldprofileedit(
+    context, {
+      required dynamic width,
+      required String? value,
+      required List<String>? listValue,
+      required void Function(String?)? onChanged,
+      required String hintT,
+    }) {
+  return Padding(
+    padding: const EdgeInsets.only(bottom: 10),
+    child: Container(
+      height: 30,
+      width: width,
+      decoration:
+      BoxDecoration(
+        borderRadius: BorderRadius.circular(5),
+        color: backGroundColor,
+      ),
+      child: DropdownButtonFormField<String>(
+        value: value,
+        isExpanded: true,
+        decoration: InputDecoration(
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+          hintStyle: dropDownST,
+          hintText: hintT,
+        ),
+        icon: Padding(
+          padding: const EdgeInsets.only(top: 2),
+          child: ImgPathSvg('homedownarrow.svg'),
+        ),
+        items: listValue?.map((String option) {
+          return DropdownMenuItem<String>(
+            value: option,
+            child: Text(option,style: dropDownST,),
+          );
+        }).toList(),
+        onChanged: onChanged,
+      ),
+    ),
+  );
+}
+
 
 
