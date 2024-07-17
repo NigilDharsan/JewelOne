@@ -47,6 +47,7 @@ dependencies:
   smooth_page_indicator:
   easy_radio: ^0.0.3
   country_list_pick:
+  scroll_loop_auto_scroll: ^0.0.5
 
 dev_dependencies:
   flutter_test:

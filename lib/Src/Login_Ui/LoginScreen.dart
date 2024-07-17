@@ -202,7 +202,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             // Handle the result
             if (result?.redirect == true) {
               await accessToken(result?.token);
-              await UserId2(result?.customer);
+               Customer_Id(result?.customer?.idCustomer ?? "");
+              print("LOGIN CUSTOMER ID ::${result?.customer?.idCustomer ?? ""}");
               // ShowToastMessage(result?.message ?? "");
               Navigator.push(
                   context,

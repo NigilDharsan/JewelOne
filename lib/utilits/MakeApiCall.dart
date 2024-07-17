@@ -78,7 +78,7 @@ Future<dynamic> requestPOST(
     dio.options.headers = {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer $accessToken'
+      'Authorization': 'Token $accessToken'
     };
     dio.options.baseUrl = url;
 
@@ -160,10 +160,12 @@ Future<dynamic> requestPOST2(
     dio.options.headers = {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer $accessToken'
+      'Authorization': 'Token $accessToken'
     };
     dio.options.baseUrl = url;
     print(url);
+    print(accessToken);
+    print(formData);
 
     final response = await dio.post(url, data: formData);
     print(response);
@@ -191,6 +193,7 @@ Future<dynamic> requestPOST2(
     };
     return jsonResponse;
   } on HttpException {
+
     final jsonResponse = {
       'success': false,
       'response': ConstantApi.SOMETHING_WRONG //Server not responding

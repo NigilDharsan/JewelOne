@@ -179,7 +179,7 @@ class ApiService {
   //MY PLANS
   Future<MyPlanModel> MyplanApi() async {
     var formData = <String, dynamic>{
-      "customer": await UserId2(UserId2),
+      "customer": '1',
     };
 
     final result = await requestPOST2(

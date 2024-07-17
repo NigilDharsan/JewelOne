@@ -3,8 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jewelone/Common_Widgets/Custom_App_Bar.dart';
 import 'package:jewelone/Src/Home_DashBoard_Ui/Home_DashBoard_Screen.dart';
 import 'package:jewelone/utilits/ApiProvider.dart';
-import 'package:readmore/readmore.dart';
-
 import '../../Common_Widgets/Image_Path.dart';
 import '../../utilits/Common_Colors.dart';
 import '../../utilits/Text_Style.dart';
@@ -105,7 +103,7 @@ class _My_SSP_ScreenState extends ConsumerState<My_SSP_Screen> {
                                       Divider(),
                                       Row_List(text1: 'ID number', text2: "njkcnjknc"),
                                       Divider(),
-                                      Row_List(text1: 'A/c name', text2: data?.data?[index].schemeName ?? ""),
+                                      Row_List(text1: 'A/c name', text2: data?.data?[index].accountName ?? ""),
                                       Divider(),
                                       Row_List(text1: 'Location', text2: 'Coimbatore'),
                                       Divider(),
@@ -120,7 +118,6 @@ class _My_SSP_ScreenState extends ConsumerState<My_SSP_Screen> {
                                   ),
                                 )
                               ],
-
                             ),
                           ),
                         ),

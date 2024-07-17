@@ -6,10 +6,10 @@ import 'Common_Colors.dart';
 
 final FlutterSecureStorage _secureStorage = FlutterSecureStorage();
 String? accesstokens = 'accessToken';
-String? userId = 'user_id';
+
 String? userRole = 'user_role';
 String? usercheckIN = 'user_checkin';
-
+String custom_Id = 'id_customer';
 String Storage = 'storage';
 String? routes = "routes_Log";
 
@@ -35,19 +35,18 @@ Future<dynamic> getToken() async {
   return gettoken!;
 }
 
-UserId2(dynamic val) async {
+Customer_Id(dynamic val) async {
   await _secureStorage.write(
-      key: userId!, value: val!, aOptions: _androidOptions());
-  print("value!:${val!}" + "$userId");
+      key: custom_Id!, value: val, aOptions: _androidOptions());
+  print("Customer ID VAL :$val" + "$custom_Id");
+}
+Future<dynamic> getCustomer_Id() async {
+  final String? customerId = await _secureStorage.read(
+      key: custom_Id!, aOptions: _androidOptions());
+  print("valu:$customerId");
+  return customerId!;
 }
 
-
-Future<dynamic> getuserId() async {
-  dynamic user_id =
-      await _secureStorage.read(key: userId!, aOptions: _androidOptions());
-  print("valuesss:$user_id");
-  return user_id;
-}
 
 UserRole(dynamic val) async {
   await _secureStorage.write(
