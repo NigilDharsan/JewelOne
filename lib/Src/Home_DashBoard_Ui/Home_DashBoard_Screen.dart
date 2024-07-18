@@ -7,6 +7,7 @@ import 'package:jewelone/Common_Widgets/Common_Card.dart';
 import 'package:jewelone/Common_Widgets/Image_Path.dart';
 import 'package:jewelone/Common_Widgets/Text_Form_Field.dart';
 import 'package:jewelone/Model/GoldRateMmodel.dart';
+import 'package:jewelone/Model/LoginModel.dart';
 import 'package:jewelone/Src/Emi_Payment_Ui/Emi_Plan1_Screen.dart';
 import 'package:jewelone/Src/Menu_Ui/Menu_Screen.dart';
 import 'package:jewelone/Src/My_SSP_Ui/My_SSP_Screen.dart';
@@ -20,7 +21,9 @@ import 'package:scroll_loop_auto_scroll/scroll_loop_auto_scroll.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class Home_DashBoard_Screen extends ConsumerStatefulWidget {
-  const Home_DashBoard_Screen({super.key});
+
+  Customer? customer;
+   Home_DashBoard_Screen({super.key,this.customer});
 
   @override
   ConsumerState<Home_DashBoard_Screen> createState() => _Home_DashBoard_ScreenState();
@@ -49,7 +52,9 @@ class _Home_DashBoard_ScreenState extends ConsumerState<Home_DashBoard_Screen> {
         backgroundColor: white2,
         leading: InkWell(
           onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>Menu_Screen()));
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>Menu_Screen(
+
+            )));
           },
             child: Icon(Icons.menu_outlined)),
         centerTitle: true,
@@ -59,7 +64,8 @@ class _Home_DashBoard_ScreenState extends ConsumerState<Home_DashBoard_Screen> {
             padding: const EdgeInsets.only(right: 20, left: 15),
             child: InkWell(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Notification_Screen()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Notification_Screen(
+                  )));
                 },
                 child: ImgPathSvg("notification.svg")),
           ),
@@ -103,6 +109,7 @@ class _Home_DashBoard_ScreenState extends ConsumerState<Home_DashBoard_Screen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
+
                           //ONLINE PAYMENT
                           InkWell(
                             onTap: (){

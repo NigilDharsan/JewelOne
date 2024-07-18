@@ -36,8 +36,7 @@ class _New_SSP_ScreenState extends ConsumerState<New_SSP_Screen> {
   }
 
   Widget _Mainbody (){
-    final activeplandata = ref.watch(ActiveplanProvider);
-    return activeplandata.when(data: (data){
+    final myschemedata = ref.watch(ActiveplanProvider);
       return SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(left: 20,right: 20,top: 20,bottom: 20),
@@ -77,78 +76,67 @@ class _New_SSP_ScreenState extends ConsumerState<New_SSP_Screen> {
                   ),
                 ),
               ),
+              myschemedata.when(data: (data){
+                return ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: data?.data?.length ?? 0,
+                    itemBuilder: (context, index) {
+                      return JoinnowContainer(context,plan: 'Plan 1', plandes: data?.data?[index].schemeName ?? "", onPress: () {
+                        //Navigator.push(context, MaterialPageRoute(builder: (context)=>New_SSP_Plan1_Screen()));
+                      });
+                    });
+              }, error: (Object error, StackTrace stackTrace){
+                return Text('ERROR$error');
+              }, loading: (){
+                return CircularProgressIndicator();
+              })
 
-              ListView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.vertical,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: 4,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      width: MediaQuery.sizeOf(context).width,
-                      decoration: BoxDecoration(
-                          color: white1,
-                          borderRadius: BorderRadius.circular(5)
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 15, bottom: 10,right: 10,left: 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            ImgPathSvg('Rupees.svg'),
-                            const SizedBox(width: 10,),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Plan 1",style: plan1,),
-                                Container(
-                                    width: MediaQuery.sizeOf(context).width/2.5,
-                                    child: Text('Gold Ornaments Purchase Advance Scheme',style: lighttext,maxLines: 2,)),
-                              ],
-                            ),
-                            const Spacer(),
-                            Paynowcommonbutton1 (context,
-                                onPress: () {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>New_SSP_Plan1_Screen()));
-                                }, titleName: 'Join Now')
-                          ],
-                        ),
-                      ),
-                    );
-                  }),
-              //JOIN NOW CONTAINER
+
+                    //JOIN NOW CONTAINERS
+                    // Column(
+                    //   children: [
+                    //     JoinnowContainer(context,plan: 'Plan 1', plandes: 'Gold Ornaments Purchase Advance Scheme', onPress: () {
+                    //       Navigator.push(context, MaterialPageRoute(builder: (context)=>New_SSP_Plan1_Screen()));
+                    //     }),
+                    //     JoinnowContainer(context,plan: 'Plan 2', plandes: 'One-Time Lump-Sum Advance Plan', onPress: () {
+                    //       Navigator.push(context, MaterialPageRoute(builder: (context)=>New_SSP_Plan2_Screen()));
+                    //     }),
+                    //     JoinnowContainer(context,plan: 'Plan 3', plandes: 'Old Gold Advance Plan', onPress: () {
+                    //       Navigator.push(context, MaterialPageRoute(builder: (context)=>New_SSP_Plan3_Screen()));
+                    //     }),
+                    //     JoinnowContainer(context,plan: 'Plan 4', plandes: 'Wedding Jewellery Plan', onPress: () {
+                    //       Navigator.push(context, MaterialPageRoute(builder: (context)=>New_SSP_Plan4_Screen()));
+                    //     }),
+                    //   ]
+                    // )
 
 
               //REGISTER NOW CONTAINERS
-              InkWell(
-                  onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>New_SSP_Plan2_Screen()));
-                  },
-                  child: plancontainer(context, texts: 'Plan 2', planname: 'One-Time Lump-Sum Advance Plan')),
-
-
-              InkWell(
-                  onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>New_SSP_Plan3_Screen()));
-                  },
-                  child: plancontainer(context, texts: 'Plan 3', planname: 'Old Gold Advance Plan')),
-
-
-              InkWell(
-                  onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>New_SSP_Plan4_Screen()));
-                  },
-                  child: plancontainer(context, texts: 'Plan 4', planname: 'Wedding Jewellery Plan')),
+              // InkWell(
+              //     onTap: (){
+              //       Navigator.push(context, MaterialPageRoute(builder: (context)=>New_SSP_Plan2_Screen()));
+              //     },
+              //     child: plancontainer(context, texts: 'Plan 2', planname: 'One-Time Lump-Sum Advance Plan')),
+              //
+              //
+              // InkWell(
+              //     onTap: (){
+              //       Navigator.push(context, MaterialPageRoute(builder: (context)=>New_SSP_Plan3_Screen()));
+              //     },
+              //     child: plancontainer(context, texts: 'Plan 3', planname: 'Old Gold Advance Plan')),
+              //
+              //
+              // InkWell(
+              //     onTap: (){
+              //       Navigator.push(context, MaterialPageRoute(builder: (context)=>New_SSP_Plan4_Screen()));
+              //     },
+              //     child: plancontainer(context, texts: 'Plan 4', planname: 'Wedding Jewellery Plan')),
             ],
           ),
         ),
       );
-    }, error: (Object error, StackTrace stackTrace){
-      return Text('ERROR$error');
-    }, loading: (){
-      return CircularProgressIndicator();
-    });
   }
 }
 
@@ -167,10 +155,11 @@ Widget _carouselImg(context){
   );
 }
 
-//REGISTER NOW CONTAINER
-Widget plancontainer (context,{required String texts,required String planname}){
+
+
+Widget JoinnowContainer (context,{required String plan,required String plandes,required void Function()? onPress}){
   return Padding(
-    padding: const EdgeInsets.only(top: 10,),
+    padding: const EdgeInsets.only(bottom: 10),
     child: Container(
       width: MediaQuery.sizeOf(context).width,
       decoration: BoxDecoration(
@@ -178,31 +167,68 @@ Widget plancontainer (context,{required String texts,required String planname}){
           borderRadius: BorderRadius.circular(5)
       ),
       child: Padding(
-        padding: const EdgeInsets.only(top: 15, bottom: 10,left: 10,right: 10),
+        padding: const EdgeInsets.only(top: 15, bottom: 10,right: 10,left: 10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(right: 10),
-              child: ImgPathSvg('Rupees.svg'),
-            ),
-            //const SizedBox(width: 10,),
+            ImgPathSvg('Rupees.svg'),
+            const SizedBox(width: 10,),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(texts,style: plan1,),
+                Text(plan,style: plan1,),
                 Container(
-                    width: MediaQuery.sizeOf(context).width/2.8,
-                    child: Text(planname,style: lighttext,maxLines: 2,)),
+                    width: MediaQuery.sizeOf(context).width/2.5,
+                    child: Text(plandes,style: lighttext,maxLines: 2,)),
               ],
             ),
             const Spacer(),
-            Text('Register Now ',style: colortexts,),
-            Icon(Icons.arrow_forward_ios,color: arrow,size: 20,),
+
+            Paynowcommonbutton1 (
+                context, onPress:onPress,titleName: 'Join Now')
           ],
         ),
       ),
     ),
   );
 }
+//REGISTER NOW CONTAINER
+// Widget plancontainer (context,{required String texts,required String planname}){
+//   return Padding(
+//     padding: const EdgeInsets.only(top: 10,),
+//     child: Container(
+//       width: MediaQuery.sizeOf(context).width,
+//       decoration: BoxDecoration(
+//           color: white1,
+//           borderRadius: BorderRadius.circular(5)
+//       ),
+//       child: Padding(
+//         padding: const EdgeInsets.only(top: 15, bottom: 10,left: 10,right: 10),
+//         child: Row(
+//           mainAxisAlignment: MainAxisAlignment.start,
+//           crossAxisAlignment: CrossAxisAlignment.center,
+//           children: [
+//             Padding(
+//               padding: const EdgeInsets.only(right: 10),
+//               child: ImgPathSvg('Rupees.svg'),
+//             ),
+//             //const SizedBox(width: 10,),
+//             Column(
+//               crossAxisAlignment: CrossAxisAlignment.start,
+//               children: [
+//                 Text(texts,style: plan1,),
+//                 Container(
+//                     width: MediaQuery.sizeOf(context).width/2.8,
+//                     child: Text(planname,style: lighttext,maxLines: 2,)),
+//               ],
+//             ),
+//             const Spacer(),
+//             Text('Register Now ',style: colortexts,),
+//             Icon(Icons.arrow_forward_ios,color: arrow,size: 20,),
+//           ],
+//         ),
+//       ),
+//     ),
+//   );
+// }

@@ -203,12 +203,16 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             if (result?.redirect == true) {
               await accessToken(result?.token);
                Customer_Id(result?.customer?.idCustomer ?? "");
+              Customer_phone(result?.customer?.mobile ?? "");
+              Customer_name(result?.customer?.firstname ?? "");
               print("LOGIN CUSTOMER ID ::${result?.customer?.idCustomer ?? ""}");
+              print("CUSTOMER PHONE ::${result?.customer?.mobile ?? ""}");
               // ShowToastMessage(result?.message ?? "");
               Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) => Home_DashBoard_Screen(
+                          customer:result?.customer,
                       )));
             } else {
               // Handle failure

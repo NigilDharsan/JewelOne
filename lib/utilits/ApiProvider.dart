@@ -55,7 +55,7 @@ final ActivelocationProvider = FutureProvider<ActiveLocationModel?>((ref) async 
 });
 
 //MY PLAN
-final MyplanProvider = FutureProvider<MyPlanModel?>((ref) async {
+final MyplanProvider = FutureProvider.autoDispose<MyPlanModel?>((ref) async {
   return ref.watch(apiServiceProvider).MyplanApi();
 });
 

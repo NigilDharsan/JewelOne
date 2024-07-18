@@ -12,6 +12,8 @@ String? usercheckIN = 'user_checkin';
 String custom_Id = 'id_customer';
 String Storage = 'storage';
 String? routes = "routes_Log";
+String phone_no = 'mobile';
+String name = 'firstname';
 
 AndroidOptions _androidOptions() => AndroidOptions();
 IOSOptions _getIOSOptions() => IOSOptions(
@@ -45,6 +47,31 @@ Future<dynamic> getCustomer_Id() async {
       key: custom_Id!, aOptions: _androidOptions());
   print("valu:$customerId");
   return customerId!;
+}
+
+Customer_phone(dynamic val) async {
+  await _secureStorage.write(
+      key: phone_no!, value: val, aOptions: _androidOptions());
+  print("Customer Phone :$val" + "$phone_no");
+}
+Future<dynamic> getCustomer_phone() async {
+  final String? customerphone = await _secureStorage.read(
+      key: phone_no!, aOptions: _androidOptions());
+  print("valu:$customerphone");
+  return customerphone!;
+}
+
+
+Customer_name(dynamic val) async {
+  await _secureStorage.write(
+      key: name!, value: val, aOptions: _androidOptions());
+  print("Customer Phone :$val" + "$name");
+}
+Future<dynamic> getCustomer_name() async {
+  final String? customerName = await _secureStorage.read(
+      key: name!, aOptions: _androidOptions());
+  print("valu:$customerName");
+  return customerName!;
 }
 
 

@@ -68,141 +68,142 @@ class _New_SSP_Plan2_ScreenState extends State<New_SSP_Plan2_Screen> {
 
                   const Spacer(),
 
-                  //BOTTOM BAR CONTENTS
+                 // BOTTOM BAR CONTENTS
                   Column(
                     children: [
                       Paynowcommonbutton1 (context,
                           onPress: () {
-
+                            //Navigator.push(context, MaterialPageRoute(builder: (context)=>Grammage_Plan_Screen()));
                         //BOTTOM SHEET
-                            showModalBottomSheet(context: (context), builder: (context)=>
-                                Container(
-                                  height:MediaQuery.sizeOf(context).height/1,
-                                  width: MediaQuery.sizeOf(context).width,
-                                  decoration: BoxDecoration(
-                                    color: white1,
-                                    borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(10),
-                                      topLeft: Radius.circular(10)
-                                    )
-                                  ),
-                                  child: SingleChildScrollView(
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                          width: MediaQuery.sizeOf(context).width,
-                                          decoration: BoxDecoration(
-                                            color: pink6,
-                                          borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(10),
-                                          topLeft: Radius.circular(10)
-                                          )
-                                          ),
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(top: 10,bottom: 10),
-                                            child: Column(
-                                              children: [
-                                                Text('Plan 2',style: sspplan,),
-                                                Container(
-                                                  width: MediaQuery.sizeOf(context).width/1.2,
-                                                    child: Text('One -Time Lump-Sum Advance Plan (Tenure: 330 Days)',style: texts2,maxLines: 2,textAlign: TextAlign.center,))
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(left: 30,right: 30,bottom: 30),
-                                          child: Column(
-                                            children: [
-                                              //INTRESTED AMOUNT
-                                              Title_Style(Title: 'Interested Amount', isStatus: null),
-                                              droptextFormField(
-                                                hintText: 'example Rs.1,30,000',
-                                                keyboardtype: TextInputType.number,
-                                                inputFormatters: [
-                                                  LengthLimitingTextInputFormatter(10),
-                                                ],
-                                                Controller: _amount,
-                                                validating: (value) {
-                                                  if (value == null || value.isEmpty) {
-                                                    return "Please Enter Amount";
-                                                  }
-                                                  else if (value == null) {
-                                                    return "Please Enter valid Amout";
-                                                  }
-                                                  return null;
-                                                },
-                                                onChanged: null,
-                                              ),
-
-                                              //CONTACT DETAILS
-                                              Title_Style(Title: 'Contact Details', isStatus: null),
-                                              droptextFormField(hintText: 'Enter Mobile*',
-                                                  keyboardtype: TextInputType.phone,
-                                                  Controller: _MobileNumber,
-                                                  inputFormatters: [
-                                                    LengthLimitingTextInputFormatter(10),
-                                                    FilteringTextInputFormatter.digitsOnly],
-                                                  onChanged: null,
-                                                  validating:(value){
-                                                    if (value!.isEmpty) {
-                                                      return 'Please enter a mobile number';
-                                                    } else if (!RegExp(r'^[0-9]{10}$').hasMatch(value)) {
-                                                      return 'Please enter a valid 10-digit mobile number';
-                                                    }
-                                                    return null;
-                                                  }
-                                              ),
-
-
-                                              //EMAIL
-                                              Padding(
-                                                padding: const EdgeInsets.only(top: 10),
-                                                child: droptextFormField(hintText: 'Enter Email*',
-                                                    keyboardtype: TextInputType.phone,
-                                                    Controller: _email,
-                                                    inputFormatters: [
-                                                      FilteringTextInputFormatter.digitsOnly],
-                                                    onChanged: null,
-                                                  validating: (value){
-                                                    if(value==null||value.isEmpty){
-                                                      return "Enter Email";
-                                                    }else if(!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)){
-                                                      return "Please Enter valid Email ";
-                                                    }else{
-                                                      return null;
-                                                    }
-                                                  },
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(top: 10,bottom: 20),
-                                                child: textfieldDescription(
-                                                  hintText: 'Message*',
-                                                  Controller:_message,
-                                                ),
-                                              ),
-
-                                              const SizedBox(height: 30,),
-
-                                              bottombutton(context,
-                                                  onPress: () {
-                                                    Navigator.pop(context);
-                                                  }, titleName: 'Submit'),
-                                            ],
-                                          ),
-                                        )
-
-                                      ],
-                                    ),
-                                  ),
-                                )
-                            );
-                          }, titleName: 'Enquiry Now'),
-                      Text('Tenure up to 11 months',style: lighttext,)
+                        //     showModalBottomSheet(context: (context), builder: (context)=>
+                        //         Container(
+                        //           height:MediaQuery.sizeOf(context).height/1,
+                        //           width: MediaQuery.sizeOf(context).width,
+                        //           decoration: BoxDecoration(
+                        //             color: white1,
+                        //             borderRadius: BorderRadius.only(
+                        //               topRight: Radius.circular(10),
+                        //               topLeft: Radius.circular(10)
+                        //             )
+                        //           ),
+                        //           child: SingleChildScrollView(
+                        //             child: Column(
+                        //               crossAxisAlignment: CrossAxisAlignment.start,
+                        //               children: [
+                        //                 Container(
+                        //                   width: MediaQuery.sizeOf(context).width,
+                        //                   decoration: BoxDecoration(
+                        //                     color: pink6,
+                        //                   borderRadius: BorderRadius.only(
+                        //                   topRight: Radius.circular(10),
+                        //                   topLeft: Radius.circular(10)
+                        //                   )
+                        //                   ),
+                        //                   child: Padding(
+                        //                     padding: const EdgeInsets.only(top: 10,bottom: 10),
+                        //                     child: Column(
+                        //                       children: [
+                        //                         Text('Plan 2',style: sspplan,),
+                        //                         Container(
+                        //                           width: MediaQuery.sizeOf(context).width/1.2,
+                        //                             child: Text('One -Time Lump-Sum Advance Plan (Tenure: 330 Days)',style: texts2,maxLines: 2,textAlign: TextAlign.center,))
+                        //                       ],
+                        //                     ),
+                        //                   ),
+                        //                 ),
+                        //                 Padding(
+                        //                   padding: const EdgeInsets.only(left: 30,right: 30,bottom: 30),
+                        //                   child: Column(
+                        //                     children: [
+                        //                       //INTRESTED AMOUNT
+                        //                       Title_Style(Title: 'Interested Amount', isStatus: null),
+                        //                       droptextFormField(
+                        //                         hintText: 'example Rs.1,30,000',
+                        //                         keyboardtype: TextInputType.number,
+                        //                         inputFormatters: [
+                        //                           LengthLimitingTextInputFormatter(10),
+                        //                         ],
+                        //                         Controller: _amount,
+                        //                         validating: (value) {
+                        //                           if (value == null || value.isEmpty) {
+                        //                             return "Please Enter Amount";
+                        //                           }
+                        //                           else if (value == null) {
+                        //                             return "Please Enter valid Amout";
+                        //                           }
+                        //                           return null;
+                        //                         },
+                        //                         onChanged: null,
+                        //                       ),
+                        //
+                        //                       //CONTACT DETAILS
+                        //                       Title_Style(Title: 'Contact Details', isStatus: null),
+                        //                       droptextFormField(hintText: 'Enter Mobile*',
+                        //                           keyboardtype: TextInputType.phone,
+                        //                           Controller: _MobileNumber,
+                        //                           inputFormatters: [
+                        //                             LengthLimitingTextInputFormatter(10),
+                        //                             FilteringTextInputFormatter.digitsOnly],
+                        //                           onChanged: null,
+                        //                           validating:(value){
+                        //                             if (value!.isEmpty) {
+                        //                               return 'Please enter a mobile number';
+                        //                             } else if (!RegExp(r'^[0-9]{10}$').hasMatch(value)) {
+                        //                               return 'Please enter a valid 10-digit mobile number';
+                        //                             }
+                        //                             return null;
+                        //                           }
+                        //                       ),
+                        //
+                        //
+                        //                       //EMAIL
+                        //                       Padding(
+                        //                         padding: const EdgeInsets.only(top: 10),
+                        //                         child: droptextFormField(hintText: 'Enter Email*',
+                        //                             keyboardtype: TextInputType.phone,
+                        //                             Controller: _email,
+                        //                             inputFormatters: [
+                        //                               FilteringTextInputFormatter.digitsOnly],
+                        //                             onChanged: null,
+                        //                           validating: (value){
+                        //                             if(value==null||value.isEmpty){
+                        //                               return "Enter Email";
+                        //                             }else if(!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)){
+                        //                               return "Please Enter valid Email ";
+                        //                             }else{
+                        //                               return null;
+                        //                             }
+                        //                           },
+                        //                         ),
+                        //                       ),
+                        //                       Padding(
+                        //                         padding: const EdgeInsets.only(top: 10,bottom: 20),
+                        //                         child: textfieldDescription(
+                        //                           hintText: 'Message*',
+                        //                           Controller:_message,
+                        //                         ),
+                        //                       ),
+                        //
+                        //                       const SizedBox(height: 30,),
+                        //
+                        //                       bottombutton(context,
+                        //                           onPress: () {
+                        //                             Navigator.pop(context);
+                        //                           }, titleName: 'Submit'),
+                        //                     ],
+                        //                   ),
+                        //                 )
+                        //
+                        //               ],
+                        //             ),
+                        //           ),
+                        //         )
+                        //     );
+                          },
+                          titleName: 'Join Now'),
+                      Text('Tenure up to 330 days',style: lighttext,)
                     ],
-                  )
+                  ),
                 ],
               ),
             ),

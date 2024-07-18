@@ -44,8 +44,10 @@ class Data {
   int? limitType;
   int? paymentChanceType;
   int? paymentChanceValue;
-  String? discountType;
-  String? discountValue;
+  int? discountType;
+  int? discountValue;
+  int? denomType;
+  int? denomValue;
   MinimumPayable? minimumPayable;
   MaximumPayable? maximumPayable;
   bool? allowPay;
@@ -73,6 +75,8 @@ class Data {
         this.paymentChanceValue,
         this.discountType,
         this.discountValue,
+        this.denomType,
+        this.denomValue,
         this.minimumPayable,
         this.maximumPayable,
         this.allowPay,
@@ -100,6 +104,8 @@ class Data {
     paymentChanceValue = json['payment_chance_value'];
     discountType = json['discount_type'];
     discountValue = json['discount_value'];
+    denomType = json['denom_type'];
+    denomValue = json['denom_value'];
     minimumPayable = json['minimum_payable'] != null
         ? new MinimumPayable.fromJson(json['minimum_payable'])
         : null;
@@ -133,6 +139,8 @@ class Data {
     data['payment_chance_value'] = this.paymentChanceValue;
     data['discount_type'] = this.discountType;
     data['discount_value'] = this.discountValue;
+    data['denom_type'] = this.denomType;
+    data['denom_value'] = this.denomValue;
     if (this.minimumPayable != null) {
       data['minimum_payable'] = this.minimumPayable!.toJson();
     }
@@ -146,7 +154,7 @@ class Data {
 }
 
 class MinimumPayable {
-  String? minAmount;
+  int? minAmount;
   int? minWeight;
 
   MinimumPayable({this.minAmount, this.minWeight});
@@ -166,7 +174,7 @@ class MinimumPayable {
 
 class MaximumPayable {
   int? maxWeight;
-  String? maxAmount;
+  int? maxAmount;
 
   MaximumPayable({this.maxWeight, this.maxAmount});
 

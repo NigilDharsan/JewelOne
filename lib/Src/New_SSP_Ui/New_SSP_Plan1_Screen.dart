@@ -67,7 +67,7 @@ class _New_SSP_Plan1_ScreenState extends State<New_SSP_Plan1_Screen> {
                     children: [
                       Paynowcommonbutton1 (context,
                           onPress: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>Grammage_Plan_Screen()));
+                            //Navigator.push(context, MaterialPageRoute(builder: (context)=>Grammage_Plan_Screen()));
                           }, titleName: 'Join Now'),
                       Text('Tenure up to 11 months',style: lighttext,)
                     ],

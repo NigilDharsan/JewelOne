@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jewelone/Common_Widgets/Common_Button.dart';
 import 'package:jewelone/Common_Widgets/Image_Path.dart';
 import 'package:jewelone/Src/FAQ_Ui/FAQ_Screen.dart';
@@ -9,14 +10,14 @@ import 'package:jewelone/Src/Profile_Details_Ui/Profile_Details_Screen.dart';
 import 'package:jewelone/Src/Security_Setting_Ui/Password_Screen.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
-class Settings_Screen extends StatefulWidget {
-  const Settings_Screen({super.key});
+class Settings_Screen extends ConsumerStatefulWidget {
+  Settings_Screen({super.key,});
 
   @override
-  State<Settings_Screen> createState() => _Settings_ScreenState();
+  ConsumerState<Settings_Screen> createState() => _Settings_ScreenState();
 }
 
-class _Settings_ScreenState extends State<Settings_Screen> {
+class _Settings_ScreenState extends ConsumerState<Settings_Screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -111,13 +112,13 @@ class _Settings_ScreenState extends State<Settings_Screen> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 20,right: 20,top: 10,bottom: 30),
+                      padding: const EdgeInsets.only(left: 20,right: 20,top: 10,bottom: 20),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
                             children: [
-                              Text('Vinoth Kumar',style: TBlack2,),
+                              Text('nkjscn',style: TBlack2,),
                               const Spacer(),
                               InkWell(
                                 onTap: (){
@@ -128,7 +129,7 @@ class _Settings_ScreenState extends State<Settings_Screen> {
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top: 5),
-                            child: Text('+91 994413xxxx',style: rate2,),
+                            child: Text('68687686876',style: rate2,),
                           )
                         ],
                       ),

@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jewelone/Common_Widgets/Custom_App_Bar.dart';
 import 'package:jewelone/Src/Home_DashBoard_Ui/Home_DashBoard_Screen.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
-
 import '../../Common_Widgets/Image_Path.dart';
 import '../../utilits/Text_Style.dart';
 
-class Faq_Screen extends StatefulWidget {
-  const Faq_Screen({super.key});
+class Faq_Screen extends ConsumerStatefulWidget {
+   Faq_Screen({super.key});
 
   @override
-  State<Faq_Screen> createState() => _Faq_ScreenState();
+  ConsumerState<Faq_Screen> createState() => _Faq_ScreenState();
 }
 
-class _Faq_ScreenState extends State<Faq_Screen> {
+class _Faq_ScreenState extends ConsumerState<Faq_Screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

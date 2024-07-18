@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jewelone/Common_Widgets/Custom_App_Bar.dart';
+import 'package:jewelone/Model/LoginModel.dart';
 import 'package:jewelone/Src/Home_DashBoard_Ui/Home_DashBoard_Screen.dart';
 import 'package:jewelone/utilits/ApiProvider.dart';
 import '../../Common_Widgets/Image_Path.dart';
 import '../../utilits/Common_Colors.dart';
 import '../../utilits/Text_Style.dart';
 class My_SSP_Screen extends ConsumerStatefulWidget {
-  const My_SSP_Screen({super.key});
+  My_SSP_Screen({super.key});
 
   @override
   ConsumerState<My_SSP_Screen> createState() => _My_SSP_ScreenState();
@@ -24,7 +25,8 @@ class _My_SSP_ScreenState extends ConsumerState<My_SSP_Screen> {
       appBar: Custom_AppBar(isNav: true, isTwoLine: false, title1: 'My Purchase Plan', title2: '',
         actionLogo: 'homescreen.svg', isWhite: false,
         ActiononTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>Home_DashBoard_Screen()));
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>Home_DashBoard_Screen(
+          )));
         },
       ),
       body: _Mainbody(),
@@ -42,7 +44,7 @@ class _My_SSP_ScreenState extends ConsumerState<My_SSP_Screen> {
                 children: [
                   ImgPathSvg('calendar2.svg'),
                   const SizedBox(width: 10),
-                  Text('2 Plan Active',style: rate2,),
+                  Text("${data?.data?.length ?? 0} Plan Active",style: rate2,),
                 ],
               ),
                  ListView.builder(
@@ -76,12 +78,12 @@ class _My_SSP_ScreenState extends ConsumerState<My_SSP_Screen> {
                                   children: [
                                     Row(
                                       children: [
-                                        Text('Plan 1',style: Plan_Style,),
+                                        Text('Plan ${data?.data?[index].idSchemeAccount ?? ""}',style: Plan_Style,),
                                         const Spacer(),
                                         _Custom_icon == true ? ImgPathSvg('downarrow.svg') : ImgPathSvg('rightarrow.svg'),
                                       ],
                                     ),
-                                    Text('Gold Ornaments Purchase Advance Scheme',style: phoneHT,),
+                                    Text(data?.data?[index].schemeName ?? "",style: phoneHT,),
                                     Row(
                                       children: [
                                         Padding(
@@ -101,19 +103,19 @@ class _My_SSP_ScreenState extends ConsumerState<My_SSP_Screen> {
                                   child: Column(
                                     children: [
                                       Divider(),
-                                      Row_List(text1: 'ID number', text2: "njkcnjknc"),
+                                      Row_List(text1: 'ID number', text2: "${data?.data?[index].schemeAccNumber}"),
                                       Divider(),
-                                      Row_List(text1: 'A/c name', text2: data?.data?[index].accountName ?? ""),
+                                      Row_List(text1: 'A/c name', text2: data?.data?[index].customerName ?? ""),
                                       Divider(),
-                                      Row_List(text1: 'Location', text2: 'Coimbatore'),
+                                      Row_List(text1: 'Location', text2: data?.data?[index].branchName ?? ""),
                                       Divider(),
-                                      Row_List(text1: 'Total plan amount', text2: '₹55,000'),
+                                      Row_List(text1: 'Total plan amount', text2: '₹${data?.data?[index].maximumPayable?.maxAmount}'),
                                       Divider(),
-                                      Row_List(text1: 'Monthly EMA', text2: '₹5,000'),
+                                      Row_List(text1: 'Monthly EMA', text2: '₹${data?.data?[index].minimumPayable?.minAmount}'),
                                       Divider(),
-                                      Row_List(text1: 'Tenure', text2: 'up to 11 months'),
+                                      Row_List(text1: 'Tenure', text2: 'up to ${data?.data?[index].totalInstallments ?? ""} months'),
                                       Divider(),
-                                      Row_List(text1: 'Gold saved till date', text2: '9.863 g'),
+                                      Row_List(text1: 'Gold saved till date', text2: '${data?.data?[index].paidWeight ?? ""} g'),
                                     ],
                                   ),
                                 )
@@ -133,7 +135,7 @@ class _My_SSP_ScreenState extends ConsumerState<My_SSP_Screen> {
     }, error: (Object error, StackTrace stackTrace){
       return Text("ERROR $error");
     }, loading: (){
-      return CircularProgressIndicator();
+      return Center(child: CircularProgressIndicator());
     }) ;
   }
 }

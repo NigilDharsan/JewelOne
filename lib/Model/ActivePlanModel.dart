@@ -42,7 +42,7 @@ class Data {
   int? totalInstalment;
   String? schemeVis;
   String? paymentRestrict;
-  int? payableType;
+  String? payableType;
   String? createdOn;
   Null? updatedOn;
   int? schIdMetal;

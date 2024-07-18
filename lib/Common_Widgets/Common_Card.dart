@@ -31,7 +31,7 @@ Widget Plan_Card(context,{required String Img,required String planT}){
 
 
 //WALLET CARD
-Widget Wallet_Card(context){
+Widget Wallet_Card(context,){
   return Container(
     width: MediaQuery.sizeOf(context).width,
     decoration: BoxDecoration(
@@ -50,7 +50,7 @@ Widget Wallet_Card(context){
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 20,),
-              Text("Hi Vinoth Kumar",style: UserST,),
+              Text("Hi Vinoth kumar",style: UserST,),
               Container(
                 width: 60,
                 margin: EdgeInsets.only(top: 15,bottom: 15),

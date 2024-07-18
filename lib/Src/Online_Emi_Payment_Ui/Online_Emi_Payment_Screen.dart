@@ -1,24 +1,26 @@
 import 'package:easy_radio/easy_radio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jewelone/Common_Widgets/Common_Button.dart';
 import 'package:jewelone/Common_Widgets/Common_Model_Bottom_Sheet.dart';
 import 'package:jewelone/Common_Widgets/Custom_App_Bar.dart';
 import 'package:jewelone/Common_Widgets/Image_Path.dart';
+import 'package:jewelone/Model/LoginModel.dart';
 import 'package:jewelone/Src/Advance_Payment_Ui/Advance_Payment_Screen.dart';
 import 'package:jewelone/Src/Home_DashBoard_Ui/Home_DashBoard_Screen.dart';
 import 'package:jewelone/Src/My_SSP_Ui/My_SSP_Screen.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
 
-class Online_Emi_Payment_Screen extends StatefulWidget {
-  const Online_Emi_Payment_Screen({super.key});
+class Online_Emi_Payment_Screen extends ConsumerStatefulWidget {
+  Online_Emi_Payment_Screen({super.key,});
 
   @override
-  State<Online_Emi_Payment_Screen> createState() =>
+  ConsumerState<Online_Emi_Payment_Screen> createState() =>
       _Online_Emi_Payment_ScreenState();
 }
 
-class _Online_Emi_Payment_ScreenState extends State<Online_Emi_Payment_Screen> {
+class _Online_Emi_Payment_ScreenState extends ConsumerState<Online_Emi_Payment_Screen> {
   int? _groupValue = 1;
   int _count = 1;
 
@@ -56,7 +58,8 @@ class _Online_Emi_Payment_ScreenState extends State<Online_Emi_Payment_Screen> {
         actionLogo: 'home.svg',
         isWhite: false,
         ActiononTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>Home_DashBoard_Screen()));
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>Home_DashBoard_Screen(
+          )));
         },
       ),
       body: SingleChildScrollView(
