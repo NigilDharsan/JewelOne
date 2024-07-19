@@ -34,7 +34,7 @@ class _New_SSP_Plan2_ScreenState extends State<New_SSP_Plan2_Screen> {
         Navigator.push(context, MaterialPageRoute(builder: (context)=>Faq_Screen()));
       },),
       bottomNavigationBar: Container(
-        height: 150,
+        height: 170,
         width: MediaQuery.sizeOf(context).width,
         color: white1,
         child: Padding(
@@ -56,11 +56,14 @@ class _New_SSP_Plan2_ScreenState extends State<New_SSP_Plan2_Screen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
-                          width: MediaQuery.sizeOf(context).width/3,
+                          width: MediaQuery.sizeOf(context).width/2.5,
                             child: Text('One - Time Lump-Sum Advance Plan',style: rate2,maxLines: 2,)),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 10),
-                          child: Text('EMA from ₹5,000 /month',style: lighttext,),
+                        Container(
+                          width: MediaQuery.sizeOf(context).width/2.8,
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 10),
+                            child: Text('EMA from ₹5,000 /month',style: lighttext,),
+                          ),
                         ),
                       ],
                     ),
@@ -201,7 +204,10 @@ class _New_SSP_Plan2_ScreenState extends State<New_SSP_Plan2_Screen> {
                         //     );
                           },
                           titleName: 'Join Now'),
-                      Text('Tenure up to 330 days',style: lighttext,)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 5,right: 10),
+                        child: Text('Tenure up to 330 days',style: lighttext,),
+                      )
                     ],
                   ),
                 ],

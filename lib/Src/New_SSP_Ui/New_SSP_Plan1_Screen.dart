@@ -51,7 +51,9 @@ class _New_SSP_Plan1_ScreenState extends State<New_SSP_Plan1_Screen> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text('Gramage Plan',style: rate2,),
-                      Text('EMA from ₹5,000 /month',style: lighttext,),
+                      Container(
+                          width: MediaQuery.sizeOf(context).width/2.8,
+                          child: Text('EMA from ₹5,000 /month',style: lighttext,)),
                       Text('Benefit (VA) 18%',style: rate2,)
                     ],
                   ),
@@ -61,7 +63,7 @@ class _New_SSP_Plan1_ScreenState extends State<New_SSP_Plan1_Screen> {
 
                 //BOTTOM BAR CONTENTS
                 Padding(
-                  padding: const EdgeInsets.only(right: 7),
+                  padding: const EdgeInsets.only(right: 5),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [

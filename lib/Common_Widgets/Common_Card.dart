@@ -6,6 +6,7 @@ import 'package:jewelone/utilits/Text_Style.dart';
 import 'Common_Button.dart';
 
 
+
 Widget Plan_Card(context,{required String Img,required String planT}){
   return Container(
     decoration: BoxDecoration(
@@ -31,7 +32,7 @@ Widget Plan_Card(context,{required String Img,required String planT}){
 
 
 //WALLET CARD
-Widget Wallet_Card(context,){
+Widget Wallet_Card(context,{required String customername}){
   return Container(
     width: MediaQuery.sizeOf(context).width,
     decoration: BoxDecoration(
@@ -50,7 +51,7 @@ Widget Wallet_Card(context,){
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 20,),
-              Text("Hi Vinoth kumar",style: UserST,),
+              Text(customername,style: UserST,),
               Container(
                 width: 60,
                 margin: EdgeInsets.only(top: 15,bottom: 15),

@@ -9,6 +9,7 @@ import 'package:jewelone/Src/Login_Ui/LoginScreen.dart';
 import 'package:jewelone/Src/Profile_Details_Ui/Profile_Details_Screen.dart';
 import 'package:jewelone/Src/Security_Setting_Ui/Password_Screen.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
+import 'package:jewelone/utilits/Generic.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
 class Settings_Screen extends ConsumerStatefulWidget {
   Settings_Screen({super.key,});
@@ -18,6 +19,23 @@ class Settings_Screen extends ConsumerStatefulWidget {
 }
 
 class _Settings_ScreenState extends ConsumerState<Settings_Screen> {
+  @override
+  String phoneVal = '';
+  String name = '';
+
+  Future<void> getDetails() async{
+    String phval = await getCustomer_phone();
+    String cusname = await getCustomer_name();
+    setState(() {
+      phoneVal = phval;
+      name = cusname;
+    });
+  }
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getDetails();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +67,6 @@ class _Settings_ScreenState extends ConsumerState<Settings_Screen> {
                         colors: [
                           gradient1,
                           gradient2,
-
                         ]
                     ),
                   ),
@@ -118,7 +135,7 @@ class _Settings_ScreenState extends ConsumerState<Settings_Screen> {
                         children: [
                           Row(
                             children: [
-                              Text('nkjscn',style: TBlack2,),
+                              Text(name,style: TBlack2,),
                               const Spacer(),
                               InkWell(
                                 onTap: (){
@@ -129,7 +146,7 @@ class _Settings_ScreenState extends ConsumerState<Settings_Screen> {
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top: 5),
-                            child: Text('68687686876',style: rate2,),
+                            child: Text(phoneVal,style: rate2,),
                           )
                         ],
                       ),

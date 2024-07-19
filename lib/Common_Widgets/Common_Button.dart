@@ -121,7 +121,7 @@ Widget Paynowcommonbutton1 (context,{ required void Function()? onPress,required
       padding: const EdgeInsets.only(top: 10),
       child: Container(
         height: 40,
-        width: MediaQuery.sizeOf(context).width/3.7,
+        width: MediaQuery.sizeOf(context).width/4.5,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(25),
           gradient: LinearGradient(

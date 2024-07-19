@@ -28,7 +28,6 @@ class Data {
   int? schemeType;
   String? schemeDescription;
   bool? kycReq;
-  String? whenKycRequired;
   bool? allowAdvance;
   int? numberOfAdvance;
   bool? allowPendingDue;
@@ -40,9 +39,6 @@ class Data {
   bool? unpaidAsDef;
   bool? allowDue;
   int? totalInstalment;
-  String? schemeVis;
-  String? paymentRestrict;
-  String? payableType;
   String? createdOn;
   Null? updatedOn;
   int? schIdMetal;
@@ -58,7 +54,6 @@ class Data {
         this.schemeType,
         this.schemeDescription,
         this.kycReq,
-        this.whenKycRequired,
         this.allowAdvance,
         this.numberOfAdvance,
         this.allowPendingDue,
@@ -70,9 +65,6 @@ class Data {
         this.unpaidAsDef,
         this.allowDue,
         this.totalInstalment,
-        this.schemeVis,
-        this.paymentRestrict,
-        this.payableType,
         this.createdOn,
         this.updatedOn,
         this.schIdMetal,
@@ -88,7 +80,6 @@ class Data {
     schemeType = json['scheme_type'];
     schemeDescription = json['scheme_description'];
     kycReq = json['kyc_req'];
-    whenKycRequired = json['when_kyc_required'];
     allowAdvance = json['allow_advance'];
     numberOfAdvance = json['number_of_advance'];
     allowPendingDue = json['allow_pending_due'];
@@ -100,9 +91,6 @@ class Data {
     unpaidAsDef = json['unpaid_as_def'];
     allowDue = json['allow_due'];
     totalInstalment = json['total_instalment'];
-    schemeVis = json['scheme_vis'];
-    paymentRestrict = json['payment_restrict'];
-    payableType = json['payable_type'];
     createdOn = json['created_on'];
     updatedOn = json['updated_on'];
     schIdMetal = json['sch_id_metal'];
@@ -120,7 +108,6 @@ class Data {
     data['scheme_type'] = this.schemeType;
     data['scheme_description'] = this.schemeDescription;
     data['kyc_req'] = this.kycReq;
-    data['when_kyc_required'] = this.whenKycRequired;
     data['allow_advance'] = this.allowAdvance;
     data['number_of_advance'] = this.numberOfAdvance;
     data['allow_pending_due'] = this.allowPendingDue;
@@ -132,9 +119,6 @@ class Data {
     data['unpaid_as_def'] = this.unpaidAsDef;
     data['allow_due'] = this.allowDue;
     data['total_instalment'] = this.totalInstalment;
-    data['scheme_vis'] = this.schemeVis;
-    data['payment_restrict'] = this.paymentRestrict;
-    data['payable_type'] = this.payableType;
     data['created_on'] = this.createdOn;
     data['updated_on'] = this.updatedOn;
     data['sch_id_metal'] = this.schIdMetal;

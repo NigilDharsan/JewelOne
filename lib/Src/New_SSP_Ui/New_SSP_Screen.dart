@@ -83,8 +83,19 @@ class _New_SSP_ScreenState extends ConsumerState<New_SSP_Screen> {
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: data?.data?.length ?? 0,
                     itemBuilder: (context, index) {
-                      return JoinnowContainer(context,plan: 'Plan 1', plandes: data?.data?[index].schemeName ?? "", onPress: () {
-                        //Navigator.push(context, MaterialPageRoute(builder: (context)=>New_SSP_Plan1_Screen()));
+                      return JoinnowContainer(context,
+                          plan: 'Plan ${data?.data?[index].schemeId ?? ""}',
+                          plandes: data?.data?[index].schemeName ?? "",
+                          onPress: () {
+                        if(data?.data?[index].schemeId == 1){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=> New_SSP_Plan1_Screen()));
+                        }else if(data?.data?[index].schemeId == 2){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=> New_SSP_Plan2_Screen()));
+                        }else if (data?.data?[index].schemeId == 3){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=> New_SSP_Plan3_Screen()));
+                        }else if (data?.data?[index].schemeId == 4){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=> New_SSP_Plan4_Screen()));
+                        }
                       });
                     });
               }, error: (Object error, StackTrace stackTrace){
@@ -120,13 +131,11 @@ class _New_SSP_ScreenState extends ConsumerState<New_SSP_Screen> {
               //     },
               //     child: plancontainer(context, texts: 'Plan 2', planname: 'One-Time Lump-Sum Advance Plan')),
               //
-              //
               // InkWell(
               //     onTap: (){
               //       Navigator.push(context, MaterialPageRoute(builder: (context)=>New_SSP_Plan3_Screen()));
               //     },
               //     child: plancontainer(context, texts: 'Plan 3', planname: 'Old Gold Advance Plan')),
-              //
               //
               // InkWell(
               //     onTap: (){

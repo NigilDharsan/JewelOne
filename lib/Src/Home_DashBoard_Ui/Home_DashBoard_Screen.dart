@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,6 +15,7 @@ import 'package:jewelone/Src/Notification_Ui/Notification_Screen.dart';
 import 'package:jewelone/Src/Online_Emi_Payment_Ui/Online_Emi_Payment_Screen.dart';
 import 'package:jewelone/utilits/ApiProvider.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
+import 'package:jewelone/utilits/Generic.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
 import 'package:scroll_loop_auto_scroll/scroll_loop_auto_scroll.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -40,6 +40,21 @@ class _Home_DashBoard_ScreenState extends ConsumerState<Home_DashBoard_Screen> {
     "Salem",
     "Erode",
   ];
+
+  String name = '';
+
+  Future<void> getDetails() async{
+
+    String cusname = await getCustomer_name();
+    setState(() {
+      name = cusname;
+    });
+  }
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getDetails();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -136,7 +151,7 @@ class _Home_DashBoard_ScreenState extends ConsumerState<Home_DashBoard_Screen> {
                     //WALLET
                     Padding(
                       padding: const EdgeInsets.only(left: 20,right: 20,bottom: 20),
-                      child: Wallet_Card(context),
+                      child: Wallet_Card(context, customername: "Hi ${name}"),
                     ),
                     //CAROSEL BANNER
                     bannerimagedata.when(data: (imagedata){
