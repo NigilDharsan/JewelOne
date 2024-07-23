@@ -70,33 +70,33 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           height: 50,
         ),
         //SKIP
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              //SKIP
-              InkWell(
-                onTap: () {
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => Home_DashBoard_Screen()),
-                      (route) => false);
-                },
-                child: Text(
-                  'Skip Login',
-                  style: skip_ST,
-                ),
-              ),
-              const Icon(
-                Icons.arrow_forward_ios,
-                size: 15,
-                color: BlackNormal,
-              ),
-            ],
-          ),
-        ),
+        // Container(
+        //   padding: const EdgeInsets.symmetric(horizontal: 16),
+        //   child: Row(
+        //     mainAxisAlignment: MainAxisAlignment.end,
+        //     children: [
+        //       //SKIP
+        //       InkWell(
+        //         onTap: () {
+        //           Navigator.pushAndRemoveUntil(
+        //               context,
+        //               MaterialPageRoute(
+        //                   builder: (context) => Home_DashBoard_Screen()),
+        //               (route) => false);
+        //         },
+        //         child: Text(
+        //           'Skip Login',
+        //           style: skip_ST,
+        //         ),
+        //       ),
+        //       const Icon(
+        //         Icons.arrow_forward_ios,
+        //         size: 15,
+        //         color: BlackNormal,
+        //       ),
+        //     ],
+        //   ),
+        // ),
         SizedBox(
           height: 40,
         ),
@@ -202,18 +202,19 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             // Handle the result
             if (result?.redirect == true) {
               await accessToken(result?.token);
-               Customer_Id(result?.customer?.idCustomer ?? "");
+              Customer_Id(result?.customer?.idCustomer ?? "");
               Customer_phone(result?.customer?.mobile ?? "");
               Customer_name(result?.customer?.firstname ?? "");
-              print("LOGIN CUSTOMER ID ::${result?.customer?.idCustomer ?? ""}");
+              print(
+                  "LOGIN CUSTOMER ID ::${result?.customer?.idCustomer ?? ""}");
               print("CUSTOMER PHONE ::${result?.customer?.mobile ?? ""}");
               // ShowToastMessage(result?.message ?? "");
               Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) => Home_DashBoard_Screen(
-                          customer:result?.customer,
-                      )));
+                            customer: result?.customer,
+                          )));
             } else {
               // Handle failure
               ShowToastMessage("Incorrect username/password");

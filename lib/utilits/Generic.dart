@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
 import 'Common_Colors.dart';
 
 final FlutterSecureStorage _secureStorage = FlutterSecureStorage();
@@ -39,12 +40,13 @@ Future<dynamic> getToken() async {
 
 Customer_Id(dynamic val) async {
   await _secureStorage.write(
-      key: custom_Id!, value: val, aOptions: _androidOptions());
+      key: custom_Id, value: val.toString(), aOptions: _androidOptions());
   print("Customer ID VAL :$val" + "$custom_Id");
 }
+
 Future<dynamic> getCustomer_Id() async {
-  final String? customerId = await _secureStorage.read(
-      key: custom_Id!, aOptions: _androidOptions());
+  final String? customerId =
+      await _secureStorage.read(key: custom_Id!, aOptions: _androidOptions());
   print("valu:$customerId");
   return customerId!;
 }
@@ -54,26 +56,26 @@ Customer_phone(dynamic val) async {
       key: phone_no!, value: val, aOptions: _androidOptions());
   print("Customer Phone :$val" + "$phone_no");
 }
+
 Future<dynamic> getCustomer_phone() async {
-  final String? customerphone = await _secureStorage.read(
-      key: phone_no!, aOptions: _androidOptions());
+  final String? customerphone =
+      await _secureStorage.read(key: phone_no!, aOptions: _androidOptions());
   print("valu:$customerphone");
   return customerphone!;
 }
-
 
 Customer_name(dynamic val) async {
   await _secureStorage.write(
       key: name!, value: val, aOptions: _androidOptions());
   print("Customer Phone :$val" + "$name");
 }
+
 Future<dynamic> getCustomer_name() async {
-  final String? customerName = await _secureStorage.read(
-      key: name!, aOptions: _androidOptions());
+  final String? customerName =
+      await _secureStorage.read(key: name!, aOptions: _androidOptions());
   print("valu:$customerName");
   return customerName!;
 }
-
 
 UserRole(dynamic val) async {
   await _secureStorage.write(
@@ -170,6 +172,3 @@ Widget buildLoadingIndicator() {
     ),
   );
 }
-
-
-
