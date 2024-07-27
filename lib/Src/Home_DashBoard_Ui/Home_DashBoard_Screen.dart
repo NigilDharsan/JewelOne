@@ -30,15 +30,13 @@ class Home_DashBoard_Screen extends ConsumerStatefulWidget {
 }
 
 class _Home_DashBoard_ScreenState extends ConsumerState<Home_DashBoard_Screen> {
-  final List<String> items = ['Coimbatore', 'Salem', 'Chennai'];
-  String selectedItem = 'Coimbatore';
+  // final List<String> items = ['Coimbatore', 'Salem', 'Chennai'];
+  // String selectedItem = 'Coimbatore';
   int myCurrentPage = 0;
 
   String? location;
   List<String> locationoption = [
-    "Coimbatore",
-    "Salem",
-    "Erode",
+    "Pollachi"
   ];
 
   String name = '';
@@ -59,7 +57,7 @@ class _Home_DashBoard_ScreenState extends ConsumerState<Home_DashBoard_Screen> {
   @override
   Widget build(BuildContext context) {
     final priceRate = ref.watch(GoldrateProvider);
-    final bannerimagedata = ref.watch(BannerDataProvider);
+    //final bannerimagedata = ref.watch(BannerDataProvider);
     final activelocationdata = ref.watch(ActivelocationProvider);
     return Scaffold(
       backgroundColor: backGroundColor,
@@ -154,60 +152,51 @@ class _Home_DashBoard_ScreenState extends ConsumerState<Home_DashBoard_Screen> {
                       child: Wallet_Card(context, customername: "Hi ${name}"),
                     ),
                     //CAROSEL BANNER
-                    bannerimagedata.when(data: (imagedata){
-                      return Container(
-                        color: white1,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 20,right: 20),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              const SizedBox(height: 20,),
-                              //CAROSEL SLIDER
-                              CarouselSlider(
-                                  items: imagedata?.data?.map((i) {
-                                    return Builder(
-                                      builder: (BuildContext context) {
-                                        return _carouselImg(context,
-                                            image:
-                                            i.bannerImg ?? "");
-                                      },
-                                    );
-                                  }).toList(),
-                                  options: CarouselOptions(
-                                    autoPlay: true,
-                                    viewportFraction: 1,
-                                    enlargeCenterPage: true,
-                                    aspectRatio: 16/9,
-                                    autoPlayAnimationDuration:Duration(milliseconds: 800),
-                                    onPageChanged: (index,reason){
-                                      setState(() {
-                                        myCurrentPage = index;
-                                      });
-                                    },
-                                  )),
-                              const SizedBox(height: 10,),
-                              Center(
-                                child: AnimatedSmoothIndicator(
-                                  activeIndex: myCurrentPage,
-                                  count: imagedata?.data?.length ?? 0,
-                                  effect: ExpandingDotsEffect(
-                                      dotHeight: 5,
-                                      dotWidth: 5,
-                                      activeDotColor: gradient1
-                                  ),
+                    Container(
+                      color: white1,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 20,right: 20),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const SizedBox(height: 20,),
+                            //CAROSEL SLIDER
+                            CarouselSlider(
+                                items: [
+                                  _carouselImg(context),
+                                  _carouselImg(context),
+                                  _carouselImg(context),
+                                  _carouselImg(context),
+                                ],
+                                options: CarouselOptions(
+                                  autoPlay: true,
+                                  viewportFraction: 1,
+                                  enlargeCenterPage: true,
+                                  aspectRatio: 16/9,
+                                  autoPlayAnimationDuration:Duration(milliseconds: 800),
+                                  onPageChanged: (index,reason){
+                                    setState(() {
+                                      myCurrentPage = index;
+                                    });
+                                  },
+                                )),
+                            const SizedBox(height: 10,),
+                            Center(
+                              child: AnimatedSmoothIndicator(
+                                activeIndex: myCurrentPage,
+                                count: 4,
+                                effect: ExpandingDotsEffect(
+                                    dotHeight: 5,
+                                    dotWidth: 5,
+                                    activeDotColor: gradient1
                                 ),
                               ),
-                              const SizedBox(height: 20,),
-                            ],
-                          ),
+                            ),
+                            const SizedBox(height: 20,),
+                          ],
                         ),
-                      );
-                    }, error: (Object error, StackTrace stackTrace){
-                      return Text("ERROR");
-                    }, loading: (){
-                      return Center(child: CircularProgressIndicator());
-                    })
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -230,7 +219,7 @@ Widget _Location_Dropdown(){
 
             homedropDownFieldprofileedit(
               context,
-              width: MediaQuery.sizeOf(context).width/3,
+              width: MediaQuery.sizeOf(context).width/3.5,
               hintT: 'Coimbatore',
               value: location,
               listValue: locationoption,
@@ -250,13 +239,14 @@ Widget _Location_Dropdown(){
 
 
 //CAROUSEL IMG STACK
-Widget _carouselImg(context,{required String image}){
+Widget _carouselImg(context){
   return Container(
     height: 185,
     width: MediaQuery.of(context).size.width,
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(15),
-      image: DecorationImage(image: NetworkImage(image),
+      image: DecorationImage(
+          image: AssetImage("lib/assets/homedashboardimage.png"),
       fit: BoxFit.cover),
     ),
   );

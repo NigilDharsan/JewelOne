@@ -735,37 +735,31 @@ Widget homedropDownFieldprofileedit(
       required void Function(String?)? onChanged,
       required String hintT,
     }) {
-  return Padding(
-    padding: const EdgeInsets.only(bottom: 10),
-    child: Container(
-      height: 30,
-      width: width,
-      decoration:
-      BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        color: backGroundColor,
+  return Container(
+    height: 50,
+    width: width,
+    decoration:
+    BoxDecoration(
+      borderRadius: BorderRadius.circular(5),
+      color: backGroundColor
+    ),
+    child: DropdownButtonFormField<String>(
+      value: value,
+      isExpanded: true,
+      decoration: InputDecoration(
+        border: InputBorder.none,
+        contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
+        hintStyle: dropDownST,
+        hintText: hintT,
       ),
-      child: DropdownButtonFormField<String>(
-        value: value,
-        isExpanded: true,
-        decoration: InputDecoration(
-          border: InputBorder.none,
-          contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
-          hintStyle: dropDownST,
-          hintText: hintT,
-        ),
-        icon: Padding(
-          padding: const EdgeInsets.only(top: 2),
-          child: ImgPathSvg('homedownarrow.svg'),
-        ),
-        items: listValue?.map((String option) {
-          return DropdownMenuItem<String>(
-            value: option,
-            child: Text(option,style: dropDownST,),
-          );
-        }).toList(),
-        onChanged: onChanged,
-      ),
+      icon: ImgPathSvg('homedownarrow.svg'),
+      items: listValue?.map((String option) {
+        return DropdownMenuItem<String>(
+          value: option,
+          child: Text(option,style: dropDownST,),
+        );
+      }).toList(),
+      onChanged: onChanged,
     ),
   );
 }
