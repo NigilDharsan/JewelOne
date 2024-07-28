@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:jewelone/Common_Widgets/Common_Button.dart';
 import 'package:jewelone/Common_Widgets/Image_Path.dart';
 import 'package:jewelone/Common_Widgets/Text_Form_Field.dart';
@@ -11,17 +12,16 @@ import 'package:jewelone/utilits/Common_Colors.dart';
 import 'package:jewelone/utilits/Generic.dart';
 import 'package:jewelone/utilits/Loading_Overlay.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
-import 'package:intl/intl.dart';
 
 class Create_Account_Screen extends ConsumerStatefulWidget {
   const Create_Account_Screen({super.key});
 
   @override
-  ConsumerState<Create_Account_Screen> createState() => _Create_Account_ScreenState();
+  ConsumerState<Create_Account_Screen> createState() =>
+      _Create_Account_ScreenState();
 }
 
 class _Create_Account_ScreenState extends ConsumerState<Create_Account_Screen> {
-
   String NewPassword = '';
   String ReEnterPassword = '';
 
@@ -36,18 +36,19 @@ class _Create_Account_ScreenState extends ConsumerState<Create_Account_Screen> {
   bool _obscurePassword = true;
   bool _isChecked = false;
 
-
   //PASSWORD VISIBILITY FUNCTION
   void _togglePasswordVisibility() {
     setState(() {
       _obscurePassword = !_obscurePassword;
     });
   }
+
   final _formKey = GlobalKey<FormState>();
 
-
-  RegExp passwordSpecial = RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$])(?=.*[0-9]).*$');
-  RegExp passwordLength = RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$])(?=.*[0-9]).{8,15}$');
+  RegExp passwordSpecial =
+      RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$])(?=.*[0-9]).*$');
+  RegExp passwordLength =
+      RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$])(?=.*[0-9]).{8,15}$');
   RegExp onlyText = RegExp(r'^[a-zA-Z ]+$');
 
   @override
@@ -61,9 +62,8 @@ class _Create_Account_ScreenState extends ConsumerState<Create_Account_Screen> {
           child: Container(
             width: MediaQuery.sizeOf(context).width,
             child: Padding(
-              padding: const EdgeInsets.only(left: 20,right: 20),
+              padding: const EdgeInsets.only(left: 20, right: 20),
               child: _MainBody(),
-
             ),
           ),
         ),
@@ -71,7 +71,7 @@ class _Create_Account_ScreenState extends ConsumerState<Create_Account_Screen> {
     );
   }
 
-  Widget _MainBody(){
+  Widget _MainBody() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -84,28 +84,29 @@ class _Create_Account_ScreenState extends ConsumerState<Create_Account_Screen> {
           height: 50,
         ),
 
-
         Heading_Text(context, Title: "Join Our Savings Scheme"),
 
         //FULL NAME
         Title_Style(Title: 'Full name', isStatus: false),
         textFormField(
-          hintText: 'Enter your full name',
-          keyboardtype: TextInputType.text,
-          inputFormatters: null,
-          Controller: _fullName,
-          validating: (value) {
-            if (value == null || value.isEmpty) {
-              return "Please Enter ${'Name'}";
-            }
-            if (!onlyText.hasMatch(value)) {
-              return "Please Enter Your Name (Special Characters are Not Allowed)";
-            }
-            return null;
-          },
-          onChanged: null,
-          prefixIcon: Icon(Icons.person,color: grey1,)
-        ),
+            hintText: 'Enter your full name',
+            keyboardtype: TextInputType.text,
+            inputFormatters: null,
+            Controller: _fullName,
+            validating: (value) {
+              if (value == null || value.isEmpty) {
+                return "Please Enter ${'Name'}";
+              }
+              if (!onlyText.hasMatch(value)) {
+                return "Please Enter Your Name (Special Characters are Not Allowed)";
+              }
+              return null;
+            },
+            onChanged: null,
+            prefixIcon: Icon(
+              Icons.person,
+              color: grey1,
+            )),
 
         //LAST NAME
         Title_Style(Title: 'Last name', isStatus: false),
@@ -124,36 +125,37 @@ class _Create_Account_ScreenState extends ConsumerState<Create_Account_Screen> {
               return null;
             },
             onChanged: null,
-            prefixIcon: Icon(Icons.person,color: grey1,)
-        ),
+            prefixIcon: Icon(
+              Icons.person,
+              color: grey1,
+            )),
 
         //Email
-        Title_Style(
-            Title: 'Email',
-            isStatus: false),
+        Title_Style(Title: 'Email', isStatus: false),
         textFormField(
-          hintText: 'Enter your Email',
-          keyboardtype: TextInputType.text,
-          inputFormatters: null,
-          Controller: _Email,
-          validating: (value) {
-            if (value!.isEmpty) {
-              return "Please Enter a Email Address";
-            } else if (!RegExp(
-                r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
-                .hasMatch(value)) {
-              return "Please Enter a Valid Email Address";
-            }
-            return null;
-          },
-          onChanged: null,
-            prefixIcon: Icon(Icons.mail,color: grey1,)
-        ),
+            hintText: 'Enter your Email',
+            keyboardtype: TextInputType.text,
+            inputFormatters: null,
+            Controller: _Email,
+            validating: (value) {
+              if (value!.isEmpty) {
+                return "Please Enter a Email Address";
+              } else if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                  .hasMatch(value)) {
+                return "Please Enter a Valid Email Address";
+              }
+              return null;
+            },
+            onChanged: null,
+            prefixIcon: Icon(
+              Icons.mail,
+              color: grey1,
+            )),
 
         // Phone Number Text and TextField
         Title_Style(Title: 'Phone Number', isStatus: null),
         textFormField(
-          // isEnabled: false,
+            // isEnabled: false,
             hintText: "Enter your phone number",
             keyboardtype: TextInputType.phone,
             Controller: _phoneNumber,
@@ -169,7 +171,11 @@ class _Create_Account_ScreenState extends ConsumerState<Create_Account_Screen> {
                 return 'Please enter a valid 10-digit Phone Number';
               }
               return null;
-            }, prefixIcon: Icon(Icons.phone_android_sharp,color: grey1,)),
+            },
+            prefixIcon: Icon(
+              Icons.phone_android_sharp,
+              color: grey1,
+            )),
 
         //DATE OF BIRTH
         Title_Style(Title: 'Date of Birth', isStatus: true),
@@ -188,7 +194,7 @@ class _Create_Account_ScreenState extends ConsumerState<Create_Account_Screen> {
             );
             if (pickedDate != null) {
               String formattedDate =
-              DateFormat("yyyy-MM-dd").format(pickedDate);
+                  DateFormat("yyyy-MM-dd").format(pickedDate);
               if (mounted) {
                 setState(() {
                   _Dateofbirth.text = formattedDate;
@@ -206,8 +212,7 @@ class _Create_Account_ScreenState extends ConsumerState<Create_Account_Screen> {
             if (value!.isEmpty) {
               return 'Please Select Date of Birth';
             } else {
-              DateTime selectedDate =
-              DateFormat("yyyy-MM-dd").parse(value);
+              DateTime selectedDate = DateFormat("yyyy-MM-dd").parse(value);
               DateTime currentDate = DateTime.now();
               int age = currentDate.year - selectedDate.year;
               if (age < 18) {
@@ -219,66 +224,68 @@ class _Create_Account_ScreenState extends ConsumerState<Create_Account_Screen> {
           },
         ),
 
-
         //ENTER NEW PASSWORD
         Title_Style(Title: 'Password', isStatus: true),
         textFormField(
-          hintText: 'Password',
-          keyboardtype: TextInputType.text,
-          inputFormatters: null,
-          Controller: _password,
-          validating: (value) {
-            if (value == null || value.isEmpty) {
-              return "Please Enter Valid ${'Password'}";
-            }
-            if (value == null) {
-              return "Please Enter Valid ${'Password'}";
-            }
-            return null;
-          },
-          onChanged: (value){
-            NewPassword= value;
-          },
-          prefixIcon: Icon(Icons.lock,color: grey1,)
-        ),
+            hintText: 'Password',
+            keyboardtype: TextInputType.text,
+            inputFormatters: null,
+            Controller: _password,
+            validating: (value) {
+              if (value == null || value.isEmpty) {
+                return "Please Enter Valid ${'Password'}";
+              }
+              if (value == null) {
+                return "Please Enter Valid ${'Password'}";
+              }
+              return null;
+            },
+            onChanged: (value) {
+              NewPassword = value;
+            },
+            prefixIcon: Icon(
+              Icons.lock,
+              color: grey1,
+            )),
         const SizedBox(height: 10),
         textFormField(
-          hintText: 'Confirm Password',
-          keyboardtype: TextInputType.text,
-          inputFormatters: null,
-          Controller: _ConfirmPassword,
-          validating: (value) {
-            if (value == null || value.isEmpty) {
-              return "Please Enter Valid ${'Password'}";
-            }
-            if (value != NewPassword) {
-              return "Password does not match with password";
-            }
-            return null;
-          },
-          onChanged: (value){
-            ReEnterPassword = value;
-          },
-            prefixIcon: Icon(Icons.lock,color: grey1,)
-        ),
+            hintText: 'Confirm Password',
+            keyboardtype: TextInputType.text,
+            inputFormatters: null,
+            Controller: _ConfirmPassword,
+            validating: (value) {
+              if (value == null || value.isEmpty) {
+                return "Please Enter Valid ${'Password'}";
+              }
+              if (value != NewPassword) {
+                return "Password does not match with password";
+              }
+              return null;
+            },
+            onChanged: (value) {
+              ReEnterPassword = value;
+            },
+            prefixIcon: Icon(
+              Icons.lock,
+              color: grey1,
+            )),
         const SizedBox(height: 15),
 
-        CheckBoxes(
-          context,
-            value: _isChecked,
-            onChanged: (value) {
-              setState(() {
-                setState(() => _isChecked = !_isChecked);
-              });
-            },
-            onTap: (){},
-            checkBoxText: 'By Registering, You agree to our Terms & Conditions*', width: MediaQuery.sizeOf(context).width/1.5),
+        CheckBoxes(context, value: _isChecked, onChanged: (value) {
+          setState(() {
+            setState(() => _isChecked = !_isChecked);
+          });
+        },
+            onTap: () {},
+            checkBoxText:
+                'By Registering, You agree to our Terms & Conditions*',
+            width: MediaQuery.sizeOf(context).width / 1.5),
 
         SizedBox(height: 15),
 
         // Sign up Button with Gradient
         CommonContainerButton(context, onPress: () async {
-          if(_formKey.currentState!.validate()){
+          if (_formKey.currentState!.validate()) {
             LoadingOverlay.show(context);
 
             Map<String, dynamic> formData = {
@@ -294,23 +301,30 @@ class _Create_Account_ScreenState extends ConsumerState<Create_Account_Screen> {
             LoadingOverlay.forcedStop();
             if (result?.success == true) {
               // ShowToastMessage(result?.message ?? "");
-              Navigator.push(context, MaterialPageRoute(builder: (context) => Home_DashBoard_Screen()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => Home_DashBoard_Screen()));
             } else {
               // Handle failure
-              ShowToastMessage("Incorrect username/password");
+              ShowToastMessage(result?.message ?? "");
             }
           }
-            }, titleName: 'Sign Up'),
+        }, titleName: 'Sign Up'),
         SizedBox(height: 16),
 
         // Don't have an account? Sign Up Now Text
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('Already have an account? ',style: Sub_TextStyle,),
+            Text(
+              'Already have an account? ',
+              style: Sub_TextStyle,
+            ),
             InkWell(
               onTap: () {
-               Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => LoginScreen()));
               },
               child: Text(
                 'Login',
@@ -320,7 +334,6 @@ class _Create_Account_ScreenState extends ConsumerState<Create_Account_Screen> {
           ],
         ),
         const SizedBox(height: 50),
-
       ],
     );
   }

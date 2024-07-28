@@ -3,6 +3,7 @@ class LoginModel {
   String? loginExpiry;
   bool? redirect;
   Customer? customer;
+  String? message;
 
   LoginModel({this.token, this.loginExpiry, this.redirect, this.customer});
 
@@ -13,6 +14,7 @@ class LoginModel {
     customer = json['customer'] != null
         ? new Customer.fromJson(json['customer'])
         : null;
+    message = json['message'];
   }
 
   Map<String, dynamic> toJson() {
@@ -23,6 +25,8 @@ class LoginModel {
     if (this.customer != null) {
       data['customer'] = this.customer!.toJson();
     }
+    data['message'] = this.message;
+
     return data;
   }
 }

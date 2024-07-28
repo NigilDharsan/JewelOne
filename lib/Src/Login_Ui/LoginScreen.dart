@@ -217,7 +217,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           )));
             } else {
               // Handle failure
-              ShowToastMessage("Incorrect username/password");
+              ShowToastMessage(
+                  result?.message ?? "Incorrect username/password");
             }
           }
         }, titleName: 'Login'),
