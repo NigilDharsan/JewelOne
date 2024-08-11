@@ -46,9 +46,9 @@ class _Create_Account_ScreenState extends ConsumerState<Create_Account_Screen> {
   final _formKey = GlobalKey<FormState>();
 
   RegExp passwordSpecial =
-      RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$])(?=.*[0-9]).*$');
+  RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$])(?=.*[0-9]).*$');
   RegExp passwordLength =
-      RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$])(?=.*[0-9]).{8,15}$');
+  RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$])(?=.*[0-9]).{8,15}$');
   RegExp onlyText = RegExp(r'^[a-zA-Z ]+$');
 
   @override
@@ -155,7 +155,7 @@ class _Create_Account_ScreenState extends ConsumerState<Create_Account_Screen> {
         // Phone Number Text and TextField
         Title_Style(Title: 'Phone Number', isStatus: null),
         textFormField(
-            // isEnabled: false,
+          // isEnabled: false,
             hintText: "Enter your phone number",
             keyboardtype: TextInputType.phone,
             Controller: _phoneNumber,
@@ -194,7 +194,7 @@ class _Create_Account_ScreenState extends ConsumerState<Create_Account_Screen> {
             );
             if (pickedDate != null) {
               String formattedDate =
-                  DateFormat("yyyy-MM-dd").format(pickedDate);
+              DateFormat("yyyy-MM-dd").format(pickedDate);
               if (mounted) {
                 setState(() {
                   _Dateofbirth.text = formattedDate;
@@ -278,7 +278,7 @@ class _Create_Account_ScreenState extends ConsumerState<Create_Account_Screen> {
         },
             onTap: () {},
             checkBoxText:
-                'By Registering, You agree to our Terms & Conditions*',
+            'By Registering, You agree to our Terms & Conditions*',
             width: MediaQuery.sizeOf(context).width / 1.5),
 
         SizedBox(height: 15),
@@ -299,12 +299,10 @@ class _Create_Account_ScreenState extends ConsumerState<Create_Account_Screen> {
 
             final result = await ref.read(signupPostProvider(formData).future);
             LoadingOverlay.forcedStop();
-            if (result?.success == true) {
-              // ShowToastMessage(result?.message ?? "");
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => Home_DashBoard_Screen()));
+            if (result?.status == true) {
+              ShowToastMessage(result?.message ?? "");
+              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>LoginScreen()),
+                      (route) => false);
             } else {
               // Handle failure
               ShowToastMessage(result?.message ?? "");

@@ -1,24 +1,22 @@
+
+
 class SignUpModel {
-  bool? success;
-  String? successTitle;
-  String? successMessage;
+  bool? status;
+  String? title;
   String? message;
 
-  SignUpModel(
-      {this.success, this.successTitle, this.successMessage, this.message});
+  SignUpModel({this.status, this.title, this.message});
 
   SignUpModel.fromJson(Map<String, dynamic> json) {
-    success = json['success'];
-    successTitle = json['success_title'];
-    successMessage = json['success_message'];
+    status = json['status'];
+    title = json['title'];
     message = json['message'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['success'] = this.success;
-    data['success_title'] = this.successTitle;
-    data['success_message'] = this.successMessage;
+    data['status'] = this.status;
+    data['title'] = this.title;
     data['message'] = this.message;
     return data;
   }
