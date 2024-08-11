@@ -15,7 +15,6 @@ import 'package:jewelone/Model/LoginModel.dart';
 import 'package:jewelone/Src/Advance_Payment_Ui/Advance_Payment_Screen.dart';
 import 'package:jewelone/Src/Home_DashBoard_Ui/Home_DashBoard_Screen.dart';
 import 'package:jewelone/Src/My_SSP_Ui/My_SSP_Screen.dart';
-import 'package:jewelone/utilits/CashFreePayment.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
 import 'package:jewelone/utilits/ConstantsApi.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
@@ -35,7 +34,7 @@ class _Online_Emi_Payment_ScreenState extends ConsumerState<Online_Emi_Payment_S
   EmiOption? _selectedEmiOption;
 
   final String clientId = 'TEST1019783451b01da019e7d8e03edd43879101';
-  final String clientSecret = '';
+  final String clientSecret = 'cfsk_ma_test_a563a0f0dac40e802b3592ecffbb4ad9_122e4d57';
   final CFEnvironment environment = CFEnvironment.SANDBOX;
 
   List<EmiOption> emiOptions = [
