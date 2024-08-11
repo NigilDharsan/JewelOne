@@ -35,7 +35,7 @@ class _Online_Emi_Payment_ScreenState extends ConsumerState<Online_Emi_Payment_S
   EmiOption? _selectedEmiOption;
 
   final String clientId = 'TEST1019783451b01da019e7d8e03edd43879101';
-  final String clientSecret = 'cfsk_ma_test_a563a0f0dac40e802b3592ecffbb4ad9_122e4d57';
+  final String clientSecret = '';
   final CFEnvironment environment = CFEnvironment.SANDBOX;
 
   List<EmiOption> emiOptions = [
