@@ -66,7 +66,6 @@ class _Home_DashBoard_ScreenState extends ConsumerState<Home_DashBoard_Screen> {
         leading: InkWell(
           onTap: (){
             Navigator.push(context, MaterialPageRoute(builder: (context)=>Menu_Screen(
-
             )));
           },
             child: Icon(Icons.menu_outlined)),
@@ -74,7 +73,7 @@ class _Home_DashBoard_ScreenState extends ConsumerState<Home_DashBoard_Screen> {
         title: App_Logo(context),
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 20, left: 15),
+            padding: const EdgeInsets.only(right: 10, left: 15),
             child: InkWell(
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context)=>Notification_Screen(

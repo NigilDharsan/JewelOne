@@ -38,9 +38,9 @@ class _Online_Emi_Payment_ScreenState extends ConsumerState<Online_Emi_Payment_S
   final CFEnvironment environment = CFEnvironment.SANDBOX;
 
   List<EmiOption> emiOptions = [
-    EmiOption(label: '3 months EMI', amount: 1000.0),
-    EmiOption(label: '6 months EMI', amount: 500.0),
-    EmiOption(label: '12 months EMI', amount: 250.0),
+    EmiOption(label: '3 months EMI', amount: 1000.0, plannum: '1'),
+    EmiOption(label: '6 months EMI', amount: 500.0, plannum: '2'),
+    EmiOption(label: '12 months EMI', amount: 250.0, plannum: '3'),
   ];
 
   @override
@@ -73,7 +73,7 @@ class _Online_Emi_Payment_ScreenState extends ConsumerState<Online_Emi_Payment_S
                     children: [
                       ImgPathSvg('calendar2.svg'),
                       const SizedBox(width: 10),
-                      Text('2 Plan Active', style: rate2),
+                      Text('${emiOptions.length} Plan Active', style: rate2),
                       //PLAN TEXT
                     ],
                   ),
@@ -157,10 +157,10 @@ class _Online_Emi_Payment_ScreenState extends ConsumerState<Online_Emi_Payment_S
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 20, right: 5),
-                      child: Text('Plan 1', style: Plan_Style),
+                      child: Text('Plan ${emiOptions?[index].plannum ?? ""}', style: Plan_Style),
                     ),
                     const Spacer(),
-                    Text("INR ₹5000", style: rate2),
+                    Text("INR ₹${emiOptions?[index].amount ?? ""}", style: rate2),
                   ],
                 ),
                 Container(
@@ -338,8 +338,9 @@ class _Online_Emi_Payment_ScreenState extends ConsumerState<Online_Emi_Payment_S
 class EmiOption {
   final String label;
   final double amount;
+  final String plannum;
 
-  EmiOption({required this.label, required this.amount});
+  EmiOption( {required this.label, required this.amount,required this.plannum});
 }
 
 

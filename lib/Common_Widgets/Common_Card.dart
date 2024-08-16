@@ -21,10 +21,12 @@ Widget Plan_Card(context,{required String Img,required String planT}){
          padding: const EdgeInsets.only(top: 10,bottom: 10,left: 10,right: 10),
          child: ImgPathSvg(Img),
        ),
-        Container(
-          margin: EdgeInsets.only(bottom: 20),
-          width: MediaQuery.sizeOf(context).width/4,
-            child: Text(planT,style: planST,maxLines: 2,textAlign: TextAlign.center,)),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 20,left: 5,right: 5),
+          child: Container(
+            width: MediaQuery.sizeOf(context).width/4,
+              child: Text(planT,style: planST,maxLines: 2,textAlign: TextAlign.center,)),
+        ),
       ],
     ),
   );
@@ -110,10 +112,8 @@ Widget New_SSP_Image_Content ({required String text,required String heading, req
         children: [
           isHeadingneeded == true? Text(heading,style: Gramage,):Container(),
           Text(text,style: Content1,),
-          
           Column(
             children: [
-
             ],
           )
         ],
