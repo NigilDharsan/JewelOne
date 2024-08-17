@@ -31,7 +31,16 @@ class Online_Emi_Payment_Screen extends ConsumerStatefulWidget {
 class _Online_Emi_Payment_ScreenState extends ConsumerState<Online_Emi_Payment_Screen> {
   int? _groupValue = 1;
   int _count = 1;
+  num totalAmount = 0;
   EmiOption? _selectedEmiOption;
+  void _calculateTotalAmount() {
+    if (_selectedEmiOption != null) {
+      totalAmount = _selectedEmiOption!.amount * _selectedEmiOption!.count;
+    } else {
+      totalAmount = 0;
+    }
+  }
+
 
   final String clientId = 'TEST1019783451b01da019e7d8e03edd43879101';
   final String clientSecret = 'cfsk_ma_test_a563a0f0dac40e802b3592ecffbb4ad9_122e4d57';
@@ -82,8 +91,9 @@ class _Online_Emi_Payment_ScreenState extends ConsumerState<Online_Emi_Payment_S
                 const SizedBox(height: 35),
                 HelpContainer(context, Color: pink4),
                 const SizedBox(height: 10),
-                Total(),
-                Padding(
+                Total_Online(),
+                totalAmount ==0 ? SizedBox(height: 50) : Container(),
+                totalAmount == 0? Container(): Padding(
                   padding: const EdgeInsets.only(top: 20, bottom: 50),
                   child: CommonContainerButton(
                     context,
@@ -142,6 +152,7 @@ class _Online_Emi_Payment_ScreenState extends ConsumerState<Online_Emi_Payment_S
                       onChanged: (value) {
                         setState(() {
                           _selectedEmiOption = value;
+                          _calculateTotalAmount(); // Recalculate total when selection changes
                         });
                       },
                       dotRadius: 5.0,
@@ -157,10 +168,10 @@ class _Online_Emi_Payment_ScreenState extends ConsumerState<Online_Emi_Payment_S
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 20, right: 5),
-                      child: Text('Plan ${emiOptions?[index].plannum ?? ""}', style: Plan_Style),
+                      child: Text('Plan ${emiOption.plannum}', style: Plan_Style),
                     ),
                     const Spacer(),
-                    Text("INR ₹${emiOptions?[index].amount ?? ""}", style: rate2),
+                    Text("INR ₹${emiOption.amount}", style: rate2),
                   ],
                 ),
                 Container(
@@ -207,14 +218,14 @@ class _Online_Emi_Payment_ScreenState extends ConsumerState<Online_Emi_Payment_S
                             color: white3,
                             child: InkWell(
                               onTap: () {
-                                _incrementCounter();
+                                _incrementCounter(emiOption);
                               },
                               child: Center(child: Icon(Icons.add)),
                             ),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(left: 10, right: 10),
-                            child: Center(child: Text('${_count}')),
+                            child: Center(child: Text('${emiOption.count}')),
                           ),
                           Container(
                             height: 30,
@@ -222,7 +233,7 @@ class _Online_Emi_Payment_ScreenState extends ConsumerState<Online_Emi_Payment_S
                             color: white3,
                             child: InkWell(
                               onTap: () {
-                                _decrementCounter();
+                                _decrementCounter(emiOption);
                               },
                               child: Center(child: Text('-', style: TextStyle(fontSize: 20))),
                             ),
@@ -320,18 +331,37 @@ class _Online_Emi_Payment_ScreenState extends ConsumerState<Online_Emi_Payment_S
   }
 
 
-  void _incrementCounter() {
+  void _incrementCounter(EmiOption emiOption) {
     setState(() {
-      _count++;
+      emiOption.count++;
+      _calculateTotalAmount();
     });
   }
 
-  void _decrementCounter() {
+  void _decrementCounter(EmiOption emiOption) {
     setState(() {
-      if (_count > 0) {
-        _count--;
+      if (emiOption.count > 0) {
+        emiOption.count--;
+        _calculateTotalAmount();
       }
     });
+  }
+
+
+  Widget Total_Online() {
+    return Padding(
+      padding: const EdgeInsets.only(left: 20, right: 20, top: 15),
+      child: Row(
+        children: [
+          Text(
+            'Total EMIs Payment',
+            style: maintext,
+          ),
+          const Spacer(),
+          Text('₹${totalAmount}', style: plan1),
+        ],
+      ),
+    );
   }
 }
 
@@ -339,8 +369,9 @@ class EmiOption {
   final String label;
   final double amount;
   final String plannum;
+  int count;
 
-  EmiOption( {required this.label, required this.amount,required this.plannum});
+  EmiOption( {required this.label, required this.amount,required this.plannum,this.count = 0});
 }
 
 
