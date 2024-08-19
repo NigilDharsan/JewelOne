@@ -193,7 +193,7 @@ class _Menu_ScreenState extends ConsumerState<Menu_Screen> {
                       ),
                     ),
 
-                    Settingscontainer(context,text: 'About JewelOne', image: 'aboutone.svg', image2: 'rightarrow2.svg', onTap: () {
+                    Settingscontainer(context,text: 'About Shining Dawn', image: 'aboutone.svg', image2: 'rightarrow2.svg', onTap: () {
                       //Navigator.pop(context);
                     }),
 
