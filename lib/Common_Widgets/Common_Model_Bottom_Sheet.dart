@@ -6,7 +6,8 @@ import 'Common_Button.dart';
 
 
 //TOTAL AMOUNT
-Widget Total_Amount_Bottom_Sheet(context,{required void Function()? onPress}){
+Widget Total_Amount_Bottom_Sheet(context,{required void Function()? onPress,
+  required String totalAmount, required String mobileNumber}){
   return  Container(
     height: MediaQuery.sizeOf(context).height/2.5,
     decoration: BoxDecoration(
@@ -33,10 +34,10 @@ Widget Total_Amount_Bottom_Sheet(context,{required void Function()? onPress}){
           //TRANSACTION FOR
           Padding(
             padding: const EdgeInsets.only(top: 10,bottom: 10),
-            child: Text('Here is the amount breakup of your transaction for 9944x xxxxx',style: Textfield_Style2,),
+            child: Text('Here is the amount breakup of your transaction for ${mobileNumber}',style: Textfield_Style2,),
           ),
           //TOTAL AMOUNT
-          Total_Amount(Amount: '5,00,000'),
+          Total_Amount(Amount: '₹${totalAmount}'),
           //BUTTON
           Padding(
             padding: const EdgeInsets.only(top: 25),

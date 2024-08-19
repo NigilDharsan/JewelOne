@@ -34,7 +34,7 @@ class _Store_Locator_ScreenState extends State<Store_Locator_Screen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('JewelOne is available at',style: locationT,),
+              Text('Shining Dawn is available at',style: locationT,),
 
               //LOCATION 1
               Location_Container(

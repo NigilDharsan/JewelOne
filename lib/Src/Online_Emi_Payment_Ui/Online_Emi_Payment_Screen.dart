@@ -17,6 +17,7 @@ import 'package:jewelone/Src/Home_DashBoard_Ui/Home_DashBoard_Screen.dart';
 import 'package:jewelone/Src/My_SSP_Ui/My_SSP_Screen.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
 import 'package:jewelone/utilits/ConstantsApi.dart';
+import 'package:jewelone/utilits/Generic.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
 import 'package:http/http.dart' as http;
 
@@ -51,6 +52,22 @@ class _Online_Emi_Payment_ScreenState extends ConsumerState<Online_Emi_Payment_S
     EmiOption(label: '6 months EMI', amount: 500.0, plannum: '2'),
     EmiOption(label: '12 months EMI', amount: 250.0, plannum: '3'),
   ];
+  String phoneVal = '';
+  String name = '';
+
+  Future<void> getDetails() async{
+    String phval = await getCustomer_phone();
+    String maskedMobileNumber = phval!.replaceRange(6, 10, "xxxx");
+    setState(() {
+      phoneVal = maskedMobileNumber;
+    });
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getDetails();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +94,7 @@ class _Online_Emi_Payment_ScreenState extends ConsumerState<Online_Emi_Payment_S
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 15),
+                  padding: const EdgeInsets.only(top: 15,bottom: 15),
                   child: Row(
                     children: [
                       ImgPathSvg('calendar2.svg'),
@@ -104,8 +121,8 @@ class _Online_Emi_Payment_ScreenState extends ConsumerState<Online_Emi_Payment_S
                           return Total_Amount_Bottom_Sheet(
                             context,
                             onPress: () async {
-                              await initiatePay(orderId: '', paymentSessionId: '');
-                            },
+                              await createOrder();
+                            }, totalAmount: "${totalAmount}", mobileNumber: '${phoneVal}',
                           );
                         },
                       );
@@ -133,6 +150,7 @@ class _Online_Emi_Payment_ScreenState extends ConsumerState<Online_Emi_Payment_S
           margin: EdgeInsets.only(bottom: 15),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
+            border: Border.all(color: arrow,width: 2),
             color: white1,
           ),
           child: Padding(
@@ -174,74 +192,90 @@ class _Online_Emi_Payment_ScreenState extends ConsumerState<Online_Emi_Payment_S
                     Text("INR ₹${emiOption.amount}", style: rate2),
                   ],
                 ),
-                Container(
-                  margin: EdgeInsets.only(bottom: 10, left: 40),
-                  width: MediaQuery.sizeOf(context).width / 1.8,
-                  child: Text(
-                    'Gold Ornaments Purchase Advance Scheme',
-                    style: planST,
-                    maxLines: 2,
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 10,),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(left: 40),
+                        width: MediaQuery.sizeOf(context).width / 2.3,
+                        child: Text(
+                          'Gold Ornaments Purchase Advance Scheme',
+                          style: planST,
+                          maxLines: 2,
+                        ),
+                      ),
+                      const Spacer(),
+                      Text('Advance EMA',style: walletT2,)
+                    ],
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 40),
-                      child: Row(
-                        children: [
-                          Container(
-                            width: MediaQuery.sizeOf(context).width / 3.5,
-                            child: Text('Equivalent Weight : ', style: planST),
-                          ),
-                          Text('0.794 gm', style: Goldweight),
-                        ],
-                      ),
-                    ),
-                    const Spacer(),
-                    Container(
-                      height: 30,
-                      alignment: Alignment.topLeft,
-                      margin: EdgeInsets.only(bottom: 25),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(2.5),
-                        color: white2,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            height: 30,
-                            width: 30,
-                            color: white3,
-                            child: InkWell(
-                              onTap: () {
-                                _incrementCounter(emiOption);
-                              },
-                              child: Center(child: Icon(Icons.add)),
+                Padding(
+                  padding: const EdgeInsets.only(bottom:20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 40),
+                        child: Row(
+                          children: [
+                            Container(
+                              width: MediaQuery.sizeOf(context).width / 3.6,
+                              child: Text('Equivalent Weight : ', style: planST),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10, right: 10),
-                            child: Center(child: Text('${emiOption.count}')),
-                          ),
-                          Container(
-                            height: 30,
-                            width: 30,
-                            color: white3,
-                            child: InkWell(
-                              onTap: () {
-                                _decrementCounter(emiOption);
-                              },
-                              child: Center(child: Text('-', style: TextStyle(fontSize: 20))),
-                            ),
-                          ),
-                        ],
+                            Text('0.794 gm', style: Goldweight),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                      const Spacer(),
+                      Container(
+                        height: 30,
+                        alignment: Alignment.topLeft,
+
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+
+                          color: white2,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+
+                            Container(
+                              height: 30,
+                              width: 30,
+                              color: white3,
+                              child: InkWell(
+                                onTap: () {
+                                  _decrementCounter(emiOption);
+                                },
+                                child: Center(child: Text('-',style: TextStyle(fontSize: 22.5,fontWeight: FontWeight.bold),)),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10, right: 10),
+                              child: Center(child: Text('${emiOption.count }')),
+                            ),
+                            Container(
+                              height: 30,
+                              width: 30,
+                              color: white3,
+                              child: InkWell(
+                                onTap: () {
+                                  _incrementCounter(emiOption);
+                                },
+                                child: Center(child: Text('+',style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold)),),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -371,7 +405,7 @@ class EmiOption {
   final String plannum;
   int count;
 
-  EmiOption( {required this.label, required this.amount,required this.plannum,this.count = 0});
+  EmiOption( {required this.label, required this.amount,required this.plannum,this.count = 1});
 }
 
 
