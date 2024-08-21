@@ -92,7 +92,10 @@ Widget Location_Container (context,{required String mainaddress,
             height: 100,
             width: MediaQuery.sizeOf(context).width,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10),
+                ),
                 image: DecorationImage(
                     fit: BoxFit.cover,
                     image: AssetImage(image))

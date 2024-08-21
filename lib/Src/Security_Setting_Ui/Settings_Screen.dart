@@ -40,8 +40,10 @@ class _Settings_ScreenState extends ConsumerState<Settings_Screen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: white2,
-      body: SingleChildScrollView(
-          child: _Mainbody()),
+      body: SafeArea(
+        child: SingleChildScrollView(
+            child: _Mainbody()),
+      ),
     );
   }
 

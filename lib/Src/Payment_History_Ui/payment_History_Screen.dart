@@ -46,89 +46,86 @@ class _paymrnt_History_ScreenState extends State<paymrnt_History_Screen> {
                     itemCount:10,
                     itemBuilder: (BuildContext context, int index){
                       return Padding(
-                        padding: const EdgeInsets.only(bottom : 10),
-                        child: Card(
-                          elevation: 5,
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: white1,
-                                borderRadius: BorderRadius.circular(10)
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 15,right: 15,top: 10,bottom: 10),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text('Plan 1',style: Goldweight,),
-                                      Padding(
-                                        padding: const EdgeInsets.only(top: 10,bottom: 10),
-                                        child: Row(
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.only(right: 10),
-                                              child: ImgPathSvg('Greenright.svg'),
+                        padding: const EdgeInsets.only(bottom : 8),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: white1,
+                              borderRadius: BorderRadius.circular(10)
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 15,right: 15,top: 10,bottom: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text('Plan 1',style: Goldweight,),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 10,bottom: 10),
+                                      child: Row(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(right: 10),
+                                            child: ImgPathSvg('Greenright.svg'),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(right: 10),
+                                            child: Text('₹5,000',style: UserST,),
+                                          ),
+                                          Container(
+                                            //width: MediaQuery.sizeOf(context).width/8,
+                                            decoration: BoxDecoration(
+                                                color: grey5,
+                                                borderRadius: BorderRadius.circular(50)
                                             ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(right: 10),
-                                              child: Text('₹5,000',style: UserST,),
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(left: 5,right: 5),
+                                              child: Center(child: Text('Success',style: success,)),
                                             ),
-                                            Container(
-                                              //width: MediaQuery.sizeOf(context).width/8,
-                                              decoration: BoxDecoration(
-                                                  color: grey5,
-                                                  borderRadius: BorderRadius.circular(50)
-                                              ),
-                                              child: Padding(
-                                                padding: const EdgeInsets.all(5),
-                                                child: Center(child: Text('Success',style: success,)),
-                                              ),
-                                            )
-                                          ],
-                                        ),
+                                          )
+                                        ],
                                       ),
-                                      Text('Gold Rate : ₹6535.00 g',style: planST,),
-                                    ],
-                                  ),
-                                  const Spacer(),
+                                    ),
+                                    Text('Gold Rate : ₹6535.00 g',style: planST,),
+                                  ],
+                                ),
+                                const Spacer(),
 
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    //crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text('SS/2425JO/000198',style: planST,),
-                                      Padding(
-                                        padding: const EdgeInsets.only(top: 10,bottom: 10),
-                                        child: Row(
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.only(right: 10),
-                                              child: Text('21 Dec 23',style: planST,),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  //crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text('SS/2425JO/000198',style: rate2,),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 10,bottom: 10),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.end,
+                                        crossAxisAlignment: CrossAxisAlignment.end,
+                                        children: [
+
+                                          Text('21 Dec 23',style: planST,),
+                                          Container(
+                                            //width: MediaQuery.sizeOf(context).width/8,
+                                            decoration: BoxDecoration(
+                                                color: grey5,
+                                                borderRadius: BorderRadius.circular(50)
                                             ),
-                                            Container(
-                                              //width: MediaQuery.sizeOf(context).width/8,
-                                              decoration: BoxDecoration(
-                                                  color: grey5,
-                                                  borderRadius: BorderRadius.circular(50)
-                                              ),
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(top: 4,bottom: 4,left: 15,right: 15),
-                                                child: Center(child: Text('UPI',style: planST,)),
-                                              ),
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(left: 15,right: 15),
+                                              child: Center(child: Text('UPI',style: planST,)),
                                             ),
-                                          ],
-                                        ),
+                                          ),
+                                        ],
                                       ),
-                                      Text('Gold Weight : 0.153 g',style: planST,)
-                                    ],
-                                  )
-                                ],
-                              ),
+                                    ),
+                                    Text('Gold Weight : 0.153 g',style: planST,)
+                                  ],
+                                )
+                              ],
                             ),
                           ),
                         ),

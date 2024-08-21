@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jewelone/Common_Widgets/Common_Button.dart';
 import 'package:jewelone/Common_Widgets/Image_Path.dart';
 import 'package:jewelone/Model/LoginModel.dart';
+import 'package:jewelone/Src/FAQ_Ui/Contact_Us_Screen.dart';
 import 'package:jewelone/Src/FAQ_Ui/FAQ_Screen.dart';
 import 'package:jewelone/Src/Home_DashBoard_Ui/Home_DashBoard_Screen.dart';
 import 'package:jewelone/Src/Login_Ui/LoginScreen.dart';
@@ -173,6 +174,7 @@ class _Menu_ScreenState extends ConsumerState<Menu_Screen> {
                               }),
                               Divider(),
                               NavContainer(image1: 'contact.svg', text: 'Contact Us', onTap: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=>Contact_Us_Screen()));
 
                               }),
                               Divider(),

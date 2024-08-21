@@ -48,6 +48,48 @@ Widget textFormField(
   );
 }
 
+//TEXTFORMFIELD BORDER
+Widget textFormField_border(
+    {TextEditingController? Controller,
+      String? Function(String?)? validating,
+      bool? isEnabled,
+      void Function(String)? onChanged,
+      required String hintText,
+      Widget? prefixIcon,
+      List<TextInputFormatter>? inputFormatters,
+      required TextInputType keyboardtype}) {
+  return Container(
+    // height: 50,
+    child: TextFormField(
+      enabled: isEnabled,
+      controller: Controller,
+      textCapitalization: TextCapitalization.none,
+      inputFormatters: inputFormatters,
+      validator: validating,
+      decoration: InputDecoration(
+        contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+        hintText: hintText,
+        hintStyle: lighttext,
+        prefixIcon: prefixIcon,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(5),
+          borderSide: BorderSide(color: borderclr),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(5),
+          borderSide: BorderSide(color: borderclr),
+        ),
+        fillColor: Colors.white,
+        filled: true,
+      ),
+      onChanged: onChanged,
+      textInputAction: TextInputAction.next,
+      style: Textfield_Style,
+      keyboardType: keyboardtype,
+    ),
+  );
+}
+
 Widget textFormFieldwwithlabelT(
     {TextEditingController? Controller,
       String? Function(String?)? validating,
@@ -336,11 +378,11 @@ Widget TextFieldDatePickerprofile({
       decoration: InputDecoration(
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
-          borderSide: BorderSide(color: pink1),
+          borderSide: BorderSide(color: borderclr),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(5),
-          borderSide: BorderSide(color: pink1),
+          borderSide: BorderSide(color: borderclr),
         ),
         counterText: "",
         hintText: '00/00/0000',
@@ -480,10 +522,11 @@ Widget textfieldDescription(
         hintText: hintText,
         hintStyle: lighttext,
         border: OutlineInputBorder(
+          borderSide: BorderSide(color: borderclr),
           borderRadius: BorderRadius.circular(10)  ,
         ),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: white1),
+          borderSide: BorderSide(color: borderclr),
           borderRadius: BorderRadius.circular(10),
         ),
         fillColor: white2,
@@ -712,6 +755,51 @@ Widget dropDownFieldprofileedit(
         padding: const EdgeInsets.only(right: 10,),
         child: Icon(
           Icons.keyboard_arrow_down_sharp,
+          color: Colors.black,
+          size: 20,
+        ),
+      ),
+      items: listValue?.map((String option) {
+        return DropdownMenuItem<String>(
+          value: option,
+          child: Center(child: Text(option,style: radioST,)),
+        );
+      }).toList(),
+      onChanged: onChanged,
+    ),
+  );
+}
+
+Widget dropDownFieldRightArrow(
+    context, {
+      required dynamic width,
+      required String? value,
+      required List<String>? listValue,
+      required void Function(String?)? onChanged,
+      required String hintT,
+    }) {
+  return Container(
+    height: 45,
+    width: width,
+    decoration:
+    BoxDecoration(
+      borderRadius: BorderRadius.circular(5),
+      color: backGroundColor,
+      border: Border.all(width: 1,color: borderclr),
+    ),
+    child: DropdownButtonFormField<String>(
+      value: value,
+      isExpanded: true,
+      decoration: InputDecoration(
+        border: InputBorder.none,
+        contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+        hintStyle: lighttext,
+        hintText: hintT,
+      ),
+      icon: Padding(
+        padding: const EdgeInsets.only(right: 10,),
+        child: Icon(
+          Icons.arrow_forward_ios,
           color: Colors.black,
           size: 20,
         ),
