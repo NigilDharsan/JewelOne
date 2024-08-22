@@ -32,7 +32,7 @@ class Data {
   int? numberOfAdvance;
   bool? allowPendingDue;
   int? numberOfPendingDue;
-  Null? particularAmount;
+  int? particularAmount;
   bool? convertToWeight;
   bool? status;
   bool? allowJoin;
@@ -40,41 +40,41 @@ class Data {
   bool? allowDue;
   int? totalInstalment;
   String? createdOn;
-  Null? updatedOn;
+  String? updatedOn;
   int? schIdMetal;
   int? schClassification;
   int? schIdPurity;
   int? createdBy;
-  Null? updatedBy;
+  int? updatedBy;
 
   Data(
       {this.schemeId,
-        this.schemeName,
-        this.schemeCode,
-        this.schemeType,
-        this.schemeDescription,
-        this.kycReq,
-        this.allowAdvance,
-        this.numberOfAdvance,
-        this.allowPendingDue,
-        this.numberOfPendingDue,
-        this.particularAmount,
-        this.convertToWeight,
-        this.status,
-        this.allowJoin,
-        this.unpaidAsDef,
-        this.allowDue,
-        this.totalInstalment,
-        this.createdOn,
-        this.updatedOn,
-        this.schIdMetal,
-        this.schClassification,
-        this.schIdPurity,
-        this.createdBy,
-        this.updatedBy});
+      this.schemeName,
+      this.schemeCode,
+      this.schemeType,
+      this.schemeDescription,
+      this.kycReq,
+      this.allowAdvance,
+      this.numberOfAdvance,
+      this.allowPendingDue,
+      this.numberOfPendingDue,
+      this.particularAmount,
+      this.convertToWeight,
+      this.status,
+      this.allowJoin,
+      this.unpaidAsDef,
+      this.allowDue,
+      this.totalInstalment,
+      this.createdOn,
+      this.updatedOn,
+      this.schIdMetal,
+      this.schClassification,
+      this.schIdPurity,
+      this.createdBy,
+      this.updatedBy});
 
   Data.fromJson(Map<String, dynamic> json) {
-    schemeId = json['scheme_id'];
+    schemeId = json['scheme_id'] ?? 0;
     schemeName = json['scheme_name'];
     schemeCode = json['scheme_code'];
     schemeType = json['scheme_type'];
@@ -91,8 +91,8 @@ class Data {
     unpaidAsDef = json['unpaid_as_def'];
     allowDue = json['allow_due'];
     totalInstalment = json['total_instalment'];
-    createdOn = json['created_on'];
-    updatedOn = json['updated_on'];
+    createdOn = json['created_on'] ?? "";
+    updatedOn = json['updated_on'] ?? "";
     schIdMetal = json['sch_id_metal'];
     schClassification = json['sch_classification'];
     schIdPurity = json['sch_id_purity'];

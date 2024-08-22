@@ -25,6 +25,7 @@ class MyPlanModel {
 }
 
 class Data {
+  int? idScheme;
   int? idSchemeAccount;
   String? accountName;
   int? idBranch;
@@ -38,9 +39,10 @@ class Data {
   bool? allowAdvance;
   int? advanceMonths;
   int? totalInstallments;
-  int? paidWeight;
+  double? paidAmount;
+  double? paidWeight;
   String? lastPaidDate;
-  int? todaysRate;
+  double? todaysRate;
   int? limitType;
   int? paymentChanceType;
   int? paymentChanceValue;
@@ -54,35 +56,38 @@ class Data {
   String? forSearch;
 
   Data(
-      {this.idSchemeAccount,
-        this.accountName,
-        this.idBranch,
-        this.startDate,
-        this.schemeAccNumber,
-        this.branchName,
-        this.schemeName,
-        this.customerName,
-        this.mobile,
-        this.paidInstallments,
-        this.allowAdvance,
-        this.advanceMonths,
-        this.totalInstallments,
-        this.paidWeight,
-        this.lastPaidDate,
-        this.todaysRate,
-        this.limitType,
-        this.paymentChanceType,
-        this.paymentChanceValue,
-        this.discountType,
-        this.discountValue,
-        this.denomType,
-        this.denomValue,
-        this.minimumPayable,
-        this.maximumPayable,
-        this.allowPay,
-        this.forSearch});
+      {this.idScheme,
+      this.idSchemeAccount,
+      this.accountName,
+      this.idBranch,
+      this.startDate,
+      this.schemeAccNumber,
+      this.branchName,
+      this.schemeName,
+      this.customerName,
+      this.mobile,
+      this.paidInstallments,
+      this.allowAdvance,
+      this.advanceMonths,
+      this.totalInstallments,
+      this.paidAmount,
+      this.paidWeight,
+      this.lastPaidDate,
+      this.todaysRate,
+      this.limitType,
+      this.paymentChanceType,
+      this.paymentChanceValue,
+      this.discountType,
+      this.discountValue,
+      this.denomType,
+      this.denomValue,
+      this.minimumPayable,
+      this.maximumPayable,
+      this.allowPay,
+      this.forSearch});
 
   Data.fromJson(Map<String, dynamic> json) {
+    idScheme = json['id_scheme'];
     idSchemeAccount = json['id_scheme_account'];
     accountName = json['account_name'];
     idBranch = json['id_branch'];
@@ -96,6 +101,7 @@ class Data {
     allowAdvance = json['allow_advance'];
     advanceMonths = json['advance_months'];
     totalInstallments = json['total_installments'];
+    paidAmount = json['paid_amount'];
     paidWeight = json['paid_weight'];
     lastPaidDate = json['last_paid_date'];
     todaysRate = json['todays_rate'];
@@ -118,6 +124,7 @@ class Data {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id_scheme'] = this.idScheme;
     data['id_scheme_account'] = this.idSchemeAccount;
     data['account_name'] = this.accountName;
     data['id_branch'] = this.idBranch;
@@ -131,6 +138,7 @@ class Data {
     data['allow_advance'] = this.allowAdvance;
     data['advance_months'] = this.advanceMonths;
     data['total_installments'] = this.totalInstallments;
+    data['paid_amount'] = this.paidAmount;
     data['paid_weight'] = this.paidWeight;
     data['last_paid_date'] = this.lastPaidDate;
     data['todays_rate'] = this.todaysRate;
@@ -154,7 +162,7 @@ class Data {
 }
 
 class MinimumPayable {
-  int? minAmount;
+  double? minAmount;
   int? minWeight;
 
   MinimumPayable({this.minAmount, this.minWeight});
@@ -174,7 +182,7 @@ class MinimumPayable {
 
 class MaximumPayable {
   int? maxWeight;
-  int? maxAmount;
+  double? maxAmount;
 
   MaximumPayable({this.maxWeight, this.maxAmount});
 
