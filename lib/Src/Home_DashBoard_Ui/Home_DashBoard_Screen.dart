@@ -218,7 +218,7 @@ Widget _Location_Dropdown(){
 
             homedropDownFieldprofileedit(
               context,
-              width: MediaQuery.sizeOf(context).width/3.5,
+              width: MediaQuery.sizeOf(context).width/3.2,
               hintT: 'Coimbatore',
               value: location,
               listValue: locationoption,

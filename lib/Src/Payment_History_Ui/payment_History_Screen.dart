@@ -82,7 +82,7 @@ class _paymrnt_History_ScreenState extends State<paymrnt_History_Screen> {
                                                 borderRadius: BorderRadius.circular(50)
                                             ),
                                             child: Padding(
-                                              padding: const EdgeInsets.only(left: 5,right: 5),
+                                              padding: const EdgeInsets.only(left: 5,right: 5,bottom: 1),
                                               child: Center(child: Text('Success',style: success,)),
                                             ),
                                           )
@@ -109,6 +109,7 @@ class _paymrnt_History_ScreenState extends State<paymrnt_History_Screen> {
 
                                           Text('21 Dec 23',style: planST,),
                                           Container(
+                                            margin: EdgeInsets.only(left: 10),
                                             //width: MediaQuery.sizeOf(context).width/8,
                                             decoration: BoxDecoration(
                                                 color: grey5,

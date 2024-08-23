@@ -31,7 +31,7 @@ class _Contact_Us_ScreenState extends State<Contact_Us_Screen> {
       ),
       body: Padding(
         padding:
-            const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 30),
+            const EdgeInsets.only(top: 20, left: 20, right: 20,),
         child: SingleChildScrollView(
           //MAINBODY
           child: _Mainbody(),
@@ -78,6 +78,8 @@ class _Contact_Us_ScreenState extends State<Contact_Us_Screen> {
         //MAIL US
         contactus(context,
             heading: 'Mail Us', number: 'retail.crm@ejindia.com'),
+
+        const SizedBox(height: 30,),
       ],
     );
   }

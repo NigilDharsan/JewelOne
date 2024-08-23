@@ -40,10 +40,8 @@ class _Settings_ScreenState extends ConsumerState<Settings_Screen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: white2,
-      body: SafeArea(
-        child: SingleChildScrollView(
-            child: _Mainbody()),
-      ),
+      body: SingleChildScrollView(
+          child: _Mainbody()),
     );
   }
 
@@ -60,7 +58,7 @@ class _Settings_ScreenState extends ConsumerState<Settings_Screen> {
               clipBehavior: Clip.none,
               children: [
                 Container(
-                  height: 80,
+                  height: 100,
                   width: MediaQuery.sizeOf(context).width,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
@@ -79,7 +77,7 @@ class _Settings_ScreenState extends ConsumerState<Settings_Screen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(top: 15,left: 15),
+                        padding: const EdgeInsets.only(top: 25,left: 15),
                         child: InkWell(
                           onTap: (){
                             Navigator.pop(context);
@@ -87,22 +85,25 @@ class _Settings_ScreenState extends ConsumerState<Settings_Screen> {
                             child: ImgPathSvg('backbutton.svg')),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 15,left: 15),
+                        padding: const EdgeInsets.only(top: 25,left: 15),
                         child: Text('Settings',style: appbarT,),
                       ),
                       const Spacer(),
-                      InkWell(
-                        onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>Faq_Screen()));
-                        },
-                          child: ImgPathSvg('info.svg')),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: InkWell(
+                          onTap: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>Faq_Screen()));
+                          },
+                            child: ImgPathSvg('info.svg')),
+                      ),
                     ],
                   ),
                 ),
 
                 //PROFILE
                 Positioned(
-                  top: 50,
+                  top: 60,
                   left: 30,
                   child: Container(
                     height: 100,
