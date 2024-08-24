@@ -80,6 +80,12 @@ TextStyle walletT2 = TextStyle(
     color: Color.fromRGBO(136, 136, 136, 1),
     fontWeight: FontWeight.w500);
 
+TextStyle plandetailT = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 12,
+    color: Color.fromRGBO(45, 45, 45, 1),
+    fontWeight: FontWeight.w500);
+
 //GRAM
 TextStyle gramST = TextStyle(
     fontFamily: 'Inter',
@@ -213,6 +219,12 @@ TextStyle TBlack1 = TextStyle(
 TextStyle Total_Plan_amount = TextStyle(
     fontFamily: 'Metropolis',
     fontSize: 18,
+    color: Color.fromRGBO(45, 45, 45, 1),
+    fontWeight: FontWeight.w600);
+
+TextStyle detailsT = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 12,
     color: Color.fromRGBO(45, 45, 45, 1),
     fontWeight: FontWeight.w600);
 
@@ -434,6 +446,12 @@ TextStyle password = TextStyle(
     fontSize: 20,
     color: Color.fromRGBO(45, 45, 45, 1),
     fontWeight: FontWeight.w500);
+
+TextStyle appbarT2 = TextStyle(
+    fontFamily: 'Inter',
+    fontSize: 20,
+    color: Color.fromRGBO(45, 45, 45, 1),
+    fontWeight: FontWeight.w600);
 
 TextStyle planlist = TextStyle(
     fontFamily: 'Inter',
