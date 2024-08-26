@@ -209,6 +209,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   "LOGIN CUSTOMER ID ::${result?.customer?.idCustomer ?? ""}");
               print("CUSTOMER PHONE ::${result?.customer?.mobile ?? ""}");
               // ShowToastMessage(result?.message ?? "");
+              String Boolvalue = "true";
+              Routes(Boolvalue);
+
               Navigator.push(
                   context,
                   MaterialPageRoute(
