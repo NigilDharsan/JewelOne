@@ -157,17 +157,17 @@ class _Menu_ScreenState extends ConsumerState<Menu_Screen> {
                                             builder: (context) =>
                                                 Notification_Screen()));
                                   }),
-                              Divider(),
-                              NavContainer(
-                                  image1: 'wallet2.svg',
-                                  text: 'Wallet',
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                Wallet_screen()));
-                                  }),
+                              // Divider(),
+                              // NavContainer(
+                              //     image1: 'wallet2.svg',
+                              //     text: 'Wallet',
+                              //     onTap: () {
+                              //       Navigator.push(
+                              //           context,
+                              //           MaterialPageRoute(
+                              //               builder: (context) =>
+                              //                   Wallet_screen()));
+                              //     }),
                               Divider(),
                               NavContainer(
                                   image1: 'ema.svg',
@@ -241,27 +241,27 @@ class _Menu_ScreenState extends ConsumerState<Menu_Screen> {
                                             builder: (context) =>
                                                 Contact_Us_Screen()));
                                   }),
-                              Divider(),
-                              NavContainer(
-                                  image1: 'faq.svg',
-                                  text: 'FAQs',
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                Faq_Screen()));
-                                  }),
-                              Divider(),
-                              NavContainer(
-                                  image1: 'support.svg',
-                                  text: 'Support',
-                                  onTap: () {}),
-                              Divider(),
-                              NavContainer(
-                                  image1: 'dth.svg',
-                                  text: 'DTH / Experience Center',
-                                  onTap: () {}),
+                              // Divider(),
+                              // NavContainer(
+                              //     image1: 'faq.svg',
+                              //     text: 'FAQs',
+                              //     onTap: () {
+                              //       Navigator.push(
+                              //           context,
+                              //           MaterialPageRoute(
+                              //               builder: (context) =>
+                              //                   Faq_Screen()));
+                              //     }),
+                              // Divider(),
+                              // NavContainer(
+                              //     image1: 'support.svg',
+                              //     text: 'Support',
+                              //     onTap: () {}),
+                              // Divider(),
+                              // NavContainer(
+                              //     image1: 'dth.svg',
+                              //     text: 'DTH / Experience Center',
+                              //     onTap: () {}),
                             ],
                           ),
                         ),

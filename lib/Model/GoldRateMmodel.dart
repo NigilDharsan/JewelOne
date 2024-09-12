@@ -30,12 +30,12 @@ class Data {
   String? silverG;
   String? silverKG;
   String? silver999;
-  Null? updatetime;
+  String? updatetime;
   bool? status;
-  Null? createdOn;
-  Null? updatedOn;
+  String? createdOn;
+  String? updatedOn;
   int? createdBy;
-  Null? updatedBy;
+  String? updatedBy;
 
   Data(
       {this.rateId,

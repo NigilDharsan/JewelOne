@@ -155,7 +155,7 @@ Widget Address(context) {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'JewelOne Corporate Office:',
+              'Shining Dawn Corporate Office:',
               style: texts2,
             ),
             Divider(
