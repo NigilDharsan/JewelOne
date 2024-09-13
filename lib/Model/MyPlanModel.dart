@@ -54,6 +54,7 @@ class Data {
   MaximumPayable? maximumPayable;
   bool? allowPay;
   String? forSearch;
+  String? enterAmount;
 
   Data(
       {this.idScheme,
@@ -84,7 +85,8 @@ class Data {
       this.minimumPayable,
       this.maximumPayable,
       this.allowPay,
-      this.forSearch});
+      this.forSearch,
+      this.enterAmount});
 
   Data.fromJson(Map<String, dynamic> json) {
     idScheme = json['id_scheme'];

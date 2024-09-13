@@ -17,8 +17,8 @@ class My_SSP_Screen extends ConsumerStatefulWidget {
 }
 
 class _My_SSP_ScreenState extends ConsumerState<My_SSP_Screen> {
-  bool _Custom_icon = false;
-  bool _Custom_icon2 = false;
+  // Create a list to track the expanded state of each ExpansionTile
+  List<bool> _expandedStates = [];
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +43,10 @@ class _My_SSP_ScreenState extends ConsumerState<My_SSP_Screen> {
   Widget _Mainbody() {
     final myplandata = ref.watch(MyplanProvider);
     return myplandata.when(data: (data) {
+      if (_expandedStates.length != data?.data?.length) {
+        _expandedStates = List<bool>.filled(data?.data?.length ?? 0, false);
+      }
+
       return SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20),
@@ -79,7 +83,8 @@ class _My_SSP_ScreenState extends ConsumerState<My_SSP_Screen> {
                             trailing: SizedBox.shrink(),
                             onExpansionChanged: (bool expanded) {
                               setState(() {
-                                _Custom_icon = expanded;
+                                // Update the expanded state for the clicked item
+                                _expandedStates[index] = expanded;
                               });
                             },
                             title: Padding(
@@ -94,7 +99,7 @@ class _My_SSP_ScreenState extends ConsumerState<My_SSP_Screen> {
                                         style: Plan_Style,
                                       ),
                                       const Spacer(),
-                                      _Custom_icon == true
+                                      _expandedStates[index]
                                           ? ImgPathSvg('downarrow.svg')
                                           : ImgPathSvg('rightarrow.svg'),
                                     ],
@@ -107,7 +112,7 @@ class _My_SSP_ScreenState extends ConsumerState<My_SSP_Screen> {
                                     children: [
                                       Padding(
                                         padding:
-                                            const EdgeInsets.only(right: 10),
+                                        const EdgeInsets.only(right: 10),
                                         child: InkWell(
                                             onTap: () {
                                               Navigator.push(
@@ -137,38 +142,36 @@ class _My_SSP_ScreenState extends ConsumerState<My_SSP_Screen> {
                                     Row_List(
                                         text1: 'ID number',
                                         text2:
-                                            "${data?.data?[index].schemeAccNumber}"),
+                                        "${data?.data?[index].schemeAccNumber}"),
                                     Divider(),
                                     Row_List(
                                         text1: 'A/c name',
                                         text2:
-                                            data?.data?[index].customerName ??
-                                                ""),
+                                        data?.data?[index].customerName ?? ""),
                                     Divider(),
                                     Row_List(
                                         text1: 'Location',
-                                        text2: data?.data?[index].branchName ??
-                                            ""),
+                                        text2: data?.data?[index].branchName ?? ""),
                                     Divider(),
                                     Row_List(
                                         text1: 'Total plan amount',
                                         text2:
-                                            '₹${data?.data?[index].maximumPayable?.maxAmount}'),
+                                        '₹${data?.data?[index].maximumPayable?.maxAmount}'),
                                     Divider(),
                                     Row_List(
                                         text1: 'Monthly EMA',
                                         text2:
-                                            '₹${data?.data?[index].minimumPayable?.minAmount}'),
+                                        '₹${data?.data?[index].minimumPayable?.minAmount}'),
                                     Divider(),
                                     Row_List(
                                         text1: 'Tenure',
                                         text2:
-                                            'up to ${data?.data?[index].totalInstallments ?? ""} months'),
+                                        'up to ${data?.data?[index].totalInstallments ?? ""} months'),
                                     Divider(),
                                     Row_List(
                                         text1: 'Gold saved till date',
                                         text2:
-                                            '${data?.data?[index].paidWeight ?? ""} g'),
+                                        '${data?.data?[index].paidWeight ?? ""} g'),
                                   ],
                                 ),
                               )
@@ -178,7 +181,6 @@ class _My_SSP_ScreenState extends ConsumerState<My_SSP_Screen> {
                       ),
                     );
                   }),
-
               //HELP CONTAINER
               HelpContainer(context, Color: pink4),
             ],
@@ -258,7 +260,7 @@ Widget HelpContainer(context, {required dynamic Color}) {
           borderRadius: BorderRadius.circular(10)),
       child: Padding(
         padding:
-            const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
+        const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
