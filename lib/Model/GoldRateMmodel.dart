@@ -35,7 +35,7 @@ class Data {
   String? createdOn;
   String? updatedOn;
   int? createdBy;
-  String? updatedBy;
+  int? updatedBy;
 
   Data(
       {this.rateId,
