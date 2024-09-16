@@ -95,7 +95,7 @@ class _Home_DashBoard_ScreenState extends ConsumerState<Home_DashBoard_Screen> {
               activelocationdata.when(data: (data){
                 return _Location_Dropdown();
               }, error: (Object error, StackTrace stackTrace){
-                return Text('ERROR');
+                return Text('ERROR $error');
               }, loading: (){
                 return CircularProgressIndicator();
                }),

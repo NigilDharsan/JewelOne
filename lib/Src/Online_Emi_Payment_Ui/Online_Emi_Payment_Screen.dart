@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_cashfree_pg_sdk/api/cfpayment/cfwebcheckoutpayment.dart';
@@ -75,9 +76,12 @@ class _Online_Emi_Payment_ScreenState
     getDetails();
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     final myplandata = ref.watch(MyplanProvider);
+
     return Scaffold(
       backgroundColor: white2,
       appBar: Custom_AppBar(
@@ -116,14 +120,14 @@ class _Online_Emi_Payment_ScreenState
                       ),
                     ),
                     // Container(child: Plan_List()),
-                    Container(
-                        child: ListView.builder(
+                    ListView.builder(
                       itemCount: data?.data?.length ?? 0,
                       shrinkWrap: true,
                       scrollDirection: Axis.vertical,
                       physics: NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
                         bool isChecked = _isCheckedList[index] ?? false;
+                        int returnType = data?.data?[index].limitType ?? 1;
                         return Padding(
                           padding: const EdgeInsets.only(bottom: 10),
                           child: Container(
@@ -133,8 +137,7 @@ class _Online_Emi_Payment_ScreenState
                               color: white1,
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 5, right: 15, top: 10, bottom: 10),
+                              padding: const EdgeInsets.only(left: 5, right: 15, top: 10, bottom: 10),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -153,59 +156,67 @@ class _Online_Emi_Payment_ScreenState
                                     },
                                   ),
                                   Padding(
-                                    padding:
-                                        const EdgeInsets.only(top: 5, left: 5),
+                                    padding: const EdgeInsets.only(top: 5, left: 3),
                                     child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.start,
                                       children: [
                                         Container(
-                                            width: MediaQuery.sizeOf(context)
-                                                    .width /
-                                                2.8,
-                                            child: Text(
-                                                data?.data?[index].schemeName ??
-                                                    "",
-                                                style: planST)),
+                                          width: MediaQuery.sizeOf(context).width / 2.8,
+                                          child: Text(
+                                            data?.data?[index].schemeName ?? "",
+                                            style: planST,
+                                          ),
+                                        ),
                                         const SizedBox(height: 5),
                                         Container(
-                                            width: MediaQuery.sizeOf(context)
-                                                    .width /
-                                                2.8,
-                                            child: Text(
-                                                data?.data?[index]
-                                                        .accountName ??
-                                                    "",
-                                                style: planST)),
+                                          width: MediaQuery.sizeOf(context).width / 2.8,
+                                          child: Text(
+                                            data?.data?[index].accountName ?? "",
+                                            style: planST,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 5),
+                                        data?.data?[index]?.limitType == 1 ?
+                                        Text(
+                                          "Min Amount : ${data?.data?[index].minimumPayable?.minAmount ?? ""}",
+                                          style: planST,
+                                        ) : Text(
+                                          "Min Weight : ${data?.data?[index].minimumPayable?.minWeight ?? ""}",
+                                          style: planST,
+                                        ),
+                                        const SizedBox(height: 5),
+                                        data?.data?[index]?.limitType == 1 ?
+                                        Text(
+                                          "Max Amount : ${data?.data?[index].maximumPayable?.maxAmount ?? ""}",
+                                          style: planST,
+                                        ) : Text(
+                                          "Max Weight : ${data?.data?[index].maximumPayable?.maxWeight ?? ""}",
+                                          style: planST,
+                                        ),
                                         const SizedBox(height: 5),
                                         Text(
-                                            "Min Amount : ${data?.data?[index].minimumPayable?.minAmount ?? ""}",
-                                            style: planST),
+                                          "Rate per gold : ${data?.data?[index].todaysRate ?? ''}",
+                                          style: planST,
+                                        ),
                                         const SizedBox(height: 5),
-                                        Text(
-                                            "Max Amount : ${data?.data?[index].maximumPayable?.maxAmount ?? ""}",
-                                            style: planST),
-                                        const SizedBox(height: 5),
-                                        Text(
-                                            "Rate per gold : ${data?.data?[index].todaysRate ?? ''}",
-                                            style: planST),
-                                        const SizedBox(height: 5),
-                                        Text(
+                                        Container(
+                                          width: MediaQuery.sizeOf(context).width/3,
+                                          child: Text(
                                             "Equivalent weight : ${data?.data?[index].paidWeight ?? ''}",
-                                            style: planST),
+                                            style: planST,
+                                          ),
+                                        ),
                                       ],
                                     ),
                                   ),
-                                  const SizedBox(width: 18),
+                                  const SizedBox(width: 15),
+
                                   Padding(
                                     padding: const EdgeInsets.only(top: 8),
                                     child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Container(
                                           width: 100,
@@ -214,121 +225,139 @@ class _Online_Emi_Payment_ScreenState
                                             // initialValue: data?.data?[index].enterAmount ?? "",
                                             keyboardType: TextInputType.number,
                                             validator: (value) {
-                                              if (value == null ||
-                                                  value.isEmpty) {
-                                                return '';
+                                              if (value == null || value.isEmpty) {
+                                                return 'Please enter amount';
                                               }
-                                              final intValue =
-                                                  int.tryParse(value);
+                                              final intValue = int.tryParse(value);
                                               if (intValue == null) {
                                                 return '';
                                               }
-                                              if (intValue < 1000 ||
-                                                  intValue > 10000) {
+                                              if (intValue <= 1000 || intValue >= 10000) {
                                                 return '';
                                               }
                                               return null;
                                             },
                                             inputFormatters: [
-                                              LengthLimitingTextInputFormatter(
-                                                  5),
-                                              FilteringTextInputFormatter
-                                                  .digitsOnly
+                                              LengthLimitingTextInputFormatter(5),
+                                              FilteringTextInputFormatter.digitsOnly
                                             ],
                                             textAlign: TextAlign.left,
-                                            enabled: isChecked,
+                                            enabled: isChecked && data?.data?[index].limitType == 1,
                                             decoration: InputDecoration(
                                               hintText: "INR",
                                               filled: true,
-                                              fillColor: Colors.grey[300],
+                                              fillColor: Colors.grey[50],
                                               border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
+                                                borderRadius: BorderRadius.circular(5),
                                                 borderSide: BorderSide.none,
                                               ),
-                                              contentPadding:
-                                                  EdgeInsets.symmetric(
-                                                      vertical: 8.0,
-                                                      horizontal: 8.0),
+                                              contentPadding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
                                             ),
                                             onChanged: (text) {
-                                              var amount = text != ""
-                                                  ? int.parse(text)
-                                                  : 0;
+                                              var amount = text != "" ? int.parse(text) : 0;
                                               setState(() {
-                                                data?.data?[index].enterAmount =
-                                                    "$amount";
-                                                data?.data?[index].limitType ==
-                                                        1
+                                                data?.data?[index].enterAmount = "$amount";
+                                                data?.data?[index].limitType == 1
                                                     ? totalAmount = amount
                                                     : amount > 1
-                                                        ? totalAmount = 0
-                                                        : 0;
+                                                    ? totalAmount = 0
+                                                    : 0;
                                               });
                                             },
                                           ),
                                         ),
                                         const SizedBox(height: 5),
                                         Container(
+                                    width: 100,
+                                    height: 35,
+                                    child: TextFormField(
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Please enter gram';
+                                        }
+                                        final intValue = int.tryParse(value);
+                                        if (intValue == null) {
+                                          return '';
+                                        }
+                                        if (intValue <= 1 || intValue >= 8) {
+                                          return '';
+                                        }
+                                        return null;
+                                      },
+                                      textAlign: TextAlign.left,
+                                      enabled: isChecked && data?.data?[index].limitType == 2,
+                                      keyboardType: TextInputType.numberWithOptions(decimal: true),
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
+                                      ],
+
+                                      decoration: InputDecoration(
+                                        hintText: "Enter Gram",
+                                        filled: true,
+                                        fillColor: Colors.grey[50],
+                                        border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(5),
+                                          borderSide: BorderSide.none,
+                                        ),
+                                        contentPadding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
+                                      ),
+                                    ),),
+                                        const SizedBox(height: 5),
+                                        Container(
                                           width: 100,
-                                          height: 35,
-                                          child: TextField(
-                                            textAlign: TextAlign.left,
-                                            enabled: (isChecked &&
-                                                        data?.data?[index]
-                                                                .limitType ==
-                                                            2) ==
-                                                    true
-                                                ? true
-                                                : false,
-                                            decoration: InputDecoration(
-                                              hintText: "Enter Gram",
-                                              filled: true,
-                                              fillColor: Colors.grey[300],
-                                              border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
-                                                borderSide: BorderSide.none,
-                                              ),
-                                              contentPadding:
-                                                  EdgeInsets.symmetric(
-                                                      vertical: 8.0,
-                                                      horizontal: 8.0),
+                                          color:Colors.grey[300],
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(left: 3,right: 3),
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                              crossAxisAlignment: CrossAxisAlignment.center,
+                                              children: [
+                                                InkWell(
+                                                  onTap: (){
+
+                                                    if ((data?.data?[index]?.advanceMonths ?? 0) >=  (data?.data?[index].incrementCount ?? 0) && (data?.data?[index].incrementCount ?? 0) > 1)
+                                                    {
+                                                      setState(() {
+                                                        data?.data?[index].incrementCount = (data?.data?[index].incrementCount ?? 0)-1;
+
+                                                      });
+
+                                                    }
+                                                  },
+                                                  child: Icon(Icons.remove,size: 15,),
+                                                ),
+                                                Container(
+                                                  color: Colors.grey[50],
+                                                  width: 50,
+                                                  child: Text("${data?.data?[index].incrementCount}", textAlign: TextAlign.center),
+                                                ),
+                                                InkWell(
+                                                  onTap: (){
+                                                    if(data?.data?[index]?.allowAdvance == true){
+                                                      // _incrementCounter();
+                                                      if ((data?.data?[index]?.advanceMonths ?? 0) >=  (data?.data?[index].incrementCount ?? 0))
+                                                        {
+                                                          setState(() {
+                                                            data?.data?[index].incrementCount = (data?.data?[index].incrementCount ?? 0)+1;
+                                                          });
+                                                        }
+                                                    }
+                                                  },
+                                                  child: Icon(Icons.add,size: 15,),
+                                                ),
+                                              ],
                                             ),
                                           ),
                                         ),
                                         const SizedBox(height: 5),
-                                        Container(
-                                          color: Colors.grey[300],
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Container(
-                                                color: Colors.grey[500],
-                                                child: Icon(Icons.remove),
-                                              ),
-                                              Container(
-                                                  width: 50,
-                                                  child: Text("1",
-                                                      textAlign:
-                                                          TextAlign.center)),
-                                              Container(
-                                                color: Colors.grey[500],
-                                                child: Icon(Icons.add),
-                                              ),
-                                            ],
-                                          ),
+                                        Text(
+                                          'Discount : ${data?.data?[index].discountValue}',
+                                          style: planST,
                                         ),
-                                        const SizedBox(height: 5),
                                         Text(
-                                            'Discount : ${data?.data?[index].discountValue}',
-                                            style: planST),
-                                        Text(
-                                            'Net Amount : ${data?.data?[index].enterAmount ?? ""}',
-                                            style: planST),
+                                          'Net Amount : ${data?.data?[index].enterAmount ?? ""}',
+                                          style: planST,
+                                        ),
                                       ],
                                     ),
                                   )
@@ -338,7 +367,7 @@ class _Online_Emi_Payment_ScreenState
                           ),
                         );
                       },
-                    )),
+                    ),
                     const SizedBox(height: 35),
                     HelpContainer(context, Color: pink4),
                     const SizedBox(height: 10),
@@ -607,22 +636,6 @@ class _Online_Emi_Payment_ScreenState
         print('Exception: $e');
       }
     }
-  }
-
-  void _incrementCounter(EmiOption emiOption) {
-    setState(() {
-      emiOption.count++;
-      _calculateTotalAmount();
-    });
-  }
-
-  void _decrementCounter(EmiOption emiOption) {
-    setState(() {
-      if (emiOption.count > 0) {
-        emiOption.count--;
-        _calculateTotalAmount();
-      }
-    });
   }
 
   Widget Total_Online() {
