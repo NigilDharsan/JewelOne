@@ -111,9 +111,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
         //MOBILE NUMBER
         Heading_Text(context, Title: "Welcome Back!"),
-
+        SizedBox(
+          height: 20,
+        ),
         // Phone Number Text and TextField
-        Title_Style(Title: 'Phone Number', isStatus: null),
+        // Title_Style(Title: 'Phone Number', isStatus: null),
         textFormField(
             // isEnabled: false,
             hintText: "Phone Number",
@@ -137,9 +139,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               color: white11,
             )),
 
+        SizedBox(
+          height: 20,
+        ),
         // Password Text and TextField
         // Phone Number Text and TextField
-        Title_Style(Title: 'Password', isStatus: null),
+        // Title_Style(Title: 'Password', isStatus: null),
         textFieldPassword(
           Controller: _password,
           obscure: _obscurePassword,

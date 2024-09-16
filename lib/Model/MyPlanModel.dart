@@ -165,7 +165,7 @@ class Data {
 
 class MinimumPayable {
   double? minAmount;
-  int? minWeight;
+  double? minWeight;
 
   MinimumPayable({this.minAmount, this.minWeight});
 
@@ -183,7 +183,7 @@ class MinimumPayable {
 }
 
 class MaximumPayable {
-  int? maxWeight;
+  double? maxWeight;
   double? maxAmount;
 
   MaximumPayable({this.maxWeight, this.maxAmount});

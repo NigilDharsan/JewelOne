@@ -10,6 +10,7 @@ import 'package:jewelone/Model/MyPlanModel.dart';
 import 'package:jewelone/Model/SignUpModel.dart';
 import 'package:jewelone/utilits/Generic.dart';
 import 'package:jewelone/utilits/MakeApiCall.dart';
+
 import 'ConstantsApi.dart';
 
 final dioProvider = Provider<Dio>((ref) {
@@ -21,7 +22,6 @@ final dioProvider = Provider<Dio>((ref) {
 class ApiService {
   final Dio _dio;
   ApiService(this._dio);
-
 
   //LOGIN
   Future<LoginModel> LoginApi(Map<String, dynamic> formData) async {
@@ -46,7 +46,7 @@ class ApiService {
   }
 
   //SIGNUP
-  Future<SignUpModel> signupapi (Map<String, dynamic> formData) async {
+  Future<SignUpModel> signupapi(Map<String, dynamic> formData) async {
     final result = await requestPOST3(
         url: ConstantApi.signupUrl, formData: formData, dio: _dio);
     if (result["success"] == true) {
@@ -68,7 +68,8 @@ class ApiService {
   }
 
   //FORGOT PASSWORD
-  Future<Forgot_Password_Model> forgetpasswordapi (Map<String, dynamic> formData) async {
+  Future<Forgot_Password_Model> forgetpasswordapi(
+      Map<String, dynamic> formData) async {
     final result = await requestPOST3(
         url: ConstantApi.forgetpasswordUrl, formData: formData, dio: _dio);
     if (result["success"] == true) {
@@ -90,7 +91,8 @@ class ApiService {
   }
 
   //VERIFY OTP
-  Future<Forgot_Password_Model> verifyotpapi (Map<String, dynamic> formData) async {
+  Future<Forgot_Password_Model> verifyotpapi(
+      Map<String, dynamic> formData) async {
     final result = await requestPOST3(
         url: ConstantApi.forgetpasswordUrl, formData: formData, dio: _dio);
     if (result["success"] == true) {
@@ -132,7 +134,6 @@ class ApiService {
     return BannerImageModel();
   }
 
-
   //BANNER IMAGE
   Future<GoldRateModel> GoldrateApi() async {
     final result = await requestGET(url: ConstantApi.goldrateUrl, dio: _dio);
@@ -156,7 +157,8 @@ class ApiService {
 
   //ACTIVE LOCATION
   Future<ActiveLocationModel> ActivelocationApi() async {
-    final result = await requestGET(url: ConstantApi.activelocationUrl, dio: _dio);
+    final result =
+        await requestGET(url: ConstantApi.activelocationUrl, dio: _dio);
     if (result["success"] == true) {
       print("resultOTP:$result");
       print("resultOTPsss:${result["success"]}");
@@ -175,11 +177,10 @@ class ApiService {
     return ActiveLocationModel();
   }
 
-
   //MY PLANS
   Future<MyPlanModel> MyplanApi() async {
     var formData = <String, dynamic>{
-      "customer": '1',
+      "customer": await getCustomer_Id(),
     };
 
     final result = await requestPOST2(
@@ -223,5 +224,4 @@ class ApiService {
     }
     return ActivePlanModel();
   }
-
 }

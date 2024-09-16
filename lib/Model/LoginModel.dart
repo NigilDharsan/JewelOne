@@ -36,8 +36,8 @@ class Customer {
   String? email;
   String? mobCode;
   Null? referenceNo;
-  Null? idBranch;
-  Null? idArea;
+  int? idBranch;
+  String? idArea;
   String? title;
   String? lastname;
   String? firstname;
@@ -45,19 +45,19 @@ class Customer {
   String? dateOfWed;
   int? gender;
   String? mobile;
-  Null? cusImg;
-  Null? comments;
-  Null? profileComplete;
+  String? cusImg;
+  String? comments;
+  String? profileComplete;
   bool? active;
-  Null? dateAdd;
+  String? dateAdd;
   String? customEntryDate;
-  Null? dateUpd;
+  String? dateUpd;
   bool? notification;
-  Null? gstNumber;
-  Null? panNumber;
-  Null? cusRefCode;
+  String? gstNumber;
+  String? panNumber;
+  String? cusRefCode;
   bool? isRefbenefitCrtCus;
-  Null? empRefCode;
+  String? empRefCode;
   bool? isRefbenefitCrtEmp;
   int? religion;
   bool? kycStatus;
@@ -72,52 +72,49 @@ class Customer {
   String? createdOn;
   Null? updatedOn;
   int? user;
-  Null? createdBy;
-  Null? updatedBy;
 
-  Customer(
-      {this.idCustomer,
-      this.email,
-      this.mobCode,
-      this.referenceNo,
-      this.idBranch,
-      this.idArea,
-      this.title,
-      this.lastname,
-      this.firstname,
-      this.dateOfBirth,
-      this.dateOfWed,
-      this.gender,
-      this.mobile,
-      this.cusImg,
-      this.comments,
-      this.profileComplete,
-      this.active,
-      this.dateAdd,
-      this.customEntryDate,
-      this.dateUpd,
-      this.notification,
-      this.gstNumber,
-      this.panNumber,
-      this.cusRefCode,
-      this.isRefbenefitCrtCus,
-      this.empRefCode,
-      this.isRefbenefitCrtEmp,
-      this.religion,
-      this.kycStatus,
-      this.isCusSynced,
-      this.lastSyncTime,
-      this.lastPaymentOn,
-      this.isVip,
-      this.isEmailVerified,
-      this.registeredThrough,
-      this.cusType,
-      this.sendPromoSms,
-      this.createdOn,
-      this.updatedOn,
-      this.user,
-      this.createdBy,
-      this.updatedBy});
+  Customer({
+    this.idCustomer,
+    this.email,
+    this.mobCode,
+    this.referenceNo,
+    this.idBranch,
+    this.idArea,
+    this.title,
+    this.lastname,
+    this.firstname,
+    this.dateOfBirth,
+    this.dateOfWed,
+    this.gender,
+    this.mobile,
+    this.cusImg,
+    this.comments,
+    this.profileComplete,
+    this.active,
+    this.dateAdd,
+    this.customEntryDate,
+    this.dateUpd,
+    this.notification,
+    this.gstNumber,
+    this.panNumber,
+    this.cusRefCode,
+    this.isRefbenefitCrtCus,
+    this.empRefCode,
+    this.isRefbenefitCrtEmp,
+    this.religion,
+    this.kycStatus,
+    this.isCusSynced,
+    this.lastSyncTime,
+    this.lastPaymentOn,
+    this.isVip,
+    this.isEmailVerified,
+    this.registeredThrough,
+    this.cusType,
+    this.sendPromoSms,
+    this.createdOn,
+    this.updatedOn,
+    this.user,
+  });
 
   Customer.fromJson(Map<String, dynamic> json) {
     idCustomer = json['id_customer'];
@@ -160,8 +157,6 @@ class Customer {
     createdOn = json['created_on'];
     updatedOn = json['updated_on'];
     user = json['user'];
-    createdBy = json['created_by'];
-    updatedBy = json['updated_by'];
   }
 
   Map<String, dynamic> toJson() {
@@ -206,8 +201,7 @@ class Customer {
     data['created_on'] = this.createdOn;
     data['updated_on'] = this.updatedOn;
     data['user'] = this.user;
-    data['created_by'] = this.createdBy;
-    data['updated_by'] = this.updatedBy;
+
     return data;
   }
 }
