@@ -56,6 +56,8 @@ class Data {
   String? forSearch;
   String? enterAmount;
   int? incrementCount = 1;
+  bool? isChecked = false;
+  String? totalAmount;
 
   Data(
       {this.idScheme,
@@ -88,7 +90,8 @@ class Data {
       this.allowPay,
       this.forSearch,
       this.enterAmount,
-      this.incrementCount});
+      this.incrementCount,
+      this.isChecked});
 
   Data.fromJson(Map<String, dynamic> json) {
     idScheme = json['id_scheme'];
