@@ -112,6 +112,7 @@ class _Online_Emi_Payment_ScreenState
                       shrinkWrap: true,
                       scrollDirection: Axis.vertical,
                       physics: NeverScrollableScrollPhysics(),
+                      padding: EdgeInsets.zero,
                       itemBuilder: (context, index) {
                         // controllers.add(TextEditingController());
                         // controllers[index].text =
@@ -135,10 +136,12 @@ class _Online_Emi_Payment_ScreenState
                                 children: [
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     children: [
                                       Checkbox(
-                                        side: BorderSide(width: 1, color: checkbox),
+                                        side: BorderSide(
+                                            width: 1, color: checkbox),
                                         value: data?.data?[index].isChecked,
                                         onChanged: (bool? value) {
                                           setState(() {
@@ -147,7 +150,8 @@ class _Online_Emi_Payment_ScreenState
                                             if (data?.data?[index].isChecked ==
                                                 true) {
                                               // totalAmount = totalAmount - int.parse(data?.data?[index].enterAmount ?? "");
-                                              data?.data?[index].enterAmount = "";
+                                              data?.data?[index].enterAmount =
+                                                  "";
                                             }
                                           });
                                         },
@@ -155,7 +159,9 @@ class _Online_Emi_Payment_ScreenState
 
                                       //SCHEME NAME
                                       Container(
-                                        width: MediaQuery.sizeOf(context).width / 1.5,
+                                        width:
+                                            MediaQuery.sizeOf(context).width /
+                                                1.5,
                                         child: Text(
                                           data?.data?[index].schemeName ?? "",
                                           style: UserST,
@@ -163,24 +169,30 @@ class _Online_Emi_Payment_ScreenState
                                       ),
                                     ],
                                   ),
-
                                   Padding(
-                                    padding: const EdgeInsets.only(left: 10,),
+                                    padding: const EdgeInsets.only(
+                                      left: 10,
+                                    ),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
                                           children: [
                                             const SizedBox(height: 5),
                                             Container(
-                                              width:
-                                              MediaQuery.sizeOf(context).width /
+                                              width: MediaQuery.sizeOf(context)
+                                                      .width /
                                                   2.8,
                                               child: Text(
-                                                data?.data?[index].accountName ??
+                                                data?.data?[index]
+                                                        .accountName ??
                                                     "",
                                                 style: planST,
                                               ),
@@ -188,23 +200,23 @@ class _Online_Emi_Payment_ScreenState
                                             const SizedBox(height: 5),
                                             data?.data?[index]?.limitType == 1
                                                 ? Text(
-                                              "Min Amount : ${data?.data?[index].minimumPayable?.minAmount ?? ""}",
-                                              style: planST,
-                                            )
+                                                    "Min Amount : ${data?.data?[index].minimumPayable?.minAmount ?? ""}",
+                                                    style: planST,
+                                                  )
                                                 : Text(
-                                              "Min Weight : ${data?.data?[index].minimumPayable?.minWeight ?? ""}",
-                                              style: planST,
-                                            ),
+                                                    "Min Weight : ${data?.data?[index].minimumPayable?.minWeight ?? ""}",
+                                                    style: planST,
+                                                  ),
                                             const SizedBox(height: 5),
                                             data?.data?[index]?.limitType == 1
                                                 ? Text(
-                                              "Max Amount : ${data?.data?[index].maximumPayable?.maxAmount ?? ""}",
-                                              style: planST,
-                                            )
+                                                    "Max Amount : ${data?.data?[index].maximumPayable?.maxAmount ?? ""}",
+                                                    style: planST,
+                                                  )
                                                 : Text(
-                                              "Max Weight : ${data?.data?[index].maximumPayable?.maxWeight ?? ""}",
-                                              style: planST,
-                                            ),
+                                                    "Max Weight : ${data?.data?[index].maximumPayable?.maxWeight ?? ""}",
+                                                    style: planST,
+                                                  ),
                                             const SizedBox(height: 5),
                                             Text(
                                               "Rate per gold : ${data?.data?[index].todaysRate ?? ''}",
@@ -212,8 +224,8 @@ class _Online_Emi_Payment_ScreenState
                                             ),
                                             const SizedBox(height: 5),
                                             Container(
-                                              width:
-                                              MediaQuery.sizeOf(context).width /
+                                              width: MediaQuery.sizeOf(context)
+                                                      .width /
                                                   3,
                                               child: Text(
                                                 "Equivalent weight : ${data?.data?[index].paidWeight ?? ''}",
@@ -228,24 +240,28 @@ class _Online_Emi_Payment_ScreenState
                                           ],
                                         ),
                                         Padding(
-                                          padding: const EdgeInsets.only(top: 8,left: 25),
+                                          padding: const EdgeInsets.only(
+                                              top: 8, left: 25),
                                           child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.start,
-                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Container(
                                                 width: 100,
                                                 height: 35,
                                                 child: TextFormField(
                                                   // controller: controllers[index],
-                                                  keyboardType: TextInputType.number,
+                                                  keyboardType:
+                                                      TextInputType.number,
                                                   validator: (value) {
                                                     if (value == null ||
                                                         value.isEmpty) {
                                                       return 'Please enter amount';
                                                     }
                                                     final intValue =
-                                                    int.tryParse(value);
+                                                        int.tryParse(value);
                                                     if (intValue == null) {
                                                       return '';
                                                     }
@@ -263,9 +279,10 @@ class _Online_Emi_Payment_ScreenState
                                                   ],
                                                   textAlign: TextAlign.left,
                                                   enabled: (data?.data?[index]
-                                                      .isChecked ??
-                                                      false) &&
-                                                      data?.data?[index].limitType ==
+                                                              .isChecked ??
+                                                          false) &&
+                                                      data?.data?[index]
+                                                              .limitType ==
                                                           1,
                                                   decoration: InputDecoration(
                                                     hintText: "INR",
@@ -273,31 +290,38 @@ class _Online_Emi_Payment_ScreenState
                                                     fillColor: Colors.grey[50],
                                                     border: OutlineInputBorder(
                                                       borderRadius:
-                                                      BorderRadius.circular(5),
-                                                      borderSide: BorderSide.none,
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      borderSide:
+                                                          BorderSide.none,
                                                     ),
                                                     contentPadding:
-                                                    EdgeInsets.symmetric(
-                                                        vertical: 8.0,
-                                                        horizontal: 8.0),
+                                                        EdgeInsets.symmetric(
+                                                            vertical: 8.0,
+                                                            horizontal: 8.0),
                                                   ),
                                                   onChanged: (text) {
                                                     var amount = text != ""
                                                         ? int.parse(text)
                                                         : 0;
                                                     if ((data
-                                                        ?.data?[index]
-                                                        .maximumPayable
-                                                        ?.maxAmount ??
-                                                        0.0) >=
+                                                                ?.data?[index]
+                                                                .maximumPayable
+                                                                ?.maxAmount ??
+                                                            0.0) >=
                                                         amount.toDouble()) {
                                                       setState(() {
                                                         data?.data?[index]
-                                                            .enterAmount = "$amount ";
-                                                        totalAmount = int.parse(data
-                                                            ?.data?[index]
-                                                            .enterAmount ??
-                                                            "0");
+                                                                .enterAmount =
+                                                            "$amount ";
+
+                                                        data?.data?[index]
+                                                                .totalAmount =
+                                                            "$amount ";
+                                                        totalAmount = int.parse(
+                                                            data?.data?[index]
+                                                                    .totalAmount ??
+                                                                "0");
                                                         // controllers[index].text = data
                                                         //         ?.data?[index]
                                                         //         .enterAmount ??
@@ -325,7 +349,7 @@ class _Online_Emi_Payment_ScreenState
                                                       return 'Please enter gram';
                                                     }
                                                     final intValue =
-                                                    int.tryParse(value);
+                                                        int.tryParse(value);
                                                     if (intValue == null) {
                                                       return '';
                                                     }
@@ -337,38 +361,46 @@ class _Online_Emi_Payment_ScreenState
                                                   },
                                                   onChanged: (value) {
                                                     var amount = value != ""
-                                                        ? int.parse(value)
+                                                        ? double.parse(value)
                                                         : 0;
 
                                                     if ((data
-                                                        ?.data?[index]
-                                                        .maximumPayable
-                                                        ?.maxWeight ??
-                                                        0.0) >=
+                                                                ?.data?[index]
+                                                                .maximumPayable
+                                                                ?.maxWeight ??
+                                                            0.0) >=
                                                         amount.toDouble()) {
                                                       setState(() {
                                                         data?.data?[index]
-                                                            .enterAmount =
-                                                        "${amount * (data.data?[index].todaysRate ?? 0.0)}";
-                                                        totalAmount = double.parse(
-                                                            data?.data?[index]
-                                                                .enterAmount ??
+                                                                .enterAmount =
+                                                            "${amount}";
+                                                        data?.data?[index]
+                                                                .totalAmount =
+                                                            "${amount * (data.data?[index].todaysRate ?? 0.0)}";
+
+                                                        totalAmount =
+                                                            double.parse(data
+                                                                    ?.data?[
+                                                                        index]
+                                                                    .totalAmount ??
                                                                 "0.0");
                                                       });
                                                     }
                                                   },
                                                   textAlign: TextAlign.left,
                                                   enabled: (data?.data?[index]
-                                                      .isChecked ??
-                                                      false) &&
-                                                      data?.data?[index].limitType ==
+                                                              .isChecked ??
+                                                          false) &&
+                                                      data?.data?[index]
+                                                              .limitType ==
                                                           2,
-                                                  keyboardType:
-                                                  TextInputType.numberWithOptions(
-                                                      decimal: true),
+                                                  keyboardType: TextInputType
+                                                      .numberWithOptions(
+                                                          decimal: true),
                                                   inputFormatters: [
-                                                    FilteringTextInputFormatter.allow(
-                                                        RegExp(r'[0-9.]')),
+                                                    FilteringTextInputFormatter
+                                                        .allow(
+                                                            RegExp(r'[0-9.]')),
                                                   ],
                                                   decoration: InputDecoration(
                                                     hintText: "Enter Gram",
@@ -376,13 +408,15 @@ class _Online_Emi_Payment_ScreenState
                                                     fillColor: Colors.grey[50],
                                                     border: OutlineInputBorder(
                                                       borderRadius:
-                                                      BorderRadius.circular(5),
-                                                      borderSide: BorderSide.none,
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      borderSide:
+                                                          BorderSide.none,
                                                     ),
                                                     contentPadding:
-                                                    EdgeInsets.symmetric(
-                                                        vertical: 8.0,
-                                                        horizontal: 8.0),
+                                                        EdgeInsets.symmetric(
+                                                            vertical: 8.0,
+                                                            horizontal: 8.0),
                                                   ),
                                                 ),
                                               ),
@@ -391,34 +425,58 @@ class _Online_Emi_Payment_ScreenState
                                                 width: 100,
                                                 color: Colors.grey[300],
                                                 child: Padding(
-                                                  padding: const EdgeInsets.only(
-                                                      left: 3, right: 3),
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 3, right: 3),
                                                   child: Row(
                                                     mainAxisAlignment:
-                                                    MainAxisAlignment.spaceAround,
+                                                        MainAxisAlignment
+                                                            .spaceAround,
                                                     crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
+                                                        CrossAxisAlignment
+                                                            .center,
                                                     children: [
                                                       InkWell(
                                                         onTap: () {
-                                                          if ((data?.data?[index]
-                                                              .advanceMonths ??
-                                                              0) >=
+                                                          if ((data
+                                                                          ?.data?[
+                                                                              index]
+                                                                          .advanceMonths ??
+                                                                      0) >=
+                                                                  (data
+                                                                          ?.data?[
+                                                                              index]
+                                                                          .incrementCount ??
+                                                                      0) &&
                                                               (data?.data?[index]
-                                                                  .incrementCount ??
-                                                                  0) &&
-                                                              (data?.data?[index]
-                                                                  .incrementCount ??
-                                                                  0) >
+                                                                          .incrementCount ??
+                                                                      0) >
                                                                   1) {
                                                             setState(() {
                                                               data?.data?[index]
                                                                   .incrementCount = (data
-                                                                  .data?[
-                                                              index]
-                                                                  .incrementCount ??
-                                                                  0) -
+                                                                          .data?[
+                                                                              index]
+                                                                          .incrementCount ??
+                                                                      0) -
                                                                   1;
+                                                              if (data
+                                                                      ?.data?[
+                                                                          index]
+                                                                      .limitType ==
+                                                                  1) {
+                                                                data
+                                                                        ?.data?[
+                                                                            index]
+                                                                        .totalAmount =
+                                                                    "${int.parse(data.data?[index].enterAmount ?? "0") * (data.data?[index].incrementCount ?? 0)}";
+                                                              } else {
+                                                                data
+                                                                        ?.data?[
+                                                                            index]
+                                                                        .totalAmount =
+                                                                    "${(double.parse(data.data?[index].enterAmount ?? "0") * (data.data?[index].todaysRate ?? 0.0)) * (data.data?[index].incrementCount ?? 0)}";
+                                                              }
                                                             });
                                                           }
                                                         },
@@ -432,35 +490,57 @@ class _Online_Emi_Payment_ScreenState
                                                         width: 50,
                                                         child: Text(
                                                             "${data?.data?[index].incrementCount}",
-                                                            textAlign:
-                                                            TextAlign.center),
+                                                            textAlign: TextAlign
+                                                                .center),
                                                       ),
                                                       InkWell(
                                                         onTap: () {
                                                           if (data?.data?[index]
-                                                              .allowAdvance ==
-                                                              true &&
-                                                              (data?.data?[index]
-                                                                  .isChecked ??
+                                                                      .allowAdvance ==
+                                                                  true &&
+                                                              (data
+                                                                      ?.data?[
+                                                                          index]
+                                                                      .isChecked ??
                                                                   false)) {
                                                             // _incrementCounter();
-                                                            if ((data?.data?[index]
-                                                                .advanceMonths ??
-                                                                0) >
-                                                                (data?.data?[index]
-                                                                    .incrementCount ??
+                                                            if ((data
+                                                                        ?.data?[
+                                                                            index]
+                                                                        .advanceMonths ??
+                                                                    0) >
+                                                                (data
+                                                                        ?.data?[
+                                                                            index]
+                                                                        .incrementCount ??
                                                                     0)) {
                                                               setState(() {
-                                                                data?.data?[index]
+                                                                data
+                                                                    ?.data?[
+                                                                        index]
                                                                     .incrementCount = (data
-                                                                    .data?[
-                                                                index]
-                                                                    .incrementCount ??
-                                                                    0) +
+                                                                            .data?[index]
+                                                                            .incrementCount ??
+                                                                        0) +
                                                                     1;
-                                                                data?.data?[index]
-                                                                    .enterAmount =
-                                                                "${int.parse(data.data?[index].enterAmount ?? "0") * (data.data?[index].incrementCount ?? 0)}";
+
+                                                                if (data
+                                                                        ?.data?[
+                                                                            index]
+                                                                        .limitType ==
+                                                                    1) {
+                                                                  data
+                                                                          ?.data?[
+                                                                              index]
+                                                                          .totalAmount =
+                                                                      "${int.parse(data.data?[index].enterAmount ?? "0") * (data.data?[index].incrementCount ?? 0)}";
+                                                                } else {
+                                                                  data
+                                                                          ?.data?[
+                                                                              index]
+                                                                          .totalAmount =
+                                                                      "${(double.parse(data.data?[index].enterAmount ?? "0") * (data.data?[index].todaysRate ?? 0.0)) * (data.data?[index].incrementCount ?? 0)}";
+                                                                }
                                                               });
                                                             }
                                                           }
@@ -476,7 +556,7 @@ class _Online_Emi_Payment_ScreenState
                                               ),
                                               const SizedBox(height: 5),
                                               Text(
-                                                'Net Amount : ${data?.data?[index].enterAmount ?? ""}',
+                                                'Net Amount : ${data?.data?[index].totalAmount ?? ""}',
                                                 style: planST,
                                               ),
                                             ],
@@ -492,9 +572,9 @@ class _Online_Emi_Payment_ScreenState
                         );
                       },
                     ),
-                    const SizedBox(height: 35),
+                    // const SizedBox(height: 35),
                     HelpContainer(context, Color: pink4),
-                    const SizedBox(height: 10),
+                    // const SizedBox(height: 10),
                     Total_Online(),
                     totalAmount == 0 ? SizedBox(height: 50) : Container(),
                     totalAmount == 0

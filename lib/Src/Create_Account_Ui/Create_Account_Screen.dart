@@ -5,7 +5,6 @@ import 'package:intl/intl.dart';
 import 'package:jewelone/Common_Widgets/Common_Button.dart';
 import 'package:jewelone/Common_Widgets/Image_Path.dart';
 import 'package:jewelone/Common_Widgets/Text_Form_Field.dart';
-import 'package:jewelone/Src/Home_DashBoard_Ui/Home_DashBoard_Screen.dart';
 import 'package:jewelone/Src/Login_Ui/LoginScreen.dart';
 import 'package:jewelone/utilits/ApiProvider.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
@@ -46,9 +45,9 @@ class _Create_Account_ScreenState extends ConsumerState<Create_Account_Screen> {
   final _formKey = GlobalKey<FormState>();
 
   RegExp passwordSpecial =
-  RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$])(?=.*[0-9]).*$');
+      RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$])(?=.*[0-9]).*$');
   RegExp passwordLength =
-  RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$])(?=.*[0-9]).{8,15}$');
+      RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$])(?=.*[0-9]).{8,15}$');
   RegExp onlyText = RegExp(r'^[a-zA-Z ]+$');
 
   @override
@@ -81,13 +80,15 @@ class _Create_Account_ScreenState extends ConsumerState<Create_Account_Screen> {
         //LOGO
         Center(child: Logo(context)),
         const SizedBox(
-          height: 50,
+          height: 20,
         ),
 
         Heading_Text(context, Title: "Join Our Savings Scheme"),
 
         //FULL NAME
-        Title_Style(Title: 'Full name', isStatus: false),
+        // Title_Style(Title: 'Full name', isStatus: false),
+        const SizedBox(height: 10),
+
         textFormField(
             hintText: 'Enter your full name',
             keyboardtype: TextInputType.text,
@@ -109,7 +110,9 @@ class _Create_Account_ScreenState extends ConsumerState<Create_Account_Screen> {
             )),
 
         //LAST NAME
-        Title_Style(Title: 'Last name', isStatus: false),
+        // Title_Style(Title: 'Last name', isStatus: false),
+        const SizedBox(height: 10),
+
         textFormField(
             hintText: 'Enter your last name',
             keyboardtype: TextInputType.text,
@@ -131,7 +134,9 @@ class _Create_Account_ScreenState extends ConsumerState<Create_Account_Screen> {
             )),
 
         //Email
-        Title_Style(Title: 'Email', isStatus: false),
+        // Title_Style(Title: 'Email', isStatus: false),
+        const SizedBox(height: 10),
+
         textFormField(
             hintText: 'Enter your Email',
             keyboardtype: TextInputType.text,
@@ -153,9 +158,11 @@ class _Create_Account_ScreenState extends ConsumerState<Create_Account_Screen> {
             )),
 
         // Phone Number Text and TextField
-        Title_Style(Title: 'Phone Number', isStatus: null),
+        // Title_Style(Title: 'Phone Number', isStatus: null),
+        const SizedBox(height: 10),
+
         textFormField(
-          // isEnabled: false,
+            // isEnabled: false,
             hintText: "Enter your phone number",
             keyboardtype: TextInputType.phone,
             Controller: _phoneNumber,
@@ -178,12 +185,14 @@ class _Create_Account_ScreenState extends ConsumerState<Create_Account_Screen> {
             )),
 
         //DATE OF BIRTH
-        Title_Style(Title: 'Date of Birth', isStatus: true),
+        // Title_Style(Title: 'Date of Birth', isStatus: true),
+        const SizedBox(height: 10),
+
         TextFieldDatePickerF(
           context,
           Controller: _Dateofbirth,
           onChanged: null,
-          hintText: 'dd/MM/yyyy',
+          hintText: 'Date of Birth (dd/MM/yyyy)',
           onTap: () async {
             FocusScope.of(context).unfocus();
             DateTime? pickedDate = await showDatePicker(
@@ -194,7 +203,7 @@ class _Create_Account_ScreenState extends ConsumerState<Create_Account_Screen> {
             );
             if (pickedDate != null) {
               String formattedDate =
-              DateFormat("yyyy-MM-dd").format(pickedDate);
+                  DateFormat("yyyy-MM-dd").format(pickedDate);
               if (mounted) {
                 setState(() {
                   _Dateofbirth.text = formattedDate;
@@ -225,7 +234,9 @@ class _Create_Account_ScreenState extends ConsumerState<Create_Account_Screen> {
         ),
 
         //ENTER NEW PASSWORD
-        Title_Style(Title: 'Password', isStatus: true),
+        // Title_Style(Title: 'Password', isStatus: true),
+        const SizedBox(height: 10),
+
         textFormField(
             hintText: 'Password',
             keyboardtype: TextInputType.text,
@@ -278,7 +289,7 @@ class _Create_Account_ScreenState extends ConsumerState<Create_Account_Screen> {
         },
             onTap: () {},
             checkBoxText:
-            'By Registering, You agree to our Terms & Conditions*',
+                'By Registering, You agree to our Terms & Conditions*',
             width: MediaQuery.sizeOf(context).width / 1.5),
 
         SizedBox(height: 15),
@@ -301,8 +312,10 @@ class _Create_Account_ScreenState extends ConsumerState<Create_Account_Screen> {
             LoadingOverlay.forcedStop();
             if (result?.status == true) {
               ShowToastMessage(result?.message ?? "");
-              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>LoginScreen()),
-                      (route) => false);
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginScreen()),
+                  (route) => false);
             } else {
               // Handle failure
               ShowToastMessage(result?.message ?? "");

@@ -112,7 +112,7 @@ class _My_SSP_ScreenState extends ConsumerState<My_SSP_Screen> {
                                     children: [
                                       Padding(
                                         padding:
-                                        const EdgeInsets.only(right: 10),
+                                            const EdgeInsets.only(right: 10),
                                         child: InkWell(
                                             onTap: () {
                                               Navigator.push(
@@ -142,36 +142,38 @@ class _My_SSP_ScreenState extends ConsumerState<My_SSP_Screen> {
                                     Row_List(
                                         text1: 'ID number',
                                         text2:
-                                        "${data?.data?[index].schemeAccNumber}"),
+                                            "${data?.data?[index].schemeAccNumber}"),
                                     Divider(),
                                     Row_List(
                                         text1: 'A/c name',
                                         text2:
-                                        data?.data?[index].customerName ?? ""),
+                                            data?.data?[index].customerName ??
+                                                ""),
                                     Divider(),
                                     Row_List(
                                         text1: 'Location',
-                                        text2: data?.data?[index].branchName ?? ""),
+                                        text2: data?.data?[index].branchName ??
+                                            ""),
                                     Divider(),
                                     Row_List(
                                         text1: 'Total plan amount',
                                         text2:
-                                        '₹${data?.data?[index].maximumPayable?.maxAmount}'),
+                                            '₹${data?.data?[index].maximumPayable?.maxAmount}'),
                                     Divider(),
                                     Row_List(
                                         text1: 'Monthly EMA',
                                         text2:
-                                        '₹${data?.data?[index].minimumPayable?.minAmount}'),
+                                            '₹${data?.data?[index].minimumPayable?.minAmount}'),
                                     Divider(),
                                     Row_List(
                                         text1: 'Tenure',
                                         text2:
-                                        'up to ${data?.data?[index].totalInstallments ?? ""} months'),
+                                            'up to ${data?.data?[index].totalInstallments ?? ""} months'),
                                     Divider(),
                                     Row_List(
                                         text1: 'Gold saved till date',
                                         text2:
-                                        '${data?.data?[index].paidWeight ?? ""} g'),
+                                            '${data?.data?[index].paidWeight ?? ""} g'),
                                   ],
                                 ),
                               )
@@ -251,7 +253,7 @@ Widget Row_List({required String text1, required String text2}) {
 
 Widget HelpContainer(context, {required dynamic Color}) {
   return Padding(
-    padding: const EdgeInsets.only(top: 20, bottom: 30),
+    padding: const EdgeInsets.only(top: 10, bottom: 10),
     child: Container(
       width: MediaQuery.sizeOf(context).width,
       decoration: BoxDecoration(
@@ -260,7 +262,7 @@ Widget HelpContainer(context, {required dynamic Color}) {
           borderRadius: BorderRadius.circular(10)),
       child: Padding(
         padding:
-        const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
+            const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
