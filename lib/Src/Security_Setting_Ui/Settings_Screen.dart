@@ -46,176 +46,178 @@ class _Settings_ScreenState extends ConsumerState<Settings_Screen> {
   }
 
   Widget _Mainbody (){
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 50),
-      child: Container(
-        width: MediaQuery.sizeOf(context).width,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Stack(
-              clipBehavior: Clip.none,
-              children: [
-                Container(
-                  height: 100,
-                  width: MediaQuery.sizeOf(context).width,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.topRight,
-                        colors: [
-                          gradient1,
-                          gradient2,
-                        ]
-                    ),
-                  ),
-
-                  //APP BAR CONTENTS
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 25,left: 15),
-                        child: InkWell(
-                          onTap: (){
-                            Navigator.pop(context);
-                          },
-                            child: ImgPathSvg('backbutton.svg')),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 25,left: 15),
-                        child: Text('Settings',style: appbarT,),
-                      ),
-                      const Spacer(),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: InkWell(
-                          onTap: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>Faq_Screen()));
-                          },
-                            child: ImgPathSvg('info.svg')),
-                      ),
-                    ],
-                  ),
-                ),
-
-                //PROFILE
-                Positioned(
-                  top: 60,
-                  left: 30,
-                  child: Container(
-                    height: 100,
-                    width: 100,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: AssetImage('lib/assets/profileimage.png')),
-                        borderRadius: BorderRadius.circular(100)
-                    ),
-                  ),
-                ),
-              ],
-            ),
-
-            //NAME CONTAINER
-            Padding(
-              padding: const EdgeInsets.only(top: 80,left: 20,right: 20,),
-              child: Column(
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 50),
+        child: Container(
+          width: MediaQuery.sizeOf(context).width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Stack(
+                clipBehavior: Clip.none,
                 children: [
                   Container(
+                    height: 100,
                     width: MediaQuery.sizeOf(context).width,
                     decoration: BoxDecoration(
-                      color: white1,
-                      border: Border.all(width: 1,color: grey5),
-                      borderRadius: BorderRadius.circular(10),
+                      gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.topRight,
+                          colors: [
+                            gradient1,
+                            gradient2,
+                          ]
+                      ),
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 20,right: 20,top: 10,bottom: 20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              Text(name,style: TBlack2,),
-                              const Spacer(),
-                              InkWell(
-                                onTap: (){
-                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile_Details_Screen()));
-                                },
-                                  child: ImgPathSvg('Edit.svg'))
-                            ],
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 5),
-                            child: Text(phoneVal,style: rate2,),
-                          )
-                        ],
+      
+                    //APP BAR CONTENTS
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 25,left: 15),
+                          child: InkWell(
+                            onTap: (){
+                              Navigator.pop(context);
+                            },
+                              child: ImgPathSvg('backbutton.svg')),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 25,left: 15),
+                          child: Text('Settings',style: appbarT,),
+                        ),
+                        const Spacer(),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: InkWell(
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>Faq_Screen()));
+                            },
+                              child: ImgPathSvg('info.svg')),
+                        ),
+                      ],
+                    ),
+                  ),
+      
+                  //PROFILE
+                  Positioned(
+                    top: 60,
+                    left: 30,
+                    child: Container(
+                      height: 100,
+                      width: 100,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: AssetImage('lib/assets/profileimage.png')),
+                          borderRadius: BorderRadius.circular(100)
                       ),
                     ),
                   ),
-
-                  //SETTINGS CONTAINER
-                  Settingscontainer(context,text: 'Change Password', image: 'lock.svg', image2: 'rightarrow2.svg', onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>Password_Screen()));
-                  }),
-                  // Settingscontainer(context,text: 'KYC', image: 'kyc.svg', image2: 'rightarrow2.svg', onTap: () {
-                  //   Navigator.push(context, MaterialPageRoute(builder: (context)=>KYC_Screen()));
-                  // }),
-                  Settingscontainer(context,text: 'About Shining Dawn', image: 'aboutjweleone.svg', image2: 'rightarrow2.svg', onTap: () {
-                    //Navigator.push(context, MaterialPageRoute(builder: (context)=>Password_Screen()));
-                  }),
                 ],
               ),
-            ),
-
-            //TERMS AND CONDITIONS
-             SizedBox(height: MediaQuery.sizeOf(context).height/5,),
-            Padding(
-              padding: const EdgeInsets.only(left: 40,right: 40,bottom: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text('Terms & Conditions*',style:underline),
-                  Text('Privacy Policy',style: underline),
-                ],
+      
+              //NAME CONTAINER
+              Padding(
+                padding: const EdgeInsets.only(top: 80,left: 20,right: 20,),
+                child: Column(
+                  children: [
+                    Container(
+                      width: MediaQuery.sizeOf(context).width,
+                      decoration: BoxDecoration(
+                        color: white1,
+                        border: Border.all(width: 1,color: grey5),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 20,right: 20,top: 10,bottom: 20),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Text(name,style: TBlack2,),
+                                const Spacer(),
+                                InkWell(
+                                  onTap: (){
+                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile_Details_Screen()));
+                                  },
+                                    child: ImgPathSvg('Edit.svg'))
+                              ],
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 5),
+                              child: Text(phoneVal,style: rate2,),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+      
+                    //SETTINGS CONTAINER
+                    Settingscontainer(context,text: 'Change Password', image: 'lock.svg', image2: 'rightarrow2.svg', onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>Password_Screen()));
+                    }),
+                    // Settingscontainer(context,text: 'KYC', image: 'kyc.svg', image2: 'rightarrow2.svg', onTap: () {
+                    //   Navigator.push(context, MaterialPageRoute(builder: (context)=>KYC_Screen()));
+                    // }),
+                    Settingscontainer(context,text: 'About Shining Dawn', image: 'aboutjweleone.svg', image2: 'rightarrow2.svg', onTap: () {
+                      //Navigator.push(context, MaterialPageRoute(builder: (context)=>Password_Screen()));
+                    }),
+                  ],
+                ),
               ),
-            ),
-            //DIVIDER
-            Divider(indent: 40,endIndent: 40,),
-
-            Padding(
-              padding: const EdgeInsets.only(top: 10,),
-              child: Center(child: Text('Follow us on',style: follow,)),
-            ),
-
-            //SOCIAL MEDIAS
-            Padding(
-              padding: const EdgeInsets.only(left: 50,right: 50,top: 20,),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ImgPathSvg('fb.svg'),
-                  ImgPathSvg('x.svg'),
-                  ImgPathSvg('pin.svg'),
-                  ImgPathSvg('Instagram.svg'),
-                  ImgPathSvg('youtube.svg'),
-                ],
+      
+              //TERMS AND CONDITIONS
+               SizedBox(height: MediaQuery.sizeOf(context).height/5,),
+              Padding(
+                padding: const EdgeInsets.only(left: 40,right: 40,bottom: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('Terms & Conditions*',style:underline),
+                    Text('Privacy Policy',style: underline),
+                  ],
+                ),
               ),
-            ),
-
-            //BUTTON
-            Padding(
-              padding: const EdgeInsets.only(left: 20,right: 20,top: 20),
-              child: buttonIcon(context,
-                  onPress: () {
-                    {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
-                    }
-                  }, titleName: 'Logout'),
-            ),
-          ],
+              //DIVIDER
+              Divider(indent: 40,endIndent: 40,),
+      
+              Padding(
+                padding: const EdgeInsets.only(top: 10,),
+                child: Center(child: Text('Follow us on',style: follow,)),
+              ),
+      
+              //SOCIAL MEDIAS
+              Padding(
+                padding: const EdgeInsets.only(left: 50,right: 50,top: 20,),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ImgPathSvg('fb.svg'),
+                    ImgPathSvg('x.svg'),
+                    ImgPathSvg('pin.svg'),
+                    ImgPathSvg('Instagram.svg'),
+                    ImgPathSvg('youtube.svg'),
+                  ],
+                ),
+              ),
+      
+              //BUTTON
+              Padding(
+                padding: const EdgeInsets.only(left: 20,right: 20,top: 20),
+                child: buttonIcon(context,
+                    onPress: () {
+                      {
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
+                      }
+                    }, titleName: 'Logout'),
+              ),
+            ],
+          ),
         ),
       ),
     );
