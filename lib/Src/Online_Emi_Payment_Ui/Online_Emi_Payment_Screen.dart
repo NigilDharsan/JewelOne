@@ -129,354 +129,362 @@ class _Online_Emi_Payment_ScreenState
                             child: Padding(
                               padding: const EdgeInsets.only(
                                   left: 5, right: 15, top: 10, bottom: 10),
-                              child: Row(
+                              child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Checkbox(
-                                    side: BorderSide(width: 1, color: checkbox),
-                                    value: data?.data?[index].isChecked,
-                                    onChanged: (bool? value) {
-                                      setState(() {
-                                        data?.data?[index].isChecked =
-                                            value ?? false;
-                                        if (data?.data?[index].isChecked ==
-                                            true) {
-                                          // totalAmount = totalAmount - int.parse(data?.data?[index].enterAmount ?? "");
-                                          data?.data?[index].enterAmount = "";
-                                        }
-                                      });
-                                    },
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      Checkbox(
+                                        side: BorderSide(width: 1, color: checkbox),
+                                        value: data?.data?[index].isChecked,
+                                        onChanged: (bool? value) {
+                                          setState(() {
+                                            data?.data?[index].isChecked =
+                                                value ?? false;
+                                            if (data?.data?[index].isChecked ==
+                                                true) {
+                                              // totalAmount = totalAmount - int.parse(data?.data?[index].enterAmount ?? "");
+                                              data?.data?[index].enterAmount = "";
+                                            }
+                                          });
+                                        },
+                                      ),
+
+                                      //SCHEME NAME
+                                      Container(
+                                        width: MediaQuery.sizeOf(context).width / 1.5,
+                                        child: Text(
+                                          data?.data?[index].schemeName ?? "",
+                                          style: UserST,
+                                        ),
+                                      ),
+                                    ],
                                   ),
+
                                   Padding(
-                                    padding:
-                                        const EdgeInsets.only(top: 5, left: 3),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
+                                    padding: const EdgeInsets.only(left: 10,),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Container(
-                                          width:
+                                        Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            const SizedBox(height: 5),
+                                            Container(
+                                              width:
                                               MediaQuery.sizeOf(context).width /
                                                   2.8,
-                                          child: Text(
-                                            data?.data?[index].schemeName ?? "",
-                                            style: planST,
-                                          ),
-                                        ),
-                                        const SizedBox(height: 5),
-                                        Container(
-                                          width:
-                                              MediaQuery.sizeOf(context).width /
-                                                  2.8,
-                                          child: Text(
-                                            data?.data?[index].accountName ??
-                                                "",
-                                            style: planST,
-                                          ),
-                                        ),
-                                        const SizedBox(height: 5),
-                                        data?.data?[index]?.limitType == 1
-                                            ? Text(
-                                                "Min Amount : ${data?.data?[index].minimumPayable?.minAmount ?? ""}",
-                                                style: planST,
-                                              )
-                                            : Text(
-                                                "Min Weight : ${data?.data?[index].minimumPayable?.minWeight ?? ""}",
+                                              child: Text(
+                                                data?.data?[index].accountName ??
+                                                    "",
                                                 style: planST,
                                               ),
-                                        const SizedBox(height: 5),
-                                        data?.data?[index]?.limitType == 1
-                                            ? Text(
-                                                "Max Amount : ${data?.data?[index].maximumPayable?.maxAmount ?? ""}",
-                                                style: planST,
-                                              )
-                                            : Text(
-                                                "Max Weight : ${data?.data?[index].maximumPayable?.maxWeight ?? ""}",
-                                                style: planST,
-                                              ),
-                                        const SizedBox(height: 5),
-                                        Text(
-                                          "Rate per gold : ${data?.data?[index].todaysRate ?? ''}",
-                                          style: planST,
-                                        ),
-                                        const SizedBox(height: 5),
-                                        Container(
-                                          width:
+                                            ),
+                                            const SizedBox(height: 5),
+                                            data?.data?[index]?.limitType == 1
+                                                ? Text(
+                                              "Min Amount : ${data?.data?[index].minimumPayable?.minAmount ?? ""}",
+                                              style: planST,
+                                            )
+                                                : Text(
+                                              "Min Weight : ${data?.data?[index].minimumPayable?.minWeight ?? ""}",
+                                              style: planST,
+                                            ),
+                                            const SizedBox(height: 5),
+                                            data?.data?[index]?.limitType == 1
+                                                ? Text(
+                                              "Max Amount : ${data?.data?[index].maximumPayable?.maxAmount ?? ""}",
+                                              style: planST,
+                                            )
+                                                : Text(
+                                              "Max Weight : ${data?.data?[index].maximumPayable?.maxWeight ?? ""}",
+                                              style: planST,
+                                            ),
+                                            const SizedBox(height: 5),
+                                            Text(
+                                              "Rate per gold : ${data?.data?[index].todaysRate ?? ''}",
+                                              style: planST,
+                                            ),
+                                            const SizedBox(height: 5),
+                                            Container(
+                                              width:
                                               MediaQuery.sizeOf(context).width /
                                                   3,
-                                          child: Text(
-                                            "Equivalent weight : ${data?.data?[index].paidWeight ?? ''}",
-                                            style: planST,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  const SizedBox(width: 15),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 8),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                          width: 100,
-                                          height: 35,
-                                          child: TextFormField(
-                                            // controller: controllers[index],
-                                            keyboardType: TextInputType.number,
-                                            validator: (value) {
-                                              if (value == null ||
-                                                  value.isEmpty) {
-                                                return 'Please enter amount';
-                                              }
-                                              final intValue =
-                                                  int.tryParse(value);
-                                              if (intValue == null) {
-                                                return '';
-                                              }
-                                              if (intValue <= 1000 ||
-                                                  intValue >= 10000) {
-                                                return '';
-                                              }
-                                              return null;
-                                            },
-                                            inputFormatters: [
-                                              LengthLimitingTextInputFormatter(
-                                                  5),
-                                              FilteringTextInputFormatter
-                                                  .digitsOnly
-                                            ],
-                                            textAlign: TextAlign.left,
-                                            enabled: (data?.data?[index]
-                                                        .isChecked ??
-                                                    false) &&
-                                                data?.data?[index].limitType ==
-                                                    1,
-                                            decoration: InputDecoration(
-                                              hintText: "INR",
-                                              filled: true,
-                                              fillColor: Colors.grey[50],
-                                              border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
-                                                borderSide: BorderSide.none,
+                                              child: Text(
+                                                "Equivalent weight : ${data?.data?[index].paidWeight ?? ''}",
+                                                style: planST,
                                               ),
-                                              contentPadding:
-                                                  EdgeInsets.symmetric(
-                                                      vertical: 8.0,
-                                                      horizontal: 8.0),
                                             ),
-                                            onChanged: (text) {
-                                              var amount = text != ""
-                                                  ? int.parse(text)
-                                                  : 0;
-                                              if ((data
-                                                          ?.data?[index]
-                                                          .maximumPayable
-                                                          ?.maxAmount ??
-                                                      0.0) >=
-                                                  amount.toDouble()) {
-                                                setState(() {
-                                                  data?.data?[index]
-                                                      .enterAmount = "$amount ";
-                                                  totalAmount = int.parse(data
-                                                          ?.data?[index]
-                                                          .enterAmount ??
-                                                      "0");
-                                                  // controllers[index].text = data
-                                                  //         ?.data?[index]
-                                                  //         .enterAmount ??
-                                                  //     "0";
-                                                });
-                                              } else {
-                                                setState(() {
-                                                  // controllers[index].text = data
-                                                  //         ?.data?[index]
-                                                  //         .enterAmount ??
-                                                  //     "0";
-                                                });
-                                              }
-                                            },
-                                          ),
-                                        ),
-                                        const SizedBox(height: 5),
-                                        Container(
-                                          width: 100,
-                                          height: 35,
-                                          child: TextFormField(
-                                            validator: (value) {
-                                              if (value == null ||
-                                                  value.isEmpty) {
-                                                return 'Please enter gram';
-                                              }
-                                              final intValue =
-                                                  int.tryParse(value);
-                                              if (intValue == null) {
-                                                return '';
-                                              }
-                                              if (intValue <= 1 ||
-                                                  intValue >= 8) {
-                                                return '';
-                                              }
-                                              return null;
-                                            },
-                                            onChanged: (value) {
-                                              var amount = value != ""
-                                                  ? int.parse(value)
-                                                  : 0;
-
-                                              if ((data
-                                                          ?.data?[index]
-                                                          .maximumPayable
-                                                          ?.maxWeight ??
-                                                      0.0) >=
-                                                  amount.toDouble()) {
-                                                setState(() {
-                                                  data?.data?[index]
-                                                          .enterAmount =
-                                                      "${amount * (data.data?[index].todaysRate ?? 0.0)}";
-                                                  totalAmount = double.parse(
-                                                      data?.data?[index]
-                                                              .enterAmount ??
-                                                          "0.0");
-                                                });
-                                              }
-                                            },
-                                            textAlign: TextAlign.left,
-                                            enabled: (data?.data?[index]
-                                                        .isChecked ??
-                                                    false) &&
-                                                data?.data?[index].limitType ==
-                                                    2,
-                                            keyboardType:
-                                                TextInputType.numberWithOptions(
-                                                    decimal: true),
-                                            inputFormatters: [
-                                              FilteringTextInputFormatter.allow(
-                                                  RegExp(r'[0-9.]')),
-                                            ],
-                                            decoration: InputDecoration(
-                                              hintText: "Enter Gram",
-                                              filled: true,
-                                              fillColor: Colors.grey[50],
-                                              border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
-                                                borderSide: BorderSide.none,
-                                              ),
-                                              contentPadding:
-                                                  EdgeInsets.symmetric(
-                                                      vertical: 8.0,
-                                                      horizontal: 8.0),
+                                            const SizedBox(height: 5),
+                                            Text(
+                                              'Discount : ${data?.data?[index].discountValue}',
+                                              style: planST,
                                             ),
-                                          ),
+                                          ],
                                         ),
-                                        const SizedBox(height: 5),
-                                        Container(
-                                          width: 100,
-                                          color: Colors.grey[300],
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 3, right: 3),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: [
-                                                InkWell(
-                                                  onTap: () {
-                                                    if ((data?.data?[index]
-                                                                    .advanceMonths ??
-                                                                0) >=
-                                                            (data?.data?[index]
-                                                                    .incrementCount ??
-                                                                0) &&
-                                                        (data?.data?[index]
-                                                                    .incrementCount ??
-                                                                0) >
-                                                            1) {
+                                        Padding(
+                                          padding: const EdgeInsets.only(top: 8,left: 25),
+                                          child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                width: 100,
+                                                height: 35,
+                                                child: TextFormField(
+                                                  // controller: controllers[index],
+                                                  keyboardType: TextInputType.number,
+                                                  validator: (value) {
+                                                    if (value == null ||
+                                                        value.isEmpty) {
+                                                      return 'Please enter amount';
+                                                    }
+                                                    final intValue =
+                                                    int.tryParse(value);
+                                                    if (intValue == null) {
+                                                      return '';
+                                                    }
+                                                    if (intValue <= 1000 ||
+                                                        intValue >= 10000) {
+                                                      return '';
+                                                    }
+                                                    return null;
+                                                  },
+                                                  inputFormatters: [
+                                                    LengthLimitingTextInputFormatter(
+                                                        5),
+                                                    FilteringTextInputFormatter
+                                                        .digitsOnly
+                                                  ],
+                                                  textAlign: TextAlign.left,
+                                                  enabled: (data?.data?[index]
+                                                      .isChecked ??
+                                                      false) &&
+                                                      data?.data?[index].limitType ==
+                                                          1,
+                                                  decoration: InputDecoration(
+                                                    hintText: "INR",
+                                                    filled: true,
+                                                    fillColor: Colors.grey[50],
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                      BorderRadius.circular(5),
+                                                      borderSide: BorderSide.none,
+                                                    ),
+                                                    contentPadding:
+                                                    EdgeInsets.symmetric(
+                                                        vertical: 8.0,
+                                                        horizontal: 8.0),
+                                                  ),
+                                                  onChanged: (text) {
+                                                    var amount = text != ""
+                                                        ? int.parse(text)
+                                                        : 0;
+                                                    if ((data
+                                                        ?.data?[index]
+                                                        .maximumPayable
+                                                        ?.maxAmount ??
+                                                        0.0) >=
+                                                        amount.toDouble()) {
                                                       setState(() {
                                                         data?.data?[index]
-                                                            .incrementCount = (data
-                                                                    .data?[
-                                                                        index]
-                                                                    .incrementCount ??
-                                                                0) -
-                                                            1;
+                                                            .enterAmount = "$amount ";
+                                                        totalAmount = int.parse(data
+                                                            ?.data?[index]
+                                                            .enterAmount ??
+                                                            "0");
+                                                        // controllers[index].text = data
+                                                        //         ?.data?[index]
+                                                        //         .enterAmount ??
+                                                        //     "0";
+                                                      });
+                                                    } else {
+                                                      setState(() {
+                                                        // controllers[index].text = data
+                                                        //         ?.data?[index]
+                                                        //         .enterAmount ??
+                                                        //     "0";
                                                       });
                                                     }
                                                   },
-                                                  child: Icon(
-                                                    Icons.remove,
-                                                    size: 15,
-                                                  ),
                                                 ),
-                                                Container(
-                                                  color: Colors.grey[50],
-                                                  width: 50,
-                                                  child: Text(
-                                                      "${data?.data?[index].incrementCount}",
-                                                      textAlign:
-                                                          TextAlign.center),
-                                                ),
-                                                InkWell(
-                                                  onTap: () {
-                                                    if (data?.data?[index]
-                                                                .allowAdvance ==
-                                                            true &&
-                                                        (data?.data?[index]
-                                                                .isChecked ??
-                                                            false)) {
-                                                      // _incrementCounter();
-                                                      if ((data?.data?[index]
-                                                                  .advanceMonths ??
-                                                              0) >
-                                                          (data?.data?[index]
-                                                                  .incrementCount ??
-                                                              0)) {
-                                                        setState(() {
-                                                          data?.data?[index]
-                                                              .incrementCount = (data
-                                                                      .data?[
-                                                                          index]
-                                                                      .incrementCount ??
-                                                                  0) +
-                                                              1;
-                                                          data?.data?[index]
-                                                                  .enterAmount =
-                                                              "${int.parse(data.data?[index].enterAmount ?? "0") * (data.data?[index].incrementCount ?? 0)}";
-                                                        });
-                                                      }
+                                              ),
+                                              const SizedBox(height: 5),
+                                              Container(
+                                                width: 100,
+                                                height: 35,
+                                                child: TextFormField(
+                                                  validator: (value) {
+                                                    if (value == null ||
+                                                        value.isEmpty) {
+                                                      return 'Please enter gram';
+                                                    }
+                                                    final intValue =
+                                                    int.tryParse(value);
+                                                    if (intValue == null) {
+                                                      return '';
+                                                    }
+                                                    if (intValue <= 1 ||
+                                                        intValue >= 8) {
+                                                      return '';
+                                                    }
+                                                    return null;
+                                                  },
+                                                  onChanged: (value) {
+                                                    var amount = value != ""
+                                                        ? int.parse(value)
+                                                        : 0;
+
+                                                    if ((data
+                                                        ?.data?[index]
+                                                        .maximumPayable
+                                                        ?.maxWeight ??
+                                                        0.0) >=
+                                                        amount.toDouble()) {
+                                                      setState(() {
+                                                        data?.data?[index]
+                                                            .enterAmount =
+                                                        "${amount * (data.data?[index].todaysRate ?? 0.0)}";
+                                                        totalAmount = double.parse(
+                                                            data?.data?[index]
+                                                                .enterAmount ??
+                                                                "0.0");
+                                                      });
                                                     }
                                                   },
-                                                  child: Icon(
-                                                    Icons.add,
-                                                    size: 15,
+                                                  textAlign: TextAlign.left,
+                                                  enabled: (data?.data?[index]
+                                                      .isChecked ??
+                                                      false) &&
+                                                      data?.data?[index].limitType ==
+                                                          2,
+                                                  keyboardType:
+                                                  TextInputType.numberWithOptions(
+                                                      decimal: true),
+                                                  inputFormatters: [
+                                                    FilteringTextInputFormatter.allow(
+                                                        RegExp(r'[0-9.]')),
+                                                  ],
+                                                  decoration: InputDecoration(
+                                                    hintText: "Enter Gram",
+                                                    filled: true,
+                                                    fillColor: Colors.grey[50],
+                                                    border: OutlineInputBorder(
+                                                      borderRadius:
+                                                      BorderRadius.circular(5),
+                                                      borderSide: BorderSide.none,
+                                                    ),
+                                                    contentPadding:
+                                                    EdgeInsets.symmetric(
+                                                        vertical: 8.0,
+                                                        horizontal: 8.0),
                                                   ),
                                                 ),
-                                              ],
-                                            ),
+                                              ),
+                                              const SizedBox(height: 5),
+                                              Container(
+                                                width: 100,
+                                                color: Colors.grey[300],
+                                                child: Padding(
+                                                  padding: const EdgeInsets.only(
+                                                      left: 3, right: 3),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                    MainAxisAlignment.spaceAround,
+                                                    crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                    children: [
+                                                      InkWell(
+                                                        onTap: () {
+                                                          if ((data?.data?[index]
+                                                              .advanceMonths ??
+                                                              0) >=
+                                                              (data?.data?[index]
+                                                                  .incrementCount ??
+                                                                  0) &&
+                                                              (data?.data?[index]
+                                                                  .incrementCount ??
+                                                                  0) >
+                                                                  1) {
+                                                            setState(() {
+                                                              data?.data?[index]
+                                                                  .incrementCount = (data
+                                                                  .data?[
+                                                              index]
+                                                                  .incrementCount ??
+                                                                  0) -
+                                                                  1;
+                                                            });
+                                                          }
+                                                        },
+                                                        child: Icon(
+                                                          Icons.remove,
+                                                          size: 15,
+                                                        ),
+                                                      ),
+                                                      Container(
+                                                        color: Colors.grey[50],
+                                                        width: 50,
+                                                        child: Text(
+                                                            "${data?.data?[index].incrementCount}",
+                                                            textAlign:
+                                                            TextAlign.center),
+                                                      ),
+                                                      InkWell(
+                                                        onTap: () {
+                                                          if (data?.data?[index]
+                                                              .allowAdvance ==
+                                                              true &&
+                                                              (data?.data?[index]
+                                                                  .isChecked ??
+                                                                  false)) {
+                                                            // _incrementCounter();
+                                                            if ((data?.data?[index]
+                                                                .advanceMonths ??
+                                                                0) >
+                                                                (data?.data?[index]
+                                                                    .incrementCount ??
+                                                                    0)) {
+                                                              setState(() {
+                                                                data?.data?[index]
+                                                                    .incrementCount = (data
+                                                                    .data?[
+                                                                index]
+                                                                    .incrementCount ??
+                                                                    0) +
+                                                                    1;
+                                                                data?.data?[index]
+                                                                    .enterAmount =
+                                                                "${int.parse(data.data?[index].enterAmount ?? "0") * (data.data?[index].incrementCount ?? 0)}";
+                                                              });
+                                                            }
+                                                          }
+                                                        },
+                                                        child: Icon(
+                                                          Icons.add,
+                                                          size: 15,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(height: 5),
+                                              Text(
+                                                'Net Amount : ${data?.data?[index].enterAmount ?? ""}',
+                                                style: planST,
+                                              ),
+                                            ],
                                           ),
-                                        ),
-                                        const SizedBox(height: 5),
-                                        Text(
-                                          'Discount : ${data?.data?[index].discountValue}',
-                                          style: planST,
-                                        ),
-                                        Text(
-                                          'Net Amount : ${data?.data?[index].enterAmount ?? ""}',
-                                          style: planST,
                                         ),
                                       ],
                                     ),
-                                  )
+                                  ),
                                 ],
                               ),
                             ),
