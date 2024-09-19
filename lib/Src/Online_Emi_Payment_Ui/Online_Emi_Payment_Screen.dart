@@ -67,8 +67,6 @@ class _Online_Emi_Payment_ScreenState
   @override
   Widget build(BuildContext context) {
     final myplandata = ref.watch(MyplanProvider);
-    // List<TextEditingController> controllers = [];
-
     return Scaffold(
       backgroundColor: white2,
       appBar: Custom_AppBar(
@@ -114,10 +112,6 @@ class _Online_Emi_Payment_ScreenState
                       physics: NeverScrollableScrollPhysics(),
                       padding: EdgeInsets.zero,
                       itemBuilder: (context, index) {
-                        // controllers.add(TextEditingController());
-                        // controllers[index].text =
-                        //     data?.data?[index].enterAmount ?? "";
-
                         int returnType = data?.data?[index].limitType ?? 1;
                         return Padding(
                           padding: const EdgeInsets.only(bottom: 10),
@@ -252,7 +246,6 @@ class _Online_Emi_Payment_ScreenState
                                                 width: 100,
                                                 height: 35,
                                                 child: TextFormField(
-                                                  // controller: controllers[index],
                                                   keyboardType:
                                                       TextInputType.number,
                                                   validator: (value) {
@@ -272,10 +265,31 @@ class _Online_Emi_Payment_ScreenState
                                                     return null;
                                                   },
                                                   inputFormatters: [
-                                                    LengthLimitingTextInputFormatter(
-                                                        5),
+                                                    // LengthLimitingTextInputFormatter(
+                                                    //     5),7510618517
                                                     FilteringTextInputFormatter
-                                                        .digitsOnly
+                                                        .digitsOnly,
+                                                    TextInputFormatter
+                                                        .withFunction((oldValue,
+                                                            newValue) {
+                                                      if (newValue
+                                                          .text.isEmpty) {
+                                                        return newValue; // Allow empty input
+                                                      }
+                                                      final int value =
+                                                          int.tryParse(newValue
+                                                                  .text) ??
+                                                              0;
+                                                      if (value <=
+                                                          (data
+                                                                  ?.data?[index]
+                                                                  .maximumPayable
+                                                                  ?.maxAmount ??
+                                                              0.0)) {
+                                                        return newValue; // Allow if value is less than or equal to 10000
+                                                      }
+                                                      return oldValue; // Reject the input if it exceeds 10000
+                                                    }),
                                                   ],
                                                   textAlign: TextAlign.left,
                                                   enabled: (data?.data?[index]
@@ -318,23 +332,22 @@ class _Online_Emi_Payment_ScreenState
                                                         data?.data?[index]
                                                                 .totalAmount =
                                                             "$amount ";
-                                                        totalAmount = int.parse(
-                                                            data?.data?[index]
-                                                                    .totalAmount ??
-                                                                "0");
-                                                        // controllers[index].text = data
-                                                        //         ?.data?[index]
-                                                        //         .enterAmount ??
-                                                        //     "0";
+
+                                                        totalAmount = data
+                                                            ?.data!
+                                                            .map((item) =>
+                                                                double.parse(
+                                                                    item.totalAmount ??
+                                                                        "0"))
+                                                            .reduce((a, b) =>
+                                                                a + b) as num;
+
+                                                        // int.parse(
+                                                        //     data?.data?[index]
+                                                        //             .totalAmount ??
+                                                        //         "0");
                                                       });
-                                                    } else {
-                                                      setState(() {
-                                                        // controllers[index].text = data
-                                                        //         ?.data?[index]
-                                                        //         .enterAmount ??
-                                                        //     "0";
-                                                      });
-                                                    }
+                                                    } else {}
                                                   },
                                                 ),
                                               ),
@@ -378,12 +391,20 @@ class _Online_Emi_Payment_ScreenState
                                                                 .totalAmount =
                                                             "${amount * (data.data?[index].todaysRate ?? 0.0)}";
 
-                                                        totalAmount =
-                                                            double.parse(data
-                                                                    ?.data?[
-                                                                        index]
-                                                                    .totalAmount ??
-                                                                "0.0");
+                                                        // totalAmount =
+                                                        //     double.parse(data
+                                                        //             ?.data?[
+                                                        //                 index]
+                                                        //             .totalAmount ??
+                                                        //         "0.0");
+                                                        totalAmount = data
+                                                            ?.data!
+                                                            .map((item) =>
+                                                                double.parse(
+                                                                    item.totalAmount ??
+                                                                        "0"))
+                                                            .reduce((a, b) =>
+                                                                a + b) as num;
                                                       });
                                                     }
                                                   },
@@ -401,6 +422,27 @@ class _Online_Emi_Payment_ScreenState
                                                     FilteringTextInputFormatter
                                                         .allow(
                                                             RegExp(r'[0-9.]')),
+                                                    TextInputFormatter
+                                                        .withFunction((oldValue,
+                                                            newValue) {
+                                                      if (newValue
+                                                          .text.isEmpty) {
+                                                        return newValue; // Allow empty input
+                                                      }
+                                                      final int value =
+                                                          int.tryParse(newValue
+                                                                  .text) ??
+                                                              0;
+                                                      if (value <=
+                                                          (data
+                                                                  ?.data?[index]
+                                                                  .maximumPayable
+                                                                  ?.maxWeight ??
+                                                              0.0)) {
+                                                        return newValue; // Allow if value is less than or equal to 10000
+                                                      }
+                                                      return oldValue; // Reject the input if it exceeds 10000
+                                                    }),
                                                   ],
                                                   decoration: InputDecoration(
                                                     hintText: "Enter Gram",
@@ -477,6 +519,16 @@ class _Online_Emi_Payment_ScreenState
                                                                         .totalAmount =
                                                                     "${(double.parse(data.data?[index].enterAmount ?? "0") * (data.data?[index].todaysRate ?? 0.0)) * (data.data?[index].incrementCount ?? 0)}";
                                                               }
+                                                              totalAmount = data
+                                                                  ?.data!
+                                                                  .map((item) =>
+                                                                      double.parse(
+                                                                          item.totalAmount ??
+                                                                              "0"))
+                                                                  .reduce((a,
+                                                                          b) =>
+                                                                      a +
+                                                                      b) as num;
                                                             });
                                                           }
                                                         },
@@ -541,6 +593,15 @@ class _Online_Emi_Payment_ScreenState
                                                                           .totalAmount =
                                                                       "${(double.parse(data.data?[index].enterAmount ?? "0") * (data.data?[index].todaysRate ?? 0.0)) * (data.data?[index].incrementCount ?? 0)}";
                                                                 }
+                                                                totalAmount = data
+                                                                    ?.data!
+                                                                    .map((item) =>
+                                                                        double.parse(item.totalAmount ??
+                                                                            "0"))
+                                                                    .reduce((a,
+                                                                            b) =>
+                                                                        a +
+                                                                        b) as num;
                                                               });
                                                             }
                                                           }
