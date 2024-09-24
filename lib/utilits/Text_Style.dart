@@ -74,6 +74,13 @@ TextStyle planST = TextStyle(
     color: Color.fromRGBO(45, 45, 45, 1),
     fontWeight: FontWeight.w600);
 
+
+TextStyle planST2 = TextStyle(
+    fontFamily: 'Inter',
+    fontSize: 12,
+    color: Color.fromRGBO(169, 169, 169, 1),
+    fontWeight: FontWeight.w600);
+
 TextStyle walletT2 = TextStyle(
     fontFamily: 'Metropolis',
     fontSize: 12,

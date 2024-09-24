@@ -824,12 +824,12 @@ Widget homedropDownFieldprofileedit(
       required String hintT,
     }) {
   return Container(
-    height: 50,
+    height: 45,
     width: width,
     decoration:
     BoxDecoration(
       borderRadius: BorderRadius.circular(5),
-      color: backGroundColor
+     color: backGroundColor
     ),
     child: DropdownButtonFormField<String>(
       value: value,
@@ -840,7 +840,8 @@ Widget homedropDownFieldprofileedit(
         hintStyle: dropDownST,
         hintText: hintT,
       ),
-      icon: ImgPathSvg('homedownarrow.svg'),
+      icon: Icon(Icons.keyboard_arrow_down_sharp,color: Font_Primary_Color,),
+      //icon: ImgPathSvg('homedownarrow.svg'),
       items: listValue?.map((String option) {
         return DropdownMenuItem<String>(
           value: option,

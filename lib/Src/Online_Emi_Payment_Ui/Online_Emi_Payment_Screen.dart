@@ -123,7 +123,7 @@ class _Online_Emi_Payment_ScreenState
                             ),
                             child: Padding(
                               padding: const EdgeInsets.only(
-                                  left: 5, right: 15, top: 10, bottom: 10),
+                                  left: 5, top: 10, bottom: 10),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -188,48 +188,115 @@ class _Online_Emi_Payment_ScreenState
                                                 data?.data?[index]
                                                         .accountName ??
                                                     "",
-                                                style: planST,
+                                                style: planST.copyWith(fontWeight: FontWeight.bold,fontSize: 14),
                                               ),
                                             ),
                                             const SizedBox(height: 5),
                                             data?.data?[index]?.limitType == 1
-                                                ? Text(
-                                                    "Min Amount : ${data?.data?[index].minimumPayable?.minAmount ?? ""}",
-                                                    style: planST,
-                                                  )
-                                                : Text(
-                                                    "Min Weight : ${data?.data?[index].minimumPayable?.minWeight ?? ""}",
-                                                    style: planST,
+                                                ? Text.rich(
+                                              TextSpan(
+                                                children: [
+                                                  TextSpan(
+                                                    text: "Min Amount         : ",
+                                                    style: planST2.copyWith(fontWeight: FontWeight.w500,fontSize: 15),
                                                   ),
+                                                  TextSpan(
+                                                    text: "${data?.data?[index].minimumPayable?.minAmount ?? ""}",
+                                                    style: planST.copyWith(fontWeight: FontWeight.bold,fontSize: 14),
+                                                  ),
+                                                ],
+                                              ),
+                                            ) :
+                                            Text.rich(
+                                              TextSpan(
+                                                children: [
+                                                  TextSpan(
+                                                    text: "Min Weight           : ",
+                                                    style: planST2.copyWith(fontWeight: FontWeight.w500,fontSize: 15),
+                                                  ),
+                                                  TextSpan(
+                                                    text: "${data?.data?[index].minimumPayable?.minWeight ?? ""}",
+                                                    style: planST.copyWith(fontWeight: FontWeight.bold,fontSize: 14),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+
                                             const SizedBox(height: 5),
                                             data?.data?[index]?.limitType == 1
-                                                ? Text(
-                                                    "Max Amount : ${data?.data?[index].maximumPayable?.maxAmount ?? ""}",
-                                                    style: planST,
-                                                  )
-                                                : Text(
-                                                    "Max Weight : ${data?.data?[index].maximumPayable?.maxWeight ?? ""}",
-                                                    style: planST,
+                                                ? Text.rich(
+                                              TextSpan(
+                                                children: [
+                                                  TextSpan(
+                                                    text: "Max Amount        : ",
+                                                    style: planST2.copyWith(fontWeight: FontWeight.w500,fontSize: 15),
                                                   ),
-                                            const SizedBox(height: 5),
-                                            Text(
-                                              "Rate per gold : ${data?.data?[index].todaysRate ?? ''}",
-                                              style: planST,
-                                            ),
-                                            const SizedBox(height: 5),
-                                            Container(
-                                              width: MediaQuery.sizeOf(context)
-                                                      .width /
-                                                  3,
-                                              child: Text(
-                                                "Equivalent weight : ${data?.data?[index].paidWeight ?? ''}",
-                                                style: planST,
+                                                  TextSpan(
+                                                    text: "${data?.data?[index].maximumPayable?.maxAmount ?? ""}",
+                                                    style: planST.copyWith(fontWeight: FontWeight.bold,fontSize: 14),
+                                                  ),
+                                                ],
+                                              ),
+                                            ) : Text.rich(
+                                              TextSpan(
+                                                children: [
+                                                  TextSpan(
+                                                    text: "Max Weight          : ",
+                                                    style: planST2.copyWith(fontWeight: FontWeight.w500,fontSize: 15),
+                                                  ),
+                                                  TextSpan(
+                                                    text: "${data?.data?[index].maximumPayable?.maxWeight ?? ""}",
+                                                    style: planST.copyWith(fontWeight: FontWeight.bold,fontSize: 14),
+                                                  ),
+                                                ],
                                               ),
                                             ),
                                             const SizedBox(height: 5),
-                                            Text(
-                                              'Discount : ${data?.data?[index].discountValue}',
-                                              style: planST,
+
+                                           RichText(
+                                             text: TextSpan(
+                                               children: <TextSpan>[
+                                                 TextSpan(
+                                                   text: 'Rate per gold         : ',
+                                                   style: planST2.copyWith(fontWeight: FontWeight.w500,fontSize: 15)
+                                                 ),
+                                                 TextSpan(
+                                                   text: '${data?.data?[index].todaysRate ?? ''}',
+                                                   style: planST.copyWith(fontWeight: FontWeight.bold,fontSize: 14),
+                                                 ),
+                                               ],
+                                             ),
+                                           ),
+
+                                            const SizedBox(height: 5),
+                                            RichText(
+                                              text: TextSpan(
+                                                children: <TextSpan>[
+                                                  TextSpan(
+                                                      text: 'Equivalent weight : ',
+                                                      style: planST2.copyWith(fontWeight: FontWeight.w500,fontSize: 15)
+                                                  ),
+                                                  TextSpan(
+                                                    text: '${data?.data?[index].paidWeight ?? ''}',
+                                                    style: planST.copyWith(fontWeight: FontWeight.bold,fontSize: 14),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            const SizedBox(height: 5),
+                                            RichText(
+                                              text: TextSpan(
+                                                children: <TextSpan>[
+                                                  TextSpan(
+                                                      text: 'Discount                 : ',
+                                                      style: planST2.copyWith(fontWeight: FontWeight.w500,fontSize: 15)
+                                                  ),
+                                                  TextSpan(
+                                                    text: '${data?.data?[index].discountValue ?? ''}',
+                                                    style: planST.copyWith(fontWeight: FontWeight.bold,fontSize: 14),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ],
                                         ),
@@ -267,11 +334,8 @@ class _Online_Emi_Payment_ScreenState
                                                   inputFormatters: [
                                                     // LengthLimitingTextInputFormatter(
                                                     //     5),7510618517
-                                                    FilteringTextInputFormatter
-                                                        .digitsOnly,
-                                                    TextInputFormatter
-                                                        .withFunction((oldValue,
-                                                            newValue) {
+                                                    FilteringTextInputFormatter.digitsOnly,
+                                                    TextInputFormatter.withFunction((oldValue,newValue) {
                                                       if (newValue
                                                           .text.isEmpty) {
                                                         return newValue; // Allow empty input
@@ -299,20 +363,18 @@ class _Online_Emi_Payment_ScreenState
                                                               .limitType ==
                                                           1,
                                                   decoration: InputDecoration(
+                                                    contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
                                                     hintText: "INR",
-                                                    filled: true,
-                                                    fillColor: Colors.grey[50],
                                                     border: OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                      borderSide:
-                                                          BorderSide.none,
+                                                      borderRadius: BorderRadius.circular(5),
+                                                      borderSide: BorderSide(color: grey5),
                                                     ),
-                                                    contentPadding:
-                                                        EdgeInsets.symmetric(
-                                                            vertical: 8.0,
-                                                            horizontal: 8.0),
+                                                    enabledBorder: OutlineInputBorder(
+                                                      borderRadius: BorderRadius.circular(5),
+                                                      borderSide: BorderSide(color: grey5),
+                                                    ),
+                                                    fillColor: Colors.grey[50],
+                                                    filled: true,
                                                   ),
                                                   onChanged: (text) {
                                                     var amount = text != ""
@@ -351,7 +413,7 @@ class _Online_Emi_Payment_ScreenState
                                                   },
                                                 ),
                                               ),
-                                              const SizedBox(height: 5),
+                                              const SizedBox(height: 8),
                                               Container(
                                                 width: 100,
                                                 height: 35,
@@ -445,24 +507,22 @@ class _Online_Emi_Payment_ScreenState
                                                     }),
                                                   ],
                                                   decoration: InputDecoration(
-                                                    hintText: "Enter Gram",
-                                                    filled: true,
-                                                    fillColor: Colors.grey[50],
+                                                    contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+                                                    hintText: "Enter gram",
                                                     border: OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                      borderSide:
-                                                          BorderSide.none,
+                                                      borderRadius: BorderRadius.circular(5),
+                                                      borderSide: BorderSide(color: grey5),
                                                     ),
-                                                    contentPadding:
-                                                        EdgeInsets.symmetric(
-                                                            vertical: 8.0,
-                                                            horizontal: 8.0),
+                                                    enabledBorder: OutlineInputBorder(
+                                                      borderRadius: BorderRadius.circular(5),
+                                                      borderSide: BorderSide(color: grey5),
+                                                    ),
+                                                    fillColor: Colors.grey[50],
+                                                    filled: true,
                                                   ),
                                                 ),
                                               ),
-                                              const SizedBox(height: 5),
+                                              const SizedBox(height: 8),
                                               Container(
                                                 width: 100,
                                                 color: Colors.grey[300],
@@ -615,10 +675,20 @@ class _Online_Emi_Payment_ScreenState
                                                   ),
                                                 ),
                                               ),
-                                              const SizedBox(height: 5),
-                                              Text(
-                                                'Net Amount : ${data?.data?[index].totalAmount ?? ""}',
-                                                style: planST,
+                                              const SizedBox(height: 8),
+                                              RichText(
+                                                text: TextSpan(
+                                                  children: <TextSpan>[
+                                                    TextSpan(
+                                                        text: 'Net Amount : ',
+                                                        style: planST2.copyWith(fontWeight: FontWeight.w500,fontSize: 15)
+                                                    ),
+                                                    TextSpan(
+                                                      text: '${data?.data?[index].totalAmount ?? ''}',
+                                                      style: planST.copyWith(fontWeight: FontWeight.bold,fontSize: 14),
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
                                             ],
                                           ),
