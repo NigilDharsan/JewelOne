@@ -64,7 +64,7 @@ TextStyle bottomotext = TextStyle(
 TextStyle UserST = TextStyle(
     fontFamily: 'Inter',
     fontSize: 18,
-    color: Color.fromRGBO(45, 45, 45, 1),
+    color: Color.fromRGBO(255,255,255,1),
     fontWeight: FontWeight.w600);
 
 //PLAN STYLE
@@ -87,6 +87,13 @@ TextStyle walletT2 = TextStyle(
     color: Color.fromRGBO(136, 136, 136, 1),
     fontWeight: FontWeight.w500);
 
+
+TextStyle walletT3 = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 12,
+    color: Color.fromRGBO(255, 255, 255,1),
+    fontWeight: FontWeight.w500);
+
 TextStyle plandetailT = TextStyle(
     fontFamily: 'Metropolis',
     fontSize: 12,
@@ -96,12 +103,13 @@ TextStyle plandetailT = TextStyle(
 //GRAM
 TextStyle gramST = TextStyle(
     fontFamily: 'Inter',
-    fontSize: 15,
+    fontSize: 13,
     color: Colors.black,
     fontWeight: FontWeight.w500);
+
 TextStyle gramrateST = TextStyle(
     fontFamily: 'Inter',
-    fontSize: 15,
+    fontSize: 13,
     color: green1,
     fontWeight: FontWeight.w500);
 
@@ -299,7 +307,7 @@ Widget Title_Style({required String Title, required bool? isStatus}) {
 
 Widget RadioText(String txt,{required double? width}) {
   return Padding(
-    padding: const EdgeInsets.only(left: 5),
+    padding: const EdgeInsets.only(left: 5,top: 3),
     child: Container(
       width:width ,
       child: Text(
@@ -337,8 +345,7 @@ Widget CheckBoxes(
           visualDensity: VisualDensity(horizontal: -4, vertical: -4),
           materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         ),
-        InkWell(onTap: onTap,
-            child: RadioText(checkBoxText, width:width )),
+        InkWell(onTap: onTap, child: RadioText(checkBoxText, width:width )),
       ],
     ),
   );

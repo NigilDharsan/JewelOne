@@ -184,7 +184,7 @@ class _My_SSP_ScreenState extends ConsumerState<My_SSP_Screen> {
                     );
                   }),
               //HELP CONTAINER
-              HelpContainer(context, Color: pink4),
+              // HelpContainer(context, Color: pink4),
             ],
           ),
         ),

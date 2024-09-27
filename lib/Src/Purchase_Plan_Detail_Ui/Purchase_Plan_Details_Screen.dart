@@ -123,56 +123,56 @@ class _Purchase_Plan_detail_ScreeenState extends State<Purchase_Plan_detail_Scre
               },
             ),
 
-            Padding(
-              padding: const EdgeInsets.only(left: 20,top: 15),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ImgPathSvg('info2.svg'),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10,),
-                    child: Container(
-                      width: MediaQuery.sizeOf(context).width/1.2,
-                        child: Text('Last EMA is less due to less number of ays in the first month EMA',style: walletT2,maxLines: 4,)),
-                  ),
-                ],
-              ),
-            ),
-
-
-            Padding(
-              padding: const EdgeInsets.only(left: 20,right: 20,top: 10),
-              child: Text('Penalty charges applicable on repayment post due date for each installments :',style: detailsT,),
-            ),
-
-            Padding(
-              padding: const EdgeInsets.only(left: 20,right: 20,top: 10),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text('EMA Bounce Charge (1 Month)',style: walletT2,),
-                  const Spacer(),
-                  Container(
-                    width: MediaQuery.sizeOf(context).width/2.4,
-                      child: Text('10% of Gold value* or ₹500,whichever is lower',style: plancode,))
-                ],
-              ),
-            ),
-            
-            Padding(
-              padding: const EdgeInsets.only(left: 20,right: 20,top: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Penal Charges for 2 - 365 days',style: walletT2,),
-                  const Spacer(),
-                  Text('36% p.a. on amount overdue*',style: plancode,)
-                ],
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.only(left: 20,top: 15),
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.start,
+            //     crossAxisAlignment: CrossAxisAlignment.start,
+            //     children: [
+            //       ImgPathSvg('info2.svg'),
+            //       Padding(
+            //         padding: const EdgeInsets.only(left: 10,),
+            //         child: Container(
+            //           width: MediaQuery.sizeOf(context).width/1.2,
+            //             child: Text('Last EMA is less due to less number of ays in the first month EMA',style: walletT2,maxLines: 4,)),
+            //       ),
+            //     ],
+            //   ),
+            // ),
+            //
+            //
+            // Padding(
+            //   padding: const EdgeInsets.only(left: 20,right: 20,top: 10),
+            //   child: Text('Penalty charges applicable on repayment post due date for each installments :',style: detailsT,),
+            // ),
+            //
+            // Padding(
+            //   padding: const EdgeInsets.only(left: 20,right: 20,top: 10),
+            //   child: Row(
+            //     crossAxisAlignment: CrossAxisAlignment.start,
+            //     mainAxisAlignment: MainAxisAlignment.start,
+            //     children: [
+            //       Text('EMA Bounce Charge (1 Month)',style: walletT2,),
+            //       const Spacer(),
+            //       Container(
+            //         width: MediaQuery.sizeOf(context).width/2.4,
+            //           child: Text('10% of Gold value* or ₹500,whichever is lower',style: plancode,))
+            //     ],
+            //   ),
+            // ),
+            //
+            // Padding(
+            //   padding: const EdgeInsets.only(left: 20,right: 20,top: 10),
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.start,
+            //     crossAxisAlignment: CrossAxisAlignment.start,
+            //     children: [
+            //       Text('Penal Charges for 2 - 365 days',style: walletT2,),
+            //       const Spacer(),
+            //       Text('36% p.a. on amount overdue*',style: plancode,)
+            //     ],
+            //   ),
+            // ),
 
             //BACK BUTTON
             Padding(

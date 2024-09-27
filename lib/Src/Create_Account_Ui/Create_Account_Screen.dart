@@ -90,7 +90,7 @@ class _Create_Account_ScreenState extends ConsumerState<Create_Account_Screen> {
         const SizedBox(height: 10),
 
         textFormField(
-            hintText: 'Enter your full name',
+            hintText: 'Enter your first name',
             keyboardtype: TextInputType.text,
             inputFormatters: null,
             Controller: _fullName,
@@ -163,7 +163,7 @@ class _Create_Account_ScreenState extends ConsumerState<Create_Account_Screen> {
 
         textFormField(
             // isEnabled: false,
-            hintText: "Enter your phone number",
+            hintText: "Enter your mobile number",
             keyboardtype: TextInputType.phone,
             Controller: _phoneNumber,
             inputFormatters: [
@@ -192,7 +192,7 @@ class _Create_Account_ScreenState extends ConsumerState<Create_Account_Screen> {
           context,
           Controller: _Dateofbirth,
           onChanged: null,
-          hintText: 'Date of Birth (dd/MM/yyyy)',
+          hintText: '(dd/MM/yyyy)',
           onTap: () async {
             FocusScope.of(context).unfocus();
             DateTime? pickedDate = await showDatePicker(
@@ -289,8 +289,8 @@ class _Create_Account_ScreenState extends ConsumerState<Create_Account_Screen> {
         },
             onTap: () {},
             checkBoxText:
-                'By Registering, You agree to our Terms & Conditions*',
-            width: MediaQuery.sizeOf(context).width / 1.5),
+            'I agree with the terms&condition',
+            width: MediaQuery.sizeOf(context).width/1.4),
 
         SizedBox(height: 15),
 

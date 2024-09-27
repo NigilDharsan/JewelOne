@@ -287,40 +287,40 @@ class _Menu_ScreenState extends ConsumerState<Menu_Screen> {
                       ),
                     ),
                     //DIVIDER
-                    Divider(
-                      indent: 25,
-                      endIndent: 25,
-                    ),
+                    // Divider(
+                    //   indent: 25,
+                    //   endIndent: 25,
+                    // ),
 
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        top: 10,
-                      ),
-                      child: Center(
-                          child: Text(
-                        'Follow us on',
-                        style: follow,
-                      )),
-                    ),
+                    // Padding(
+                    //   padding: const EdgeInsets.only(
+                    //     top: 10,
+                    //   ),
+                    //   child: Center(
+                    //       child: Text(
+                    //     'Follow us on',
+                    //     style: follow,
+                    //   )),
+                    // ),
 
                     //SOCIAL MEDIAS
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        left: 50,
-                        right: 50,
-                        top: 20,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          ImgPathSvg('fb.svg'),
-                          ImgPathSvg('x.svg'),
-                          ImgPathSvg('pin.svg'),
-                          ImgPathSvg('Instagram.svg'),
-                          ImgPathSvg('youtube.svg'),
-                        ],
-                      ),
-                    ),
+                    // Padding(
+                    //   padding: const EdgeInsets.only(
+                    //     left: 50,
+                    //     right: 50,
+                    //     top: 20,
+                    //   ),
+                    //   child: Row(
+                    //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    //     children: [
+                    //       ImgPathSvg('fb.svg'),
+                    //       ImgPathSvg('x.svg'),
+                    //       ImgPathSvg('pin.svg'),
+                    //       ImgPathSvg('Instagram.svg'),
+                    //       ImgPathSvg('youtube.svg'),
+                    //     ],
+                    //   ),
+                    // ),
 
                     //BUTTON
                     Padding(

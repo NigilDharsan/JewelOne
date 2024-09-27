@@ -257,26 +257,26 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         SizedBox(height: 40),
 
         // Trouble Logging in? Please call: Text
-        Center(
-            child: Text(
-          'Trouble Logging in? Please call:',
-          style: BlackTextColor,
-        )),
-        SizedBox(height: 16),
-
-        // Icon and Trouble Logging in? Please call: Text
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // Icon(Icons.call),
-            ImgPathSvg('Call.svg'),
-            SizedBox(width: 8),
-            Text(
-              '18001033916',
-              style: phone_ST,
-            ),
-          ],
-        ),
+        // Center(
+        //     child: Text(
+        //   'Trouble Logging in? Please call:',
+        //   style: BlackTextColor,
+        // )),
+        // SizedBox(height: 16),
+        //
+        // // Icon and Trouble Logging in? Please call: Text
+        // Row(
+        //   mainAxisAlignment: MainAxisAlignment.center,
+        //   children: [
+        //     // Icon(Icons.call),
+        //     ImgPathSvg('Call.svg'),
+        //     SizedBox(width: 8),
+        //     Text(
+        //       '18001033916',
+        //       style: phone_ST,
+        //     ),
+        //   ],
+        // ),
       ],
     );
   }

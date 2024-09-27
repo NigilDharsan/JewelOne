@@ -704,7 +704,7 @@ class _Online_Emi_Payment_ScreenState
                       },
                     ),
                     // const SizedBox(height: 35),
-                    HelpContainer(context, Color: pink4),
+                    // HelpContainer(context, Color: pink4),
                     // const SizedBox(height: 10),
                     Total_Online(),
                     totalAmount == 0 ? SizedBox(height: 50) : Container(),

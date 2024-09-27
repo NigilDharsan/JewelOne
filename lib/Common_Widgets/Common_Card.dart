@@ -34,57 +34,152 @@ Widget Plan_Card(context,{required String Img,required String planT}){
 
 
 //WALLET CARD
-Widget Wallet_Card(context,{required String customername}){
-  return Container(
-    width: MediaQuery.sizeOf(context).width,
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(20),
-      border: Border.all(width: 1,color: gradient2),
-      color: white1,
-    ),
-    child: Padding(
-      padding: const EdgeInsets.only(left: 24,right: 24),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 20,),
-              Text(customername,style: UserST,),
-              Container(
-                width: 60,
-                margin: EdgeInsets.only(top: 15,bottom: 15),
-                child: Divider(
-                  thickness: 2,
-                  color: gradient2,
-                ),
-              ),
-              Text('Gold balance - 0.0000 gms',style: gramST,),
-              Container(
-                margin: EdgeInsets.only(top: 20,bottom: 20),
-                width:MediaQuery.sizeOf(context).width/2.5,
-                child: CommonContainerButton2(context,
-                    onPress: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>Wallet_screen()));
-                    }, titleName: 'View my Wallet'),
-              ),
-            ],
-          ),
-          const Spacer(),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 92),
-                child: ImgPathSvg('wallet.svg'),
-              ),
-            ],
-          ),
+Widget Wallet_Card(context,{
+  required String customername,
+  required String Acnum,
+  required String Acnumval,
+  required String totalpaid,
+  required String totalpaidval,
+  required String totacc,
+  required String totaccval,
+  required String noofpaid,
+  required String noofpaidval
+}){
+  return Card(
+    elevation: 5,
+      shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(20)),
+    child: Container(
+      width: MediaQuery.sizeOf(context).width,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(width: 1,color: gradient2),
+        gradient: appGradient
+      ),
+      child: Padding(
+        padding: const EdgeInsets.only(top: 10),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 15,right: 15),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  //const SizedBox(height: 20,),
+                  Text(customername,style: UserST,),
+                  Container(
+                    width: 60,
+                    child: Divider(
+                      thickness: 2,
+                      color: gradient2,
+                    ),
+                  ),
+                  const SizedBox(height: 5),
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: Acnum,
+                          style: planST2,
+                        ),
+                        TextSpan(
+                          text: Acnumval,
+                          style: walletT3,
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 5),
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: totalpaid,
+                          style: planST2,
+                        ),
+                        TextSpan(
+                          text: totalpaidval,
+                          style: walletT3,
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 5),
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: totacc,
+                          style: planST2,
+                        ),
+                        TextSpan(
+                          text: totaccval,
+                          style: walletT3,
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 5),
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                          text: noofpaid,
+                          style: planST2,
+                        ),
+                        TextSpan(
+                          text: noofpaidval,
+                          style: walletT3,
+                        ),
+                      ],
+                    ),
+                  ),
 
-        ],
+                ],
+              ),
+            ),
+            const SizedBox(height: 5),
+            Column(
+              children: [
+                Divider(thickness: 1.5,color: Colors.white),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                      width: (MediaQuery.sizeOf(context).width/2)-40,
+                        child: Center(child: Padding(
+                          padding: const EdgeInsets.only(bottom: 10),
+                          child: Text("Payment History",style: ButtonT,),
+                        ))),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      child: Container(width: 1,height: 30,color: Colors.grey,),
+                    ),
+                    Container(
+                        width: (MediaQuery.sizeOf(context).width/2)-40,
+                        child: Center(child: Padding(
+                          padding: const EdgeInsets.only(bottom: 10),
+                          child: Text("Pay now",style: ButtonT,),
+                        )))
+                  ],
+                )
+              ],
+            ),
+
+            // Container(
+            //   margin: EdgeInsets.only(top: 20,bottom: 20),
+            //   width:MediaQuery.sizeOf(context).width/2.5,
+            //   child: CommonContainerButton2(context,
+            //       onPress: () {
+            //         Navigator.push(context, MaterialPageRoute(builder: (context)=>Wallet_screen()));
+            //       }, titleName: 'Pay'),
+            // ),
+
+          ],
+        ),
       ),
     ),
   );
