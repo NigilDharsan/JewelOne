@@ -25,39 +25,37 @@ class _Notification_ScreenState extends State<Notification_Screen> {
       ),
       body:
       //TabBarWithSearch(),
-      Expanded(
-        child: ListView.builder(
-            itemCount: 7,
-            itemBuilder: (BuildContext context, int index){
-              return Padding(
-                padding: const EdgeInsets.only(top: 10),
-                child: Container(
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 20,right: 20,top: 5),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ImgPathSvg('noti.svg'),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 15),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                  width: MediaQuery.sizeOf(context).width/1.6,
-                                  child: Text('To avail your XXXX05895  EMI amount is Rs. 5000 payable on 21-Feb-24 every...',style: phoneHT,)),
-                              Text('9 minutes ago',style: lighttext,)
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
+      ListView.builder(
+          itemCount: 7,
+          itemBuilder: (BuildContext context, int index){
+            return Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: Container(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 20,right: 20,top: 5),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ImgPathSvg('noti.svg'),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 15),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                                width: MediaQuery.sizeOf(context).width/1.6,
+                                child: Text('To avail your XXXX05895  EMI amount is Rs. 5000 payable on 21-Feb-24 every...',style: phoneHT,)),
+                            Text('9 minutes ago',style: lighttext,)
+                          ],
+                        ),
+                      )
+                    ],
                   ),
                 ),
-              );
-            }
-        ),
+              ),
+            );
+          }
       )
     );
   }

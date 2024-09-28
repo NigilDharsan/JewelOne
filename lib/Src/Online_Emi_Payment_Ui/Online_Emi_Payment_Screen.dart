@@ -97,7 +97,7 @@ class _Online_Emi_Payment_ScreenState
                       padding: const EdgeInsets.only(top: 15, bottom: 15),
                       child: Row(
                         children: [
-                          ImgPathSvg('calendar2.svg'),
+                          ImgPathSvg('calend  ar2.svg'),
                           const SizedBox(width: 10),
                           Text('${data?.data?.length ?? 0} Plan Active',
                               style: rate2)

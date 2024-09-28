@@ -9,12 +9,14 @@ import 'Common_Button.dart';
 
 Widget Plan_Card(context,{required String Img,required String planT}){
   return Container(
+    height: 120,
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(10),
       color: white1,
     ),
     child: Column(
-      mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center,
+
       children: [
         //IMAGE
        Padding(
@@ -22,7 +24,7 @@ Widget Plan_Card(context,{required String Img,required String planT}){
          child: ImgPathSvg(Img),
        ),
         Padding(
-          padding: const EdgeInsets.only(bottom: 20,left: 5,right: 5),
+          padding: const EdgeInsets.only(left: 5,right: 5),
           child: Container(
             width: MediaQuery.sizeOf(context).width/4,
               child: Text(planT,style: planST,maxLines: 2,textAlign: TextAlign.center,)),
@@ -36,13 +38,9 @@ Widget Plan_Card(context,{required String Img,required String planT}){
 //WALLET CARD
 Widget Wallet_Card(context,{
   required String customername,
-  required String Acnum,
   required String Acnumval,
-  required String totalpaid,
   required String totalpaidval,
-  required String totacc,
   required String totaccval,
-  required String noofpaid,
   required String noofpaidval
 }){
   return Card(
@@ -69,7 +67,15 @@ Widget Wallet_Card(context,{
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   //const SizedBox(height: 20,),
-                  Text(customername,style: UserST,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(customername,style: UserST,),
+                      Container(
+                        height: 40,width: 40,
+                          child: App_Logo(context)),
+                    ],
+                  ),
                   Container(
                     width: 60,
                     child: Divider(
@@ -77,71 +83,102 @@ Widget Wallet_Card(context,{
                       color: gradient2,
                     ),
                   ),
-                  const SizedBox(height: 5),
-                  RichText(
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                          text: Acnum,
-                          style: planST2,
+
+                  const SizedBox(height: 10),
+
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: (MediaQuery.sizeOf(context).width/2) - 30,
+                        child: Row(
+                          children: [
+                            Icon(Icons.wallet,color: Colors.white60,),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 5,right: 5),
+                              child: Container(width: 3,color: gradient2,height: 30,),
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Account Number',style: planST2,),
+                                Text(Acnumval,style: walletT3,)
+                              ],
+                            )
+                          ],
                         ),
-                        TextSpan(
-                          text: Acnumval,
-                          style: walletT3,
-                        ),
-                      ],
-                    ),
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.wallet,color: Colors.white60,),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 5,right: 5),
+                            child: Container(width: 3,color: gradient2,height: 30,),
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('Paid Installment',style: planST2,),
+                              Text(noofpaidval,style: walletT3,)
+                            ],
+                          )
+                        ],
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 5),
-                  RichText(
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                          text: totalpaid,
-                          style: planST2,
+
+                  const SizedBox(height: 15),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: (MediaQuery.sizeOf(context).width/2) - 30,
+                        child: Row(
+                          children: [
+                            Icon(Icons.wallet,color: Colors.white60,),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 5,right: 5),
+                              child: Container(width: 3,color: gradient2,height: 30,),
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Total Paid',style: planST2,),
+                                Text(totalpaidval,style: walletT3,)
+                              ],
+                            )
+                          ],
                         ),
-                        TextSpan(
-                          text: totalpaidval,
-                          style: walletT3,
-                        ),
-                      ],
-                    ),
+                      ),
+                      Row(
+                        children: [
+                          Icon(Icons.wallet,color: Colors.white60,),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 5,right: 5),
+                            child: Container(width: 3,color: gradient2,height: 30,),
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('Total Weight',style: planST2,),
+                              Text(totaccval,style: walletT3,)
+                            ],
+                          )
+                        ],
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 5),
-                  RichText(
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                          text: totacc,
-                          style: planST2,
-                        ),
-                        TextSpan(
-                          text: totaccval,
-                          style: walletT3,
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 5),
-                  RichText(
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                          text: noofpaid,
-                          style: planST2,
-                        ),
-                        TextSpan(
-                          text: noofpaidval,
-                          style: walletT3,
-                        ),
-                      ],
-                    ),
-                  ),
+
+                  const SizedBox(height: 10),
 
                 ],
               ),
             ),
-            const SizedBox(height: 5),
             Column(
               children: [
                 Divider(thickness: 1.5,color: Colors.white),
@@ -149,10 +186,10 @@ Widget Wallet_Card(context,{
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Container(
-                      width: (MediaQuery.sizeOf(context).width/2)-40,
+                      width: (MediaQuery.sizeOf(context).width/2)-20,
                         child: Center(child: Padding(
                           padding: const EdgeInsets.only(bottom: 10),
-                          child: Text("Payment History",style: ButtonT,),
+                          child: Text("Payment History",style: ButtonT2,),
                         ))),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 10),
@@ -162,7 +199,7 @@ Widget Wallet_Card(context,{
                         width: (MediaQuery.sizeOf(context).width/2)-40,
                         child: Center(child: Padding(
                           padding: const EdgeInsets.only(bottom: 10),
-                          child: Text("Pay now",style: ButtonT,),
+                          child: Text("Pay now",style: ButtonT2,),
                         )))
                   ],
                 )

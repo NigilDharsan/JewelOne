@@ -63,7 +63,7 @@ TextStyle bottomotext = TextStyle(
 //USER NAME ST
 TextStyle UserST = TextStyle(
     fontFamily: 'Inter',
-    fontSize: 18,
+    fontSize: 16,
     color: Color.fromRGBO(255,255,255,1),
     fontWeight: FontWeight.w600);
 
@@ -103,13 +103,13 @@ TextStyle plandetailT = TextStyle(
 //GRAM
 TextStyle gramST = TextStyle(
     fontFamily: 'Inter',
-    fontSize: 13,
+    fontSize: 10,
     color: Colors.black,
     fontWeight: FontWeight.w500);
 
 TextStyle gramrateST = TextStyle(
     fontFamily: 'Inter',
-    fontSize: 13,
+    fontSize: 10,
     color: green1,
     fontWeight: FontWeight.w500);
 

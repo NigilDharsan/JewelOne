@@ -60,7 +60,7 @@ class _Home_DashBoard_ScreenState extends ConsumerState<Home_DashBoard_Screen> {
   Widget build(BuildContext context) {
     final priceRate = ref.watch(GoldrateProvider);
     //final bannerimagedata = ref.watch(BannerDataProvider);
-    final activelocationdata = ref.watch(ActivelocationProvider);
+    // final activelocationdata = ref.watch(ActivelocationProvider);
     return Scaffold(
       backgroundColor: backGroundColor,
       appBar: AppBar(
@@ -117,9 +117,23 @@ class _Home_DashBoard_ScreenState extends ConsumerState<Home_DashBoard_Screen> {
                 color: white2,
                 child: Column(
                   children: [
+
+                    //WALLET
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20,right: 20,bottom: 20,top: 20),
+                      child: Wallet_Card(context, customername: "Hi ${name}",
+                        Acnumval: '81278172817271',
+                        totalpaidval: '20,000',
+                        totaccval: '12',
+                        noofpaidval: '8',
+
+
+                      ),
+                    ),
+
                     //PLAN CARD
                     Padding(
-                      padding: const EdgeInsets.only(left: 20,right: 20,top: 20,bottom: 15),
+                      padding: const EdgeInsets.only(left: 20,right: 20,bottom: 15),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -177,18 +191,7 @@ class _Home_DashBoard_ScreenState extends ConsumerState<Home_DashBoard_Screen> {
                         ],
                       ),
                     ),
-                    //WALLET
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20,right: 20,bottom: 20),
-                      child: Wallet_Card(context, customername: "Hi ${name}",
-                          Acnum: 'Account Number                    :  ', Acnumval: '81278172817271',
-                        totalpaid: 'Total Paid                                :  ', totalpaidval: '20,000',
-                        totacc: 'Total Accumulated weight   :  ', totaccval: '12',
-                        noofpaid: 'No of Paid Installment          :  ', noofpaidval: '8',
 
-
-                      ),
-                    ),
                     //CAROSEL BANNER
                     Container(
                       color: white1,
@@ -337,8 +340,7 @@ class _GoldScrollPriceWidgetState extends ConsumerState<GoldScrollPriceWidget> {
       return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               '1 GRM (22KT) Gold : ',
@@ -350,7 +352,7 @@ class _GoldScrollPriceWidgetState extends ConsumerState<GoldScrollPriceWidget> {
             ),
             const SizedBox(width: 10,),
             Text(
-              '1 (G) Silver : ',
+              '1 (GRM) Silver : ',
               style: gramST,
             ),
             Text(
