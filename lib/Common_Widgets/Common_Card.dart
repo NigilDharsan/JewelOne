@@ -94,7 +94,7 @@ Widget Wallet_Card(context,{
                         width: (MediaQuery.sizeOf(context).width/2) - 30,
                         child: Row(
                           children: [
-                            Icon(Icons.wallet,color: Colors.white60,),
+                            Icon(Icons.wallet,color: Colors.white,),
                             Padding(
                               padding: const EdgeInsets.only(left: 5,right: 5),
                               child: Container(width: 3,color: gradient2,height: 30,),
@@ -102,7 +102,7 @@ Widget Wallet_Card(context,{
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('Account Number',style: planST2,),
+                                Text('Account Number',style: walletT3,),
                                 Text(Acnumval,style: walletT3,)
                               ],
                             )
@@ -113,7 +113,7 @@ Widget Wallet_Card(context,{
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(Icons.wallet,color: Colors.white60,),
+                          Icon(Icons.wallet,color: Colors.white,),
                           Padding(
                             padding: const EdgeInsets.only(left: 5,right: 5),
                             child: Container(width: 3,color: gradient2,height: 30,),
@@ -121,7 +121,7 @@ Widget Wallet_Card(context,{
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Paid Installment',style: planST2,),
+                              Text('Paid Installment',style: walletT3,),
                               Text(noofpaidval,style: walletT3,)
                             ],
                           )
@@ -140,7 +140,7 @@ Widget Wallet_Card(context,{
                         width: (MediaQuery.sizeOf(context).width/2) - 30,
                         child: Row(
                           children: [
-                            Icon(Icons.wallet,color: Colors.white60,),
+                            Icon(Icons.wallet,color: Colors.white,),
                             Padding(
                               padding: const EdgeInsets.only(left: 5,right: 5),
                               child: Container(width: 3,color: gradient2,height: 30,),
@@ -148,7 +148,7 @@ Widget Wallet_Card(context,{
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('Total Paid',style: planST2,),
+                                Text('Total Paid',style: walletT3,),
                                 Text(totalpaidval,style: walletT3,)
                               ],
                             )
@@ -157,7 +157,7 @@ Widget Wallet_Card(context,{
                       ),
                       Row(
                         children: [
-                          Icon(Icons.wallet,color: Colors.white60,),
+                          Icon(Icons.wallet,color: Colors.white,),
                           Padding(
                             padding: const EdgeInsets.only(left: 5,right: 5),
                             child: Container(width: 3,color: gradient2,height: 30,),
@@ -165,7 +165,7 @@ Widget Wallet_Card(context,{
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('Total Weight',style: planST2,),
+                              Text('Total Weight',style: walletT3,),
                               Text(totaccval,style: walletT3,)
                             ],
                           )
