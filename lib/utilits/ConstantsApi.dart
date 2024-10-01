@@ -12,8 +12,8 @@ class ConstantApi {
   static String activelocationUrl = SERVER_ONE + "retailmaster/active_branch/";
   static String myplanUrl = SERVER_ONE + "managescheme/customer_account/";
   static String activeplanUrl = SERVER_ONE + "scheme/list/?status";
-
-
+  static String paymenthistoryUrl = SERVER_ONE + "payment/payment_history/";
+  static String accountCloseUrl = SERVER_ONE + "managescheme/scheme_account_close/";
 
   static String SOMETHING_WRONG = "Some thing wrong";
   static String NO_INTERNET = "No internet Connection";

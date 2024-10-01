@@ -188,7 +188,7 @@ class _Menu_ScreenState extends ConsumerState<Menu_Screen> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                paymrnt_History_Screen()));
+                                                payment_History_Screen()));
                                   }),
                               Divider(),
                               NavContainer(

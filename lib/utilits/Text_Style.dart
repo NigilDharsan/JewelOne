@@ -103,13 +103,13 @@ TextStyle plandetailT = TextStyle(
 //GRAM
 TextStyle gramST = TextStyle(
     fontFamily: 'Inter',
-    fontSize: 10,
+    fontSize: 11,
     color: Colors.black,
     fontWeight: FontWeight.w500);
 
 TextStyle gramrateST = TextStyle(
     fontFamily: 'Inter',
-    fontSize: 10,
+    fontSize: 11,
     color: green1,
     fontWeight: FontWeight.w500);
 

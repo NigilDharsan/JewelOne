@@ -224,4 +224,54 @@ class ApiService {
     }
     return ActivePlanModel();
   }
+
+  //PAYMENT HISTORY
+  Future<SignUpModel> PaymenthistoryApi() async {
+    var formData = <String, dynamic>{
+      "id_customer": await getCustomer_Id(),
+    };
+
+    final result = await requestPOST2(
+        url: ConstantApi.paymenthistoryUrl, formData: formData, dio: _dio);
+
+    if (result["success"] == true) {
+      print("resultOTP:$result");
+      print("resultOTPsss:${result["success"]}");
+      return SignUpModel?.fromJson(result["response"]);
+    } else {
+      try {
+        var resultval = SignUpModel.fromJson(result["response"]);
+        // Toast.show(resultval.message.toString(), context);
+        print(result["response"]);
+        return resultval;
+      } catch (e) {
+        print(result["response"]);
+        // Toast.show(result["response"], context);
+      }
+    }
+    return SignUpModel();
+  }
+
+  //CLOSED ACCOUNT
+  Future<SignUpModel> closedAccountApi() async {
+    final result = await requestGET(url: ConstantApi.accountCloseUrl + "?id_customer=${await getCustomer_Id()}", dio: _dio);
+    if (result["success"] == true) {
+      print("resultOTP:$result");
+      print("resultOTPsss:${result["success"]}");
+      return SignUpModel?.fromJson(result["response"]);
+    } else {
+      try {
+        var resultval = SignUpModel.fromJson(result["response"]);
+        // Toast.show(resultval.message.toString(), context);
+        print(result["response"]);
+        return resultval;
+      } catch (e) {
+        print(result["response"]);
+        // Toast.show(result["response"], context);
+      }
+    }
+    return SignUpModel();
+  }
+
 }
+

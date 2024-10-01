@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jewelone/Common_Widgets/Common_Button.dart';
 import 'package:jewelone/Common_Widgets/Custom_App_Bar.dart';
 import 'package:jewelone/Common_Widgets/Image_Path.dart';
@@ -6,14 +7,16 @@ import 'package:jewelone/Src/FAQ_Ui/FAQ_Screen.dart';
 import 'package:jewelone/Src/My_SSP_Ui/My_SSP_Screen.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
-class paymrnt_History_Screen extends StatefulWidget {
-  const paymrnt_History_Screen({super.key});
+
+import '../../utilits/ApiProvider.dart';
+class payment_History_Screen extends ConsumerStatefulWidget {
+  const payment_History_Screen({super.key});
 
   @override
-  State<paymrnt_History_Screen> createState() => _paymrnt_History_ScreenState();
+  ConsumerState<payment_History_Screen> createState() => _payment_History_ScreenState();
 }
 
-class _paymrnt_History_ScreenState extends State<paymrnt_History_Screen> {
+class _payment_History_ScreenState extends ConsumerState<payment_History_Screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,6 +32,7 @@ class _paymrnt_History_ScreenState extends State<paymrnt_History_Screen> {
   }
 
   Widget _Mainbody (){
+    final paymenthistorydata = ref.watch(PaymenthistoryProvider);
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.only(left: 20,right: 20,bottom: 50),

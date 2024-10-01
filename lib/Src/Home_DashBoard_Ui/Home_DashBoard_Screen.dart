@@ -22,6 +22,10 @@ import 'package:jewelone/utilits/Text_Style.dart';
 import 'package:scroll_loop_auto_scroll/scroll_loop_auto_scroll.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../../utilits/Loading_Overlay.dart';
+import '../Login_Ui/LoginScreen.dart';
+import '../Payment_History_Ui/payment_History_Screen.dart';
+
 class Home_DashBoard_Screen extends ConsumerStatefulWidget {
 
   Customer? customer;
@@ -60,7 +64,7 @@ class _Home_DashBoard_ScreenState extends ConsumerState<Home_DashBoard_Screen> {
   Widget build(BuildContext context) {
     final priceRate = ref.watch(GoldrateProvider);
     //final bannerimagedata = ref.watch(BannerDataProvider);
-    // final activelocationdata = ref.watch(ActivelocationProvider);
+   // final activelocationdata = ref.watch(ActivelocationProvider);
     return Scaffold(
       backgroundColor: backGroundColor,
       appBar: AppBar(
@@ -171,14 +175,39 @@ class _Home_DashBoard_ScreenState extends ConsumerState<Home_DashBoard_Screen> {
                           // PAYMENT HISTORY
                           InkWell(
                               onTap: (){
-                               //Navigator.push(context, MaterialPageRoute(builder: (context)=>Purchase_Plan_detail_Screeen()));
+                               Navigator.push(context, MaterialPageRoute(builder: (context)=>payment_History_Screen()));
                               },
                               child: Plan_Card(context, Img: 'plan1.svg', planT: 'Payment history',)),
 
                           //CLOSED ACCOUNT
                           InkWell(
                               onTap: (){
-                                //Navigator.push(context, MaterialPageRoute(builder: (context)=>New_SSP_Screen()));
+                               showDialog(context: (context), builder: (BuildContext context){
+                                 return AlertDialog(
+                                   content: Text("Are you sure to close your account",style: radioST,),
+                                   actions: [
+                                     InkWell(
+                                       onTap: (){Navigator.pop(context);},
+                                         child: Container(child: Text("Cancel",style: radioST,),)),
+
+                                     const SizedBox(width: 10),
+
+                                     InkWell(
+                                       onTap:() async{
+                                         Navigator.pop(context);
+                                         LoadingOverlay.show(context);
+                                         final result = await ref.read(closedaccountProvider.future);
+                                         LoadingOverlay.forcedStop();
+
+                                         if (result?.status == true) {
+                                         } else {
+
+                                         }
+                                       },
+                                         child: Container(child: Text("Ok",style: radioST,),))
+                                   ],
+                                 );
+                               });
                               },
                               child: Plan_Card(context, Img: 'plan2.svg', planT: 'Closed account',)),
 
@@ -343,16 +372,18 @@ class _GoldScrollPriceWidgetState extends ConsumerState<GoldScrollPriceWidget> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              '1 GRM (22KT) Gold : ',
+              'Gold Rate 22ct: ',
               style: gramST,
             ),
             Text(
               '₹ ${widget.data?.data?.gold22ct ?? ""}',
               style: gramrateST,
             ),
-            const SizedBox(width: 10,),
+
+            const Spacer(),
+
             Text(
-              '1 (GRM) Silver : ',
+              'Silver Rate 1gm: ',
               style: gramST,
             ),
             Text(
