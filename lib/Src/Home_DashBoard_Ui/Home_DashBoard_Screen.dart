@@ -1,38 +1,33 @@
 import 'dart:async';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jewelone/Common_Widgets/Common_Card.dart';
 import 'package:jewelone/Common_Widgets/Image_Path.dart';
-import 'package:jewelone/Common_Widgets/Text_Form_Field.dart';
 import 'package:jewelone/Model/GoldRateMmodel.dart';
 import 'package:jewelone/Model/LoginModel.dart';
-import 'package:jewelone/Src/Advance_Payment_Ui/Advance_Payment_Screen.dart';
-import 'package:jewelone/Src/Emi_Payment_Ui/Emi_Plan1_Screen.dart';
 import 'package:jewelone/Src/Menu_Ui/Menu_Screen.dart';
 import 'package:jewelone/Src/My_SSP_Ui/My_SSP_Screen.dart';
 import 'package:jewelone/Src/New_SSP_Ui/New_SSP_Screen.dart';
 import 'package:jewelone/Src/Notification_Ui/Notification_Screen.dart';
 import 'package:jewelone/Src/Online_Emi_Payment_Ui/Online_Emi_Payment_Screen.dart';
-import 'package:jewelone/Src/Purchase_Plan_Detail_Ui/Purchase_Plan_Details_Screen.dart';
 import 'package:jewelone/utilits/ApiProvider.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
 import 'package:jewelone/utilits/Generic.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
-import 'package:scroll_loop_auto_scroll/scroll_loop_auto_scroll.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../utilits/Loading_Overlay.dart';
-import '../Login_Ui/LoginScreen.dart';
 import '../Payment_History_Ui/payment_History_Screen.dart';
 
 class Home_DashBoard_Screen extends ConsumerStatefulWidget {
-
   Customer? customer;
-   Home_DashBoard_Screen({super.key,this.customer});
+  Home_DashBoard_Screen({super.key, this.customer});
 
   @override
-  ConsumerState<Home_DashBoard_Screen> createState() => _Home_DashBoard_ScreenState();
+  ConsumerState<Home_DashBoard_Screen> createState() =>
+      _Home_DashBoard_ScreenState();
 }
 
 class _Home_DashBoard_ScreenState extends ConsumerState<Home_DashBoard_Screen> {
@@ -41,19 +36,17 @@ class _Home_DashBoard_ScreenState extends ConsumerState<Home_DashBoard_Screen> {
   int myCurrentPage = 0;
 
   String? location;
-  List<String> locationoption = [
-    "Pollachi"
-  ];
+  List<String> locationoption = ["Pollachi"];
 
   String name = '';
 
-  Future<void> getDetails() async{
-
+  Future<void> getDetails() async {
     String cusname = await getCustomer_name();
     setState(() {
       name = cusname;
     });
   }
+
   void initState() {
     // TODO: implement initState
     super.initState();
@@ -64,16 +57,16 @@ class _Home_DashBoard_ScreenState extends ConsumerState<Home_DashBoard_Screen> {
   Widget build(BuildContext context) {
     final priceRate = ref.watch(GoldrateProvider);
     //final bannerimagedata = ref.watch(BannerDataProvider);
-   // final activelocationdata = ref.watch(ActivelocationProvider);
+    // final activelocationdata = ref.watch(ActivelocationProvider);
     return Scaffold(
       backgroundColor: backGroundColor,
       appBar: AppBar(
         backgroundColor: white2,
         leading: InkWell(
-          onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>Menu_Screen(
-            )));
-          },
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Menu_Screen()));
+            },
             child: Icon(Icons.menu_outlined)),
         centerTitle: true,
         title: App_Logo(context),
@@ -82,14 +75,15 @@ class _Home_DashBoard_ScreenState extends ConsumerState<Home_DashBoard_Screen> {
             padding: const EdgeInsets.only(right: 10, left: 15),
             child: InkWell(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Notification_Screen(
-                  )));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Notification_Screen()));
                 },
                 child: ImgPathSvg("notification.svg")),
           ),
         ],
       ),
-
       body: SingleChildScrollView(
         child: Container(
           width: MediaQuery.sizeOf(context).width,
@@ -108,115 +102,170 @@ class _Home_DashBoard_ScreenState extends ConsumerState<Home_DashBoard_Screen> {
 
               //GOLD PRICE SCROLL
 
-              priceRate.when(data: (data){
-                return GoldScrollPriceWidget(data: data,);
-              }, error: (Object error, StackTrace stackTrace){
+              priceRate.when(data: (data) {
+                return GoldScrollPriceWidget(
+                  data: data,
+                );
+              }, error: (Object error, StackTrace stackTrace) {
                 return Text("$error");
-              }, loading: (){
+              }, loading: () {
                 return CircularProgressIndicator();
-              }) ,
-          
-          
+              }),
+
               Container(
                 color: white2,
                 child: Column(
                   children: [
-
                     //WALLET
                     Padding(
-                      padding: const EdgeInsets.only(left: 20,right: 20,bottom: 20,top: 20),
-                      child: Wallet_Card(context, customername: "Hi ${name}",
+                      padding: const EdgeInsets.only(
+                          left: 20, right: 20, bottom: 20, top: 20),
+                      child: Wallet_Card(
+                        context,
+                        customername: "Hi ${name}",
                         Acnumval: '81278172817271',
                         totalpaidval: '20,000',
                         totaccval: '12',
                         noofpaidval: '8',
-
-
                       ),
                     ),
 
                     //PLAN CARD
                     Padding(
-                      padding: const EdgeInsets.only(left: 20,right: 20,bottom: 15),
+                      padding: const EdgeInsets.only(
+                          left: 20, right: 20, bottom: 15),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-
                           //ONLINE PAYMENT
                           InkWell(
-                            onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=>Online_Emi_Payment_Screen()));
-                            },
-                              child: Plan_Card(context, Img: 'plan1.svg', planT: 'Online EMI',)),
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            Online_Emi_Payment_Screen()));
+                              },
+                              child: Plan_Card(
+                                context,
+                                Img: 'plan1.svg',
+                                planT: 'Online EMI',
+                              )),
 
                           //NEW SWARNA
                           InkWell(
-                            onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=>New_SSP_Screen()));
-                            },
-                              child: Plan_Card(context, Img: 'plan2.svg', planT: 'New Plan',)),
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            New_SSP_Screen()));
+                              },
+                              child: Plan_Card(
+                                context,
+                                Img: 'plan2.svg',
+                                planT: 'New Plan',
+                              )),
 
                           //MY SWARNA
                           InkWell(
-                            onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=>My_SSP_Screen()));
-                            },
-                              child: Plan_Card(context, Img: 'plan3.svg', planT: 'My Plan',)),
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => My_SSP_Screen()));
+                              },
+                              child: Plan_Card(
+                                context,
+                                Img: 'plan3.svg',
+                                planT: 'My Plan',
+                              )),
                         ],
                       ),
                     ),
 
                     Padding(
-                      padding: const EdgeInsets.only(left: 20,right: 20,bottom: 25),
+                      padding: const EdgeInsets.only(
+                          left: 20, right: 20, bottom: 25),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-
                           // PAYMENT HISTORY
                           InkWell(
-                              onTap: (){
-                               Navigator.push(context, MaterialPageRoute(builder: (context)=>payment_History_Screen()));
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            payment_History_Screen()));
                               },
-                              child: Plan_Card(context, Img: 'plan1.svg', planT: 'Payment history',)),
+                              child: Plan_Card(
+                                context,
+                                Img: 'plan1.svg',
+                                planT: 'Payment history',
+                              )),
 
                           //CLOSED ACCOUNT
                           InkWell(
-                              onTap: (){
-                               showDialog(context: (context), builder: (BuildContext context){
-                                 return AlertDialog(
-                                   content: Text("Are you sure to close your account",style: radioST,),
-                                   actions: [
-                                     InkWell(
-                                       onTap: (){Navigator.pop(context);},
-                                         child: Container(child: Text("Cancel",style: radioST,),)),
+                              onTap: () {
+                                showDialog(
+                                    context: (context),
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        content: Text(
+                                          "Are you sure to close your account",
+                                          style: radioST,
+                                        ),
+                                        actions: [
+                                          InkWell(
+                                              onTap: () {
+                                                Navigator.pop(context);
+                                              },
+                                              child: Container(
+                                                child: Text(
+                                                  "Cancel",
+                                                  style: radioST,
+                                                ),
+                                              )),
+                                          const SizedBox(width: 10),
+                                          InkWell(
+                                              onTap: () async {
+                                                Navigator.pop(context);
+                                                LoadingOverlay.show(context);
+                                                final result = await ref.read(
+                                                    closedaccountProvider
+                                                        .future);
+                                                LoadingOverlay.forcedStop();
 
-                                     const SizedBox(width: 10),
-
-                                     InkWell(
-                                       onTap:() async{
-                                         Navigator.pop(context);
-                                         LoadingOverlay.show(context);
-                                         final result = await ref.read(closedaccountProvider.future);
-                                         LoadingOverlay.forcedStop();
-
-                                         if (result?.status == true) {
-                                         } else {
-
-                                         }
-                                       },
-                                         child: Container(child: Text("Ok",style: radioST,),))
-                                   ],
-                                 );
-                               });
+                                                if (result?.status == true) {
+                                                } else {}
+                                              },
+                                              child: Container(
+                                                child: Text(
+                                                  "Ok",
+                                                  style: radioST,
+                                                ),
+                                              ))
+                                        ],
+                                      );
+                                    });
                               },
-                              child: Plan_Card(context, Img: 'plan2.svg', planT: 'Closed account',)),
+                              child: Plan_Card(
+                                context,
+                                Img: 'plan2.svg',
+                                planT: 'Closed account',
+                              )),
 
                           //MY ORDER
                           InkWell(
-                              onTap: (){
+                              onTap: () {
                                 //Navigator.push(context, MaterialPageRoute(builder: (context)=>My_SSP_Screen()));
                               },
-                              child: Plan_Card(context, Img: 'plan3.svg', planT: 'My order',)),
+                              child: Plan_Card(
+                                context,
+                                Img: 'plan3.svg',
+                                planT: 'My order',
+                              )),
                         ],
                       ),
                     ),
@@ -225,11 +274,13 @@ class _Home_DashBoard_ScreenState extends ConsumerState<Home_DashBoard_Screen> {
                     Container(
                       color: white1,
                       child: Padding(
-                        padding: const EdgeInsets.only(left: 20,right: 20),
+                        padding: const EdgeInsets.only(left: 20, right: 20),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            const SizedBox(height: 20,),
+                            const SizedBox(
+                              height: 20,
+                            ),
                             //CAROSEL SLIDER
                             CarouselSlider(
                                 items: [
@@ -242,15 +293,18 @@ class _Home_DashBoard_ScreenState extends ConsumerState<Home_DashBoard_Screen> {
                                   autoPlay: true,
                                   viewportFraction: 1,
                                   enlargeCenterPage: true,
-                                  aspectRatio: 16/9,
-                                  autoPlayAnimationDuration:Duration(milliseconds: 800),
-                                  onPageChanged: (index,reason){
+                                  aspectRatio: 16 / 9,
+                                  autoPlayAnimationDuration:
+                                      Duration(milliseconds: 800),
+                                  onPageChanged: (index, reason) {
                                     setState(() {
                                       myCurrentPage = index;
                                     });
                                   },
                                 )),
-                            const SizedBox(height: 10,),
+                            const SizedBox(
+                              height: 10,
+                            ),
                             Center(
                               child: AnimatedSmoothIndicator(
                                 activeIndex: myCurrentPage,
@@ -258,11 +312,12 @@ class _Home_DashBoard_ScreenState extends ConsumerState<Home_DashBoard_Screen> {
                                 effect: ExpandingDotsEffect(
                                     dotHeight: 5,
                                     dotWidth: 5,
-                                    activeDotColor: gradient1
-                                ),
+                                    activeDotColor: gradient1),
                               ),
                             ),
-                            const SizedBox(height: 20,),
+                            const SizedBox(
+                              height: 20,
+                            ),
                           ],
                         ),
                       ),
@@ -306,9 +361,8 @@ class _Home_DashBoard_ScreenState extends ConsumerState<Home_DashBoard_Screen> {
 // }
 }
 
-
 //CAROUSEL IMG STACK
-Widget _carouselImg(context){
+Widget _carouselImg(context) {
   return Container(
     height: 185,
     width: MediaQuery.of(context).size.width,
@@ -316,12 +370,10 @@ Widget _carouselImg(context){
       borderRadius: BorderRadius.circular(15),
       image: DecorationImage(
           image: AssetImage("lib/assets/homedashboardimage.png"),
-      fit: BoxFit.cover),
+          fit: BoxFit.cover),
     ),
   );
 }
-
-
 
 class GoldScrollPriceWidget extends ConsumerStatefulWidget {
   GoldRateModel? data;
@@ -366,41 +418,41 @@ class _GoldScrollPriceWidgetState extends ConsumerState<GoldScrollPriceWidget> {
 
   @override
   Widget build(BuildContext context) {
-      return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Gold Rate 22ct: ',
-              style: gramST,
-            ),
-            Text(
-              '₹ ${widget.data?.data?.gold22ct ?? ""}',
-              style: gramrateST,
-            ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            '1 GRM (22KT) Gold : ',
+            style: gramST,
+          ),
+          Text(
+            '₹ ${widget.data?.data?.gold22ct ?? ""}',
+            style: gramrateST,
+          ),
 
-            const Spacer(),
+          const Spacer(),
 
-            Text(
-              'Silver Rate 1gm: ',
-              style: gramST,
-            ),
-            Text(
-              '₹ ${widget.data?.data?.silverG ?? ""}',
-              style: gramrateST,
-            ),
-            // const SizedBox(width: 20,),
-            // Text(
-            //   'Platinum : ',
-            //   style: gramST,
-            // ),
-            // Text(
-            //   '₹ ${widget.data?.data?.platinum ?? ""}',
-            //   style: gramrateST,
-            // ),
-          ],
-        ),
-      );
+          Text(
+            '1 (GRM) Silver : ',
+            style: gramST,
+          ),
+          Text(
+            '₹ ${widget.data?.data?.silverG ?? ""}',
+            style: gramrateST,
+          ),
+          // const SizedBox(width: 20,),
+          // Text(
+          //   'Platinum : ',
+          //   style: gramST,
+          // ),
+          // Text(
+          //   '₹ ${widget.data?.data?.platinum ?? ""}',
+          //   style: gramrateST,
+          // ),
+        ],
+      ),
+    );
   }
 }

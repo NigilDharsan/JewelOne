@@ -14,10 +14,10 @@ import 'package:jewelone/Common_Widgets/Common_Model_Bottom_Sheet.dart';
 import 'package:jewelone/Common_Widgets/Custom_App_Bar.dart';
 import 'package:jewelone/Common_Widgets/Image_Path.dart';
 import 'package:jewelone/Src/Home_DashBoard_Ui/Home_DashBoard_Screen.dart';
-import 'package:jewelone/Src/My_SSP_Ui/My_SSP_Screen.dart';
 import 'package:jewelone/utilits/ApiProvider.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
 import 'package:jewelone/utilits/Generic.dart';
+import 'package:jewelone/utilits/Loading_Overlay.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
 
 class Online_Emi_Payment_Screen extends ConsumerStatefulWidget {
@@ -97,7 +97,7 @@ class _Online_Emi_Payment_ScreenState
                       padding: const EdgeInsets.only(top: 15, bottom: 15),
                       child: Row(
                         children: [
-                          ImgPathSvg('calend  ar2.svg'),
+                          ImgPathSvg('calendar2.svg'),
                           const SizedBox(width: 10),
                           Text('${data?.data?.length ?? 0} Plan Active',
                               style: rate2)
@@ -129,9 +129,6 @@ class _Online_Emi_Payment_ScreenState
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
                                     children: [
                                       Checkbox(
                                         side: BorderSide(
@@ -153,12 +150,11 @@ class _Online_Emi_Payment_ScreenState
 
                                       //SCHEME NAME
                                       Container(
-                                        width:
-                                            MediaQuery.sizeOf(context).width /
-                                                1.5,
                                         child: Text(
                                           data?.data?[index].schemeName ?? "",
-                                          style: UserST,
+                                          style: planST.copyWith(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 14),
                                         ),
                                       ),
                                     ],
@@ -179,7 +175,6 @@ class _Online_Emi_Payment_ScreenState
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
                                           children: [
-                                            const SizedBox(height: 5),
                                             Container(
                                               width: MediaQuery.sizeOf(context)
                                                       .width /
@@ -188,97 +183,138 @@ class _Online_Emi_Payment_ScreenState
                                                 data?.data?[index]
                                                         .accountName ??
                                                     "",
-                                                style: planST.copyWith(fontWeight: FontWeight.bold,fontSize: 14),
+                                                style: planST.copyWith(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 14),
                                               ),
                                             ),
+                                            SizedBox(
+                                              height: 5,
+                                            ),
+                                            data?.data?[index]?.limitType == 1
+                                                ? Text.rich(
+                                                    TextSpan(
+                                                      children: [
+                                                        TextSpan(
+                                                          text:
+                                                              "Min Amount   : ",
+                                                          style:
+                                                              planST2.copyWith(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  fontSize: 15),
+                                                        ),
+                                                        TextSpan(
+                                                          text:
+                                                              "${data?.data?[index].minimumPayable?.minAmount ?? ""}",
+                                                          style:
+                                                              planST.copyWith(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  fontSize: 14),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  )
+                                                : Text.rich(
+                                                    TextSpan(
+                                                      children: [
+                                                        TextSpan(
+                                                          text:
+                                                              "Min Weight    : ",
+                                                          style:
+                                                              planST2.copyWith(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  fontSize: 15),
+                                                        ),
+                                                        TextSpan(
+                                                          text:
+                                                              "${data?.data?[index].minimumPayable?.minWeight ?? ""}",
+                                                          style:
+                                                              planST.copyWith(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  fontSize: 14),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
                                             const SizedBox(height: 5),
                                             data?.data?[index]?.limitType == 1
                                                 ? Text.rich(
-                                              TextSpan(
-                                                children: [
-                                                  TextSpan(
-                                                    text: "Min Amount         : ",
-                                                    style: planST2.copyWith(fontWeight: FontWeight.w500,fontSize: 15),
+                                                    TextSpan(
+                                                      children: [
+                                                        TextSpan(
+                                                          text:
+                                                              "Max Amount  : ",
+                                                          style:
+                                                              planST2.copyWith(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  fontSize: 15),
+                                                        ),
+                                                        TextSpan(
+                                                          text:
+                                                              "${data?.data?[index].maximumPayable?.maxAmount ?? ""}",
+                                                          style:
+                                                              planST.copyWith(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  fontSize: 14),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  )
+                                                : Text.rich(
+                                                    TextSpan(
+                                                      children: [
+                                                        TextSpan(
+                                                          text:
+                                                              "Max Weight   : ",
+                                                          style:
+                                                              planST2.copyWith(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  fontSize: 15),
+                                                        ),
+                                                        TextSpan(
+                                                          text:
+                                                              "${data?.data?[index].maximumPayable?.maxWeight ?? ""}",
+                                                          style:
+                                                              planST.copyWith(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  fontSize: 14),
+                                                        ),
+                                                      ],
+                                                    ),
                                                   ),
-                                                  TextSpan(
-                                                    text: "${data?.data?[index].minimumPayable?.minAmount ?? ""}",
-                                                    style: planST.copyWith(fontWeight: FontWeight.bold,fontSize: 14),
-                                                  ),
-                                                ],
-                                              ),
-                                            ) :
-                                            Text.rich(
-                                              TextSpan(
-                                                children: [
-                                                  TextSpan(
-                                                    text: "Min Weight           : ",
-                                                    style: planST2.copyWith(fontWeight: FontWeight.w500,fontSize: 15),
-                                                  ),
-                                                  TextSpan(
-                                                    text: "${data?.data?[index].minimumPayable?.minWeight ?? ""}",
-                                                    style: planST.copyWith(fontWeight: FontWeight.bold,fontSize: 14),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-
-                                            const SizedBox(height: 5),
-                                            data?.data?[index]?.limitType == 1
-                                                ? Text.rich(
-                                              TextSpan(
-                                                children: [
-                                                  TextSpan(
-                                                    text: "Max Amount        : ",
-                                                    style: planST2.copyWith(fontWeight: FontWeight.w500,fontSize: 15),
-                                                  ),
-                                                  TextSpan(
-                                                    text: "${data?.data?[index].maximumPayable?.maxAmount ?? ""}",
-                                                    style: planST.copyWith(fontWeight: FontWeight.bold,fontSize: 14),
-                                                  ),
-                                                ],
-                                              ),
-                                            ) : Text.rich(
-                                              TextSpan(
-                                                children: [
-                                                  TextSpan(
-                                                    text: "Max Weight          : ",
-                                                    style: planST2.copyWith(fontWeight: FontWeight.w500,fontSize: 15),
-                                                  ),
-                                                  TextSpan(
-                                                    text: "${data?.data?[index].maximumPayable?.maxWeight ?? ""}",
-                                                    style: planST.copyWith(fontWeight: FontWeight.bold,fontSize: 14),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            const SizedBox(height: 5),
-
-                                           RichText(
-                                             text: TextSpan(
-                                               children: <TextSpan>[
-                                                 TextSpan(
-                                                   text: 'Rate per gold         : ',
-                                                   style: planST2.copyWith(fontWeight: FontWeight.w500,fontSize: 15)
-                                                 ),
-                                                 TextSpan(
-                                                   text: '${data?.data?[index].todaysRate ?? ''}',
-                                                   style: planST.copyWith(fontWeight: FontWeight.bold,fontSize: 14),
-                                                 ),
-                                               ],
-                                             ),
-                                           ),
-
                                             const SizedBox(height: 5),
                                             RichText(
                                               text: TextSpan(
                                                 children: <TextSpan>[
                                                   TextSpan(
-                                                      text: 'Equivalent weight : ',
-                                                      style: planST2.copyWith(fontWeight: FontWeight.w500,fontSize: 15)
-                                                  ),
+                                                      text: 'Rate per gold : ',
+                                                      style: planST2.copyWith(
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontSize: 15)),
                                                   TextSpan(
-                                                    text: '${data?.data?[index].paidWeight ?? ''}',
-                                                    style: planST.copyWith(fontWeight: FontWeight.bold,fontSize: 14),
+                                                    text:
+                                                        '${data?.data?[index].todaysRate ?? ''}',
+                                                    style: planST.copyWith(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 14),
                                                   ),
                                                 ],
                                               ),
@@ -288,12 +324,63 @@ class _Online_Emi_Payment_ScreenState
                                               text: TextSpan(
                                                 children: <TextSpan>[
                                                   TextSpan(
-                                                      text: 'Discount                 : ',
-                                                      style: planST2.copyWith(fontWeight: FontWeight.w500,fontSize: 15)
-                                                  ),
+                                                      text:
+                                                          'weight             : ',
+                                                      style: planST2.copyWith(
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontSize: 15)),
                                                   TextSpan(
-                                                    text: '${data?.data?[index].discountValue ?? ''}',
-                                                    style: planST.copyWith(fontWeight: FontWeight.bold,fontSize: 14),
+                                                    text:
+                                                        '${data?.data?[index].paidWeight ?? ''}',
+                                                    style: planST.copyWith(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 14),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            const SizedBox(height: 5),
+                                            RichText(
+                                              text: TextSpan(
+                                                children: <TextSpan>[
+                                                  TextSpan(
+                                                      text:
+                                                          'Discount         : ',
+                                                      style: planST2.copyWith(
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontSize: 15)),
+                                                  TextSpan(
+                                                    text:
+                                                        '${data?.data?[index].discountValue ?? ''}',
+                                                    style: planST.copyWith(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 14),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            const SizedBox(height: 5),
+                                            RichText(
+                                              text: TextSpan(
+                                                children: <TextSpan>[
+                                                  TextSpan(
+                                                      text:
+                                                          'Tax                   : ',
+                                                      style: planST2.copyWith(
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontSize: 15)),
+                                                  TextSpan(
+                                                    text:
+                                                        '${data?.data?[index].discountValue ?? ''}',
+                                                    style: planST.copyWith(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 14),
                                                   ),
                                                 ],
                                               ),
@@ -301,8 +388,8 @@ class _Online_Emi_Payment_ScreenState
                                           ],
                                         ),
                                         Padding(
-                                          padding: const EdgeInsets.only(
-                                              top: 8, left: 25),
+                                          padding:
+                                              const EdgeInsets.only(left: 15),
                                           child: Column(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
@@ -310,7 +397,11 @@ class _Online_Emi_Payment_ScreenState
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Container(
-                                                width: 100,
+                                                width: (MediaQuery.of(context)
+                                                            .size
+                                                            .width /
+                                                        2) -
+                                                    60,
                                                 height: 35,
                                                 child: TextFormField(
                                                   keyboardType:
@@ -334,8 +425,11 @@ class _Online_Emi_Payment_ScreenState
                                                   inputFormatters: [
                                                     // LengthLimitingTextInputFormatter(
                                                     //     5),7510618517
-                                                    FilteringTextInputFormatter.digitsOnly,
-                                                    TextInputFormatter.withFunction((oldValue,newValue) {
+                                                    FilteringTextInputFormatter
+                                                        .digitsOnly,
+                                                    TextInputFormatter
+                                                        .withFunction((oldValue,
+                                                            newValue) {
                                                       if (newValue
                                                           .text.isEmpty) {
                                                         return newValue; // Allow empty input
@@ -363,15 +457,25 @@ class _Online_Emi_Payment_ScreenState
                                                               .limitType ==
                                                           1,
                                                   decoration: InputDecoration(
-                                                    contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+                                                    contentPadding:
+                                                        EdgeInsets.symmetric(
+                                                            vertical: 10.0,
+                                                            horizontal: 10.0),
                                                     hintText: "INR",
                                                     border: OutlineInputBorder(
-                                                      borderRadius: BorderRadius.circular(5),
-                                                      borderSide: BorderSide(color: grey5),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      borderSide: BorderSide(
+                                                          color: grey5),
                                                     ),
-                                                    enabledBorder: OutlineInputBorder(
-                                                      borderRadius: BorderRadius.circular(5),
-                                                      borderSide: BorderSide(color: grey5),
+                                                    enabledBorder:
+                                                        OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      borderSide: BorderSide(
+                                                          color: grey5),
                                                     ),
                                                     fillColor: Colors.grey[50],
                                                     filled: true,
@@ -415,7 +519,11 @@ class _Online_Emi_Payment_ScreenState
                                               ),
                                               const SizedBox(height: 8),
                                               Container(
-                                                width: 100,
+                                                width: (MediaQuery.of(context)
+                                                            .size
+                                                            .width /
+                                                        2) -
+                                                    60,
                                                 height: 35,
                                                 child: TextFormField(
                                                   validator: (value) {
@@ -507,15 +615,25 @@ class _Online_Emi_Payment_ScreenState
                                                     }),
                                                   ],
                                                   decoration: InputDecoration(
-                                                    contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+                                                    contentPadding:
+                                                        EdgeInsets.symmetric(
+                                                            vertical: 10.0,
+                                                            horizontal: 10.0),
                                                     hintText: "Enter gram",
                                                     border: OutlineInputBorder(
-                                                      borderRadius: BorderRadius.circular(5),
-                                                      borderSide: BorderSide(color: grey5),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      borderSide: BorderSide(
+                                                          color: grey5),
                                                     ),
-                                                    enabledBorder: OutlineInputBorder(
-                                                      borderRadius: BorderRadius.circular(5),
-                                                      borderSide: BorderSide(color: grey5),
+                                                    enabledBorder:
+                                                        OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      borderSide: BorderSide(
+                                                          color: grey5),
                                                     ),
                                                     fillColor: Colors.grey[50],
                                                     filled: true,
@@ -524,44 +642,127 @@ class _Online_Emi_Payment_ScreenState
                                               ),
                                               const SizedBox(height: 8),
                                               Container(
-                                                width: 100,
+                                                width: (MediaQuery.of(context)
+                                                            .size
+                                                            .width /
+                                                        2) -
+                                                    60,
+                                                height: 30,
                                                 color: Colors.grey[300],
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 3, right: 3),
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceAround,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      InkWell(
-                                                        onTap: () {
+                                                child: Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  children: [
+                                                    InkWell(
+                                                      onTap: () {
+                                                        if ((data?.data?[index]
+                                                                        .advanceMonths ??
+                                                                    0) >=
+                                                                (data
+                                                                        ?.data?[
+                                                                            index]
+                                                                        .incrementCount ??
+                                                                    0) &&
+                                                            (data?.data?[index]
+                                                                        .incrementCount ??
+                                                                    0) >
+                                                                1) {
+                                                          setState(() {
+                                                            data?.data?[index]
+                                                                .incrementCount = (data
+                                                                        .data?[
+                                                                            index]
+                                                                        .incrementCount ??
+                                                                    0) -
+                                                                1;
+                                                            if (data
+                                                                    ?.data?[
+                                                                        index]
+                                                                    .limitType ==
+                                                                1) {
+                                                              data?.data?[index]
+                                                                      .totalAmount =
+                                                                  "${int.parse(data.data?[index].enterAmount ?? "0") * (data.data?[index].incrementCount ?? 0)}";
+                                                            } else {
+                                                              data?.data?[index]
+                                                                      .totalAmount =
+                                                                  "${(double.parse(data.data?[index].enterAmount ?? "0") * (data.data?[index].todaysRate ?? 0.0)) * (data.data?[index].incrementCount ?? 0)}";
+                                                            }
+                                                            totalAmount = data
+                                                                ?.data!
+                                                                .map((item) =>
+                                                                    double.parse(
+                                                                        item.totalAmount ??
+                                                                            "0"))
+                                                                .reduce((a,
+                                                                        b) =>
+                                                                    a +
+                                                                    b) as num;
+                                                          });
+                                                        }
+                                                      },
+                                                      child: Container(
+                                                        width: ((MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width /
+                                                                    2) -
+                                                                60) /
+                                                            3,
+                                                        child: Icon(
+                                                          Icons.remove,
+                                                          size: 15,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      color: Colors.grey[50],
+                                                      width: ((MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width /
+                                                                  2) -
+                                                              60) /
+                                                          3,
+                                                      height: 30,
+                                                      child: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(top: 5),
+                                                        child: Text(
+                                                            "${data?.data?[index].incrementCount}",
+                                                            textAlign: TextAlign
+                                                                .center),
+                                                      ),
+                                                    ),
+                                                    InkWell(
+                                                      onTap: () {
+                                                        if (data?.data?[index]
+                                                                    .allowAdvance ==
+                                                                true &&
+                                                            (data?.data?[index]
+                                                                    .isChecked ??
+                                                                false)) {
+                                                          // _incrementCounter();
                                                           if ((data
-                                                                          ?.data?[
-                                                                              index]
-                                                                          .advanceMonths ??
-                                                                      0) >=
-                                                                  (data
-                                                                          ?.data?[
-                                                                              index]
-                                                                          .incrementCount ??
-                                                                      0) &&
-                                                              (data?.data?[index]
-                                                                          .incrementCount ??
-                                                                      0) >
-                                                                  1) {
+                                                                      ?.data?[
+                                                                          index]
+                                                                      .advanceMonths ??
+                                                                  0) >
+                                                              (data
+                                                                      ?.data?[
+                                                                          index]
+                                                                      .incrementCount ??
+                                                                  0)) {
                                                             setState(() {
                                                               data?.data?[index]
                                                                   .incrementCount = (data
                                                                           .data?[
                                                                               index]
                                                                           .incrementCount ??
-                                                                      0) -
+                                                                      0) +
                                                                   1;
+
                                                               if (data
                                                                       ?.data?[
                                                                           index]
@@ -591,104 +792,43 @@ class _Online_Emi_Payment_ScreenState
                                                                       b) as num;
                                                             });
                                                           }
-                                                        },
-                                                        child: Icon(
-                                                          Icons.remove,
-                                                          size: 15,
-                                                        ),
-                                                      ),
-                                                      Container(
-                                                        color: Colors.grey[50],
-                                                        width: 50,
-                                                        child: Text(
-                                                            "${data?.data?[index].incrementCount}",
-                                                            textAlign: TextAlign
-                                                                .center),
-                                                      ),
-                                                      InkWell(
-                                                        onTap: () {
-                                                          if (data?.data?[index]
-                                                                      .allowAdvance ==
-                                                                  true &&
-                                                              (data
-                                                                      ?.data?[
-                                                                          index]
-                                                                      .isChecked ??
-                                                                  false)) {
-                                                            // _incrementCounter();
-                                                            if ((data
-                                                                        ?.data?[
-                                                                            index]
-                                                                        .advanceMonths ??
-                                                                    0) >
-                                                                (data
-                                                                        ?.data?[
-                                                                            index]
-                                                                        .incrementCount ??
-                                                                    0)) {
-                                                              setState(() {
-                                                                data
-                                                                    ?.data?[
-                                                                        index]
-                                                                    .incrementCount = (data
-                                                                            .data?[index]
-                                                                            .incrementCount ??
-                                                                        0) +
-                                                                    1;
-
-                                                                if (data
-                                                                        ?.data?[
-                                                                            index]
-                                                                        .limitType ==
-                                                                    1) {
-                                                                  data
-                                                                          ?.data?[
-                                                                              index]
-                                                                          .totalAmount =
-                                                                      "${int.parse(data.data?[index].enterAmount ?? "0") * (data.data?[index].incrementCount ?? 0)}";
-                                                                } else {
-                                                                  data
-                                                                          ?.data?[
-                                                                              index]
-                                                                          .totalAmount =
-                                                                      "${(double.parse(data.data?[index].enterAmount ?? "0") * (data.data?[index].todaysRate ?? 0.0)) * (data.data?[index].incrementCount ?? 0)}";
-                                                                }
-                                                                totalAmount = data
-                                                                    ?.data!
-                                                                    .map((item) =>
-                                                                        double.parse(item.totalAmount ??
-                                                                            "0"))
-                                                                    .reduce((a,
-                                                                            b) =>
-                                                                        a +
-                                                                        b) as num;
-                                                              });
-                                                            }
-                                                          }
-                                                        },
+                                                        }
+                                                      },
+                                                      child: Container(
+                                                        width: ((MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width /
+                                                                    2) -
+                                                                60) /
+                                                            3,
                                                         child: Icon(
                                                           Icons.add,
                                                           size: 15,
                                                         ),
                                                       ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                              const SizedBox(height: 8),
-                                              RichText(
-                                                text: TextSpan(
-                                                  children: <TextSpan>[
-                                                    TextSpan(
-                                                        text: 'Net Amount : ',
-                                                        style: planST2.copyWith(fontWeight: FontWeight.w500,fontSize: 15)
-                                                    ),
-                                                    TextSpan(
-                                                      text: '${data?.data?[index].totalAmount ?? ''}',
-                                                      style: planST.copyWith(fontWeight: FontWeight.bold,fontSize: 14),
                                                     ),
                                                   ],
                                                 ),
+                                              ),
+                                              const SizedBox(height: 8),
+                                              Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text('Net Amount : ',
+                                                      style: planST2.copyWith(
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontSize: 15)),
+                                                  Text(
+                                                    '${data?.data?[index].totalAmount ?? ''}',
+                                                    style: planST.copyWith(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 14),
+                                                  )
+                                                ],
                                               ),
                                             ],
                                           ),
@@ -715,13 +855,60 @@ class _Online_Emi_Payment_ScreenState
                             child: CommonContainerButton(
                               context,
                               onPress: () {
+                                SingleTon().plandata = data?.data ?? [];
                                 showModalBottomSheet(
                                   context: context,
                                   builder: (BuildContext context) {
                                     return Total_Amount_Bottom_Sheet(
                                       context,
                                       onPress: () async {
-                                        await createOrder();
+                                        List<Map<String, dynamic>> data = [];
+                                        for (int i = 0;
+                                            i < (SingleTon().plandata.length);
+                                            i++) {
+                                          final dataDetails = {
+                                            "actual_trans_amt": SingleTon()
+                                                .plandata[i]
+                                                .totalAmount,
+                                            "advance": 1,
+                                            "discountAmt": SingleTon()
+                                                .plandata[i]
+                                                .discountValue,
+                                            "id_branch": SingleTon()
+                                                .plandata[i]
+                                                .idBranch,
+                                            "id_payGateway": null,
+                                            "id_scheme_account": SingleTon()
+                                                .plandata[i]
+                                                .idSchemeAccount,
+                                            "installment": SingleTon()
+                                                .plandata[i]
+                                                .paidInstallments,
+                                            "metal_rate": SingleTon()
+                                                .plandata[i]
+                                                .todaysRate,
+                                            "metal_weight": SingleTon()
+                                                .plandata[i]
+                                                .paidWeight,
+                                            "net_amount": "3745.00",
+                                            "paid_through": 2,
+                                            "payment_amount": "3750",
+                                          };
+                                          data.add(dataDetails);
+                                        }
+
+                                        final result = await ref.read(
+                                            paymentPostProvider(data).future);
+                                        LoadingOverlay.forcedStop();
+                                        if (result?.status == true) {
+                                          ShowToastMessage(
+                                              result?.message ?? "");
+                                          await createOrder();
+                                        } else {
+                                          // Handle failure
+                                          ShowToastMessage(
+                                              result?.message ?? "");
+                                        }
                                       },
                                       totalAmount: "${totalAmount}",
                                       mobileNumber: '${phoneVal}',
@@ -955,7 +1142,7 @@ class _Online_Emi_Payment_ScreenState
       var cfPaymentGateway = CFPaymentGatewayService();
 
       cfPaymentGateway.setCallback(
-        (orderId) {
+        (orderId) async {
           print('Payment successful for Order ID: $orderId');
         },
         (error, orderId) {

@@ -1,15 +1,15 @@
 class MyPlanModel {
   String? message;
-  List<Data>? data;
+  List<MyPlanData>? data;
 
   MyPlanModel({this.message, this.data});
 
   MyPlanModel.fromJson(Map<String, dynamic> json) {
     message = json['message'];
     if (json['data'] != null) {
-      data = <Data>[];
+      data = <MyPlanData>[];
       json['data'].forEach((v) {
-        data!.add(new Data.fromJson(v));
+        data!.add(new MyPlanData.fromJson(v));
       });
     }
   }
@@ -24,7 +24,7 @@ class MyPlanModel {
   }
 }
 
-class Data {
+class MyPlanData {
   int? idScheme;
   int? idSchemeAccount;
   String? accountName;
@@ -59,7 +59,7 @@ class Data {
   bool? isChecked = false;
   String? totalAmount;
 
-  Data(
+  MyPlanData(
       {this.idScheme,
       this.idSchemeAccount,
       this.accountName,
@@ -93,7 +93,7 @@ class Data {
       this.incrementCount,
       this.isChecked});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  MyPlanData.fromJson(Map<String, dynamic> json) {
     idScheme = json['id_scheme'];
     idSchemeAccount = json['id_scheme_account'];
     accountName = json['account_name'];

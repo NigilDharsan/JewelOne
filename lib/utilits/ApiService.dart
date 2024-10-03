@@ -254,7 +254,10 @@ class ApiService {
 
   //CLOSED ACCOUNT
   Future<SignUpModel> closedAccountApi() async {
-    final result = await requestGET(url: ConstantApi.accountCloseUrl + "?id_customer=${await getCustomer_Id()}", dio: _dio);
+    final result = await requestGET(
+        url: ConstantApi.accountCloseUrl +
+            "?id_customer=${await getCustomer_Id()}",
+        dio: _dio);
     if (result["success"] == true) {
       print("resultOTP:$result");
       print("resultOTPsss:${result["success"]}");
@@ -273,5 +276,25 @@ class ApiService {
     return SignUpModel();
   }
 
+  //PAYEMNT API
+  Future<SignUpModel> PaymentApi(List<Map<String, dynamic>> formData) async {
+    final result = await requestPOST4(
+        url: ConstantApi.paymentUrl, formData: formData, dio: _dio);
+    if (result["success"] == true) {
+      print("resultOTP:$result");
+      print("resultOTPsss:${result["success"]}");
+      return SignUpModel?.fromJson(result["response"]);
+    } else {
+      try {
+        var resultval = SignUpModel.fromJson(result["response"]);
+        // Toast.show(resultval.message.toString(), context);
+        print(result["response"]);
+        return resultval;
+      } catch (e) {
+        print(result["response"]);
+        // Toast.show(result["response"], context);
+      }
+    }
+    return SignUpModel();
+  }
 }
-
