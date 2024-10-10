@@ -136,7 +136,8 @@ class _Home_DashBoard_ScreenState extends ConsumerState<Home_DashBoard_Screen> {
                                 child: Wallet_Card(
                                   width: cardWidth,
                                   context,
-                                  customername: "Hi ${name}",
+                                  customername:
+                                      "${data?.data?[index].accountName ?? ""}",
                                   Acnumval:
                                       "${data?.data?[index].idSchemeAccount ?? ""}",
                                   totalpaidval:
@@ -461,7 +462,7 @@ class _GoldScrollPriceWidgetState extends ConsumerState<GoldScrollPriceWidget> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            '1 GRM (22KT) Gold : ',
+            '1 GM (22KT) Gold : ',
             style: gramST,
           ),
           Text(
@@ -483,7 +484,7 @@ class _GoldScrollPriceWidgetState extends ConsumerState<GoldScrollPriceWidget> {
           const Spacer(),
 
           Text(
-            '1 (GRM) Silver : ',
+            '1 (GM) Silver : ',
             style: gramST,
           ),
           Text(

@@ -180,7 +180,7 @@ class _Online_Emi_Payment_ScreenState
                                       //SCHEME NAME
                                       Container(
                                         child: Text(
-                                          data?.data?[index].schemeName ?? "",
+                                          data?.data?[index].accountName ?? "",
                                           style: planST.copyWith(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 14),
@@ -204,19 +204,19 @@ class _Online_Emi_Payment_ScreenState
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
                                           children: [
-                                            Container(
-                                              child: Text(
-                                                data?.data?[index]
-                                                        .accountName ??
-                                                    "",
-                                                style: planST.copyWith(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 14),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 5,
-                                            ),
+                                            // Container(
+                                            //   child: Text(
+                                            //     data?.data?[index]
+                                            //             .accountName ??
+                                            //         "",
+                                            //     style: planST.copyWith(
+                                            //         fontWeight: FontWeight.bold,
+                                            //         fontSize: 14),
+                                            //   ),
+                                            // ),
+                                            // SizedBox(
+                                            //   height: 5,
+                                            // ),
                                             data?.data?[index]?.limitType == 1
                                                 ? Text.rich(
                                                     TextSpan(
