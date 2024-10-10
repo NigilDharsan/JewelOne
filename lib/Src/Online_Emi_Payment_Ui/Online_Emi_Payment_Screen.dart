@@ -49,6 +49,12 @@ class _Online_Emi_Payment_ScreenState
   String name = '';
   final _formKey = GlobalKey<FormState>();
 
+  String? selectedAmount;
+  List<String> amounts = ['100', '500', '1000'];
+
+  String? selectedGram;
+  List<String> grams = ['5', '10', '15' , "20"];
+
   Future<void> getDetails() async {
     String phval = await getCustomer_phone();
     String maskedMobileNumber = phval!.replaceRange(6, 10, "xxxx");
@@ -85,27 +91,47 @@ class _Online_Emi_Payment_ScreenState
         return SingleChildScrollView(
           child: Container(
             width: MediaQuery.sizeOf(context).width,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 15, bottom: 15),
-                      child: Row(
-                        children: [
-                          ImgPathSvg('calendar2.svg'),
-                          const SizedBox(width: 10),
-                          Text('${data?.data?.length ?? 0} Plan Active',
-                              style: rate2)
-                        ],
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+
+                  Padding(
+                    padding: const EdgeInsets.only(top:15),
+                    child: Container(
+                      color: Colors.white,
+                      width: MediaQuery.sizeOf(context).width,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 5),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text("Rate Per Gold ",style: gramST,),
+                            Text(" ₹  ${data?.data?[0]?.todaysRate ?? ""}",style: gramrateST,)
+                          ],
+                        ),
                       ),
                     ),
-                    // Container(child: Plan_List()),
-                    ListView.builder(
+                  ),
+
+                  Padding(
+                    padding: const EdgeInsets.only(top: 15,bottom: 15,left: 20,right: 20),
+                    child: Row(
+                      children: [
+                        ImgPathSvg('calendar2.svg'),
+                        const SizedBox(width: 10),
+                        Text('${data?.data?.length ?? 0} Plan Active',
+                            style: rate2)
+                      ],
+                    ),
+                  ),
+                  // Container(child: Plan_List()),
+
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20,right: 20),
+                    child: ListView.builder(
                       itemCount: data?.data?.length ?? 0,
                       shrinkWrap: true,
                       scrollDirection: Axis.vertical,
@@ -396,6 +422,65 @@ class _Online_Emi_Payment_ScreenState
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
+
+                                            Container(
+                                            height: 35, width: (MediaQuery.of(context).size.width / 2) - 60,
+                                            padding: EdgeInsets.symmetric(horizontal: 8.0),
+                                            decoration: BoxDecoration(
+                                              border: Border.all(color: Colors.grey),
+                                              borderRadius: BorderRadius.circular(5.0),
+                                            ),
+                                            child: DropdownButton<String>(
+                                              isExpanded: true,
+                                              underline: SizedBox(),
+                                              value: selectedAmount,
+                                              icon: Icon(Icons.keyboard_arrow_down_rounded),
+                                              hint: Text("Amount"),
+                                              items: amounts.map((String amount) {
+                                                return DropdownMenuItem<String>(
+                                                  value: amount,
+                                                  child: Text(amount),
+                                                );
+                                              }).toList(),
+                                              onChanged: (String? newValue) {
+                                                setState(() {
+                                                  selectedAmount = newValue;
+                                                });
+                                              },
+                                            ),
+                                          ),
+
+                                              const SizedBox(height: 8),
+
+                                              Container(
+                                                height: 35, width: (MediaQuery.of(context).size.width / 2) - 60,
+                                                padding: EdgeInsets.symmetric(horizontal: 8.0),
+                                                decoration: BoxDecoration(
+                                                  border: Border.all(color: Colors.grey),
+                                                  borderRadius: BorderRadius.circular(5.0),
+                                                ),
+                                                child: DropdownButton<String>(
+                                                  isExpanded: true,
+                                                  underline: SizedBox(),
+                                                  value: selectedGram,
+                                                  icon: Icon(Icons.keyboard_arrow_down_rounded),
+                                                  hint: Text("Grams"),
+                                                  items: grams.map((String amount) {
+                                                    return DropdownMenuItem<String>(
+                                                      value: amount,
+                                                      child: Text(amount),
+                                                    );
+                                                  }).toList(),
+                                                  onChanged: (String? newValue) {
+                                                    setState(() {
+                                                      selectedGram = newValue;
+                                                    });
+                                                  },
+                                                ),
+                                              ),
+
+                                              const SizedBox(height: 8),
+
                                               Container(
                                                 width: (MediaQuery.of(context)
                                                             .size
@@ -843,84 +928,84 @@ class _Online_Emi_Payment_ScreenState
                         );
                       },
                     ),
-                    // const SizedBox(height: 35),
-                    // HelpContainer(context, Color: pink4),
-                    // const SizedBox(height: 10),
-                    Total_Online(),
-                    totalAmount == 0 ? SizedBox(height: 50) : Container(),
-                    totalAmount == 0
-                        ? Container()
-                        : Padding(
-                            padding: const EdgeInsets.only(top: 20, bottom: 50),
-                            child: CommonContainerButton(
-                              context,
-                              onPress: () {
-                                SingleTon().plandata = data?.data ?? [];
-                                showModalBottomSheet(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return Total_Amount_Bottom_Sheet(
-                                      context,
-                                      onPress: () async {
-                                        List<Map<String, dynamic>> data = [];
-                                        for (int i = 0;
-                                            i < (SingleTon().plandata.length);
-                                            i++) {
-                                          final dataDetails = {
-                                            "actual_trans_amt": SingleTon()
-                                                .plandata[i]
-                                                .totalAmount,
-                                            "advance": 1,
-                                            "discountAmt": SingleTon()
-                                                .plandata[i]
-                                                .discountValue,
-                                            "id_branch": SingleTon()
-                                                .plandata[i]
-                                                .idBranch,
-                                            "id_payGateway": null,
-                                            "id_scheme_account": SingleTon()
-                                                .plandata[i]
-                                                .idSchemeAccount,
-                                            "installment": SingleTon()
-                                                .plandata[i]
-                                                .paidInstallments,
-                                            "metal_rate": SingleTon()
-                                                .plandata[i]
-                                                .todaysRate,
-                                            "metal_weight": SingleTon()
-                                                .plandata[i]
-                                                .paidWeight,
-                                            "net_amount": "3745.00",
-                                            "paid_through": 2,
-                                            "payment_amount": "3750",
-                                          };
-                                          data.add(dataDetails);
-                                        }
+                  ),
+                  // const SizedBox(height: 35),
+                  // HelpContainer(context, Color: pink4),
+                  // const SizedBox(height: 10),
+                  Total_Online(),
+                  totalAmount == 0 ? SizedBox(height: 50) : Container(),
+                  totalAmount == 0
+                      ? Container()
+                      : Padding(
+                          padding: const EdgeInsets.only(top: 20, bottom: 50),
+                          child: CommonContainerButton(
+                            context,
+                            onPress: () {
+                              SingleTon().plandata = data?.data ?? [];
+                              showModalBottomSheet(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return Total_Amount_Bottom_Sheet(
+                                    context,
+                                    onPress: () async {
+                                      List<Map<String, dynamic>> data = [];
+                                      for (int i = 0;
+                                          i < (SingleTon().plandata.length);
+                                          i++) {
+                                        final dataDetails = {
+                                          "actual_trans_amt": SingleTon()
+                                              .plandata[i]
+                                              .totalAmount,
+                                          "advance": 1,
+                                          "discountAmt": SingleTon()
+                                              .plandata[i]
+                                              .discountValue,
+                                          "id_branch": SingleTon()
+                                              .plandata[i]
+                                              .idBranch,
+                                          "id_payGateway": null,
+                                          "id_scheme_account": SingleTon()
+                                              .plandata[i]
+                                              .idSchemeAccount,
+                                          "installment": SingleTon()
+                                              .plandata[i]
+                                              .paidInstallments,
+                                          "metal_rate": SingleTon()
+                                              .plandata[i]
+                                              .todaysRate,
+                                          "metal_weight": SingleTon()
+                                              .plandata[i]
+                                              .paidWeight,
+                                          "net_amount": "3745.00",
+                                          "paid_through": 2,
+                                          "payment_amount": "3750",
+                                        };
+                                        data.add(dataDetails);
+                                      }
 
-                                        final result = await ref.read(
-                                            paymentPostProvider(data).future);
-                                        LoadingOverlay.forcedStop();
-                                        if (result?.status == true) {
-                                          ShowToastMessage(
-                                              result?.message ?? "");
-                                          await createOrder();
-                                        } else {
-                                          // Handle failure
-                                          ShowToastMessage(
-                                              result?.message ?? "");
-                                        }
-                                      },
-                                      totalAmount: "${totalAmount}",
-                                      mobileNumber: '${phoneVal}',
-                                    );
-                                  },
-                                );
-                              },
-                              titleName: "Continue",
-                            ),
+                                      final result = await ref.read(
+                                          paymentPostProvider(data).future);
+                                      LoadingOverlay.forcedStop();
+                                      if (result?.status == true) {
+                                        ShowToastMessage(
+                                            result?.message ?? "");
+                                        await createOrder();
+                                      } else {
+                                        // Handle failure
+                                        ShowToastMessage(
+                                            result?.message ?? "");
+                                      }
+                                    },
+                                    totalAmount: "${totalAmount}",
+                                    mobileNumber: '${phoneVal}',
+                                  );
+                                },
+                              );
+                            },
+                            titleName: "Continue",
                           ),
-                  ],
-                ),
+                        ),
+                ],
               ),
             ),
           ),

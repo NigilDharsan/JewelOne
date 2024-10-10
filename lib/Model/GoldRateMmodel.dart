@@ -33,9 +33,13 @@ class Data {
   String? updatetime;
   bool? status;
   String? createdOn;
-  String? updatedOn;
+  Null? updatedOn;
   int? createdBy;
-  int? updatedBy;
+  Null? updatedBy;
+  String? goldRateDifference;
+  String? silverRateDifference;
+  bool? isGoldRateIncrease;
+  bool? isSilverRateIncrease;
 
   Data(
       {this.rateId,
@@ -53,7 +57,11 @@ class Data {
         this.createdOn,
         this.updatedOn,
         this.createdBy,
-        this.updatedBy});
+        this.updatedBy,
+        this.goldRateDifference,
+        this.silverRateDifference,
+        this.isGoldRateIncrease,
+        this.isSilverRateIncrease});
 
   Data.fromJson(Map<String, dynamic> json) {
     rateId = json['rate_id'];
@@ -72,6 +80,10 @@ class Data {
     updatedOn = json['updated_on'];
     createdBy = json['created_by'];
     updatedBy = json['updated_by'];
+    goldRateDifference = json['gold_rate_difference'];
+    silverRateDifference = json['silver_rate_difference'];
+    isGoldRateIncrease = json['is_gold_rate_increase'];
+    isSilverRateIncrease = json['is_silver_rate_increase'];
   }
 
   Map<String, dynamic> toJson() {
@@ -92,6 +104,10 @@ class Data {
     data['updated_on'] = this.updatedOn;
     data['created_by'] = this.createdBy;
     data['updated_by'] = this.updatedBy;
+    data['gold_rate_difference'] = this.goldRateDifference;
+    data['silver_rate_difference'] = this.silverRateDifference;
+    data['is_gold_rate_increase'] = this.isGoldRateIncrease;
+    data['is_silver_rate_increase'] = this.isSilverRateIncrease;
     return data;
   }
 }

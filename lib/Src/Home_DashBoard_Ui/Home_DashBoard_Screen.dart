@@ -58,6 +58,7 @@ class _Home_DashBoard_ScreenState extends ConsumerState<Home_DashBoard_Screen> {
     final priceRate = ref.watch(GoldrateProvider);
     //final bannerimagedata = ref.watch(BannerDataProvider);
     // final activelocationdata = ref.watch(ActivelocationProvider);
+    final myplandata = ref.watch(MyplanProvider);
     return Scaffold(
       backgroundColor: backGroundColor,
       appBar: AppBar(
@@ -100,8 +101,7 @@ class _Home_DashBoard_ScreenState extends ConsumerState<Home_DashBoard_Screen> {
               //   return CircularProgressIndicator();
               //  }),
 
-              //GOLD PRICE SCROLL
-
+              //GOLD PRICE
               priceRate.when(data: (data) {
                 return GoldScrollPriceWidget(
                   data: data,
@@ -116,19 +116,54 @@ class _Home_DashBoard_ScreenState extends ConsumerState<Home_DashBoard_Screen> {
                 color: white2,
                 child: Column(
                   children: [
-                    //WALLET
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          left: 20, right: 20, bottom: 20, top: 20),
-                      child: Wallet_Card(
-                        context,
-                        customername: "Hi ${name}",
-                        Acnumval: '81278172817271',
-                        totalpaidval: '20,000',
-                        totaccval: '12',
-                        noofpaidval: '8',
-                      ),
-                    ),
+
+                    //CARD
+                    myplandata.when(data: (data){
+                      return Container(
+                        width: MediaQuery.sizeOf(context).width,
+                        height: 238,
+                        child: ListView.builder(
+                            itemCount: data?.data?.length ?? 0,
+                            physics: ScrollPhysics(),
+                            scrollDirection: Axis.horizontal,
+                            shrinkWrap: true,
+                            itemBuilder: (BuildContext context, int index){
+                              final cardWidth = data?.data?.length == 1
+                                  ? MediaQuery.sizeOf(context).width / 1.1
+                                  : MediaQuery.sizeOf(context).width / 1.3;
+                              return Padding(
+                                padding: const EdgeInsets.only(top: 10,bottom: 10,right: 15),
+                                child: Wallet_Card(
+                                  width: cardWidth,
+                                  context,
+                                  customername: "Hi ${name}",
+                                  Acnumval: "${data?.data?[index].idSchemeAccount ?? ""}",
+                                  totalpaidval: "${data?.data?[index].paidAmount ?? ""}",
+                                  totaccval: '120',
+                                  noofpaidval: "${data?.data?[index].paidInstallments ?? ""}",
+                                ),
+                              );
+                            }
+                        ),
+                      );
+                    }, error: (Object error, StackTrace stackTrace){
+                      return Text('ERROR');
+                    }, loading: (){
+                      return CircularProgressIndicator();
+                    }),
+
+                    // Padding(
+                    //   padding: const EdgeInsets.only(
+                    //       left: 20, right: 20, bottom: 20, top: 20),
+                    //   child: Wallet_Card(
+                    //     context,
+                    //     customername: "Hi ${name}",
+                    //     Acnumval: '81278172817271',
+                    //     totalpaidval: '20,000',
+                    //     totaccval: '12',
+                    //     noofpaidval: '8',
+                    //   ),
+                    // ),
 
                     //PLAN CARD
                     Padding(
@@ -428,9 +463,12 @@ class _GoldScrollPriceWidgetState extends ConsumerState<GoldScrollPriceWidget> {
             style: gramST,
           ),
           Text(
-            '₹ ${widget.data?.data?.gold22ct ?? ""}',
+            '₹ ${widget.data?.data?.gold22ct ?? ""} ',
             style: gramrateST,
           ),
+           double.parse(widget?.data?.data?.goldRateDifference ?? "0.0") < 0 ?
+          Icon(Icons.arrow_downward_outlined,color: Colors.green,size: 18,) :
+           Icon(Icons.arrow_upward_outlined,color: Colors.red,size: 18,),
 
           const Spacer(),
 
@@ -442,6 +480,7 @@ class _GoldScrollPriceWidgetState extends ConsumerState<GoldScrollPriceWidget> {
             '₹ ${widget.data?.data?.silverG ?? ""}',
             style: gramrateST,
           ),
+          Icon(Icons.arrow_downward_outlined,color: Colors.black,size: 18,)
           // const SizedBox(width: 20,),
           // Text(
           //   'Platinum : ',
