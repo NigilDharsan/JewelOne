@@ -116,9 +116,8 @@ class _Home_DashBoard_ScreenState extends ConsumerState<Home_DashBoard_Screen> {
                 color: white2,
                 child: Column(
                   children: [
-
                     //CARD
-                    myplandata.when(data: (data){
+                    myplandata.when(data: (data) {
                       return Container(
                         width: MediaQuery.sizeOf(context).width,
                         height: 238,
@@ -127,28 +126,31 @@ class _Home_DashBoard_ScreenState extends ConsumerState<Home_DashBoard_Screen> {
                             physics: ScrollPhysics(),
                             scrollDirection: Axis.horizontal,
                             shrinkWrap: true,
-                            itemBuilder: (BuildContext context, int index){
+                            itemBuilder: (BuildContext context, int index) {
                               final cardWidth = data?.data?.length == 1
                                   ? MediaQuery.sizeOf(context).width / 1.1
-                                  : MediaQuery.sizeOf(context).width / 1.3;
+                                  : MediaQuery.sizeOf(context).width / 1.2;
                               return Padding(
-                                padding: const EdgeInsets.only(top: 10,bottom: 10,right: 15),
+                                padding:
+                                    const EdgeInsets.only(top: 10, bottom: 10),
                                 child: Wallet_Card(
                                   width: cardWidth,
                                   context,
                                   customername: "Hi ${name}",
-                                  Acnumval: "${data?.data?[index].idSchemeAccount ?? ""}",
-                                  totalpaidval: "${data?.data?[index].paidAmount ?? ""}",
+                                  Acnumval:
+                                      "${data?.data?[index].idSchemeAccount ?? ""}",
+                                  totalpaidval:
+                                      "${data?.data?[index].paidAmount ?? ""}",
                                   totaccval: '120',
-                                  noofpaidval: "${data?.data?[index].paidInstallments ?? ""}",
+                                  noofpaidval:
+                                      "${data?.data?[index].paidInstallments ?? ""}",
                                 ),
                               );
-                            }
-                        ),
+                            }),
                       );
-                    }, error: (Object error, StackTrace stackTrace){
+                    }, error: (Object error, StackTrace stackTrace) {
                       return Text('ERROR');
-                    }, loading: (){
+                    }, loading: () {
                       return CircularProgressIndicator();
                     }),
 
@@ -454,7 +456,7 @@ class _GoldScrollPriceWidgetState extends ConsumerState<GoldScrollPriceWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -466,9 +468,17 @@ class _GoldScrollPriceWidgetState extends ConsumerState<GoldScrollPriceWidget> {
             '₹ ${widget.data?.data?.gold22ct ?? ""} ',
             style: gramrateST,
           ),
-           double.parse(widget?.data?.data?.goldRateDifference ?? "0.0") < 0 ?
-          Icon(Icons.arrow_downward_outlined,color: Colors.green,size: 18,) :
-           Icon(Icons.arrow_upward_outlined,color: Colors.red,size: 18,),
+          double.parse(widget.data?.data?.goldRateDifference ?? "0.0") < 0
+              ? Icon(
+                  Icons.arrow_downward_outlined,
+                  color: Colors.black,
+                  size: 18,
+                )
+              : Icon(
+                  Icons.arrow_upward_outlined,
+                  color: Colors.red,
+                  size: 18,
+                ),
 
           const Spacer(),
 
@@ -480,7 +490,17 @@ class _GoldScrollPriceWidgetState extends ConsumerState<GoldScrollPriceWidget> {
             '₹ ${widget.data?.data?.silverG ?? ""}',
             style: gramrateST,
           ),
-          Icon(Icons.arrow_downward_outlined,color: Colors.black,size: 18,)
+          double.parse(widget.data?.data?.silverRateDifference ?? "0.0") < 0
+              ? Icon(
+                  Icons.arrow_downward_outlined,
+                  color: Colors.black,
+                  size: 18,
+                )
+              : Icon(
+                  Icons.arrow_upward_outlined,
+                  color: Colors.red,
+                  size: 18,
+                ),
           // const SizedBox(width: 20,),
           // Text(
           //   'Platinum : ',
