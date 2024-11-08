@@ -42,7 +42,7 @@ const Color orange1 = Color.fromRGBO(255, 165, 0, 1);
 const Color orange2 = Color.fromRGBO(255, 232, 190, 1);
 
 //GREEN
-const Color green1=Color.fromRGBO(2, 194, 15, 1);
+const Color green1 = Color.fromRGBO(2, 194, 15, 1);
 
 //YELLOW
 const Color yellow1 = Color.fromRGBO(255, 165, 0, 1);
@@ -80,13 +80,11 @@ const Color eye = Color.fromRGBO(168, 168, 168, 1);
 //BACKGROUND COLOR
 // const Color backGroundColor = Color.fromRGBO(232, 219, 208, 1);
 const Color backGroundColor = Color.fromRGBO(255, 255, 255, 1);
-const Gradient appGradient = LinearGradient(
-  begin: Alignment.topLeft,
-    end: Alignment.topRight,
-    colors: [
-      gradient1,
-      gradient2,
-    ]);
+const Gradient appGradient =
+    LinearGradient(begin: Alignment.topLeft, end: Alignment.topRight, colors: [
+  gradient1,
+  gradient2,
+]);
 
 //GRADIENT COLOR
 const Color gradient2 = Color.fromRGBO(248, 146, 28, 1);

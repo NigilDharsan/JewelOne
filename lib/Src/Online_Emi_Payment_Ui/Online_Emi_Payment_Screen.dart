@@ -1,67 +1,66 @@
 import 'dart:convert';
-import 'package:easy_radio/easy_radio.dart';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_cashfree_pg_sdk/api/cfpayment/cfwebcheckoutpayment.dart';
 import 'package:flutter_cashfree_pg_sdk/api/cfpaymentgateway/cfpaymentgatewayservice.dart';
 import 'package:flutter_cashfree_pg_sdk/api/cfsession/cfsession.dart';
 import 'package:flutter_cashfree_pg_sdk/utils/cfenums.dart';
 import 'package:flutter_cashfree_pg_sdk/utils/cfexceptions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:http/http.dart' as http;
 import 'package:jewelone/Common_Widgets/Common_Button.dart';
 import 'package:jewelone/Common_Widgets/Common_Model_Bottom_Sheet.dart';
 import 'package:jewelone/Common_Widgets/Custom_App_Bar.dart';
 import 'package:jewelone/Common_Widgets/Image_Path.dart';
-import 'package:jewelone/Model/LoginModel.dart';
-import 'package:jewelone/Src/Advance_Payment_Ui/Advance_Payment_Screen.dart';
+import 'package:jewelone/Model/MyPlanModel.dart';
 import 'package:jewelone/Src/Home_DashBoard_Ui/Home_DashBoard_Screen.dart';
-import 'package:jewelone/Src/My_SSP_Ui/My_SSP_Screen.dart';
+import 'package:jewelone/utilits/ApiProvider.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
-import 'package:jewelone/utilits/ConstantsApi.dart';
 import 'package:jewelone/utilits/Generic.dart';
+import 'package:jewelone/utilits/Loading_Overlay.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
-import 'package:http/http.dart' as http;
 
 class Online_Emi_Payment_Screen extends ConsumerStatefulWidget {
-  Online_Emi_Payment_Screen({super.key,});
+  Online_Emi_Payment_Screen({
+    super.key,
+  });
 
   @override
   ConsumerState<Online_Emi_Payment_Screen> createState() =>
       _Online_Emi_Payment_ScreenState();
 }
 
-class _Online_Emi_Payment_ScreenState extends ConsumerState<Online_Emi_Payment_Screen> {
-  int? _groupValue = 1;
+class _Online_Emi_Payment_ScreenState
+    extends ConsumerState<Online_Emi_Payment_Screen> {
+  // int? _groupValue = 1;
   int _count = 1;
   num totalAmount = 0;
   EmiOption? _selectedEmiOption;
   void _calculateTotalAmount() {
-    if (_selectedEmiOption != null) {
-      totalAmount = _selectedEmiOption!.amount * _selectedEmiOption!.count;
-    } else {
-      totalAmount = 0;
-    }
+    totalAmount = _selectedEmiOption!.amount * _selectedEmiOption!.count;
   }
 
-
   final String clientId = 'TEST1019783451b01da019e7d8e03edd43879101';
-  final String clientSecret = 'cfsk_ma_test_a563a0f0dac40e802b3592ecffbb4ad9_122e4d57';
+  final String clientSecret =
+      'cfsk_ma_test_a563a0f0dac40e802b3592ecffbb4ad9_122e4d57';
   final CFEnvironment environment = CFEnvironment.SANDBOX;
 
-  List<EmiOption> emiOptions = [
-    EmiOption(label: '3 months EMI', amount: 1000.0, plannum: '1'),
-    EmiOption(label: '6 months EMI', amount: 500.0, plannum: '2'),
-    EmiOption(label: '12 months EMI', amount: 250.0, plannum: '3'),
-  ];
   String phoneVal = '';
   String name = '';
+  final _formKey = GlobalKey<FormState>();
 
-  Future<void> getDetails() async{
+  String? selectedAmount;
+  List<String> amounts = ['100', '500', '1000'];
+
+  Future<void> getDetails() async {
     String phval = await getCustomer_phone();
     String maskedMobileNumber = phval!.replaceRange(6, 10, "xxxx");
     setState(() {
       phoneVal = maskedMobileNumber;
     });
   }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -71,6 +70,7 @@ class _Online_Emi_Payment_ScreenState extends ConsumerState<Online_Emi_Payment_S
 
   @override
   Widget build(BuildContext context) {
+    final myplandata = ref.watch(MyplanProvider);
     return Scaffold(
       backgroundColor: white2,
       appBar: Custom_AppBar(
@@ -81,209 +81,1155 @@ class _Online_Emi_Payment_ScreenState extends ConsumerState<Online_Emi_Payment_S
         actionLogo: 'home.svg',
         isWhite: false,
         ActiononTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => Home_DashBoard_Screen()));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => Home_DashBoard_Screen()));
         },
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          width: MediaQuery.sizeOf(context).width,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 20, right: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 15,bottom: 15),
-                  child: Row(
-                    children: [
-                      ImgPathSvg('calendar2.svg'),
-                      const SizedBox(width: 10),
-                      Text('${emiOptions.length} Plan Active', style: rate2),
-                      //PLAN TEXT
-                    ],
+      body: myplandata.when(data: (data) {
+        return SingleChildScrollView(
+          child: Container(
+            width: MediaQuery.sizeOf(context).width,
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 15),
+                    child: Container(
+                      color: Colors.white,
+                      width: MediaQuery.sizeOf(context).width,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 5),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Rate Per Gold ",
+                              style: gramST,
+                            ),
+                            Text(
+                              " ₹  ${data?.data?[0]?.todaysRate ?? ""}",
+                              style: gramrateST,
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-                Container(child: Plan_List()),
-                const SizedBox(height: 35),
-                HelpContainer(context, Color: pink4),
-                const SizedBox(height: 10),
-                Total_Online(),
-                totalAmount ==0 ? SizedBox(height: 50) : Container(),
-                totalAmount == 0? Container(): Padding(
-                  padding: const EdgeInsets.only(top: 20, bottom: 50),
-                  child: CommonContainerButton(
-                    context,
-                    onPress: () {
-                      showModalBottomSheet(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return Total_Amount_Bottom_Sheet(
-                            context,
-                            onPress: () async {
-                              await createOrder();
-                            }, totalAmount: "${totalAmount}", mobileNumber: '${phoneVal}',
-                          );
-                        },
-                      );
-                    },
-                    titleName: "Continue",
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
 
-  Widget Plan_List() {
-    return ListView.builder(
-      itemCount: emiOptions.length,
-      scrollDirection: Axis.vertical,
-      physics: const NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      itemBuilder: (BuildContext context, int index) {
-        final emiOption = emiOptions[index];
-        return Container(
-          margin: EdgeInsets.only(bottom: 15),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            border: Border.all(color: arrow,width: 2),
-            color: white1,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.only(left: 10, right: 20),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    EasyRadio(
-                      value: emiOption,
-                      groupValue: _selectedEmiOption,
-                      onChanged: (value) {
-                        setState(() {
-                          _selectedEmiOption = value;
-                          _calculateTotalAmount(); // Recalculate total when selection changes
-                        });
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        top: 15, bottom: 15, left: 20, right: 20),
+                    child: Row(
+                      children: [
+                        ImgPathSvg('calendar2.svg'),
+                        const SizedBox(width: 10),
+                        Text('${data?.data?.length ?? 0} Plan Active',
+                            style: rate2)
+                      ],
+                    ),
+                  ),
+                  // Container(child: Plan_List()),
+
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20, right: 20),
+                    child: ListView.builder(
+                      itemCount: data?.data?.length ?? 0,
+                      shrinkWrap: true,
+                      scrollDirection: Axis.vertical,
+                      physics: NeverScrollableScrollPhysics(),
+                      padding: EdgeInsets.zero,
+                      itemBuilder: (context, index) {
+                        int returnType = data?.data?[index].limitType ?? 1;
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 10),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              border: Border.all(color: arrow, width: 2),
+                              color: white1,
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Container(
+                                        width: 20,
+                                        child: Checkbox(
+                                          side: BorderSide(
+                                              width: 1, color: checkbox),
+                                          value: data?.data?[index].isChecked,
+                                          onChanged: (bool? value) {
+                                            setState(() {
+                                              data?.data?[index].isChecked =
+                                                  value ?? false;
+                                              if (data?.data?[index]
+                                                      .isChecked ==
+                                                  true) {
+                                                // totalAmount = totalAmount - int.parse(data?.data?[index].enterAmount ?? "");
+                                                data?.data?[index].enterAmount =
+                                                    "";
+                                              }
+                                            });
+                                          },
+                                        ),
+                                      ),
+
+                                      //SCHEME NAME
+                                      Container(
+                                        margin: EdgeInsets.only(left: 10),
+                                        child: Text(
+                                          data?.data?[index].accountName ?? "",
+                                          style: planST.copyWith(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 14),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  data?.data?[index].limitType == 1
+                                      ? Row(
+                                          children: [
+                                            Container(
+                                                width:
+                                                    (MediaQuery.sizeOf(context)
+                                                                .width /
+                                                            2) -
+                                                        30,
+                                                child: Text("Min / Max Amount ",
+                                                    style: planST2.copyWith(
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontSize: 15))),
+                                            Text(
+                                              "₹ ${data?.data?[index].minimumPayable?.minAmount ?? ""} / ${data?.data?[index].maximumPayable?.maxAmount ?? ""}",
+                                              style: planST.copyWith(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 14),
+                                            ),
+                                          ],
+                                        )
+                                      : Row(
+                                          children: [
+                                            Container(
+                                              width: (MediaQuery.sizeOf(context)
+                                                          .width /
+                                                      2) -
+                                                  30,
+                                              child: Text('Min/Max Weight: ',
+                                                  style: planST2.copyWith(
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontSize: 15)),
+                                            ),
+                                            Text(
+                                              "${data?.data?[index].minimumPayable?.minWeight ?? ""} / ",
+                                              style: planST.copyWith(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 14),
+                                            ),
+                                            Text(
+                                              "${data?.data?[index].maximumPayable?.maxWeight ?? ""}",
+                                              style: planST.copyWith(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 14),
+                                            )
+                                          ],
+                                        ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            children: [
+                                              Container(
+                                                width:
+                                                    (MediaQuery.sizeOf(context)
+                                                                .width /
+                                                            2) -
+                                                        30,
+                                                child: Text("Pay",
+                                                    style: planST2.copyWith(
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontSize: 15)),
+                                              ),
+                                              data?.data?[index].limitType == 1
+                                                  ? Container(
+                                                      width: (MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width /
+                                                              2) -
+                                                          35,
+                                                      height: 35,
+                                                      child: TextFormField(
+                                                        keyboardType:
+                                                            TextInputType
+                                                                .number,
+                                                        validator: (value) {
+                                                          if (value == null ||
+                                                              value.isEmpty) {
+                                                            return 'Please enter amount';
+                                                          }
+                                                          final intValue =
+                                                              int.tryParse(
+                                                                  value);
+                                                          if (intValue ==
+                                                              null) {
+                                                            return '';
+                                                          }
+                                                          if (intValue <=
+                                                                  1000 ||
+                                                              intValue >=
+                                                                  10000) {
+                                                            return '';
+                                                          }
+                                                          return null;
+                                                        },
+                                                        inputFormatters: [
+                                                          // LengthLimitingTextInputFormatter(
+                                                          //     5),7510618517
+                                                          FilteringTextInputFormatter
+                                                              .digitsOnly,
+                                                          TextInputFormatter
+                                                              .withFunction(
+                                                                  (oldValue,
+                                                                      newValue) {
+                                                            if (newValue
+                                                                .text.isEmpty) {
+                                                              return newValue; // Allow empty input
+                                                            }
+                                                            final int value =
+                                                                int.tryParse(
+                                                                        newValue
+                                                                            .text) ??
+                                                                    0;
+                                                            if (value <=
+                                                                (data
+                                                                        ?.data?[
+                                                                            index]
+                                                                        .maximumPayable
+                                                                        ?.maxAmount ??
+                                                                    0.0)) {
+                                                              return newValue; // Allow if value is less than or equal to 10000
+                                                            }
+                                                            return oldValue; // Reject the input if it exceeds 10000
+                                                          }),
+                                                        ],
+                                                        textAlign:
+                                                            TextAlign.left,
+                                                        enabled: (data
+                                                                    ?.data?[
+                                                                        index]
+                                                                    .isChecked ??
+                                                                false) &&
+                                                            data?.data?[index]
+                                                                    .limitType ==
+                                                                1,
+                                                        decoration:
+                                                            InputDecoration(
+                                                          contentPadding:
+                                                              EdgeInsets
+                                                                  .symmetric(
+                                                                      vertical:
+                                                                          10.0,
+                                                                      horizontal:
+                                                                          10.0),
+                                                          hintText: "INR",
+                                                          border:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5),
+                                                            borderSide:
+                                                                BorderSide(
+                                                                    color:
+                                                                        grey5),
+                                                          ),
+                                                          enabledBorder:
+                                                              OutlineInputBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5),
+                                                            borderSide:
+                                                                BorderSide(
+                                                                    color:
+                                                                        grey5),
+                                                          ),
+                                                          fillColor:
+                                                              Colors.grey[50],
+                                                          filled: true,
+                                                        ),
+                                                        onChanged: (text) {
+                                                          var amount = text !=
+                                                                  ""
+                                                              ? int.parse(text)
+                                                              : 0;
+                                                          if ((data
+                                                                      ?.data?[
+                                                                          index]
+                                                                      .maximumPayable
+                                                                      ?.maxAmount ??
+                                                                  0.0) >=
+                                                              amount
+                                                                  .toDouble()) {
+                                                            setState(() {
+                                                              data?.data?[index]
+                                                                      .enterAmount =
+                                                                  "$amount ";
+
+                                                              data?.data?[index]
+                                                                      .totalAmount =
+                                                                  "$amount ";
+
+                                                              totalAmount = data
+                                                                  ?.data!
+                                                                  .map((item) =>
+                                                                      double.parse(
+                                                                          item.totalAmount ??
+                                                                              "0"))
+                                                                  .reduce((a,
+                                                                          b) =>
+                                                                      a +
+                                                                      b) as num;
+
+                                                              // int.parse(
+                                                              //     data?.data?[index]
+                                                              //             .totalAmount ??
+                                                              //         "0");
+                                                            });
+                                                          } else {}
+                                                        },
+                                                      ),
+                                                    )
+                                                  : (data
+                                                                  ?.data?[index]
+                                                                  .amountDenom
+                                                                  ?.length ??
+                                                              0) !=
+                                                          0
+                                                      ? Container(
+                                                          height: 35,
+                                                          width: (MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width /
+                                                                  2) -
+                                                              60,
+                                                          padding: EdgeInsets
+                                                              .symmetric(
+                                                                  horizontal:
+                                                                      8.0),
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            border: Border.all(
+                                                                color: Colors
+                                                                    .grey),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5.0),
+                                                          ),
+                                                          child: DropdownButton<
+                                                              String>(
+                                                            isExpanded: true,
+                                                            underline:
+                                                                SizedBox(),
+                                                            value:
+                                                                selectedAmount,
+                                                            icon: Icon(Icons
+                                                                .keyboard_arrow_down_rounded),
+                                                            hint:
+                                                                Text("Amount"),
+                                                            items: amounts.map(
+                                                                (String
+                                                                    amount) {
+                                                              return DropdownMenuItem<
+                                                                  String>(
+                                                                value: amount,
+                                                                child: Text(
+                                                                    amount),
+                                                              );
+                                                            }).toList(),
+                                                            onChanged: (String?
+                                                                newValue) {
+                                                              setState(() {
+                                                                selectedAmount =
+                                                                    newValue;
+                                                              });
+                                                            },
+                                                          ),
+                                                        )
+                                                      : (data
+                                                                      ?.data?[
+                                                                          index]
+                                                                      .weightDenom
+                                                                      ?.length ??
+                                                                  0) !=
+                                                              0
+                                                          ? Container(
+                                                              height: 35,
+                                                              width: (MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width /
+                                                                      2) -
+                                                                  60,
+                                                              padding: EdgeInsets
+                                                                  .symmetric(
+                                                                      horizontal:
+                                                                          8.0),
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                border: Border.all(
+                                                                    color: Colors
+                                                                        .grey),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            5.0),
+                                                              ),
+                                                              child:
+                                                                  DropdownButton<
+                                                                      String>(
+                                                                isExpanded:
+                                                                    true,
+                                                                underline:
+                                                                    SizedBox(),
+                                                                value: data
+                                                                    ?.data?[
+                                                                        index]
+                                                                    .selectedGram,
+                                                                icon: Icon(Icons
+                                                                    .keyboard_arrow_down_rounded),
+                                                                hint: Text(
+                                                                    "Grams"),
+                                                                items: data!
+                                                                    .data![
+                                                                        index]
+                                                                    .weightDenom!
+                                                                    .map((AmountDenom
+                                                                        amount) {
+                                                                  return DropdownMenuItem<
+                                                                      String>(
+                                                                    value: amount
+                                                                        .value,
+                                                                    child: Text(
+                                                                        amount.value ??
+                                                                            ""),
+                                                                  );
+                                                                }).toList(),
+                                                                onChanged: ((data.data?[index].isChecked ??
+                                                                            false) &&
+                                                                        data.data?[index].limitType ==
+                                                                            2)
+                                                                    ? (String?
+                                                                        newValue) {
+                                                                        setState(
+                                                                            () {
+                                                                          data.data?[index].selectedGram =
+                                                                              newValue;
+                                                                          var amount = newValue != ""
+                                                                              ? double.parse(newValue ?? "0.0")
+                                                                              : 0;
+
+                                                                          if ((data.data?[index].maximumPayable?.maxWeight ?? 0.0) >=
+                                                                              amount.toDouble()) {
+                                                                            setState(() {
+                                                                              data?.data?[index].enterAmount = "${amount}";
+                                                                              data?.data?[index].totalAmount = "${amount * (data.data?[index].todaysRate ?? 0.0)}";
+
+                                                                              // totalAmount =
+                                                                              //     double.parse(data
+                                                                              //             ?.data?[
+                                                                              //                 index]
+                                                                              //             .totalAmount ??
+                                                                              //         "0.0");
+                                                                              totalAmount = data?.data!.map((item) => double.parse(item.totalAmount ?? "0")).reduce((a, b) => a + b) as num;
+                                                                            });
+                                                                          }
+                                                                        });
+                                                                      }
+                                                                    : null,
+                                                              ),
+                                                            )
+                                                          : Container(
+                                                              width: (MediaQuery.of(
+                                                                              context)
+                                                                          .size
+                                                                          .width /
+                                                                      2) -
+                                                                  60,
+                                                              height: 35,
+                                                              child:
+                                                                  TextFormField(
+                                                                validator:
+                                                                    (value) {
+                                                                  if (value ==
+                                                                          null ||
+                                                                      value
+                                                                          .isEmpty) {
+                                                                    return 'Please enter gram';
+                                                                  }
+                                                                  final intValue =
+                                                                      int.tryParse(
+                                                                          value);
+                                                                  if (intValue ==
+                                                                      null) {
+                                                                    return '';
+                                                                  }
+                                                                  if (intValue <=
+                                                                          1 ||
+                                                                      intValue >=
+                                                                          8) {
+                                                                    return '';
+                                                                  }
+                                                                  return null;
+                                                                },
+                                                                onChanged:
+                                                                    (value) {
+                                                                  var amount = value !=
+                                                                          ""
+                                                                      ? double.parse(
+                                                                          value)
+                                                                      : 0;
+
+                                                                  if ((data?.data?[index].maximumPayable?.maxWeight ??
+                                                                          0.0) >=
+                                                                      amount
+                                                                          .toDouble()) {
+                                                                    setState(
+                                                                        () {
+                                                                      data
+                                                                          ?.data?[
+                                                                              index]
+                                                                          .enterAmount = "${amount}";
+                                                                      data
+                                                                          ?.data?[
+                                                                              index]
+                                                                          .totalAmount = "${amount * (data.data?[index].todaysRate ?? 0.0)}";
+
+                                                                      // totalAmount =
+                                                                      //     double.parse(data
+                                                                      //             ?.data?[
+                                                                      //                 index]
+                                                                      //             .totalAmount ??
+                                                                      //         "0.0");
+                                                                      totalAmount = data
+                                                                          ?.data!
+                                                                          .map((item) => double.parse(item.totalAmount ??
+                                                                              "0"))
+                                                                          .reduce((a, b) =>
+                                                                              a +
+                                                                              b) as num;
+                                                                    });
+                                                                  }
+                                                                },
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .left,
+                                                                enabled: (data
+                                                                            ?.data?[
+                                                                                index]
+                                                                            .isChecked ??
+                                                                        false) &&
+                                                                    data?.data?[index]
+                                                                            .limitType ==
+                                                                        2,
+                                                                keyboardType: TextInputType
+                                                                    .numberWithOptions(
+                                                                        decimal:
+                                                                            true),
+                                                                inputFormatters: [
+                                                                  FilteringTextInputFormatter
+                                                                      .allow(RegExp(
+                                                                          r'[0-9.]')),
+                                                                  TextInputFormatter
+                                                                      .withFunction(
+                                                                          (oldValue,
+                                                                              newValue) {
+                                                                    if (newValue
+                                                                        .text
+                                                                        .isEmpty) {
+                                                                      return newValue; // Allow empty input
+                                                                    }
+                                                                    final int
+                                                                        value =
+                                                                        int.tryParse(newValue.text) ??
+                                                                            0;
+                                                                    if (value <=
+                                                                        (data?.data?[index].maximumPayable?.maxWeight ??
+                                                                            0.0)) {
+                                                                      return newValue; // Allow if value is less than or equal to 10000
+                                                                    }
+                                                                    return oldValue; // Reject the input if it exceeds 10000
+                                                                  }),
+                                                                ],
+                                                                decoration:
+                                                                    InputDecoration(
+                                                                  contentPadding: EdgeInsets.symmetric(
+                                                                      vertical:
+                                                                          10.0,
+                                                                      horizontal:
+                                                                          10.0),
+                                                                  hintText:
+                                                                      "Enter gram",
+                                                                  border:
+                                                                      OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(5),
+                                                                    borderSide:
+                                                                        BorderSide(
+                                                                            color:
+                                                                                grey5),
+                                                                  ),
+                                                                  enabledBorder:
+                                                                      OutlineInputBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(5),
+                                                                    borderSide:
+                                                                        BorderSide(
+                                                                            color:
+                                                                                grey5),
+                                                                  ),
+                                                                  fillColor:
+                                                                      Colors.grey[
+                                                                          50],
+                                                                  filled: true,
+                                                                ),
+                                                              ),
+                                                            ),
+                                            ],
+                                          ),
+                                          const SizedBox(height: 10),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                        width:
+                                            (MediaQuery.sizeOf(context).width /
+                                                    2) -
+                                                30,
+                                        child: Text("Installment",
+                                            style: planST2.copyWith(
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 15)),
+                                      ),
+                                      Container(
+                                        height: 30,
+                                        color: Colors.grey[300],
+                                        child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            InkWell(
+                                              onTap: () {
+                                                if ((data?.data?[index]
+                                                                .advanceMonths ??
+                                                            0) >=
+                                                        (data?.data?[index]
+                                                                .incrementCount ??
+                                                            0) &&
+                                                    (data?.data?[index]
+                                                                .incrementCount ??
+                                                            0) >
+                                                        1) {
+                                                  setState(() {
+                                                    data?.data?[index]
+                                                        .incrementCount = (data
+                                                                .data?[index]
+                                                                .incrementCount ??
+                                                            0) -
+                                                        1;
+                                                    if (data?.data?[index]
+                                                            .limitType ==
+                                                        1) {
+                                                      data?.data?[index]
+                                                              .totalAmount =
+                                                          "${int.parse(data.data?[index].enterAmount ?? "0") * (data.data?[index].incrementCount ?? 0)}";
+                                                    } else {
+                                                      data?.data?[index]
+                                                              .totalAmount =
+                                                          "${(double.parse(data.data?[index].enterAmount ?? "0") * (data.data?[index].todaysRate ?? 0.0)) * (data.data?[index].incrementCount ?? 0)}";
+                                                    }
+                                                    totalAmount = data?.data!
+                                                        .map((item) =>
+                                                            double.parse(
+                                                                item.totalAmount ??
+                                                                    "0"))
+                                                        .reduce((a, b) =>
+                                                            a + b) as num;
+                                                  });
+                                                }
+                                              },
+                                              child: Container(
+                                                width: ((MediaQuery.of(context)
+                                                                .size
+                                                                .width /
+                                                            2) -
+                                                        35) /
+                                                    3,
+                                                child: Icon(
+                                                  Icons.remove,
+                                                  size: 15,
+                                                ),
+                                              ),
+                                            ),
+                                            Container(
+                                              color: Colors.grey[50],
+                                              width: ((MediaQuery.of(context)
+                                                              .size
+                                                              .width /
+                                                          2) -
+                                                      35) /
+                                                  3,
+                                              height: 30,
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 5),
+                                                child: Text(
+                                                    "${data?.data?[index].incrementCount}",
+                                                    textAlign:
+                                                        TextAlign.center),
+                                              ),
+                                            ),
+                                            InkWell(
+                                              onTap: () {
+                                                if (data?.data?[index]
+                                                            .allowAdvance ==
+                                                        true &&
+                                                    (data?.data?[index]
+                                                            .isChecked ??
+                                                        false)) {
+                                                  // _incrementCounter();
+                                                  if ((data?.data?[index]
+                                                              .advanceMonths ??
+                                                          0) >
+                                                      (data?.data?[index]
+                                                              .incrementCount ??
+                                                          0)) {
+                                                    setState(() {
+                                                      data?.data?[index]
+                                                          .incrementCount = (data
+                                                                  .data?[index]
+                                                                  .incrementCount ??
+                                                              0) +
+                                                          1;
+
+                                                      if (data?.data?[index]
+                                                              .limitType ==
+                                                          1) {
+                                                        data?.data?[index]
+                                                                .totalAmount =
+                                                            "${int.parse(data.data?[index].enterAmount ?? "0") * (data.data?[index].incrementCount ?? 0)}";
+                                                      } else {
+                                                        data?.data?[index]
+                                                                .totalAmount =
+                                                            "${(double.parse(data.data?[index].enterAmount ?? "0") * (data.data?[index].todaysRate ?? 0.0)) * (data.data?[index].incrementCount ?? 0)}";
+                                                      }
+                                                      totalAmount = data?.data!
+                                                          .map((item) =>
+                                                              double.parse(
+                                                                  item.totalAmount ??
+                                                                      "0"))
+                                                          .reduce((a, b) =>
+                                                              a + b) as num;
+                                                    });
+                                                  }
+                                                }
+                                              },
+                                              child: Container(
+                                                width: ((MediaQuery.of(context)
+                                                                .size
+                                                                .width /
+                                                            2) -
+                                                        35) /
+                                                    3,
+                                                child: Icon(
+                                                  Icons.add,
+                                                  size: 15,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 8),
+
+                                  Row(
+                                    children: [
+                                      Container(
+                                        width:
+                                            (MediaQuery.sizeOf(context).width /
+                                                    2) -
+                                                30,
+                                        child: Text("Discount",
+                                            style: planST2.copyWith(
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 15)),
+                                      ),
+                                      Text(
+                                          '${data?.data?[index].discountValue ?? ''}',
+                                          style: planST.copyWith(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 14)),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 8),
+
+                                  Row(
+                                    children: [
+                                      Container(
+                                        width:
+                                            (MediaQuery.sizeOf(context).width /
+                                                    2) -
+                                                30,
+                                        child: Text('Tax',
+                                            style: planST2.copyWith(
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 15)),
+                                      ),
+                                      Text(
+                                        '${data?.data?[index].discountValue ?? ''}',
+                                        style: planST.copyWith(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 14),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 8),
+
+                                  // Row(
+                                  //   children: [
+                                  //     Container(
+                                  //       width:
+                                  //           MediaQuery.sizeOf(context).width /
+                                  //               2.2,
+                                  //       child: Text('weight',
+                                  //           style: planST2.copyWith(
+                                  //               fontWeight: FontWeight.w500,
+                                  //               fontSize: 15)),
+                                  //     ),
+                                  //     Text(
+                                  //       '${data?.data?[index].paidWeight ?? ''}',
+                                  //       style: planST.copyWith(
+                                  //           fontWeight: FontWeight.bold,
+                                  //           fontSize: 14),
+                                  //     )
+                                  //   ],
+                                  // ),
+                                  Row(
+                                    children: [
+                                      Container(
+                                        width:
+                                            (MediaQuery.sizeOf(context).width /
+                                                    2) -
+                                                30,
+                                        child: Text('Net Amount',
+                                            style: planST2.copyWith(
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 15)),
+                                      ),
+                                      Text(
+                                        '${data?.data?[index].totalAmount ?? '0'}',
+                                        style: planST.copyWith(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 14),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 8),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
                       },
-                      dotRadius: 5.0,
-                      radius: 10.0,
-                      activeBorderColor: gradient1,
-                      dotColor: white1,
-                      inactiveBorderColor: Colors.grey,
-                      inactiveFillColor: Colors.transparent,
-                      activeFillColor: gradient1,
-                      animateFillColor: true,
-                      dotStyle: DotStyle.circle(),
-                      shape: RadioShape.circle(),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20, right: 5),
-                      child: Text('Plan ${emiOption.plannum}', style: Plan_Style),
-                    ),
-                    const Spacer(),
-                    Text("INR ₹${emiOption.amount}", style: rate2),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 10,),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(left: 40),
-                        width: MediaQuery.sizeOf(context).width / 2.3,
-                        child: Text(
-                          'Gold Ornaments Purchase Advance Scheme',
-                          style: planST,
-                          maxLines: 2,
-                        ),
-                      ),
-                      const Spacer(),
-                      Text('Advance EMA',style: walletT2,)
-                    ],
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom:20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 40),
-                        child: Row(
-                          children: [
-                            Container(
-                              width: MediaQuery.sizeOf(context).width / 3.6,
-                              child: Text('Equivalent Weight : ', style: planST),
-                            ),
-                            Text('0.794 gm', style: Goldweight),
-                          ],
-                        ),
-                      ),
-                      const Spacer(),
-                      Container(
-                        height: 30,
-                        alignment: Alignment.topLeft,
+                  // const SizedBox(height: 35),
+                  // HelpContainer(context, Color: pink4),
+                  // const SizedBox(height: 10),
+                  Total_Online(),
+                  totalAmount == 0 ? SizedBox(height: 50) : Container(),
+                  totalAmount == 0
+                      ? Container()
+                      : Padding(
+                          padding: const EdgeInsets.only(
+                              top: 20, left: 20, right: 20, bottom: 50),
+                          child: CommonContainerButton(
+                            context,
+                            onPress: () {
+                              SingleTon().plandata = data?.data ?? [];
+                              showModalBottomSheet(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return Total_Amount_Bottom_Sheet(
+                                    context,
+                                    onPress: () async {
+                                      List<Map<String, dynamic>> data = [];
+                                      for (int i = 0;
+                                          i < (SingleTon().plandata.length);
+                                          i++) {
+                                        if (SingleTon().plandata[i].isChecked ==
+                                            true) {
+                                          final dataDetails = {
+                                            "actual_trans_amt": SingleTon()
+                                                .plandata[i]
+                                                .totalAmount,
+                                            "advance": 1,
+                                            "discountAmt": SingleTon()
+                                                .plandata[i]
+                                                .discountValue,
+                                            "id_branch": SingleTon()
+                                                .plandata[i]
+                                                .idBranch,
+                                            "id_payGateway": 1,
+                                            "id_scheme_account": SingleTon()
+                                                .plandata[i]
+                                                .idSchemeAccount,
+                                            "installment": SingleTon()
+                                                .plandata[i]
+                                                .paidInstallments,
+                                            "metal_rate": SingleTon()
+                                                .plandata[i]
+                                                .todaysRate,
+                                            "metal_weight": SingleTon()
+                                                .plandata[i]
+                                                .paidWeight,
+                                            "net_amount": SingleTon()
+                                                .plandata[i]
+                                                .totalAmount,
+                                            "paid_through": 2,
+                                            "payment_amount": SingleTon()
+                                                .plandata[i]
+                                                .totalAmount,
+                                            "total_net_amount": SingleTon()
+                                                .plandata[i]
+                                                .totalAmount,
+                                            "tax_type": 1,
+                                            "payment_charges": 0,
+                                          };
+                                          data.add(dataDetails);
+                                        }
+                                      }
 
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-
-                          color: white2,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-
-                            Container(
-                              height: 30,
-                              width: 30,
-                              color: white3,
-                              child: InkWell(
-                                onTap: () {
-                                  _decrementCounter(emiOption);
+                                      final result = await ref.read(
+                                          paymentPostProvider(data).future);
+                                      LoadingOverlay.forcedStop();
+                                      if (result?.message ==
+                                          "Payment Created successfully.") {
+                                        // ShowToastMessage(result?.message ?? "");
+                                        // await createOrder();
+                                        await initiatePay(
+                                            orderId: result?.message ?? "",
+                                            paymentSessionId:
+                                                result?.paymentSessionId ?? "");
+                                      } else {
+                                        // Handle failure
+                                        ShowToastMessage(result?.message ?? "");
+                                      }
+                                    },
+                                    totalAmount: "${totalAmount}",
+                                    mobileNumber: '${phoneVal}',
+                                  );
                                 },
-                                child: Center(child: Text('-',style: TextStyle(fontSize: 22.5,fontWeight: FontWeight.bold),)),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 10, right: 10),
-                              child: Center(child: Text('${emiOption.count }')),
-                            ),
-                            Container(
-                              height: 30,
-                              width: 30,
-                              color: white3,
-                              child: InkWell(
-                                onTap: () {
-                                  _incrementCounter(emiOption);
-                                },
-                                child: Center(child: Text('+',style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold)),),
-                              ),
-                            ),
-                          ],
+                              );
+                            },
+                            titleName: "Continue",
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         );
-      },
+      }, error: (Object error, StackTrace stackTrace) {
+        return Text("ERROR, $error");
+      }, loading: () {
+        return Center(child: CircularProgressIndicator());
+      }),
     );
   }
+
+  // Widget Plan_List() {
+  //   return ListView.builder(
+  //     itemCount: emiOptions.length,
+  //     scrollDirection: Axis.vertical,
+  //     physics: const NeverScrollableScrollPhysics(),
+  //     shrinkWrap: true,
+  //     itemBuilder: (BuildContext context, int index) {
+  //       final emiOption = emiOptions[index];
+  //       return Container(
+  //         margin: EdgeInsets.only(bottom: 15),
+  //         decoration: BoxDecoration(
+  //           borderRadius: BorderRadius.circular(15),
+  //           border: Border.all(color: arrow,width: 2),
+  //           color: white1,
+  //         ),
+  //         child: Padding(
+  //           padding: const EdgeInsets.only(left: 10, right: 20),
+  //           child: Column(
+  //             mainAxisAlignment: MainAxisAlignment.start,
+  //             crossAxisAlignment: CrossAxisAlignment.start,
+  //             children: [
+  //               const SizedBox(height: 20),
+  //               Row(
+  //                 mainAxisAlignment: MainAxisAlignment.start,
+  //                 crossAxisAlignment: CrossAxisAlignment.start,
+  //                 children: [
+  //                   EasyRadio(
+  //                     value: emiOption,
+  //                     groupValue: _selectedEmiOption,
+  //                     onChanged: (value) {
+  //                       setState(() {
+  //                         _selectedEmiOption = value;
+  //                         _calculateTotalAmount(); // Recalculate total when selection changes
+  //                       });
+  //                     },
+  //                     dotRadius: 5.0,
+  //                     radius: 10.0,
+  //                     activeBorderColor: gradient1,
+  //                     dotColor: white1,
+  //                     inactiveBorderColor: Colors.grey,
+  //                     inactiveFillColor: Colors.transparent,
+  //                     activeFillColor: gradient1,
+  //                     animateFillColor: true,
+  //                     dotStyle: DotStyle.circle(),
+  //                     shape: RadioShape.circle(),
+  //                   ),
+  //                   Padding(
+  //                     padding: const EdgeInsets.only(left: 20, right: 5),
+  //                     child: Text('Plan ${emiOption.plannum}', style: Plan_Style),
+  //                   ),
+  //                   const Spacer(),
+  //                   Text("INR ₹${emiOption.amount}", style: rate2),
+  //                 ],
+  //               ),
+  //               Padding(
+  //                 padding: const EdgeInsets.only(bottom: 10,),
+  //                 child: Row(
+  //                   mainAxisAlignment: MainAxisAlignment.start,
+  //                   crossAxisAlignment: CrossAxisAlignment.end,
+  //                   children: [
+  //                     Container(
+  //                       margin: EdgeInsets.only(left: 40),
+  //                       width: MediaQuery.sizeOf(context).width / 2.3,
+  //                       child: Text(
+  //                         'Gold Ornaments Purchase Advance Scheme',
+  //                         style: planST,
+  //                         maxLines: 2,
+  //                       ),
+  //                     ),
+  //                     const Spacer(),
+  //                     Text('Advance EMA',style: walletT2,)
+  //                   ],
+  //                 ),
+  //               ),
+  //               Padding(
+  //                 padding: const EdgeInsets.only(bottom:20),
+  //                 child: Row(
+  //                   mainAxisAlignment: MainAxisAlignment.start,
+  //                   crossAxisAlignment: CrossAxisAlignment.end,
+  //                   children: [
+  //                     Padding(
+  //                       padding: const EdgeInsets.only(left: 40),
+  //                       child: Row(
+  //                         children: [
+  //                           Container(
+  //                             width: MediaQuery.sizeOf(context).width / 3.6,
+  //                             child: Text('Equivalent Weight : ', style: planST),
+  //                           ),
+  //                           Text('0.794 gm', style: Goldweight),
+  //                         ],
+  //                       ),
+  //                     ),
+  //                     const Spacer(),
+  //                     Container(
+  //                       height: 30,
+  //                       alignment: Alignment.topLeft,
+  //
+  //                       decoration: BoxDecoration(
+  //                         borderRadius: BorderRadius.circular(5),
+  //
+  //                         color: white2,
+  //                       ),
+  //                       child: Row(
+  //                         mainAxisAlignment: MainAxisAlignment.start,
+  //                         crossAxisAlignment: CrossAxisAlignment.start,
+  //                         children: [
+  //
+  //                           Container(
+  //                             height: 30,
+  //                             width: 30,
+  //                             color: white3,
+  //                             child: InkWell(
+  //                               onTap: () {
+  //                                 _decrementCounter(emiOption);
+  //                               },
+  //                               child: Center(child: Text('-',style: TextStyle(fontSize: 22.5,fontWeight: FontWeight.bold),)),
+  //                             ),
+  //                           ),
+  //                           Padding(
+  //                             padding: const EdgeInsets.only(left: 10, right: 10),
+  //                             child: Center(child: Text('${emiOption.count }')),
+  //                           ),
+  //                           Container(
+  //                             height: 30,
+  //                             width: 30,
+  //                             color: white3,
+  //                             child: InkWell(
+  //                               onTap: () {
+  //                                 _incrementCounter(emiOption);
+  //                               },
+  //                               child: Center(child: Text('+',style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold)),),
+  //                             ),
+  //                           ),
+  //                         ],
+  //                       ),
+  //                     ),
+  //                   ],
+  //                 ),
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
+
   Future<void> createOrder() async {
     final String url = 'https://sandbox.cashfree.com/pg/orders';
     final Map<String, dynamic> body = {
@@ -331,7 +1277,8 @@ class _Online_Emi_Payment_ScreenState extends ConsumerState<Online_Emi_Payment_S
     }
   }
 
-  Future<void> initiatePay({required String orderId, required String paymentSessionId}) async {
+  Future<void> initiatePay(
+      {required String orderId, required String paymentSessionId}) async {
     try {
       var session = CFSessionBuilder()
           .setEnvironment(environment)
@@ -339,17 +1286,16 @@ class _Online_Emi_Payment_ScreenState extends ConsumerState<Online_Emi_Payment_S
           .setPaymentSessionId(paymentSessionId)
           .build();
 
-      var cfWebCheckout = CFWebCheckoutPaymentBuilder()
-          .setSession(session)
-          .build();
+      var cfWebCheckout =
+          CFWebCheckoutPaymentBuilder().setSession(session).build();
 
       var cfPaymentGateway = CFPaymentGatewayService();
 
       cfPaymentGateway.setCallback(
-            (orderId) {
+        (orderId) async {
           print('Payment successful for Order ID: $orderId');
         },
-            (error, orderId) {
+        (error, orderId) {
           print('Payment error: ${error.getMessage()}');
         },
       );
@@ -363,24 +1309,6 @@ class _Online_Emi_Payment_ScreenState extends ConsumerState<Online_Emi_Payment_S
       }
     }
   }
-
-
-  void _incrementCounter(EmiOption emiOption) {
-    setState(() {
-      emiOption.count++;
-      _calculateTotalAmount();
-    });
-  }
-
-  void _decrementCounter(EmiOption emiOption) {
-    setState(() {
-      if (emiOption.count > 0) {
-        emiOption.count--;
-        _calculateTotalAmount();
-      }
-    });
-  }
-
 
   Widget Total_Online() {
     return Padding(
@@ -405,9 +1333,9 @@ class EmiOption {
   final String plannum;
   int count;
 
-  EmiOption( {required this.label, required this.amount,required this.plannum,this.count = 1});
+  EmiOption(
+      {required this.label,
+      required this.amount,
+      required this.plannum,
+      this.count = 1});
 }
-
-
-
-

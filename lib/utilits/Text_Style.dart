@@ -63,8 +63,8 @@ TextStyle bottomotext = TextStyle(
 //USER NAME ST
 TextStyle UserST = TextStyle(
     fontFamily: 'Inter',
-    fontSize: 18,
-    color: Color.fromRGBO(45, 45, 45, 1),
+    fontSize: 16,
+    color: Color.fromRGBO(255, 255, 255, 1),
     fontWeight: FontWeight.w600);
 
 //PLAN STYLE
@@ -74,21 +74,40 @@ TextStyle planST = TextStyle(
     color: Color.fromRGBO(45, 45, 45, 1),
     fontWeight: FontWeight.w600);
 
+TextStyle planST2 = TextStyle(
+    fontFamily: 'Inter',
+    fontSize: 12,
+    color: Color.fromRGBO(113, 121, 126, 1),
+    fontWeight: FontWeight.w800);
+
 TextStyle walletT2 = TextStyle(
     fontFamily: 'Metropolis',
     fontSize: 12,
     color: Color.fromRGBO(136, 136, 136, 1),
     fontWeight: FontWeight.w500);
 
+TextStyle walletT3 = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 12,
+    color: Color.fromRGBO(255, 255, 255, 1),
+    fontWeight: FontWeight.w500);
+
+TextStyle plandetailT = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 12,
+    color: Color.fromRGBO(45, 45, 45, 1),
+    fontWeight: FontWeight.w500);
+
 //GRAM
 TextStyle gramST = TextStyle(
     fontFamily: 'Inter',
-    fontSize: 15,
+    fontSize: 12,
     color: Colors.black,
     fontWeight: FontWeight.w500);
+
 TextStyle gramrateST = TextStyle(
     fontFamily: 'Inter',
-    fontSize: 15,
+    fontSize: 12,
     color: green1,
     fontWeight: FontWeight.w500);
 
@@ -145,7 +164,6 @@ TextStyle delete = TextStyle(
     fontSize: 14,
     color: Color.fromRGBO(255, 0, 0, 1),
     fontWeight: FontWeight.w500);
-
 
 TextStyle Textfield_Style = TextStyle(
     fontFamily: 'Inter',
@@ -216,6 +234,12 @@ TextStyle Total_Plan_amount = TextStyle(
     color: Color.fromRGBO(45, 45, 45, 1),
     fontWeight: FontWeight.w600);
 
+TextStyle detailsT = TextStyle(
+    fontFamily: 'Metropolis',
+    fontSize: 12,
+    color: Color.fromRGBO(45, 45, 45, 1),
+    fontWeight: FontWeight.w600);
+
 TextStyle Plan_Style = TextStyle(
     fontFamily: 'Metropolis',
     fontSize: 20,
@@ -240,7 +264,6 @@ TextStyle Goldweight = TextStyle(
     color: Color.fromRGBO(145, 26, 29, 1),
     fontWeight: FontWeight.w500);
 
-
 //HEADING
 Widget Heading_Text(context, {required String Title}) {
   return Container(
@@ -252,8 +275,6 @@ Widget Heading_Text(context, {required String Title}) {
     ),
   );
 }
-
-
 
 //TEXTFIELD HEADING
 Widget Title_Style({required String Title, required bool? isStatus}) {
@@ -278,11 +299,11 @@ Widget Title_Style({required String Title, required bool? isStatus}) {
   );
 }
 
-Widget RadioText(String txt,{required double? width}) {
+Widget RadioText(String txt, {required double? width}) {
   return Padding(
-    padding: const EdgeInsets.only(left: 5),
+    padding: const EdgeInsets.only(left: 5, top: 3),
     child: Container(
-      width:width ,
+      width: width,
       child: Text(
         txt,
         style: radioST,
@@ -299,12 +320,12 @@ TextStyle pdfT = TextStyle(
     fontWeight: FontWeight.w600);
 
 // CHECK BOX
-Widget CheckBoxes(
-    context,
+Widget CheckBoxes(context,
     {required bool? value,
     required void Function(bool?)? onChanged,
     required String checkBoxText,
-    void Function()? onTap,required double? width}) {
+    void Function()? onTap,
+    required double? width}) {
   return Padding(
     padding: const EdgeInsets.only(bottom: 20),
     child: Row(
@@ -318,8 +339,7 @@ Widget CheckBoxes(
           visualDensity: VisualDensity(horizontal: -4, vertical: -4),
           materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         ),
-        InkWell(onTap: onTap,
-            child: RadioText(checkBoxText, width:width )),
+        InkWell(onTap: onTap, child: RadioText(checkBoxText, width: width)),
       ],
     ),
   );
@@ -408,7 +428,6 @@ TextStyle lighttext = TextStyle(
     color: Color.fromRGBO(116, 116, 116, 1),
     fontWeight: FontWeight.w400);
 
-
 TextStyle location_Phone = TextStyle(
     fontFamily: 'Metropolis',
     fontSize: 12,
@@ -417,10 +436,11 @@ TextStyle location_Phone = TextStyle(
 
 //FAQ CONTAINER HEADING
 TextStyle colortexts = TextStyle(
-    fontFamily: 'Metropolis',
-    fontSize: 14,
-    color: Color.fromRGBO(217, 154, 38, 1),
-    fontWeight: FontWeight.w500,);
+  fontFamily: 'Metropolis',
+  fontSize: 14,
+  color: Color.fromRGBO(217, 154, 38, 1),
+  fontWeight: FontWeight.w500,
+);
 
 //MOBILE NUMBER
 TextStyle Num = TextStyle(
@@ -434,6 +454,12 @@ TextStyle password = TextStyle(
     fontSize: 20,
     color: Color.fromRGBO(45, 45, 45, 1),
     fontWeight: FontWeight.w500);
+
+TextStyle appbarT2 = TextStyle(
+    fontFamily: 'Inter',
+    fontSize: 20,
+    color: Color.fromRGBO(45, 45, 45, 1),
+    fontWeight: FontWeight.w600);
 
 TextStyle planlist = TextStyle(
     fontFamily: 'Inter',
@@ -488,7 +514,6 @@ TextStyle hours = TextStyle(
     color: Color.fromRGBO(160, 34, 44, 1),
     fontWeight: FontWeight.w500);
 
-
 TextStyle stackT = TextStyle(
     fontFamily: 'Canela Trial',
     fontSize: 40,
@@ -525,7 +550,6 @@ TextStyle appbarT = TextStyle(
     fontSize: 20,
     color: Color.fromRGBO(255, 255, 255, 1),
     fontWeight: FontWeight.w600);
-
 
 TextStyle profilT = TextStyle(
     fontFamily: 'Metropolis',

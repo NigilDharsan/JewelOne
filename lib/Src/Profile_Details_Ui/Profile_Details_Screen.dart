@@ -85,7 +85,7 @@ class _Profile_Details_ScreenState extends State<Profile_Details_Screen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Heading(text: 'Mr / Mrs'),
-                        dropDownFieldprofileedit(
+                        dropDownFieldRightArrow(
                           context,
                           width: MediaQuery.sizeOf(context).width/4,
                           hintT: 'Mr',
@@ -107,7 +107,7 @@ class _Profile_Details_ScreenState extends State<Profile_Details_Screen> {
                         Heading(text: 'User name'),
                         Container(
                           width: MediaQuery.sizeOf(context).width/1.6,
-                          child: textFormField(
+                          child: textFormField_border(
                             // isEnabled: false,
                             hintText: "Vinoth Kumar",
                             keyboardtype: TextInputType.text,
@@ -134,7 +134,7 @@ class _Profile_Details_ScreenState extends State<Profile_Details_Screen> {
 
                 //EMAIL
                 Heading(text: 'Email'),
-                textFormField(hintText: 'vinothkumar@brightbridgeinfotech.com',
+                textFormField_border(hintText: 'vinothkumar@brightbridgeinfotech.com',
                   keyboardtype: TextInputType.text,
 
                   Controller: _email,
@@ -154,7 +154,7 @@ class _Profile_Details_ScreenState extends State<Profile_Details_Screen> {
 
                 //PHONE NUMBER
                 Heading(text: 'Phone number'),
-                textFormField(
+                textFormField_border(
                   // isEnabled: false,
                     hintText: "994413xxxx",
                     keyboardtype: TextInputType.phone,
@@ -328,7 +328,7 @@ class _Profile_Details_ScreenState extends State<Profile_Details_Screen> {
                         Heading(text: 'City'),
                         Container(
                           width: MediaQuery.sizeOf(context).width/2.3,
-                          child: textFormField(
+                          child: textFormField_border(
                             // isEnabled: false,
                             hintText: "City",
                             keyboardtype: TextInputType.text,
@@ -359,7 +359,7 @@ class _Profile_Details_ScreenState extends State<Profile_Details_Screen> {
                 Heading(text: 'Nominee name'),
                 Container(
                   width: MediaQuery.sizeOf(context).width,
-                  child: textFormField(
+                  child: textFormField_border(
                     // isEnabled: false,
                     hintText: "Nominee name",
                     keyboardtype: TextInputType.text,
@@ -382,7 +382,7 @@ class _Profile_Details_ScreenState extends State<Profile_Details_Screen> {
 
                 //NOMINEE PHONE NUMBER
                 Heading(text: 'Nominee phone number'),
-                textFormField(
+                textFormField_border(
                   // isEnabled: false,
                   hintText: "994413xxxx",
                   keyboardtype: TextInputType.phone,

@@ -26,12 +26,16 @@ class _Contact_Us_ScreenState extends State<Contact_Us_Screen> {
         actionLogo: 'home.svg',
         isWhite: true,
         ActiononTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>Home_DashBoard_Screen()));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => Home_DashBoard_Screen()));
         },
       ),
       body: Padding(
-        padding:
-            const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 30),
+        padding: const EdgeInsets.only(
+          top: 20,
+          left: 20,
+          right: 20,
+        ),
         child: SingleChildScrollView(
           //MAINBODY
           child: _Mainbody(),
@@ -78,6 +82,10 @@ class _Contact_Us_ScreenState extends State<Contact_Us_Screen> {
         //MAIL US
         contactus(context,
             heading: 'Mail Us', number: 'retail.crm@ejindia.com'),
+
+        const SizedBox(
+          height: 30,
+        ),
       ],
     );
   }
@@ -153,7 +161,7 @@ Widget Address(context) {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'JewelOne Corporate Office:',
+              'Santhi Swarna Mahal Corporate Office:',
               style: texts2,
             ),
             Divider(

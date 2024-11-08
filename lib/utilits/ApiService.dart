@@ -7,9 +7,11 @@ import 'package:jewelone/Model/ForgotPasswwordModel.dart';
 import 'package:jewelone/Model/GoldRateMmodel.dart';
 import 'package:jewelone/Model/LoginModel.dart';
 import 'package:jewelone/Model/MyPlanModel.dart';
+import 'package:jewelone/Model/PaymentCreateModel.dart';
 import 'package:jewelone/Model/SignUpModel.dart';
 import 'package:jewelone/utilits/Generic.dart';
 import 'package:jewelone/utilits/MakeApiCall.dart';
+
 import 'ConstantsApi.dart';
 
 final dioProvider = Provider<Dio>((ref) {
@@ -21,7 +23,6 @@ final dioProvider = Provider<Dio>((ref) {
 class ApiService {
   final Dio _dio;
   ApiService(this._dio);
-
 
   //LOGIN
   Future<LoginModel> LoginApi(Map<String, dynamic> formData) async {
@@ -46,7 +47,7 @@ class ApiService {
   }
 
   //SIGNUP
-  Future<SignUpModel> signupapi (Map<String, dynamic> formData) async {
+  Future<SignUpModel> signupapi(Map<String, dynamic> formData) async {
     final result = await requestPOST3(
         url: ConstantApi.signupUrl, formData: formData, dio: _dio);
     if (result["success"] == true) {
@@ -68,7 +69,8 @@ class ApiService {
   }
 
   //FORGOT PASSWORD
-  Future<Forgot_Password_Model> forgetpasswordapi (Map<String, dynamic> formData) async {
+  Future<Forgot_Password_Model> forgetpasswordapi(
+      Map<String, dynamic> formData) async {
     final result = await requestPOST3(
         url: ConstantApi.forgetpasswordUrl, formData: formData, dio: _dio);
     if (result["success"] == true) {
@@ -90,7 +92,8 @@ class ApiService {
   }
 
   //VERIFY OTP
-  Future<Forgot_Password_Model> verifyotpapi (Map<String, dynamic> formData) async {
+  Future<Forgot_Password_Model> verifyotpapi(
+      Map<String, dynamic> formData) async {
     final result = await requestPOST3(
         url: ConstantApi.forgetpasswordUrl, formData: formData, dio: _dio);
     if (result["success"] == true) {
@@ -132,7 +135,6 @@ class ApiService {
     return BannerImageModel();
   }
 
-
   //BANNER IMAGE
   Future<GoldRateModel> GoldrateApi() async {
     final result = await requestGET(url: ConstantApi.goldrateUrl, dio: _dio);
@@ -156,7 +158,8 @@ class ApiService {
 
   //ACTIVE LOCATION
   Future<ActiveLocationModel> ActivelocationApi() async {
-    final result = await requestGET(url: ConstantApi.activelocationUrl, dio: _dio);
+    final result =
+        await requestGET(url: ConstantApi.activelocationUrl, dio: _dio);
     if (result["success"] == true) {
       print("resultOTP:$result");
       print("resultOTPsss:${result["success"]}");
@@ -175,11 +178,10 @@ class ApiService {
     return ActiveLocationModel();
   }
 
-
   //MY PLANS
   Future<MyPlanModel> MyplanApi() async {
     var formData = <String, dynamic>{
-      "customer": '1',
+      "customer": await getCustomer_Id(),
     };
 
     final result = await requestPOST2(
@@ -224,4 +226,77 @@ class ApiService {
     return ActivePlanModel();
   }
 
+  //PAYMENT HISTORY
+  Future<SignUpModel> PaymenthistoryApi() async {
+    var formData = <String, dynamic>{
+      "id_customer": await getCustomer_Id(),
+    };
+
+    final result = await requestPOST2(
+        url: ConstantApi.paymenthistoryUrl, formData: formData, dio: _dio);
+
+    if (result["success"] == true) {
+      print("resultOTP:$result");
+      print("resultOTPsss:${result["success"]}");
+      return SignUpModel?.fromJson(result["response"]);
+    } else {
+      try {
+        var resultval = SignUpModel.fromJson(result["response"]);
+        // Toast.show(resultval.message.toString(), context);
+        print(result["response"]);
+        return resultval;
+      } catch (e) {
+        print(result["response"]);
+        // Toast.show(result["response"], context);
+      }
+    }
+    return SignUpModel();
+  }
+
+  //CLOSED ACCOUNT
+  Future<SignUpModel> closedAccountApi() async {
+    final result = await requestGET(
+        url: ConstantApi.accountCloseUrl +
+            "?id_customer=${await getCustomer_Id()}",
+        dio: _dio);
+    if (result["success"] == true) {
+      print("resultOTP:$result");
+      print("resultOTPsss:${result["success"]}");
+      return SignUpModel?.fromJson(result["response"]);
+    } else {
+      try {
+        var resultval = SignUpModel.fromJson(result["response"]);
+        // Toast.show(resultval.message.toString(), context);
+        print(result["response"]);
+        return resultval;
+      } catch (e) {
+        print(result["response"]);
+        // Toast.show(result["response"], context);
+      }
+    }
+    return SignUpModel();
+  }
+
+  //PAYEMNT API
+  Future<PaymentCreateModel> PaymentApi(
+      List<Map<String, dynamic>> formData) async {
+    final result = await requestPOST4(
+        url: ConstantApi.paymentUrl, formData: formData, dio: _dio);
+    if (result["success"] == true) {
+      print("resultOTP:$result");
+      print("resultOTPsss:${result["success"]}");
+      return PaymentCreateModel?.fromJson(result["response"]);
+    } else {
+      try {
+        var resultval = PaymentCreateModel.fromJson(result["response"]);
+        // Toast.show(resultval.message.toString(), context);
+        print(result["response"]);
+        return resultval;
+      } catch (e) {
+        print(result["response"]);
+        // Toast.show(result["response"], context);
+      }
+    }
+    return PaymentCreateModel();
+  }
 }

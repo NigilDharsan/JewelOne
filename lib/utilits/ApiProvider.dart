@@ -6,6 +6,7 @@ import 'package:jewelone/Model/ForgotPasswwordModel.dart';
 import 'package:jewelone/Model/GoldRateMmodel.dart';
 import 'package:jewelone/Model/LoginModel.dart';
 import 'package:jewelone/Model/MyPlanModel.dart';
+import 'package:jewelone/Model/PaymentCreateModel.dart';
 import 'package:jewelone/Model/SignUpModel.dart';
 import 'package:jewelone/utilits/ApiService.dart';
 
@@ -28,13 +29,15 @@ final signupPostProvider = FutureProvider.autoDispose
 
 //FORGOT PASSWORD
 final ForgotpasswordPostProvider = FutureProvider.autoDispose
-    .family<Forgot_Password_Model?, Map<String, dynamic>>((ref, formData) async {
+    .family<Forgot_Password_Model?, Map<String, dynamic>>(
+        (ref, formData) async {
   return ref.watch(apiServiceProvider).forgetpasswordapi(formData);
 });
 
 //VERIFY OTP
 final verifyotpPostProvider = FutureProvider.autoDispose
-    .family<Forgot_Password_Model?, Map<String, dynamic>>((ref, formData) async {
+    .family<Forgot_Password_Model?, Map<String, dynamic>>(
+        (ref, formData) async {
   return ref.watch(apiServiceProvider).verifyotpapi(formData);
 });
 
@@ -43,14 +46,14 @@ final BannerDataProvider = FutureProvider<BannerImageModel?>((ref) async {
   return ref.watch(apiServiceProvider).HomeBannerApi();
 });
 
-
 //GOLD RATE
 final GoldrateProvider = FutureProvider<GoldRateModel?>((ref) async {
   return ref.watch(apiServiceProvider).GoldrateApi();
 });
 
 //ACTIVE LOCATION
-final ActivelocationProvider = FutureProvider<ActiveLocationModel?>((ref) async {
+final ActivelocationProvider =
+    FutureProvider<ActiveLocationModel?>((ref) async {
   return ref.watch(apiServiceProvider).ActivelocationApi();
 });
 
@@ -62,4 +65,23 @@ final MyplanProvider = FutureProvider.autoDispose<MyPlanModel?>((ref) async {
 //ACTIVE PLAN
 final ActiveplanProvider = FutureProvider<ActivePlanModel?>((ref) async {
   return ref.watch(apiServiceProvider).ActiveplanApi();
+});
+
+//PAYMENT HISTORY
+final PaymenthistoryProvider =
+    FutureProvider.autoDispose<SignUpModel?>((ref) async {
+  return ref.watch(apiServiceProvider).PaymenthistoryApi();
+});
+
+//CLOSED ACCOUNT
+final closedaccountProvider =
+    FutureProvider.autoDispose<SignUpModel?>((ref) async {
+  return ref.watch(apiServiceProvider).closedAccountApi();
+});
+
+//SIGNUP
+final paymentPostProvider = FutureProvider.autoDispose
+    .family<PaymentCreateModel?, List<Map<String, dynamic>>>(
+        (ref, formData) async {
+  return ref.watch(apiServiceProvider).PaymentApi(formData);
 });

@@ -3,16 +3,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jewelone/Common_Widgets/Common_Button.dart';
 import 'package:jewelone/Common_Widgets/Image_Path.dart';
 import 'package:jewelone/Src/FAQ_Ui/FAQ_Screen.dart';
-import 'package:jewelone/Src/KYC_Ui/KYC_Details_Screen.dart';
-import 'package:jewelone/Src/KYC_Ui/KYC_Screen.dart';
 import 'package:jewelone/Src/Login_Ui/LoginScreen.dart';
 import 'package:jewelone/Src/Profile_Details_Ui/Profile_Details_Screen.dart';
 import 'package:jewelone/Src/Security_Setting_Ui/Password_Screen.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
 import 'package:jewelone/utilits/Generic.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
+
 class Settings_Screen extends ConsumerStatefulWidget {
-  Settings_Screen({super.key,});
+  Settings_Screen({
+    super.key,
+  });
 
   @override
   ConsumerState<Settings_Screen> createState() => _Settings_ScreenState();
@@ -23,7 +24,7 @@ class _Settings_ScreenState extends ConsumerState<Settings_Screen> {
   String phoneVal = '';
   String name = '';
 
-  Future<void> getDetails() async{
+  Future<void> getDetails() async {
     String phval = await getCustomer_phone();
     String cusname = await getCustomer_name();
     setState(() {
@@ -31,21 +32,22 @@ class _Settings_ScreenState extends ConsumerState<Settings_Screen> {
       name = cusname;
     });
   }
+
   void initState() {
     // TODO: implement initState
     super.initState();
     getDetails();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: white2,
-      body: SingleChildScrollView(
-          child: _Mainbody()),
+      body: SingleChildScrollView(child: _Mainbody()),
     );
   }
 
-  Widget _Mainbody (){
+  Widget _Mainbody() {
     return Padding(
       padding: const EdgeInsets.only(bottom: 50),
       child: Container(
@@ -58,7 +60,7 @@ class _Settings_ScreenState extends ConsumerState<Settings_Screen> {
               clipBehavior: Clip.none,
               children: [
                 Container(
-                  height: 80,
+                  height: 140,
                   width: MediaQuery.sizeOf(context).width,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
@@ -67,8 +69,7 @@ class _Settings_ScreenState extends ConsumerState<Settings_Screen> {
                         colors: [
                           gradient1,
                           gradient2,
-                        ]
-                    ),
+                        ]),
                   ),
 
                   //APP BAR CONTENTS
@@ -77,30 +78,39 @@ class _Settings_ScreenState extends ConsumerState<Settings_Screen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(top: 15,left: 15),
+                        padding: const EdgeInsets.only(top: 55, left: 15),
                         child: InkWell(
-                          onTap: (){
-                            Navigator.pop(context);
-                          },
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
                             child: ImgPathSvg('backbutton.svg')),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 15,left: 15),
-                        child: Text('Settings',style: appbarT,),
+                        padding: const EdgeInsets.only(top: 55, left: 15),
+                        child: Text(
+                          'Settings',
+                          style: appbarT,
+                        ),
                       ),
                       const Spacer(),
-                      InkWell(
-                        onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>Faq_Screen()));
-                        },
-                          child: ImgPathSvg('info.svg')),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 45),
+                        child: InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Faq_Screen()));
+                            },
+                            child: ImgPathSvg('info.svg')),
+                      ),
                     ],
                   ),
                 ),
 
                 //PROFILE
                 Positioned(
-                  top: 50,
+                  top: 90,
                   left: 30,
                   child: Container(
                     height: 100,
@@ -109,8 +119,7 @@ class _Settings_ScreenState extends ConsumerState<Settings_Screen> {
                         image: DecorationImage(
                             fit: BoxFit.cover,
                             image: AssetImage('lib/assets/profileimage.png')),
-                        borderRadius: BorderRadius.circular(100)
-                    ),
+                        borderRadius: BorderRadius.circular(100)),
                   ),
                 ),
               ],
@@ -118,35 +127,50 @@ class _Settings_ScreenState extends ConsumerState<Settings_Screen> {
 
             //NAME CONTAINER
             Padding(
-              padding: const EdgeInsets.only(top: 80,left: 20,right: 20,),
+              padding: const EdgeInsets.only(
+                top: 80,
+                left: 20,
+                right: 20,
+              ),
               child: Column(
                 children: [
                   Container(
                     width: MediaQuery.sizeOf(context).width,
                     decoration: BoxDecoration(
                       color: white1,
-                      border: Border.all(width: 1,color: grey5),
+                      border: Border.all(width: 1, color: grey5),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 20,right: 20,top: 10,bottom: 20),
+                      padding: const EdgeInsets.only(
+                          left: 20, right: 20, top: 10, bottom: 20),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
                             children: [
-                              Text(name,style: TBlack2,),
+                              Text(
+                                name,
+                                style: TBlack2,
+                              ),
                               const Spacer(),
                               InkWell(
-                                onTap: (){
-                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>Profile_Details_Screen()));
-                                },
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                Profile_Details_Screen()));
+                                  },
                                   child: ImgPathSvg('Edit.svg'))
                             ],
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top: 5),
-                            child: Text(phoneVal,style: rate2,),
+                            child: Text(
+                              phoneVal,
+                              style: rate2,
+                            ),
                           )
                         ],
                       ),
@@ -154,13 +178,22 @@ class _Settings_ScreenState extends ConsumerState<Settings_Screen> {
                   ),
 
                   //SETTINGS CONTAINER
-                  Settingscontainer(context,text: 'Change Password', image: 'lock.svg', image2: 'rightarrow2.svg', onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>Password_Screen()));
+                  Settingscontainer(context,
+                      text: 'Change Password',
+                      image: 'lock.svg',
+                      image2: 'rightarrow2.svg', onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Password_Screen()));
                   }),
-                  Settingscontainer(context,text: 'KYC', image: 'kyc.svg', image2: 'rightarrow2.svg', onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>KYC_Screen()));
-                  }),
-                  Settingscontainer(context,text: 'About Shining Dawn', image: 'aboutjweleone.svg', image2: 'rightarrow2.svg', onTap: () {
+                  // Settingscontainer(context,text: 'KYC', image: 'kyc.svg', image2: 'rightarrow2.svg', onTap: () {
+                  //   Navigator.push(context, MaterialPageRoute(builder: (context)=>KYC_Screen()));
+                  // }),
+                  Settingscontainer(context,
+                      text: 'About Santhi Swarna Mahal',
+                      image: 'aboutjweleone.svg',
+                      image2: 'rightarrow2.svg', onTap: () {
                     //Navigator.push(context, MaterialPageRoute(builder: (context)=>Password_Screen()));
                   }),
                 ],
@@ -168,49 +201,64 @@ class _Settings_ScreenState extends ConsumerState<Settings_Screen> {
             ),
 
             //TERMS AND CONDITIONS
-             SizedBox(height: MediaQuery.sizeOf(context).height/5,),
+            SizedBox(
+              height: MediaQuery.sizeOf(context).height / 5,
+            ),
             Padding(
-              padding: const EdgeInsets.only(left: 40,right: 40,bottom: 20),
+              padding: const EdgeInsets.only(left: 40, right: 40, bottom: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Terms & Conditions*',style:underline),
-                  Text('Privacy Policy',style: underline),
+                  Text('Terms & Conditions*', style: underline),
+                  Text('Privacy Policy', style: underline),
                 ],
               ),
             ),
             //DIVIDER
-            Divider(indent: 40,endIndent: 40,),
-
-            Padding(
-              padding: const EdgeInsets.only(top: 10,),
-              child: Center(child: Text('Follow us on',style: follow,)),
+            Divider(
+              indent: 40,
+              endIndent: 40,
             ),
 
-            //SOCIAL MEDIAS
-            Padding(
-              padding: const EdgeInsets.only(left: 50,right: 50,top: 20,),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ImgPathSvg('fb.svg'),
-                  ImgPathSvg('x.svg'),
-                  ImgPathSvg('pin.svg'),
-                  ImgPathSvg('Instagram.svg'),
-                  ImgPathSvg('youtube.svg'),
-                ],
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.only(
+            //     top: 10,
+            //   ),
+            //   child: Center(
+            //       child: Text(
+            //     'Follow us on',
+            //     style: follow,
+            //   )),
+            // ),
+
+            // //SOCIAL MEDIAS
+            // Padding(
+            //   padding: const EdgeInsets.only(
+            //     left: 50,
+            //     right: 50,
+            //     top: 20,
+            //   ),
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            //     children: [
+            //       ImgPathSvg('fb.svg'),
+            //       ImgPathSvg('x.svg'),
+            //       ImgPathSvg('pin.svg'),
+            //       ImgPathSvg('Instagram.svg'),
+            //       ImgPathSvg('youtube.svg'),
+            //     ],
+            //   ),
+            // ),
 
             //BUTTON
             Padding(
-              padding: const EdgeInsets.only(left: 20,right: 20,top: 20),
-              child: buttonIcon(context,
-                  onPress: () {
-                    {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginScreen()));
-                    }
-                  }, titleName: 'Logout'),
+              padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
+              child: buttonIcon(context, onPress: () {
+                {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => LoginScreen()));
+                }
+              }, titleName: 'Logout'),
             ),
           ],
         ),
@@ -219,26 +267,35 @@ class _Settings_ScreenState extends ConsumerState<Settings_Screen> {
   }
 }
 
-Widget Settingscontainer (context,{required String text,required String image,required String image2,required void Function()? onTap}){
+Widget Settingscontainer(context,
+    {required String text,
+    required String image,
+    required String image2,
+    required void Function()? onTap}) {
   return Padding(
-    padding: const EdgeInsets.only(top: 10,),
+    padding: const EdgeInsets.only(
+      top: 10,
+    ),
     child: InkWell(
       onTap: onTap,
       child: Container(
         width: MediaQuery.sizeOf(context).width,
         decoration: BoxDecoration(
             color: white1,
-            border: Border.all(width: 1,color: grey5),
-            borderRadius: BorderRadius.circular(10)
-        ),
+            border: Border.all(width: 1, color: grey5),
+            borderRadius: BorderRadius.circular(10)),
         child: Padding(
-          padding: const EdgeInsets.only(left: 20,right: 20,top: 10,bottom: 10),
+          padding:
+              const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
           child: Row(
             children: [
               ImgPathSvg(image),
               Padding(
                 padding: const EdgeInsets.only(left: 10),
-                child: Text(text,style: rate2,),
+                child: Text(
+                  text,
+                  style: rate2,
+                ),
               ),
               const Spacer(),
               ImgPathSvg(image2)

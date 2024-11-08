@@ -24,11 +24,11 @@ class ActiveLocationModel {
 class Data {
   String? name;
   String? shortName;
-  Null? email;
-  Null? address1;
-  Null? address2;
-  Null? mobile;
-  Null? pincode;
+  String? email;
+  String? address1;
+  String? address2;
+  String? mobile;
+  String? pincode;
   String? city;
   String? state;
   String? stoneHours;

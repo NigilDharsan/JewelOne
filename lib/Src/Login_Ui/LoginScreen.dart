@@ -111,9 +111,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
         //MOBILE NUMBER
         Heading_Text(context, Title: "Welcome Back!"),
-
+        SizedBox(
+          height: 20,
+        ),
         // Phone Number Text and TextField
-        Title_Style(Title: 'Phone Number', isStatus: null),
+        // Title_Style(Title: 'Phone Number', isStatus: null),
         textFormField(
             // isEnabled: false,
             hintText: "Phone Number",
@@ -137,9 +139,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               color: white11,
             )),
 
+        SizedBox(
+          height: 20,
+        ),
         // Password Text and TextField
         // Phone Number Text and TextField
-        Title_Style(Title: 'Password', isStatus: null),
+        // Title_Style(Title: 'Password', isStatus: null),
         textFieldPassword(
           Controller: _password,
           obscure: _obscurePassword,
@@ -209,6 +214,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   "LOGIN CUSTOMER ID ::${result?.customer?.idCustomer ?? ""}");
               print("CUSTOMER PHONE ::${result?.customer?.mobile ?? ""}");
               // ShowToastMessage(result?.message ?? "");
+              String Boolvalue = "true";
+              Routes(Boolvalue);
+
               Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -249,26 +257,26 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         SizedBox(height: 40),
 
         // Trouble Logging in? Please call: Text
-        Center(
-            child: Text(
-          'Trouble Logging in? Please call:',
-          style: BlackTextColor,
-        )),
-        SizedBox(height: 16),
-
-        // Icon and Trouble Logging in? Please call: Text
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // Icon(Icons.call),
-            ImgPathSvg('Call.svg'),
-            SizedBox(width: 8),
-            Text(
-              '18001033916',
-              style: phone_ST,
-            ),
-          ],
-        ),
+        // Center(
+        //     child: Text(
+        //   'Trouble Logging in? Please call:',
+        //   style: BlackTextColor,
+        // )),
+        // SizedBox(height: 16),
+        //
+        // // Icon and Trouble Logging in? Please call: Text
+        // Row(
+        //   mainAxisAlignment: MainAxisAlignment.center,
+        //   children: [
+        //     // Icon(Icons.call),
+        //     ImgPathSvg('Call.svg'),
+        //     SizedBox(width: 8),
+        //     Text(
+        //       '18001033916',
+        //       style: phone_ST,
+        //     ),
+        //   ],
+        // ),
       ],
     );
   }

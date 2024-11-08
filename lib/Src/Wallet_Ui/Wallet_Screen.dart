@@ -61,7 +61,7 @@ class _Wallet_screenState extends State<Wallet_screen> {
             Navigator.push(context, MaterialPageRoute(builder: (context)=>New_SSP_Screen()));
           }),
           BottomContainers(context, text: 'Check Purchase History', onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>paymrnt_History_Screen()));
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>payment_History_Screen()));
           }),
 
           const Spacer(),
