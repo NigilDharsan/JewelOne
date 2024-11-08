@@ -6,6 +6,7 @@ import 'package:jewelone/Model/ForgotPasswwordModel.dart';
 import 'package:jewelone/Model/GoldRateMmodel.dart';
 import 'package:jewelone/Model/LoginModel.dart';
 import 'package:jewelone/Model/MyPlanModel.dart';
+import 'package:jewelone/Model/PaymentCreateModel.dart';
 import 'package:jewelone/Model/SignUpModel.dart';
 import 'package:jewelone/utilits/ApiService.dart';
 
@@ -80,6 +81,7 @@ final closedaccountProvider =
 
 //SIGNUP
 final paymentPostProvider = FutureProvider.autoDispose
-    .family<SignUpModel?, List<Map<String, dynamic>>>((ref, formData) async {
+    .family<PaymentCreateModel?, List<Map<String, dynamic>>>(
+        (ref, formData) async {
   return ref.watch(apiServiceProvider).PaymentApi(formData);
 });

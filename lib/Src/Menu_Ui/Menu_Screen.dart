@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jewelone/Common_Widgets/Common_Button.dart';
 import 'package:jewelone/Common_Widgets/Image_Path.dart';
 import 'package:jewelone/Src/FAQ_Ui/Contact_Us_Screen.dart';
-import 'package:jewelone/Src/FAQ_Ui/FAQ_Screen.dart';
 import 'package:jewelone/Src/Home_DashBoard_Ui/Home_DashBoard_Screen.dart';
 import 'package:jewelone/Src/Login_Ui/LoginScreen.dart';
 import 'package:jewelone/Src/Notification_Ui/Notification_Screen.dart';
@@ -11,7 +10,6 @@ import 'package:jewelone/Src/Online_Emi_Payment_Ui/Online_Emi_Payment_Screen.dar
 import 'package:jewelone/Src/Payment_History_Ui/payment_History_Screen.dart';
 import 'package:jewelone/Src/Security_Setting_Ui/Settings_Screen.dart';
 import 'package:jewelone/Src/Store_Locator_Ui/Store_Locator_Screen.dart';
-import 'package:jewelone/Src/Wallet_Ui/Wallet_Screen.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
 import 'package:jewelone/utilits/Generic.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
@@ -269,7 +267,7 @@ class _Menu_ScreenState extends ConsumerState<Menu_Screen> {
                     ),
 
                     Settingscontainer(context,
-                        text: 'About Shining Dawn',
+                        text: 'About Santhi Swarna Mahal',
                         image: 'aboutone.svg',
                         image2: 'rightarrow2.svg', onTap: () {
                       //Navigator.pop(context);

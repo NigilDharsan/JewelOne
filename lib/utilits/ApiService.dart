@@ -7,6 +7,7 @@ import 'package:jewelone/Model/ForgotPasswwordModel.dart';
 import 'package:jewelone/Model/GoldRateMmodel.dart';
 import 'package:jewelone/Model/LoginModel.dart';
 import 'package:jewelone/Model/MyPlanModel.dart';
+import 'package:jewelone/Model/PaymentCreateModel.dart';
 import 'package:jewelone/Model/SignUpModel.dart';
 import 'package:jewelone/utilits/Generic.dart';
 import 'package:jewelone/utilits/MakeApiCall.dart';
@@ -277,16 +278,17 @@ class ApiService {
   }
 
   //PAYEMNT API
-  Future<SignUpModel> PaymentApi(List<Map<String, dynamic>> formData) async {
+  Future<PaymentCreateModel> PaymentApi(
+      List<Map<String, dynamic>> formData) async {
     final result = await requestPOST4(
         url: ConstantApi.paymentUrl, formData: formData, dio: _dio);
     if (result["success"] == true) {
       print("resultOTP:$result");
       print("resultOTPsss:${result["success"]}");
-      return SignUpModel?.fromJson(result["response"]);
+      return PaymentCreateModel?.fromJson(result["response"]);
     } else {
       try {
-        var resultval = SignUpModel.fromJson(result["response"]);
+        var resultval = PaymentCreateModel.fromJson(result["response"]);
         // Toast.show(resultval.message.toString(), context);
         print(result["response"]);
         return resultval;
@@ -295,6 +297,6 @@ class ApiService {
         // Toast.show(result["response"], context);
       }
     }
-    return SignUpModel();
+    return PaymentCreateModel();
   }
 }

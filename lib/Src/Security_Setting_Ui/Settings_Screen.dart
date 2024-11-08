@@ -191,7 +191,7 @@ class _Settings_ScreenState extends ConsumerState<Settings_Screen> {
                   //   Navigator.push(context, MaterialPageRoute(builder: (context)=>KYC_Screen()));
                   // }),
                   Settingscontainer(context,
-                      text: 'About Shining Dawn',
+                      text: 'About Santhi Swarna Mahal',
                       image: 'aboutjweleone.svg',
                       image2: 'rightarrow2.svg', onTap: () {
                     //Navigator.push(context, MaterialPageRoute(builder: (context)=>Password_Screen()));
@@ -220,35 +220,35 @@ class _Settings_ScreenState extends ConsumerState<Settings_Screen> {
               endIndent: 40,
             ),
 
-            Padding(
-              padding: const EdgeInsets.only(
-                top: 10,
-              ),
-              child: Center(
-                  child: Text(
-                'Follow us on',
-                style: follow,
-              )),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.only(
+            //     top: 10,
+            //   ),
+            //   child: Center(
+            //       child: Text(
+            //     'Follow us on',
+            //     style: follow,
+            //   )),
+            // ),
 
-            //SOCIAL MEDIAS
-            Padding(
-              padding: const EdgeInsets.only(
-                left: 50,
-                right: 50,
-                top: 20,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ImgPathSvg('fb.svg'),
-                  ImgPathSvg('x.svg'),
-                  ImgPathSvg('pin.svg'),
-                  ImgPathSvg('Instagram.svg'),
-                  ImgPathSvg('youtube.svg'),
-                ],
-              ),
-            ),
+            // //SOCIAL MEDIAS
+            // Padding(
+            //   padding: const EdgeInsets.only(
+            //     left: 50,
+            //     right: 50,
+            //     top: 20,
+            //   ),
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            //     children: [
+            //       ImgPathSvg('fb.svg'),
+            //       ImgPathSvg('x.svg'),
+            //       ImgPathSvg('pin.svg'),
+            //       ImgPathSvg('Instagram.svg'),
+            //       ImgPathSvg('youtube.svg'),
+            //     ],
+            //   ),
+            // ),
 
             //BUTTON
             Padding(
