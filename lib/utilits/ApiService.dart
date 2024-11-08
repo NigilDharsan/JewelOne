@@ -8,6 +8,7 @@ import 'package:jewelone/Model/GoldRateMmodel.dart';
 import 'package:jewelone/Model/LoginModel.dart';
 import 'package:jewelone/Model/MyPlanModel.dart';
 import 'package:jewelone/Model/PaymentCreateModel.dart';
+import 'package:jewelone/Model/PaymentHistoryModel.dart';
 import 'package:jewelone/Model/SignUpModel.dart';
 import 'package:jewelone/utilits/Generic.dart';
 import 'package:jewelone/utilits/MakeApiCall.dart';
@@ -227,7 +228,7 @@ class ApiService {
   }
 
   //PAYMENT HISTORY
-  Future<SignUpModel> PaymenthistoryApi() async {
+  Future<PaymentHistoryModel> PaymenthistoryApi() async {
     var formData = <String, dynamic>{
       "id_customer": await getCustomer_Id(),
     };
@@ -238,10 +239,10 @@ class ApiService {
     if (result["success"] == true) {
       print("resultOTP:$result");
       print("resultOTPsss:${result["success"]}");
-      return SignUpModel?.fromJson(result["response"]);
+      return PaymentHistoryModel?.fromJson(result["response"]);
     } else {
       try {
-        var resultval = SignUpModel.fromJson(result["response"]);
+        var resultval = PaymentHistoryModel.fromJson(result["response"]);
         // Toast.show(resultval.message.toString(), context);
         print(result["response"]);
         return resultval;
@@ -250,7 +251,7 @@ class ApiService {
         // Toast.show(result["response"], context);
       }
     }
-    return SignUpModel();
+    return PaymentHistoryModel();
   }
 
   //CLOSED ACCOUNT

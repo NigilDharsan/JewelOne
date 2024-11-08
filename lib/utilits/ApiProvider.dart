@@ -10,6 +10,8 @@ import 'package:jewelone/Model/PaymentCreateModel.dart';
 import 'package:jewelone/Model/SignUpModel.dart';
 import 'package:jewelone/utilits/ApiService.dart';
 
+import '../Model/PaymentHistoryModel.dart';
+
 final apiServiceProvider = Provider<ApiService>((ref) {
   final dio = ref.read(dioProvider);
   return ApiService(dio);
@@ -68,8 +70,8 @@ final ActiveplanProvider = FutureProvider<ActivePlanModel?>((ref) async {
 });
 
 //PAYMENT HISTORY
-final PaymenthistoryProvider =
-    FutureProvider.autoDispose<SignUpModel?>((ref) async {
+final paymenthistoryProvider =
+    FutureProvider.autoDispose<PaymentHistoryModel?>((ref) async {
   return ref.watch(apiServiceProvider).PaymenthistoryApi();
 });
 
