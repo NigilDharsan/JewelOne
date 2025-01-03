@@ -7,6 +7,7 @@ import 'package:jewelone/Common_Widgets/Common_Card.dart';
 import 'package:jewelone/Common_Widgets/Image_Path.dart';
 import 'package:jewelone/Model/GoldRateMmodel.dart';
 import 'package:jewelone/Model/LoginModel.dart';
+import 'package:jewelone/Src/Close_Account_UI/CloseAccountScreen.dart';
 import 'package:jewelone/Src/Menu_Ui/Menu_Screen.dart';
 import 'package:jewelone/Src/My_SSP_Ui/My_SSP_Screen.dart';
 import 'package:jewelone/Src/New_SSP_Ui/New_SSP_Screen.dart';
@@ -18,7 +19,6 @@ import 'package:jewelone/utilits/Generic.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../../utilits/Loading_Overlay.dart';
 import '../Payment_History_Ui/payment_History_Screen.dart';
 
 class Home_DashBoard_Screen extends ConsumerStatefulWidget {
@@ -57,7 +57,6 @@ class _Home_DashBoard_ScreenState extends ConsumerState<Home_DashBoard_Screen> {
   Widget build(BuildContext context) {
     final priceRate = ref.watch(GoldrateProvider);
     //final bannerimagedata = ref.watch(BannerDataProvider);
-    // final activelocationdata = ref.watch(ActivelocationProvider);
     final myplandata = ref.watch(MyplanProvider);
     return Scaffold(
       backgroundColor: backGroundColor,
@@ -145,6 +144,15 @@ class _Home_DashBoard_ScreenState extends ConsumerState<Home_DashBoard_Screen> {
                                   totaccval: '120',
                                   noofpaidval:
                                       "${data?.data?[index].paidInstallments ?? ""}",
+                                  paynow: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                Online_Emi_Payment_Screen(
+                                                  selectedIndex: index,
+                                                )));
+                                  },
                                 ),
                               );
                             }),
@@ -182,7 +190,9 @@ class _Home_DashBoard_ScreenState extends ConsumerState<Home_DashBoard_Screen> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            Online_Emi_Payment_Screen()));
+                                            Online_Emi_Payment_Screen(
+                                              selectedIndex: null,
+                                            )));
                               },
                               child: Plan_Card(
                                 context,
@@ -246,47 +256,11 @@ class _Home_DashBoard_ScreenState extends ConsumerState<Home_DashBoard_Screen> {
                           //CLOSED ACCOUNT
                           InkWell(
                               onTap: () {
-                                showDialog(
-                                    context: (context),
-                                    builder: (BuildContext context) {
-                                      return AlertDialog(
-                                        content: Text(
-                                          "Are you sure to close your account",
-                                          style: radioST,
-                                        ),
-                                        actions: [
-                                          InkWell(
-                                              onTap: () {
-                                                Navigator.pop(context);
-                                              },
-                                              child: Container(
-                                                child: Text(
-                                                  "Cancel",
-                                                  style: radioST,
-                                                ),
-                                              )),
-                                          const SizedBox(width: 10),
-                                          InkWell(
-                                              onTap: () async {
-                                                Navigator.pop(context);
-                                                LoadingOverlay.show(context);
-                                                final result = await ref.read(
-                                                    closedaccountProvider
-                                                        .future);
-                                                LoadingOverlay.forcedStop();
-
-                                                if (result?.status == true) {
-                                                } else {}
-                                              },
-                                              child: Container(
-                                                child: Text(
-                                                  "Ok",
-                                                  style: radioST,
-                                                ),
-                                              ))
-                                        ],
-                                      );
-                                    });
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            CloseAccountScreen()));
                               },
                               child: Plan_Card(
                                 context,
@@ -469,7 +443,9 @@ class _GoldScrollPriceWidgetState extends ConsumerState<GoldScrollPriceWidget> {
             '₹ ${widget.data?.data?.gold22ct ?? ""} ',
             style: gramrateST,
           ),
-          double.parse(widget.data?.data?.goldRateDifference ?? "0.0") < 0
+          double.parse((widget.data?.data?.goldRateDifference ?? "0.0")
+                      .replaceAll(',', '')) <
+                  0
               ? Icon(
                   Icons.arrow_downward_outlined,
                   color: Colors.black,

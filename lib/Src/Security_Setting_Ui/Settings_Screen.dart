@@ -190,12 +190,6 @@ class _Settings_ScreenState extends ConsumerState<Settings_Screen> {
                   // Settingscontainer(context,text: 'KYC', image: 'kyc.svg', image2: 'rightarrow2.svg', onTap: () {
                   //   Navigator.push(context, MaterialPageRoute(builder: (context)=>KYC_Screen()));
                   // }),
-                  Settingscontainer(context,
-                      text: 'About Santhi Swarna Mahal',
-                      image: 'aboutjweleone.svg',
-                      image2: 'rightarrow2.svg', onTap: () {
-                    //Navigator.push(context, MaterialPageRoute(builder: (context)=>Password_Screen()));
-                  }),
                 ],
               ),
             ),

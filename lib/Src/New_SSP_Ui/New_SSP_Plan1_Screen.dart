@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:jewelone/Common_Widgets/Common_Button.dart';
 import 'package:jewelone/Common_Widgets/Common_Card.dart';
 import 'package:jewelone/Common_Widgets/Custom_App_Bar.dart';
-import 'package:jewelone/Common_Widgets/Image_Path.dart';
 import 'package:jewelone/Src/FAQ_Ui/FAQ_Screen.dart';
 import 'package:jewelone/Src/New_SSP_Ui/Grammage_Plan_Screen.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
@@ -65,10 +64,10 @@ class _New_SSP_Plan1_ScreenState extends State<New_SSP_Plan1_Screen> {
                             'EMA from ₹5,000 /month',
                             style: lighttext,
                           )),
-                      Text(
-                        'Benefit (VA) 18%',
-                        style: rate2,
-                      )
+                      // Text(
+                      //   'Benefit (VA) 18%',
+                      //   style: rate2,
+                      // )
                     ],
                   ),
                 ),
@@ -115,14 +114,14 @@ class _New_SSP_Plan1_ScreenState extends State<New_SSP_Plan1_Screen> {
                 image: 'lib/assets/New_SSP_Plan1_Image.png'),
 
             //TOP IMAGE CONTENT
-            New_SSP_Image_Content(
-                text:
-                    'A customer can select any Jewellery design of Her/His choice'
-                    ' and place an order. Customer can pay the estimated order value in installments at '
-                    'regular monthly basis as per His/Her convenience. On or before the end of every month, '
-                    'as 11 Equated Monthly Advance (EMA).',
-                heading: 'Grammage Accumulation',
-                isHeadingneeded: true),
+            // New_SSP_Image_Content(
+            //     text:
+            //         'A customer can select any Jewellery design of Her/His choice'
+            //         ' and place an order. Customer can pay the estimated order value in installments at '
+            //         'regular monthly basis as per His/Her convenience. On or before the end of every month, '
+            //         'as 11 Equated Monthly Advance (EMA).',
+            //     heading: 'Grammage Accumulation',
+            //     isHeadingneeded: true),
             Padding(
               padding: const EdgeInsets.only(left: 25, right: 25, top: 15),
               child: Column(
@@ -189,10 +188,10 @@ class _New_SSP_Plan1_ScreenState extends State<New_SSP_Plan1_Screen> {
             ),
 
             //MATURITY BENIFITS IMAGE
-            Padding(
-              padding: const EdgeInsets.only(left: 5, right: 5, bottom: 50),
-              child: ImgPathSvg('Benifits.svg'),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.only(left: 5, right: 5, bottom: 50),
+            //   child: ImgPathSvg('Benifits.svg'),
+            // ),
           ],
         ),
       ),

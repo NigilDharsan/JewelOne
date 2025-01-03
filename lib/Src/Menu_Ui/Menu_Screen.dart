@@ -175,7 +175,9 @@ class _Menu_ScreenState extends ConsumerState<Menu_Screen> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                Online_Emi_Payment_Screen()));
+                                                Online_Emi_Payment_Screen(
+                                                  selectedIndex: null,
+                                                )));
                                   }),
                               Divider(),
                               NavContainer(
@@ -267,7 +269,7 @@ class _Menu_ScreenState extends ConsumerState<Menu_Screen> {
                     ),
 
                     Settingscontainer(context,
-                        text: 'About Santhi Swarna Mahal',
+                        text: 'About Shaining Dawn',
                         image: 'aboutone.svg',
                         image2: 'rightarrow2.svg', onTap: () {
                       //Navigator.pop(context);

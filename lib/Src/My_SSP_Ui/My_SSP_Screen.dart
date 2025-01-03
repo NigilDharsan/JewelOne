@@ -95,7 +95,7 @@ class _My_SSP_ScreenState extends ConsumerState<My_SSP_Screen> {
                                   Row(
                                     children: [
                                       Text(
-                                        'Plan ${data?.data?[index].idSchemeAccount ?? ""}',
+                                        '${data?.data?[index].schemeName ?? ""}',
                                         style: Plan_Style,
                                       ),
                                       const Spacer(),
@@ -104,10 +104,10 @@ class _My_SSP_ScreenState extends ConsumerState<My_SSP_Screen> {
                                           : ImgPathSvg('rightarrow.svg'),
                                     ],
                                   ),
-                                  Text(
-                                    data?.data?[index].schemeName ?? "",
-                                    style: phoneHT,
-                                  ),
+                                  // Text(
+                                  //   data?.data?[index].schemeName ?? "",
+                                  //   style: phoneHT,
+                                  // ),
                                   Row(
                                     children: [
                                       Padding(
@@ -119,7 +119,13 @@ class _My_SSP_ScreenState extends ConsumerState<My_SSP_Screen> {
                                                   context,
                                                   MaterialPageRoute(
                                                       builder: (context) =>
-                                                          Purchase_Plan_detail_Screeen()));
+                                                          Purchase_Plan_detail_Screeen(
+                                                            schemeAccountID: data
+                                                                    ?.data?[
+                                                                        index]
+                                                                    .idSchemeAccount ??
+                                                                0,
+                                                          )));
                                             },
                                             child: Text(
                                               'View details',

@@ -1,30 +1,36 @@
+import 'dart:convert';
 import 'dart:io';
 
-import 'package:dio/dio.dart';
+import 'package:http/http.dart' as http;
 import 'package:jewelone/utilits/Generic.dart';
 
 import 'ConstantsApi.dart';
 
-Future<dynamic> requestGET({required String url, required Dio dio}) async {
+Future<dynamic> requestGET(
+    {required String url, required http.Client dio}) async {
   try {
     String? accessToken = await getToken();
     // if (accessToken != "") {
     //   options.headers['Authorization'] = 'Bearer $accessToken';
     // }
 
-    dio.options.headers = {
+    final headers = {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       'Authorization': 'Token $accessToken'
     };
 
-    final response = await dio.get(url);
+    final response = await dio.get(Uri.parse(url), headers: headers);
     switch (response.statusCode) {
       case 200:
-        final jsonResponse = {'success': true, 'response': response.data};
+        final Map<String, dynamic> responseDecode = jsonDecode(response.body);
+
+        final jsonResponse = {'success': true, 'response': responseDecode};
         return jsonResponse;
       case 201:
-        final jsonResponse = {'success': true, 'response': response.data};
+        final Map<String, dynamic> responseDecode = jsonDecode(response.body);
+
+        final jsonResponse = {'success': true, 'response': responseDecode};
         return jsonResponse;
       // case 400:
       //   final result = jsonDecode(response.body);
@@ -45,7 +51,9 @@ Future<dynamic> requestGET({required String url, required Dio dio}) async {
       //   };
       //   return jsonResponse;
       default:
-        final jsonResponse = {'success': false, 'response': response.data};
+        final Map<String, dynamic> responseDecode = jsonDecode(response.body);
+
+        final jsonResponse = {'success': false, 'response': responseDecode};
         return jsonResponse;
     }
   } on SocketException {
@@ -70,26 +78,33 @@ Future<dynamic> requestGET({required String url, required Dio dio}) async {
 }
 
 Future<dynamic> requestPOST(
-    {required String url, required FormData formData, required Dio dio}) async {
+    {required String url,
+    required Map<String, dynamic> formData,
+    required http.Client dio}) async {
   try {
     String? accessToken = await getToken();
-    Dio dio = new Dio();
 
-    dio.options.headers = {
+    final headers = {
       'Accept': 'application/json',
-      'Content-Type': 'application/json',
+      // 'Content-Type': 'application/json',
       'Authorization': 'Token $accessToken'
     };
-    dio.options.baseUrl = url;
 
-    final response = await dio.post(url, data: formData);
+    final response =
+        await dio.post(Uri.parse(url), headers: headers, body: formData);
     print(response);
     switch (response.statusCode) {
       case 200:
-        final jsonResponse = {'success': true, 'response': response.data};
+        final decodedBody = utf8.decode(response.bodyBytes);
+
+        final Map<String, dynamic> responseDecode = jsonDecode(decodedBody);
+
+        final jsonResponse = {'success': true, 'response': responseDecode};
         return jsonResponse;
       case 201:
-        final jsonResponse = {'success': true, 'response': response.data};
+        final Map<String, dynamic> responseDecode = jsonDecode(response.body);
+
+        final jsonResponse = {'success': true, 'response': responseDecode};
         return jsonResponse;
       // case 400:
       //   final result = jsonDee.body);
@@ -110,7 +125,9 @@ Future<dynamic> requestPOST(
       //   };
       //   return jsonResponse;
       default:
-        final jsonResponse = {'success': false, 'response': response.data};
+        final Map<String, dynamic> responseDecode = jsonDecode(response.body);
+
+        final jsonResponse = {'success': false, 'response': responseDecode};
         return jsonResponse;
     }
   } on SocketException {
@@ -131,53 +148,44 @@ Future<dynamic> requestPOST(
       'response': ConstantApi.SOMETHING_WRONG //Server not responding
     };
     return jsonResponse;
-  } on DioError catch (e) {
-    if (e.response?.statusCode == 400) {
-      print(e.response?.statusCode);
-      print(e.response?.data);
-
-      final jsonResponse = {
-        'success': false,
-        'response': e.response?.data //Server not responding
-      };
-      return jsonResponse;
-    } else {
-      final jsonResponse = {
-        'success': false,
-        'response': ConstantApi.SOMETHING_WRONG //Server not responding
-      };
-      return jsonResponse;
-    }
   }
 }
 
 Future<dynamic> requestPOST2(
-    {required String url, required Object formData, required Dio dio}) async {
+    {required String url,
+    required Object formData,
+    required http.Client dio}) async {
   try {
     String? accessToken = await getToken();
-    Dio dio = Dio();
-
-    dio.options.headers = {
+    final headers = {
       'Accept': 'application/json',
-      'Content-Type': 'application/json',
+      // 'Content-Type': 'application/x-www-form-urlencoded',
       'Authorization': 'Token $accessToken'
     };
-    dio.options.baseUrl = url;
     print(url);
     print(accessToken);
     print(formData);
 
-    final response = await dio.post(url, data: formData);
+    final response =
+        await dio.post(Uri.parse(url), body: formData, headers: headers);
     print(response);
     switch (response.statusCode) {
       case 200:
-        final jsonResponse = {'success': true, 'response': response.data};
+        final decodedBody = utf8.decode(response.bodyBytes);
+
+        final Map<String, dynamic> responseDecode = jsonDecode(decodedBody);
+
+        final jsonResponse = {'success': true, 'response': responseDecode};
         return jsonResponse;
       case 201:
-        final jsonResponse = {'success': true, 'response': response.data};
+        final Map<String, dynamic> responseDecode = jsonDecode(response.body);
+
+        final jsonResponse = {'success': true, 'response': responseDecode};
         return jsonResponse;
       default:
-        final jsonResponse = {'success': false, 'response': response.data};
+        final Map<String, dynamic> responseDecode = jsonDecode(response.body);
+
+        final jsonResponse = {'success': false, 'response': responseDecode};
         return jsonResponse;
     }
   } on SocketException {
@@ -198,44 +206,38 @@ Future<dynamic> requestPOST2(
       'response': ConstantApi.SOMETHING_WRONG //Server not responding
     };
     return jsonResponse;
-  } on DioError catch (e) {
-    if (e.response?.statusCode == 400) {
-      print(e.response?.statusCode);
-      print(e.response?.data);
-
-      final jsonResponse = {
-        'success': false,
-        'response': e.response?.data //Server not responding
-      };
-      return jsonResponse;
-    } else {
-      final jsonResponse = {
-        'success': false,
-        'response': ConstantApi.SOMETHING_WRONG //Server not responding
-      };
-      return jsonResponse;
-    }
   }
 }
 
 Future<dynamic> requestPOST3(
     {required String url,
     required Map<String, dynamic> formData,
-    required Dio dio}) async {
+    required http.Client dio}) async {
   try {
     print(url);
+    // final headers = {
+    //   'Accept': 'application/json',
+    //   'Content-Type': 'application/x-www-form-urlencoded',
+    //   'Authorization': 'Token $accessToken'
+    // };
 
-    final response = await dio.post(url, data: formData);
+    final response = await dio.post(Uri.parse(url), body: formData);
     print(response);
     switch (response.statusCode) {
       case 200:
-        final jsonResponse = {'success': true, 'response': response.data};
+        final Map<String, dynamic> responseDecode = jsonDecode(response.body);
+
+        final jsonResponse = {'success': true, 'response': responseDecode};
         return jsonResponse;
       case 201:
-        final jsonResponse = {'success': true, 'response': response.data};
+        final Map<String, dynamic> responseDecode = jsonDecode(response.body);
+
+        final jsonResponse = {'success': true, 'response': responseDecode};
         return jsonResponse;
       default:
-        final jsonResponse = {'success': false, 'response': response.data};
+        final Map<String, dynamic> responseDecode = jsonDecode(response.body);
+
+        final jsonResponse = {'success': false, 'response': responseDecode};
         return jsonResponse;
     }
   } on SocketException {
@@ -256,44 +258,43 @@ Future<dynamic> requestPOST3(
       'response': ConstantApi.SOMETHING_WRONG //Server not responding
     };
     return jsonResponse;
-  } on DioError catch (e) {
-    if (e.response?.statusCode == 400) {
-      print(e.response?.statusCode);
-      print(e.response?.data);
-
-      final jsonResponse = {
-        'success': false,
-        'response': e.response?.data //Server not responding
-      };
-      return jsonResponse;
-    } else {
-      final jsonResponse = {
-        'success': false,
-        'response': ConstantApi.SOMETHING_WRONG //Server not responding
-      };
-      return jsonResponse;
-    }
   }
 }
 
 Future<dynamic> requestPOST4(
     {required String url,
     required List<Map<String, dynamic>> formData,
-    required Dio dio}) async {
+    required http.Client dio}) async {
   try {
     print(url);
+    String? accessToken = await getToken();
 
-    final response = await dio.post(url, data: formData);
+    final headers = {
+      'Accept': 'application/json',
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/json',
+
+      'Authorization': 'Token $accessToken'
+    };
+
+    final response = await dio.post(Uri.parse(url),
+        body: jsonEncode(formData), headers: headers);
     print(response);
     switch (response.statusCode) {
       case 200:
-        final jsonResponse = {'success': true, 'response': response.data};
+        final Map<String, dynamic> responseDecode = jsonDecode(response.body);
+
+        final jsonResponse = {'success': true, 'response': responseDecode};
         return jsonResponse;
       case 201:
-        final jsonResponse = {'success': true, 'response': response.data};
+        final Map<String, dynamic> responseDecode = jsonDecode(response.body);
+
+        final jsonResponse = {'success': true, 'response': responseDecode};
         return jsonResponse;
       default:
-        final jsonResponse = {'success': false, 'response': response.data};
+        final Map<String, dynamic> responseDecode = jsonDecode(response.body);
+
+        final jsonResponse = {'success': false, 'response': responseDecode};
         return jsonResponse;
     }
   } on SocketException {
@@ -314,49 +315,35 @@ Future<dynamic> requestPOST4(
       'response': ConstantApi.SOMETHING_WRONG //Server not responding
     };
     return jsonResponse;
-  } on DioError catch (e) {
-    if (e.response?.statusCode == 400) {
-      print(e.response?.statusCode);
-      print(e.response?.data);
-
-      final jsonResponse = {
-        'success': false,
-        'response': e.response?.data //Server not responding
-      };
-      return jsonResponse;
-    } else {
-      final jsonResponse = {
-        'success': false,
-        'response': ConstantApi.SOMETHING_WRONG //Server not responding
-      };
-      return jsonResponse;
-    }
   }
 }
 
 Future<dynamic> requestMultiPart({
   required String url,
-  required FormData formData,
+  required Map<String, dynamic> formData,
 }) async {
   try {
     String? accessToken = await getToken();
 
-    Dio _dio = new Dio();
-    _dio.options.headers = {
+    final headers = {
       'Accept': 'application/json',
       'Content-Type': 'multipart/form-data',
       'Authorization': 'Bearer $accessToken'
     };
-    _dio.options.baseUrl = url;
 
-    final response = await _dio.post(url, data: formData);
+    final response =
+        await http.post(Uri.parse(url), body: formData, headers: headers);
     print(response);
     switch (response.statusCode) {
       case 200:
-        final jsonResponse = {'success': true, 'response': response.data};
+        final Map<String, dynamic> responseDecode = jsonDecode(response.body);
+
+        final jsonResponse = {'success': true, 'response': responseDecode};
         return jsonResponse;
       case 201:
-        final jsonResponse = {'success': true, 'response': response.data};
+        final Map<String, dynamic> responseDecode = jsonDecode(response.body);
+
+        final jsonResponse = {'success': true, 'response': responseDecode};
         return jsonResponse;
       // case 400:
       //   final result = jsonDee.body);
@@ -377,7 +364,9 @@ Future<dynamic> requestMultiPart({
       //   };
       //   return jsonResponse;
       default:
-        final jsonResponse = {'success': false, 'response': response.data};
+        final Map<String, dynamic> responseDecode = jsonDecode(response.body);
+
+        final jsonResponse = {'success': false, 'response': responseDecode};
         return jsonResponse;
     }
   } on SocketException {
@@ -398,23 +387,6 @@ Future<dynamic> requestMultiPart({
       'response': ConstantApi.SOMETHING_WRONG //Server not responding
     };
     return jsonResponse;
-  } on DioError catch (e) {
-    if (e.response?.statusCode == 400) {
-      print(e.response?.statusCode);
-      print(e.response?.data);
-
-      final jsonResponse = {
-        'success': false,
-        'response': e.response?.data //Server not responding
-      };
-      return jsonResponse;
-    } else {
-      final jsonResponse = {
-        'success': false,
-        'response': ConstantApi.SOMETHING_WRONG //Server not responding
-      };
-      return jsonResponse;
-    }
   }
 }
 

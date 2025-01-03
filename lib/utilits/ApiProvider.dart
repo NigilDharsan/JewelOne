@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jewelone/Model/ActiveLocationMOdel.dart';
 import 'package:jewelone/Model/ActivePlanModel.dart';
 import 'package:jewelone/Model/BannerModel.dart';
+import 'package:jewelone/Model/ClosedAccountModel.dart';
 import 'package:jewelone/Model/ForgotPasswwordModel.dart';
 import 'package:jewelone/Model/GoldRateMmodel.dart';
 import 'package:jewelone/Model/LoginModel.dart';
@@ -13,7 +14,7 @@ import 'package:jewelone/utilits/ApiService.dart';
 import '../Model/PaymentHistoryModel.dart';
 
 final apiServiceProvider = Provider<ApiService>((ref) {
-  final dio = ref.read(dioProvider);
+  final dio = ref.read(httpClientProvider);
   return ApiService(dio);
 });
 
@@ -75,9 +76,14 @@ final paymenthistoryProvider =
   return ref.watch(apiServiceProvider).PaymenthistoryApi();
 });
 
+final paymentHistorySchemeProvider = FutureProvider.autoDispose
+    .family<PaymentHistoryModel?, int>((ref, schemeAccountID) async {
+  return ref.watch(apiServiceProvider).paymentHistorySchemeApi(schemeAccountID);
+});
+
 //CLOSED ACCOUNT
 final closedaccountProvider =
-    FutureProvider.autoDispose<SignUpModel?>((ref) async {
+    FutureProvider.autoDispose<ClosedAccountModel?>((ref) async {
   return ref.watch(apiServiceProvider).closedAccountApi();
 });
 

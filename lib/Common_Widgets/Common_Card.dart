@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:jewelone/Common_Widgets/Image_Path.dart';
-import 'package:jewelone/Src/Wallet_Ui/Wallet_Screen.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
-import 'Common_Button.dart';
 
-
-
-Widget Plan_Card(context,{required String Img,required String planT}){
+Widget Plan_Card(context, {required String Img, required String planT}) {
   return Container(
     height: 120,
     decoration: BoxDecoration(
@@ -16,47 +12,51 @@ Widget Plan_Card(context,{required String Img,required String planT}){
     ),
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
-
       children: [
         //IMAGE
-       Padding(
-         padding: const EdgeInsets.only(top: 10,bottom: 10,left: 10,right: 10),
-         child: ImgPathSvg(Img),
-       ),
         Padding(
-          padding: const EdgeInsets.only(left: 5,right: 5),
+          padding:
+              const EdgeInsets.only(top: 10, bottom: 10, left: 10, right: 10),
+          child: ImgPathSvg(Img),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 5, right: 5),
           child: Container(
-            width: MediaQuery.sizeOf(context).width/4,
-              child: Text(planT,style: planST,maxLines: 2,textAlign: TextAlign.center,)),
+              width: MediaQuery.sizeOf(context).width / 4,
+              child: Text(
+                planT,
+                style: planST,
+                maxLines: 2,
+                textAlign: TextAlign.center,
+              )),
         ),
       ],
     ),
   );
 }
 
-
 //WALLET CARD
-Widget Wallet_Card(context,{
+Widget Wallet_Card(
+  context, {
   required String customername,
   required String Acnumval,
   required String totalpaidval,
   required String totaccval,
   required String noofpaidval,
   required double? width,
-}){
+  required void Function()? paynow,
+}) {
   return Padding(
     padding: const EdgeInsets.only(left: 10),
     child: Card(
       elevation: 5,
-        shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Container(
         width: width,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(width: 1,color: gradient2),
-          gradient: appGradient
-        ),
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(width: 1, color: gradient2),
+            gradient: appGradient),
         child: Padding(
           padding: const EdgeInsets.only(top: 10),
           child: Column(
@@ -64,13 +64,16 @@ Widget Wallet_Card(context,{
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.only(left: 15,right: 15),
+                padding: const EdgeInsets.only(left: 15, right: 15),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     //const SizedBox(height: 20,),
-                    Text(customername,style: UserST,),
+                    Text(
+                      customername,
+                      style: UserST,
+                    ),
                     Container(
                       width: 60,
                       child: Divider(
@@ -86,21 +89,33 @@ Widget Wallet_Card(context,{
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Container(
-                          width: (MediaQuery.sizeOf(context).width/2) - 50,
+                          width: (MediaQuery.sizeOf(context).width / 2) - 50,
                           child: Row(
                             children: [
                               Container(
-                                height: 25,width: 25,
+                                  height: 25,
+                                  width: 25,
                                   child: ImgPathPng('accountnum.png')),
                               Padding(
-                                padding: const EdgeInsets.only(left: 5,right: 5),
-                                child: Container(width: 3,color: gradient2,height: 30,),
+                                padding:
+                                    const EdgeInsets.only(left: 5, right: 5),
+                                child: Container(
+                                  width: 3,
+                                  color: gradient2,
+                                  height: 30,
+                                ),
                               ),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Account Number',style: walletT3,),
-                                  Text(Acnumval,style: walletT3,)
+                                  Text(
+                                    'Account Number',
+                                    style: walletT3,
+                                  ),
+                                  Text(
+                                    Acnumval,
+                                    style: walletT3,
+                                  )
                                 ],
                               )
                             ],
@@ -111,17 +126,28 @@ Widget Wallet_Card(context,{
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Container(
-                              height: 25,width: 25,
+                                height: 25,
+                                width: 25,
                                 child: ImgPathPng('paidinstall.png')),
                             Padding(
-                              padding: const EdgeInsets.only(left: 5,right: 5),
-                              child: Container(width: 3,color: gradient2,height: 30,),
+                              padding: const EdgeInsets.only(left: 5, right: 5),
+                              child: Container(
+                                width: 3,
+                                color: gradient2,
+                                height: 30,
+                              ),
                             ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('Paid Installment',style: walletT3,),
-                                Text(noofpaidval,style: walletT3,)
+                                Text(
+                                  'Paid Installment',
+                                  style: walletT3,
+                                ),
+                                Text(
+                                  noofpaidval,
+                                  style: walletT3,
+                                )
                               ],
                             )
                           ],
@@ -136,21 +162,33 @@ Widget Wallet_Card(context,{
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
-                          width: (MediaQuery.sizeOf(context).width/2) - 50,
+                          width: (MediaQuery.sizeOf(context).width / 2) - 50,
                           child: Row(
                             children: [
                               Container(
-                                  height: 25,width: 25,
+                                  height: 25,
+                                  width: 25,
                                   child: ImgPathPng('totalpaid.png')),
                               Padding(
-                                padding: const EdgeInsets.only(left: 5,right: 5),
-                                child: Container(width: 3,color: gradient2,height: 30,),
+                                padding:
+                                    const EdgeInsets.only(left: 5, right: 5),
+                                child: Container(
+                                  width: 3,
+                                  color: gradient2,
+                                  height: 30,
+                                ),
                               ),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Total Paid',style: walletT3,),
-                                  Text(totalpaidval,style: walletT3,)
+                                  Text(
+                                    'Total Paid',
+                                    style: walletT3,
+                                  ),
+                                  Text(
+                                    totalpaidval,
+                                    style: walletT3,
+                                  )
                                 ],
                               )
                             ],
@@ -158,16 +196,26 @@ Widget Wallet_Card(context,{
                         ),
                         Row(
                           children: [
-                            Icon(Icons.balance_sharp,color: Colors.white),
+                            Icon(Icons.balance_sharp, color: Colors.white),
                             Padding(
-                              padding: const EdgeInsets.only(left: 5,right: 5),
-                              child: Container(width: 3,color: gradient2,height: 30,),
+                              padding: const EdgeInsets.only(left: 5, right: 5),
+                              child: Container(
+                                width: 3,
+                                color: gradient2,
+                                height: 30,
+                              ),
                             ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('Total Weight',style: walletT3,),
-                                Text(totaccval,style: walletT3,)
+                                Text(
+                                  'Total Weight',
+                                  style: walletT3,
+                                ),
+                                Text(
+                                  totaccval,
+                                  style: walletT3,
+                                )
                               ],
                             )
                           ],
@@ -176,32 +224,46 @@ Widget Wallet_Card(context,{
                     ),
 
                     const SizedBox(height: 10),
-
                   ],
                 ),
               ),
               Column(
                 children: [
-                  Divider(thickness: 1.5,color: Colors.white),
+                  Divider(thickness: 1.5, color: Colors.white),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Container(
-                        width: (MediaQuery.sizeOf(context).width/2)-50,
-                          child: Center(child: Padding(
+                          width: (MediaQuery.sizeOf(context).width / 2) - 50,
+                          child: Center(
+                              child: Padding(
                             padding: const EdgeInsets.only(bottom: 10),
-                            child: Text("Payment History",style: ButtonT2,),
+                            child: Text(
+                              "Payment History",
+                              style: ButtonT2,
+                            ),
                           ))),
                       Padding(
                         padding: const EdgeInsets.only(bottom: 10),
-                        child: Container(width: 1,height: 30,color: Colors.grey,),
+                        child: Container(
+                          width: 1,
+                          height: 30,
+                          color: Colors.grey,
+                        ),
                       ),
-                      Container(
-                          width: (MediaQuery.sizeOf(context).width/2)-70,
-                          child: Center(child: Padding(
-                            padding: const EdgeInsets.only(bottom: 10),
-                            child: Text("Pay now",style: ButtonT2,),
-                          )))
+                      InkWell(
+                        onTap: paynow,
+                        child: Container(
+                            width: (MediaQuery.sizeOf(context).width / 2) - 70,
+                            child: Center(
+                                child: Padding(
+                              padding: const EdgeInsets.only(bottom: 10),
+                              child: Text(
+                                "Pay Now",
+                                style: ButtonT2,
+                              ),
+                            ))),
+                      )
                     ],
                   )
                 ],
@@ -215,7 +277,6 @@ Widget Wallet_Card(context,{
               //         Navigator.push(context, MaterialPageRoute(builder: (context)=>Wallet_screen()));
               //       }, titleName: 'Pay'),
               // ),
-
             ],
           ),
         ),
@@ -224,19 +285,20 @@ Widget Wallet_Card(context,{
   );
 }
 
-Widget New_SSP_Images (context,{required String image}){
-  return  Container(
-    height: MediaQuery.sizeOf(context).height/4,
+Widget New_SSP_Images(context, {required String image}) {
+  return Container(
+    height: MediaQuery.sizeOf(context).height / 4,
     width: MediaQuery.sizeOf(context).width,
     decoration: BoxDecoration(
-      image: DecorationImage(
-          fit: BoxFit.fill,
-          image: AssetImage(image)),
+      image: DecorationImage(fit: BoxFit.fill, image: AssetImage(image)),
     ),
   );
 }
 
-Widget New_SSP_Image_Content ({required String text,required String heading, required bool isHeadingneeded}){
+Widget New_SSP_Image_Content(
+    {required String text,
+    required String heading,
+    required bool isHeadingneeded}) {
   return Container(
     color: red3,
     child: Padding(
@@ -244,11 +306,18 @@ Widget New_SSP_Image_Content ({required String text,required String heading, req
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          isHeadingneeded == true? Text(heading,style: Gramage,):Container(),
-          Text(text,style: Content1,),
+          isHeadingneeded == true
+              ? Text(
+                  heading,
+                  style: Gramage,
+                )
+              : Container(),
+          Text(
+            text,
+            style: Content1,
+          ),
           Column(
-            children: [
-            ],
+            children: [],
           )
         ],
       ),

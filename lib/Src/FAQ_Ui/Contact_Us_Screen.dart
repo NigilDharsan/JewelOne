@@ -161,7 +161,7 @@ Widget Address(context) {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Santhi Swarna Mahal Corporate Office:',
+              'Shaining Dawn Corporate Office:',
               style: texts2,
             ),
             Divider(

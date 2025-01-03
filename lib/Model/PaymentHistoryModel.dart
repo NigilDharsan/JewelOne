@@ -28,7 +28,9 @@ class PaymentHistoryModel {
 class PaymentHistoryData {
   int? paymentId;
   int? customerId;
+  int? id_scheme_account;
   String? paymentDate;
+  String? receipt_no;
   String? amount;
   String? accountNumber;
   String? paymentMode;
@@ -41,7 +43,9 @@ class PaymentHistoryData {
   PaymentHistoryData(
       {this.paymentId,
       this.customerId,
+      this.id_scheme_account,
       this.paymentDate,
+      this.receipt_no,
       this.amount,
       this.accountNumber,
       this.paymentMode,
@@ -54,7 +58,9 @@ class PaymentHistoryData {
   PaymentHistoryData.fromJson(Map<String, dynamic> json) {
     paymentId = json['payment_id'];
     customerId = json['customer_id'];
+    id_scheme_account = json['id_scheme_account'];
     paymentDate = json['payment_date'];
+    receipt_no = json['receipt_no'];
     amount = json['amount'];
     accountNumber = json['account_number'];
     paymentMode = json['payment_mode'];
@@ -69,7 +75,9 @@ class PaymentHistoryData {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['payment_id'] = this.paymentId;
     data['customer_id'] = this.customerId;
+    data['id_scheme_account'] = this.id_scheme_account;
     data['payment_date'] = this.paymentDate;
+    data['receipt_no'] = this.receipt_no;
     data['amount'] = this.amount;
     data['account_number'] = this.accountNumber;
     data['payment_mode'] = this.paymentMode;

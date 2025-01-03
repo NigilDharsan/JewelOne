@@ -42,7 +42,7 @@ class _Store_Locator_ScreenState extends ConsumerState<Store_Locator_Screen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Santhi Swarna Mahal is available at',
+                      'Shaning Dawn is available at',
                       style: locationT,
                     ),
                     ListView.builder(
@@ -54,8 +54,8 @@ class _Store_Locator_ScreenState extends ConsumerState<Store_Locator_Screen> {
                       itemBuilder: (context, index) {
                         return Location_Container(
                           context,
-                          mainaddress: "${data?.data?[index]?.address1 ?? ""} ",
-                          address: "${data?.data?[index]?.address2 ?? ""} ",
+                          mainaddress: "${data?.data?[index]?.name ?? ""} ",
+                          address: "${data?.data?[index]?.address1 ?? ""} ",
                           number: "${data?.data?[index]?.mobile ?? ""} ",
                           image: 'lib/assets/location3.png',
                           timing:

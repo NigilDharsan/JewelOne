@@ -1,8 +1,11 @@
-import 'package:dio/dio.dart';
+import 'dart:convert';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:http/http.dart' as http;
 import 'package:jewelone/Model/ActiveLocationMOdel.dart';
 import 'package:jewelone/Model/ActivePlanModel.dart';
 import 'package:jewelone/Model/BannerModel.dart';
+import 'package:jewelone/Model/ClosedAccountModel.dart';
 import 'package:jewelone/Model/ForgotPasswwordModel.dart';
 import 'package:jewelone/Model/GoldRateMmodel.dart';
 import 'package:jewelone/Model/LoginModel.dart';
@@ -15,14 +18,19 @@ import 'package:jewelone/utilits/MakeApiCall.dart';
 
 import 'ConstantsApi.dart';
 
-final dioProvider = Provider<Dio>((ref) {
-  final dio = Dio();
-  dio.interceptors.add(LogInterceptor(responseBody: true)); // For debugging
-  return dio;
+// final dioProvider = Provider<Dio>((ref) {
+//   final dio = Dio();
+//   dio.interceptors.add(LogInterceptor(responseBody: true)); // For debugging
+//   return dio;
+// });
+
+final httpClientProvider = Provider<http.Client>((ref) {
+  // You can add any custom configuration if needed
+  return http.Client();
 });
 
 class ApiService {
-  final Dio _dio;
+  final http.Client _dio;
   ApiService(this._dio);
 
   //LOGIN
@@ -32,6 +40,7 @@ class ApiService {
     if (result["success"] == true) {
       print("resultOTP:$result");
       print("resultOTPsss:${result["success"]}");
+
       return LoginModel?.fromJson(result["response"]);
     } else {
       try {
@@ -254,19 +263,24 @@ class ApiService {
     return PaymentHistoryModel();
   }
 
-  //CLOSED ACCOUNT
-  Future<SignUpModel> closedAccountApi() async {
-    final result = await requestGET(
-        url: ConstantApi.accountCloseUrl +
-            "?id_customer=${await getCustomer_Id()}",
-        dio: _dio);
+  //PAYMENT HISTORY
+  Future<PaymentHistoryModel> paymentHistorySchemeApi(
+      int scheme_account) async {
+    var formData = <String, dynamic>{
+      "id_customer": await getCustomer_Id(),
+      "id_scheme_account": "${scheme_account}"
+    };
+
+    final result = await requestPOST(
+        url: ConstantApi.paymenthistoryUrl, formData: formData, dio: _dio);
+
     if (result["success"] == true) {
       print("resultOTP:$result");
       print("resultOTPsss:${result["success"]}");
-      return SignUpModel?.fromJson(result["response"]);
+      return PaymentHistoryModel?.fromJson(result["response"]);
     } else {
       try {
-        var resultval = SignUpModel.fromJson(result["response"]);
+        var resultval = PaymentHistoryModel.fromJson(result["response"]);
         // Toast.show(resultval.message.toString(), context);
         print(result["response"]);
         return resultval;
@@ -275,12 +289,38 @@ class ApiService {
         // Toast.show(result["response"], context);
       }
     }
-    return SignUpModel();
+    return PaymentHistoryModel();
+  }
+
+  //CLOSED ACCOUNT
+  Future<ClosedAccountModel> closedAccountApi() async {
+    final result = await requestGET(
+        url: ConstantApi.accountCloseUrl +
+            "?id_customer=${await getCustomer_Id()}",
+        dio: _dio);
+    if (result["success"] == true) {
+      print("resultOTP:$result");
+      print("resultOTPsss:${result["success"]}");
+      return ClosedAccountModel?.fromJson(result["response"]);
+    } else {
+      try {
+        var resultval = ClosedAccountModel.fromJson(result["response"]);
+        // Toast.show(resultval.message.toString(), context);
+        print(result["response"]);
+        return resultval;
+      } catch (e) {
+        print(result["response"]);
+        // Toast.show(result["response"], context);
+      }
+    }
+    return ClosedAccountModel();
   }
 
   //PAYEMNT API
   Future<PaymentCreateModel> PaymentApi(
       List<Map<String, dynamic>> formData) async {
+    String jsonString = jsonEncode(formData); // Correct for API body
+
     final result = await requestPOST4(
         url: ConstantApi.paymentUrl, formData: formData, dio: _dio);
     if (result["success"] == true) {
