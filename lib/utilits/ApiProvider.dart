@@ -65,6 +65,13 @@ final MyplanProvider = FutureProvider.autoDispose<MyPlanModel?>((ref) async {
   return ref.watch(apiServiceProvider).MyplanApi();
 });
 
+//Buy New Plan
+final buyplanProvider =
+    FutureProvider.family<Forgot_Password_Model?, Map<String, dynamic>>(
+        (ref, body) async {
+  return ref.watch(apiServiceProvider).BuyNewPlanapi(body);
+});
+
 //ACTIVE PLAN
 final ActiveplanProvider = FutureProvider<ActivePlanModel?>((ref) async {
   return ref.watch(apiServiceProvider).ActiveplanApi();

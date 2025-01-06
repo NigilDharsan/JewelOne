@@ -151,23 +151,19 @@ Future<dynamic> requestPOST(
   }
 }
 
-Future<dynamic> requestPOST2(
-    {required String url,
-    required Object formData,
-    required http.Client dio}) async {
+Future<dynamic> requestPOST2({
+  required String url,
+  required Map<String, dynamic> formData,
+}) async {
   try {
-    String? accessToken = await getToken();
     final headers = {
       'Accept': 'application/json',
-      // 'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization': 'Token $accessToken'
+      'Content-Type': 'application/x-www-form-urlencoded',
     };
-    print(url);
-    print(accessToken);
-    print(formData);
+    String jsonString = jsonEncode(formData);
 
     final response =
-        await dio.post(Uri.parse(url), body: formData, headers: headers);
+        await http.post(Uri.parse(url), body: jsonString, headers: headers);
     print(response);
     switch (response.statusCode) {
       case 200:

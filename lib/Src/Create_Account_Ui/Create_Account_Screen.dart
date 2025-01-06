@@ -288,9 +288,8 @@ class _Create_Account_ScreenState extends ConsumerState<Create_Account_Screen> {
           });
         },
             onTap: () {},
-            checkBoxText:
-            'I agree with the terms&condition',
-            width: MediaQuery.sizeOf(context).width/1.4),
+            checkBoxText: 'I agree with the terms&condition',
+            width: MediaQuery.sizeOf(context).width / 1.4),
 
         SizedBox(height: 15),
 

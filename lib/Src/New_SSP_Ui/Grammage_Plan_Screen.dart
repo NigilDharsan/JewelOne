@@ -8,6 +8,7 @@ import 'package:jewelone/Src/FAQ_Ui/FAQ_Screen.dart';
 import 'package:jewelone/utilits/ApiProvider.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
 import 'package:jewelone/utilits/Generic.dart';
+import 'package:jewelone/utilits/Loading_Overlay.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
 
 class Grammage_Plan_Screen extends ConsumerStatefulWidget {
@@ -23,6 +24,10 @@ class _Grammage_Plan_ScreenState extends ConsumerState<Grammage_Plan_Screen> {
   String? name;
   //LOCATION
   String? locationval;
+  int? branch_id;
+
+  TextEditingController customerNameController = TextEditingController();
+
   List<String> locationOption = [
     "Coimbatore",
     "Chennai",
@@ -76,7 +81,7 @@ class _Grammage_Plan_ScreenState extends ConsumerState<Grammage_Plan_Screen> {
                 Container(
                     width: MediaQuery.sizeOf(context).width / 1.5,
                     child: Text(
-                      'Swarna Sakthi Plan ID (Grammage Plan)',
+                      SingleTon().selectedActivePlan?.schemeName ?? "",
                       style: Heading_Style1,
                     )),
 
@@ -110,6 +115,7 @@ class _Grammage_Plan_ScreenState extends ConsumerState<Grammage_Plan_Screen> {
                             ),
                           ),
                           SSPtextFormField(
+                              Controller: customerNameController,
                               hintText: "Eg: Your Daughter's name: “Meena”",
                               keyboardtype: TextInputType.text),
                         ],
@@ -191,6 +197,11 @@ class _Grammage_Plan_ScreenState extends ConsumerState<Grammage_Plan_Screen> {
                             onChanged: (String? newValue) {
                               setState(() {
                                 locationval = newValue;
+                                branch_id = data?.data
+                                        ?.firstWhere(
+                                            (test) => test.name == newValue)
+                                        .id_branch ??
+                                    0;
                               });
                             },
                           ),
@@ -257,10 +268,33 @@ class _Grammage_Plan_ScreenState extends ConsumerState<Grammage_Plan_Screen> {
                   height: 100,
                 ),
 
-                CommonContainerButton(context, onPress: () {
+                CommonContainerButton(context, onPress: () async {
                   {
-                    // Navigator.push(context,
-                    //     MaterialPageRoute(builder: (context) => KYC_Screen()));
+                    if (customerNameController.text.trim() == "") {
+                      ShowToastMessage("Enter your custom name");
+                    } else if (branch_id == null) {
+                      ShowToastMessage("Select your branch");
+                    } else {
+                      Map<String, dynamic> formData = {
+                        "account_name": "",
+                        "acc_scheme_id":
+                            SingleTon().selectedActivePlan?.schemeId ?? "",
+                        "id_customer": await getCustomer_Id(),
+                        "id_branch": branch_id,
+                        "added_by": 1,
+                        "scheme_acc_number": null
+                      };
+                      final result =
+                          await ref.read(buyplanProvider(formData).future);
+                      LoadingOverlay.forcedStop();
+                      // Handle the result
+                      if (result?.errorDetail == true) {
+                        // ShowToastMessage(result?.message ?? "");
+                      } else {
+                        // Handle failure
+                        ShowToastMessage("Invalid Email");
+                      }
+                    }
                   }
                 }, titleName: 'Proceed to Buy'),
               ],

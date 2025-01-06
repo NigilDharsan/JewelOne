@@ -32,18 +32,20 @@ class Data {
   String? city;
   String? state;
   String? stoneHours;
+  int? id_branch;
 
   Data(
       {this.name,
-        this.shortName,
-        this.email,
-        this.address1,
-        this.address2,
-        this.mobile,
-        this.pincode,
-        this.city,
-        this.state,
-        this.stoneHours});
+      this.shortName,
+      this.email,
+      this.address1,
+      this.address2,
+      this.mobile,
+      this.pincode,
+      this.city,
+      this.state,
+      this.stoneHours,
+      this.id_branch});
 
   Data.fromJson(Map<String, dynamic> json) {
     name = json['name'];
@@ -56,6 +58,7 @@ class Data {
     city = json['city'];
     state = json['state'];
     stoneHours = json['stone_hours'];
+    id_branch = json["id_branch"];
   }
 
   Map<String, dynamic> toJson() {
@@ -70,6 +73,7 @@ class Data {
     data['city'] = this.city;
     data['state'] = this.state;
     data['stone_hours'] = this.stoneHours;
+    data['id_branch'] = this.id_branch;
     return data;
   }
 }
