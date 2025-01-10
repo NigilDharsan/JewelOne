@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:jewelone/Common_Widgets/Common_Button.dart';
 import 'package:jewelone/Common_Widgets/Common_Card.dart';
 import 'package:jewelone/Common_Widgets/Custom_App_Bar.dart';
 import 'package:jewelone/Src/FAQ_Ui/FAQ_Screen.dart';
 import 'package:jewelone/Src/New_SSP_Ui/Grammage_Plan_Screen.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
+import 'package:jewelone/utilits/Generic.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
 
 class New_SSP_Plan1_Screen extends StatefulWidget {
@@ -22,7 +24,7 @@ class _New_SSP_Plan1_ScreenState extends State<New_SSP_Plan1_Screen> {
       appBar: Custom_AppBar(
         isNav: true,
         isTwoLine: true,
-        title1: "Plan 1",
+        title1: SingleTon().selectedActivePlan?.schemeName ?? "",
         title2: 'Gold Ornaments Purchase Advance Scheme',
         actionLogo: 'info.svg',
         isWhite: false,
@@ -55,13 +57,13 @@ class _New_SSP_Plan1_ScreenState extends State<New_SSP_Plan1_Screen> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text(
-                        'Gramage Plan',
+                        SingleTon().selectedActivePlan?.schemeName ?? "",
                         style: rate2,
                       ),
                       Container(
                           width: MediaQuery.sizeOf(context).width / 2.8,
                           child: Text(
-                            'EMA from ₹5,000 /month',
+                            'EMA from ₹${SingleTon().selectedActivePlan?.particularAmount} /month',
                             style: lighttext,
                           )),
                       // Text(
@@ -87,7 +89,7 @@ class _New_SSP_Plan1_ScreenState extends State<New_SSP_Plan1_Screen> {
                                 builder: (context) => Grammage_Plan_Screen()));
                       }, titleName: 'Join Now'),
                       Text(
-                        'Tenure up to 11 months',
+                        'Tenure up to ${SingleTon().selectedActivePlan?.totalInstalment} months',
                         style: lighttext,
                       )
                     ],
@@ -129,60 +131,80 @@ class _New_SSP_Plan1_ScreenState extends State<New_SSP_Plan1_Screen> {
                 children: [
                   //PLAN HEADINGS AND CONTENTS
                   Content(content: 'Terms & Conditions'),
-                  Heading(heading: 'A. VA Waiver'),
-                  Content(
-                      content:
-                          'On maturity, “ Gold Jewellery & Gold Coin” can be purchased in '
-                          ' this scheme with a wavier of up to 18% VA (Value Addition) or '
-                          ' on actuals, whichever is lower.'),
-                  Heading(heading: 'B. No. of Advance Payments'),
-                  Content(content: '11 Equated Monthly advances.'),
-                  Heading(heading: 'C. Tenure'),
-                  Content(content: '330 Days'),
-                  Heading(heading: 'D. Minimum Monthly Advance'),
-                  Content(
-                      content:
-                          'On maturity, “ Gold Jewellery & Gold Coin” can be purchased '
-                          'in this scheme with a wavier of up to 18% VA (Value Addition)'
-                          'or on actuals, whichever is lower.'),
-                  Heading(heading: 'E. No. of Advance Payments'),
-                  Content(
-                      content:
-                          'At the end of the 330 days (i.e., joining date + 329 days) '
-                          'Example: A customer joins Swarna Sakthi on 15th January + '
-                          '329 days I.e., 10th December of the same year will be the redemption date.'),
-                  Heading(heading: 'F. Swarna Sakthi Order Redemption'),
-                  Content(
-                      content:
-                          'At the end of the 330 days (i.e., joining date + 329 days) Example: A '
-                          'customer joins Swarna Sakthi on 15th January + 329 days I.e., 10th December '
-                          'of the same year will be the redemption date.'),
-                  Heading(heading: 'G. Maturity'),
-                  Content(
-                      content:
-                          'Maturity is on completion of the 330 days and this tenure of 330'
-                          ' days cannot be extended under any circumstances. '),
-                  Heading(heading: 'H. Refund'),
-                  Content(
-                      content:
-                          'Refund is not permitted in this plan under any circumstances as EMA'
-                          ' is converted to gold weight at the time of payment itself.'),
-                  Heading(heading: 'I. GST & other Levies'),
-                  Content(
-                      content:
-                          'GST & other Levies will be charged extra as er government norms.'),
-                  Heading(heading: 'J. Eligibility'),
-                  Content(
-                      content:
-                          'Wavier of upto 18% VA will be given only if EMA payments are paid'
-                          ' continuously without any default.'),
-                  Heading(heading: 'K. After-maturity Benefits'),
-                  Content(
-                      content:
-                          'In case of default, eligible benefit will be based on the number of'
-                          ' EMAs (complete minimum period of 90 days). Customer will get '
-                          'benefit of 1% VA for each EMA paid month. Customer can avail maximum'
-                          ' of upto 10% on VA. Please refer to the table below.'),
+
+                  Html(
+                    data: SingleTon().selectedActivePlan?.schemeDescription,
+                    style: {
+                      "h1": Style(
+                        fontSize: FontSize(24),
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                      "h2": Style(
+                        fontSize: FontSize(20),
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black54,
+                      ),
+                      "p": Style(
+                        fontSize: FontSize(16),
+                        color: Colors.grey,
+                      ),
+                    },
+                  ),
+                  // Heading(heading: 'A. VA Waiver'),
+                  // Content(
+                  //     content:
+                  //         'On maturity, “ Gold Jewellery & Gold Coin” can be purchased in '
+                  //         ' this scheme with a wavier of up to 18% VA (Value Addition) or '
+                  //         ' on actuals, whichever is lower.'),
+                  // Heading(heading: 'B. No. of Advance Payments'),
+                  // Content(content: '11 Equated Monthly advances.'),
+                  // Heading(heading: 'C. Tenure'),
+                  // Content(content: '330 Days'),
+                  // Heading(heading: 'D. Minimum Monthly Advance'),
+                  // Content(
+                  //     content:
+                  //         'On maturity, “ Gold Jewellery & Gold Coin” can be purchased '
+                  //         'in this scheme with a wavier of up to 18% VA (Value Addition)'
+                  //         'or on actuals, whichever is lower.'),
+                  // Heading(heading: 'E. No. of Advance Payments'),
+                  // Content(
+                  //     content:
+                  //         'At the end of the 330 days (i.e., joining date + 329 days) '
+                  //         'Example: A customer joins Swarna Sakthi on 15th January + '
+                  //         '329 days I.e., 10th December of the same year will be the redemption date.'),
+                  // Heading(heading: 'F. Swarna Sakthi Order Redemption'),
+                  // Content(
+                  //     content:
+                  //         'At the end of the 330 days (i.e., joining date + 329 days) Example: A '
+                  //         'customer joins Swarna Sakthi on 15th January + 329 days I.e., 10th December '
+                  //         'of the same year will be the redemption date.'),
+                  // Heading(heading: 'G. Maturity'),
+                  // Content(
+                  //     content:
+                  //         'Maturity is on completion of the 330 days and this tenure of 330'
+                  //         ' days cannot be extended under any circumstances. '),
+                  // Heading(heading: 'H. Refund'),
+                  // Content(
+                  //     content:
+                  //         'Refund is not permitted in this plan under any circumstances as EMA'
+                  //         ' is converted to gold weight at the time of payment itself.'),
+                  // Heading(heading: 'I. GST & other Levies'),
+                  // Content(
+                  //     content:
+                  //         'GST & other Levies will be charged extra as er government norms.'),
+                  // Heading(heading: 'J. Eligibility'),
+                  // Content(
+                  //     content:
+                  //         'Wavier of upto 18% VA will be given only if EMA payments are paid'
+                  //         ' continuously without any default.'),
+                  // Heading(heading: 'K. After-maturity Benefits'),
+                  // Content(
+                  //     content:
+                  //         'In case of default, eligible benefit will be based on the number of'
+                  //         ' EMAs (complete minimum period of 90 days). Customer will get '
+                  //         'benefit of 1% VA for each EMA paid month. Customer can avail maximum'
+                  //         ' of upto 10% on VA. Please refer to the table below.'),
                 ],
               ),
             ),

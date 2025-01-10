@@ -298,7 +298,7 @@ class _Create_Account_ScreenState extends ConsumerState<Create_Account_Screen> {
           if (_formKey.currentState!.validate()) {
             LoadingOverlay.show(context);
 
-            Map<String, dynamic> formData = {
+            final formData = {
               "firstname": _fullName.text,
               "lastname": _LastName.text,
               "email": _Email.text,

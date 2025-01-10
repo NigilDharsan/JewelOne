@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:jewelone/Model/ActiveLocationMOdel.dart';
@@ -58,8 +56,8 @@ class ApiService {
 
   //SIGNUP
   Future<SignUpModel> signupapi(Map<String, dynamic> formData) async {
-    final result =
-        await requestPOST2(url: ConstantApi.signupUrl, formData: formData);
+    final result = await requestPOST2(
+        url: ConstantApi.signupUrl, formData: formData, dio: _dio);
     if (result["success"] == true) {
       print("resultOTP:$result");
       print("resultOTPsss:${result["success"]}");
@@ -341,8 +339,6 @@ class ApiService {
   //PAYEMNT API
   Future<PaymentCreateModel> PaymentApi(
       List<Map<String, dynamic>> formData) async {
-    String jsonString = jsonEncode(formData); // Correct for API body
-
     final result = await requestPOST4(
         url: ConstantApi.paymentUrl, formData: formData, dio: _dio);
     if (result["success"] == true) {
