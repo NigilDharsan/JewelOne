@@ -64,11 +64,14 @@ class _Online_Emi_Payment_ScreenState
   void initState() {
     // TODO: implement initState
     super.initState();
+
     getDetails();
   }
 
   @override
   Widget build(BuildContext context) {
+    final priceRate = ref.watch(GoldrateProvider);
+
     final myplandata = ref.watch(MyplanProvider);
     return Scaffold(
       backgroundColor: white2,
@@ -101,7 +104,8 @@ class _Online_Emi_Payment_ScreenState
                     ((data?.data?[selectIndex].discountValue ?? 0) + taxAmount);
 
             data?.data?[selectIndex].enterAmount = "$amount";
-            data?.data?[selectIndex].totalAmount = "$finalAmount";
+            data?.data?[selectIndex].totalAmount =
+                finalAmount.toStringAsFixed(2);
           } else if (data?.data?[selectIndex].discountType == 1) {
             final taxAmount =
                 ((data?.data?[selectIndex].taxPercentage ?? 0.0) / 100) *
@@ -116,27 +120,35 @@ class _Online_Emi_Payment_ScreenState
 
             data?.data?[selectIndex].enterAmount = "$amount";
 
-            data?.data?[selectIndex].totalAmount = "$finalAmount";
+            data?.data?[selectIndex].totalAmount =
+                finalAmount.toStringAsFixed(2);
           } else {
             final taxAmount =
                 ((data?.data?[selectIndex].taxPercentage ?? 0.0) / 100) *
                     amount;
-
             final finalAmount =
                 (amount * (data?.data?[selectIndex].incrementCount ?? 0)) -
                     taxAmount;
 
             data?.data?[selectIndex].enterAmount = "$amount";
 
-            data?.data?[selectIndex].totalAmount = "$finalAmount";
+            data?.data?[selectIndex].totalAmount =
+                finalAmount.toStringAsFixed(2);
+          }
+          if (data?.data?[selectIndex].convertToWeight == true) {
+            data?.data?[selectIndex].totalWeight =
+                (amount / (data.data?[selectIndex].todaysRate ?? 0.0))
+                    .toStringAsFixed(3);
           }
 
           totalAmount = data?.data!
               .map((item) => double.parse(item.totalAmount ?? "0"))
               .reduce((a, b) => a + b) as num;
+
+          totalAmount = double.parse(totalAmount.toStringAsFixed(2));
         }
 
-        gramCalculation(int selectIndex, int amount) {
+        gramCalculation(int selectIndex, double amount) {
           if (data?.data?[selectIndex].discountType == 2) {
             final finalAmount =
                 ((amount * (data?.data?[selectIndex].incrementCount ?? 0)) *
@@ -148,12 +160,14 @@ class _Online_Emi_Payment_ScreenState
                   ((data?.data?[selectIndex].taxPercentage ?? 0.0) / 100) *
                       finalAmount;
 
-              data?.data?[selectIndex].enterAmount = "${amount + taxAmount}";
+              data?.data?[selectIndex].enterAmount =
+                  (amount + taxAmount).toStringAsFixed(2);
               data?.data?[selectIndex].totalAmount =
-                  "${finalAmount + taxAmount}";
+                  (finalAmount + taxAmount).toStringAsFixed(2);
             } else {
-              data?.data?[selectIndex].enterAmount = "${amount}";
-              data?.data?[selectIndex].totalAmount = "${finalAmount}";
+              data?.data?[selectIndex].enterAmount = amount.toStringAsFixed(2);
+              data?.data?[selectIndex].totalAmount =
+                  finalAmount.toStringAsFixed(2);
             }
           } else if (data?.data?[selectIndex].discountType == 1) {
             final dicountAmout =
@@ -169,13 +183,15 @@ class _Online_Emi_Payment_ScreenState
                   ((data?.data?[selectIndex].taxPercentage ?? 0.0) / 100) *
                       finalAmount;
 
-              data?.data?[selectIndex].enterAmount = "${amount + taxAmount}";
+              data?.data?[selectIndex].enterAmount =
+                  (amount + taxAmount).toStringAsFixed(2);
               data?.data?[selectIndex].totalAmount =
-                  "${finalAmount + taxAmount}";
+                  (finalAmount + taxAmount).toStringAsFixed(2);
             } else {
-              data?.data?[selectIndex].enterAmount = "$amount";
+              data?.data?[selectIndex].enterAmount = amount.toStringAsFixed(2);
 
-              data?.data?[selectIndex].totalAmount = "$finalAmount";
+              data?.data?[selectIndex].totalAmount =
+                  finalAmount.toStringAsFixed(2);
             }
           } else {
             final taxAmount =
@@ -187,13 +203,15 @@ class _Online_Emi_Payment_ScreenState
                         (data?.data?[selectIndex].todaysRate ?? 0.0))) -
                     taxAmount;
 
-            data?.data?[selectIndex].enterAmount = "$amount";
+            data?.data?[selectIndex].enterAmount = amount.toStringAsFixed(2);
 
-            data?.data?[selectIndex].totalAmount = "$finalAmount";
+            data?.data?[selectIndex].totalAmount =
+                finalAmount.toStringAsFixed(2);
           }
-          totalAmount = data?.data!
+          totalAmount = (data?.data!
               .map((item) => double.parse(item.totalAmount ?? "0"))
-              .reduce((a, b) => a + b) as num;
+              .reduce((a, b) => a + b) as num);
+          totalAmount = double.parse(totalAmount.toStringAsFixed(2));
         }
 
         clearAmount(int selectIndex) {
@@ -221,29 +239,15 @@ class _Online_Emi_Payment_ScreenState
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 15),
-                      child: Container(
-                        color: Colors.white,
-                        width: MediaQuery.sizeOf(context).width,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 5),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "Rate Per Gold ",
-                                style: gramST,
-                              ),
-                              Text(
-                                " ₹  ${data?.data?[0]?.todaysRate ?? ""}",
-                                style: gramrateST,
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
+                    priceRate.when(data: (data) {
+                      return GoldScrollPriceWidget(
+                        data: data,
+                      );
+                    }, error: (Object error, StackTrace stackTrace) {
+                      return Text("$error");
+                    }, loading: () {
+                      return CircularProgressIndicator();
+                    }),
 
                     Padding(
                       padding: const EdgeInsets.only(
@@ -337,7 +341,7 @@ class _Online_Emi_Payment_ScreenState
                                                                       .w500,
                                                               fontSize: 15))),
                                               Text(
-                                                "₹ ${data?.data?[index].minimumPayable?.minAmount ?? ""} / ${data?.data?[index].maximumPayable?.maxAmount ?? ""}",
+                                                "₹ ${(data?.data?[index].minimumPayable?.minAmount ?? 0.0).toStringAsFixed(2)} / ${(data?.data?[index].maximumPayable?.maxAmount ?? 0.0).toStringAsFixed(2)}",
                                                 style: planST.copyWith(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 14),
@@ -359,13 +363,13 @@ class _Online_Emi_Payment_ScreenState
                                                         fontSize: 15)),
                                               ),
                                               Text(
-                                                "${data?.data?[index].minimumPayable?.minWeight ?? ""} / ",
+                                                "${(data?.data?[index].minimumPayable?.minWeight ?? 0.0).toStringAsFixed(3)} / ",
                                                 style: planST.copyWith(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 14),
                                               ),
                                               Text(
-                                                "${data?.data?[index].maximumPayable?.maxWeight ?? ""}",
+                                                "${(data?.data?[index].maximumPayable?.maxWeight ?? 0.0).toStringAsFixed(3)}",
                                                 style: planST.copyWith(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 14),
@@ -720,8 +724,8 @@ class _Online_Emi_Payment_ScreenState
                                                                             data.data?[index].selectedGram =
                                                                                 newValue;
 
-                                                                            var amount = newValue != ""
-                                                                                ? int.parse(newValue ?? "0.0")
+                                                                            double amount = newValue != ""
+                                                                                ? double.parse(newValue ?? "0.0")
                                                                                 : 0;
 
                                                                             gramCalculation(index,
@@ -751,7 +755,7 @@ class _Online_Emi_Payment_ScreenState
                                                                       return 'Please enter gram';
                                                                     }
                                                                     final intValue =
-                                                                        int.tryParse(
+                                                                        double.tryParse(
                                                                             value);
                                                                     if (intValue ==
                                                                         null) {
@@ -767,11 +771,12 @@ class _Online_Emi_Payment_ScreenState
                                                                   },
                                                                   onChanged:
                                                                       (value) {
-                                                                    var amount = value !=
-                                                                            ""
-                                                                        ? int.parse(
-                                                                            value)
-                                                                        : 0;
+                                                                    double
+                                                                        amount =
+                                                                        value !=
+                                                                                ""
+                                                                            ? double.parse(value)
+                                                                            : 0;
 
                                                                     if ((data?.data?[index].maximumPayable?.maxWeight ??
                                                                             0.0) >=
@@ -825,7 +830,7 @@ class _Online_Emi_Payment_ScreenState
                                                                   inputFormatters: [
                                                                     FilteringTextInputFormatter
                                                                         .allow(RegExp(
-                                                                            r'[0-9.]')),
+                                                                            r'^\d+\.?\d{0,3}')),
                                                                     TextInputFormatter.withFunction(
                                                                         (oldValue,
                                                                             newValue) {
@@ -888,6 +893,31 @@ class _Online_Emi_Payment_ScreenState
                                         ),
                                       ],
                                     ),
+                                    data?.data?[index].convertToWeight == true
+                                        ? Row(
+                                            children: [
+                                              Container(
+                                                width:
+                                                    (MediaQuery.sizeOf(context)
+                                                                .width /
+                                                            2) -
+                                                        30,
+                                                child: Text('Weight',
+                                                    style: planST2.copyWith(
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontSize: 15)),
+                                              ),
+                                              Text(
+                                                '${data?.data?[index].totalWeight ?? 0.0}',
+                                                style: planST.copyWith(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 14),
+                                              ),
+                                            ],
+                                          )
+                                        : SizedBox.shrink(),
+                                    const SizedBox(height: 10),
 
                                     Row(
                                       crossAxisAlignment:
@@ -941,8 +971,8 @@ class _Online_Emi_Payment_ScreenState
                                                         amountCalculation(
                                                             index, amount);
                                                       } else {
-                                                        final amount =
-                                                            (int.parse(data
+                                                        double amount =
+                                                            (double.parse(data
                                                                     ?.data?[
                                                                         index]
                                                                     .enterAmount ??
@@ -1023,8 +1053,8 @@ class _Online_Emi_Payment_ScreenState
                                                           amountCalculation(
                                                               index, amount);
                                                         } else {
-                                                          final amount =
-                                                              (int.parse(data
+                                                          double amount =
+                                                              (double.parse(data
                                                                       ?.data?[
                                                                           index]
                                                                       .enterAmount ??
@@ -1149,7 +1179,7 @@ class _Online_Emi_Payment_ScreenState
                                                   fontSize: 15)),
                                         ),
                                         Text(
-                                          '${data?.data?[index].totalAmount ?? '0'}',
+                                          '₹${data?.data?[index].totalAmount ?? '0'}',
                                           style: planST.copyWith(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 14),
@@ -1547,7 +1577,7 @@ class _Online_Emi_Payment_ScreenState
             style: maintext,
           ),
           const Spacer(),
-          Text('₹${totalAmount}', style: plan1),
+          Text('₹${totalAmount.toStringAsFixed(2)}', style: plan1),
         ],
       ),
     );

@@ -18,7 +18,8 @@ String? routes = "routes_Log";
 String phone_no = 'mobile';
 String name = 'firstname';
 
-AndroidOptions _androidOptions() => AndroidOptions();
+AndroidOptions _androidOptions() =>
+    AndroidOptions(encryptedSharedPreferences: true);
 IOSOptions _getIOSOptions() => IOSOptions(
       accountName: Storage,
     );

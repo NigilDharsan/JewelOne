@@ -45,6 +45,7 @@ Widget Wallet_Card(
   required String noofpaidval,
   required double? width,
   required void Function()? paynow,
+  required void Function()? payMentHistory,
 }) {
   return Padding(
     padding: const EdgeInsets.only(left: 10),
@@ -233,16 +234,19 @@ Widget Wallet_Card(
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Container(
-                          width: (MediaQuery.sizeOf(context).width / 2) - 50,
-                          child: Center(
-                              child: Padding(
-                            padding: const EdgeInsets.only(bottom: 10),
-                            child: Text(
-                              "Payment History",
-                              style: ButtonT2,
-                            ),
-                          ))),
+                      InkWell(
+                        onTap: payMentHistory,
+                        child: Container(
+                            width: (MediaQuery.sizeOf(context).width / 2) - 50,
+                            child: Center(
+                                child: Padding(
+                              padding: const EdgeInsets.only(bottom: 10),
+                              child: Text(
+                                "Payment History",
+                                style: ButtonT2,
+                              ),
+                            ))),
+                      ),
                       Padding(
                         padding: const EdgeInsets.only(bottom: 10),
                         child: Container(

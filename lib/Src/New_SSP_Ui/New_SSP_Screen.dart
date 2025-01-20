@@ -3,11 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jewelone/Common_Widgets/Custom_App_Bar.dart';
 import 'package:jewelone/Common_Widgets/Image_Path.dart';
+import 'package:jewelone/Model/ActivePlanModel.dart';
 import 'package:jewelone/Src/FAQ_Ui/FAQ_Screen.dart';
 import 'package:jewelone/Src/New_SSP_Ui/New_SSP_Plan1_Screen.dart';
-import 'package:jewelone/Src/New_SSP_Ui/New_SSP_Plan2_Screen.dart';
-import 'package:jewelone/Src/New_SSP_Ui/New_SSP_Plan3_Screen.dart';
-import 'package:jewelone/Src/New_SSP_Ui/New_SSP_Plan4_Screen.dart';
 import 'package:jewelone/utilits/ApiProvider.dart';
 import 'package:jewelone/utilits/Generic.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
@@ -93,38 +91,24 @@ class _New_SSP_ScreenState extends ConsumerState<New_SSP_Screen> {
               ),
             ),
             myschemedata.when(data: (data) {
+              var schemeDataVisible = data?.data
+                  ?.where((toElement) =>
+                      toElement.schemeVis == 1 || toElement.schemeVis == 3)
+                  .toList();
               return ListView.builder(
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: data?.data?.length ?? 0,
+                  itemCount: schemeDataVisible?.length ?? 0,
                   itemBuilder: (context, index) {
                     return JoinnowContainer(context,
-                        plan: 'Plan ${data?.data?[index].schemeId ?? ""}',
-                        plandes: data?.data?[index].schemeName ?? "",
-                        onPress: () {
-                      SingleTon().selectedActivePlan = data?.data?[index];
-                      if (data?.data?[index].schemeId == 1) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => New_SSP_Plan1_Screen()));
-                      } else if (data?.data?[index].schemeId == 2) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => New_SSP_Plan2_Screen()));
-                      } else if (data?.data?[index].schemeId == 3) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => New_SSP_Plan3_Screen()));
-                      } else if (data?.data?[index].schemeId == 4) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => New_SSP_Plan4_Screen()));
-                      }
+                        data: schemeDataVisible?[index], onPress: () {
+                      SingleTon().selectedActivePlan =
+                          schemeDataVisible?[index];
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => New_SSP_Plan1_Screen()));
                     });
                   });
             }, error: (Object error, StackTrace stackTrace) {
@@ -193,9 +177,7 @@ Widget _carouselImg(context) {
 }
 
 Widget JoinnowContainer(context,
-    {required String plan,
-    required String plandes,
-    required void Function()? onPress}) {
+    {required Data? data, required void Function()? onPress}) {
   return Padding(
     padding: const EdgeInsets.only(bottom: 10),
     child: Container(
@@ -217,21 +199,23 @@ Widget JoinnowContainer(context,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  plan,
+                  "Plan ${data?.schemeId}",
                   style: plan1,
                 ),
                 Container(
                     width: MediaQuery.sizeOf(context).width / 2.5,
                     child: Text(
-                      plandes,
+                      data?.schemeName ?? "",
                       style: lighttext,
                       maxLines: 2,
                     )),
               ],
             ),
             const Spacer(),
-            Paynowcommonbutton1(context,
-                onPress: onPress, titleName: 'Join Now')
+            data?.allowJoin == true
+                ? Paynowcommonbutton1(context,
+                    onPress: onPress, titleName: 'Join Now')
+                : SizedBox.shrink()
           ],
         ),
       ),

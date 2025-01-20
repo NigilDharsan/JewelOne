@@ -33,6 +33,7 @@ class MyPlanData {
   String? schemeAccNumber;
   String? branchName;
   String? schemeName;
+  bool? convertToWeight;
   int? taxType;
   int? taxId;
   String? customerName;
@@ -63,6 +64,7 @@ class MyPlanData {
   String? enterAmount;
   int? incrementCount = 1;
   bool? isChecked = false;
+  String? totalWeight;
   String? totalAmount;
   String? selectedGram;
   String? selectedAmount;
@@ -76,6 +78,7 @@ class MyPlanData {
       this.schemeAccNumber,
       this.branchName,
       this.schemeName,
+      this.convertToWeight,
       this.taxType,
       this.taxId,
       this.customerName,
@@ -118,6 +121,7 @@ class MyPlanData {
     schemeAccNumber = json['scheme_acc_number'];
     branchName = json['branch_name'];
     schemeName = json['scheme_name'];
+    convertToWeight = json['convert_to_weight'];
     taxType = json['tax_type'];
     taxId = json['tax_id'];
     customerName = json['customer_name'];
@@ -170,6 +174,8 @@ class MyPlanData {
     data['scheme_acc_number'] = this.schemeAccNumber;
     data['branch_name'] = this.branchName;
     data['scheme_name'] = this.schemeName;
+    data['convert_to_weight'] = this.convertToWeight;
+
     data['tax_type'] = this.taxType;
     data['tax_id'] = this.taxId;
     data['customer_name'] = this.customerName;

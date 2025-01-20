@@ -19,6 +19,8 @@ class ConstantApi {
   static String accountCloseUrl =
       SERVER_ONE + "managescheme/scheme_account_close/";
 
+  static String companyListUrl = SERVER_ONE + "retailmaster/company/?id=1";
+
   static String SOMETHING_WRONG = "Some thing wrong";
   static String NO_INTERNET = "No internet Connection";
   static String BAD_RESPONSE = "Bad Response";

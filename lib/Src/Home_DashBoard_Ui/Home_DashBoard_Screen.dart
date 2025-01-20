@@ -13,6 +13,7 @@ import 'package:jewelone/Src/My_SSP_Ui/My_SSP_Screen.dart';
 import 'package:jewelone/Src/New_SSP_Ui/New_SSP_Screen.dart';
 import 'package:jewelone/Src/Notification_Ui/Notification_Screen.dart';
 import 'package:jewelone/Src/Online_Emi_Payment_Ui/Online_Emi_Payment_Screen.dart';
+import 'package:jewelone/Src/Purchase_Plan_Detail_Ui/Purchase_Plan_Details_Screen.dart';
 import 'package:jewelone/utilits/ApiProvider.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
 import 'package:jewelone/utilits/Generic.dart';
@@ -56,7 +57,7 @@ class _Home_DashBoard_ScreenState extends ConsumerState<Home_DashBoard_Screen> {
   @override
   Widget build(BuildContext context) {
     final priceRate = ref.watch(GoldrateProvider);
-    //final bannerimagedata = ref.watch(BannerDataProvider);
+    final bannerimagedata = ref.watch(BannerDataProvider);
     final myplandata = ref.watch(MyplanProvider);
     return Scaffold(
       backgroundColor: backGroundColor,
@@ -139,9 +140,11 @@ class _Home_DashBoard_ScreenState extends ConsumerState<Home_DashBoard_Screen> {
                                       "${data?.data?[index].accountName ?? ""}",
                                   Acnumval:
                                       "${data?.data?[index].idSchemeAccount ?? ""}",
-                                  totalpaidval:
-                                      "${data?.data?[index].paidAmount ?? ""}",
-                                  totaccval: '120',
+                                  totalpaidval: '₹' +
+                                      "${data?.data?[index].paidAmount?.toStringAsFixed(2) ?? ""}",
+                                  totaccval: data?.data?[index].paidWeight
+                                          ?.toStringAsFixed(3) ??
+                                      "",
                                   noofpaidval:
                                       "${data?.data?[index].paidInstallments ?? ""}",
                                   paynow: () {
@@ -151,6 +154,20 @@ class _Home_DashBoard_ScreenState extends ConsumerState<Home_DashBoard_Screen> {
                                             builder: (context) =>
                                                 Online_Emi_Payment_Screen(
                                                   selectedIndex: index,
+                                                ))).then((onValue) {
+                                      ref.refresh(MyplanProvider);
+                                    });
+                                  },
+                                  payMentHistory: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                Purchase_Plan_detail_Screeen(
+                                                  schemeAccountID: data
+                                                          ?.data?[index]
+                                                          .idSchemeAccount ??
+                                                      0,
                                                 )));
                                   },
                                 ),
@@ -192,7 +209,9 @@ class _Home_DashBoard_ScreenState extends ConsumerState<Home_DashBoard_Screen> {
                                         builder: (context) =>
                                             Online_Emi_Payment_Screen(
                                               selectedIndex: null,
-                                            )));
+                                            ))).then((onValue) {
+                                  ref.refresh(MyplanProvider);
+                                });
                               },
                               child: Plan_Card(
                                 context,
@@ -282,58 +301,67 @@ class _Home_DashBoard_ScreenState extends ConsumerState<Home_DashBoard_Screen> {
                       ),
                     ),
 
-                    //CAROSEL BANNER
-                    Container(
-                      color: white1,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 20, right: 20),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            //CAROSEL SLIDER
-                            CarouselSlider(
-                                items: [
-                                  _carouselImg(context),
-                                  _carouselImg(context),
-                                  _carouselImg(context),
-                                  _carouselImg(context),
-                                ],
-                                options: CarouselOptions(
-                                  autoPlay: true,
-                                  viewportFraction: 1,
-                                  enlargeCenterPage: true,
-                                  aspectRatio: 16 / 9,
-                                  autoPlayAnimationDuration:
-                                      Duration(milliseconds: 800),
-                                  onPageChanged: (index, reason) {
-                                    setState(() {
-                                      myCurrentPage = index;
-                                    });
-                                  },
-                                )),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Center(
-                              child: AnimatedSmoothIndicator(
-                                activeIndex: myCurrentPage,
-                                count: 4,
-                                effect: ExpandingDotsEffect(
-                                    dotHeight: 5,
-                                    dotWidth: 5,
-                                    activeDotColor: gradient1),
+                    bannerimagedata.when(data: (data) {
+                      List<Widget> carouselItems =
+                          data!.data!.map<Widget>((item) {
+                        return _carouselImg(context,
+                            item.bannerImg); // Pass the item to your _carouselImg method
+                      }).toList();
+
+                      return
+                          //CAROSEL BANNER
+                          Container(
+                        color: white1,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 20, right: 20),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              const SizedBox(
+                                height: 20,
                               ),
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                          ],
+                              //CAROSEL SLIDER
+
+                              CarouselSlider(
+                                  items: carouselItems,
+                                  options: CarouselOptions(
+                                    autoPlay: true,
+                                    viewportFraction: 1,
+                                    enlargeCenterPage: true,
+                                    aspectRatio: 16 / 9,
+                                    autoPlayAnimationDuration:
+                                        Duration(milliseconds: 800),
+                                    onPageChanged: (index, reason) {
+                                      setState(() {
+                                        myCurrentPage = index;
+                                      });
+                                    },
+                                  )),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Center(
+                                child: AnimatedSmoothIndicator(
+                                  activeIndex: myCurrentPage,
+                                  count: carouselItems.length,
+                                  effect: ExpandingDotsEffect(
+                                      dotHeight: 5,
+                                      dotWidth: 5,
+                                      activeDotColor: gradient1),
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ),
+                      );
+                    }, error: (Object error, StackTrace stackTrace) {
+                      return Text("$error");
+                    }, loading: () {
+                      return CircularProgressIndicator();
+                    }),
                   ],
                 ),
               ),
@@ -374,15 +402,13 @@ class _Home_DashBoard_ScreenState extends ConsumerState<Home_DashBoard_Screen> {
 }
 
 //CAROUSEL IMG STACK
-Widget _carouselImg(context) {
+Widget _carouselImg(context, imageURL) {
   return Container(
     height: 185,
     width: MediaQuery.of(context).size.width,
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(15),
-      image: DecorationImage(
-          image: AssetImage("lib/assets/homedashboardimage.png"),
-          fit: BoxFit.cover),
+      image: DecorationImage(image: NetworkImage(imageURL), fit: BoxFit.cover),
     ),
   );
 }

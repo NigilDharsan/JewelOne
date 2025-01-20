@@ -60,12 +60,19 @@ class _New_SSP_Plan1_ScreenState extends State<New_SSP_Plan1_Screen> {
                         SingleTon().selectedActivePlan?.schemeName ?? "",
                         style: rate2,
                       ),
-                      Container(
-                          width: MediaQuery.sizeOf(context).width / 2.8,
-                          child: Text(
-                            'EMA from ₹${SingleTon().selectedActivePlan?.particularAmount} /month',
-                            style: lighttext,
-                          )),
+                      SingleTon().selectedActivePlan?.schemeType == 0
+                          ? Container(
+                              width: MediaQuery.sizeOf(context).width / 2.8,
+                              child: Text(
+                                'EMA from ₹${SingleTon().selectedActivePlan?.minimumAmount} /month',
+                                style: lighttext,
+                              ))
+                          : Container(
+                              width: MediaQuery.sizeOf(context).width / 2.8,
+                              child: Text(
+                                'EMA from ${SingleTon().selectedActivePlan?.minimumAmount} gm /month',
+                                style: lighttext,
+                              )),
                       // Text(
                       //   'Benefit (VA) 18%',
                       //   style: rate2,
@@ -82,12 +89,15 @@ class _New_SSP_Plan1_ScreenState extends State<New_SSP_Plan1_Screen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Paynowcommonbutton1(context, onPress: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Grammage_Plan_Screen()));
-                      }, titleName: 'Join Now'),
+                      SingleTon().selectedActivePlan?.allowJoin == true
+                          ? Paynowcommonbutton1(context, onPress: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          Grammage_Plan_Screen()));
+                            }, titleName: 'Join Now')
+                          : SizedBox.shrink(),
                       Text(
                         'Tenure up to ${SingleTon().selectedActivePlan?.totalInstalment} months',
                         style: lighttext,
@@ -124,90 +134,94 @@ class _New_SSP_Plan1_ScreenState extends State<New_SSP_Plan1_Screen> {
             //         'as 11 Equated Monthly Advance (EMA).',
             //     heading: 'Grammage Accumulation',
             //     isHeadingneeded: true),
-            Padding(
-              padding: const EdgeInsets.only(left: 25, right: 25, top: 15),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  //PLAN HEADINGS AND CONTENTS
-                  Content(content: 'Terms & Conditions'),
+            SingleTon().selectedActivePlan?.schemeDescription == ""
+                ? Container()
+                : Padding(
+                    padding:
+                        const EdgeInsets.only(left: 25, right: 25, top: 15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        //PLAN HEADINGS AND CONTENTS
+                        Content(content: 'Terms & Conditions'),
 
-                  Html(
-                    data: SingleTon().selectedActivePlan?.schemeDescription,
-                    style: {
-                      "h1": Style(
-                        fontSize: FontSize(24),
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                      "h2": Style(
-                        fontSize: FontSize(20),
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black54,
-                      ),
-                      "p": Style(
-                        fontSize: FontSize(16),
-                        color: Colors.grey,
-                      ),
-                    },
+                        Html(
+                          data:
+                              SingleTon().selectedActivePlan?.schemeDescription,
+                          style: {
+                            "h1": Style(
+                              fontSize: FontSize(24),
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                            "h2": Style(
+                              fontSize: FontSize(20),
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black54,
+                            ),
+                            "p": Style(
+                              fontSize: FontSize(16),
+                              color: Colors.grey,
+                            ),
+                          },
+                        ),
+                        // Heading(heading: 'A. VA Waiver'),
+                        // Content(
+                        //     content:
+                        //         'On maturity, “ Gold Jewellery & Gold Coin” can be purchased in '
+                        //         ' this scheme with a wavier of up to 18% VA (Value Addition) or '
+                        //         ' on actuals, whichever is lower.'),
+                        // Heading(heading: 'B. No. of Advance Payments'),
+                        // Content(content: '11 Equated Monthly advances.'),
+                        // Heading(heading: 'C. Tenure'),
+                        // Content(content: '330 Days'),
+                        // Heading(heading: 'D. Minimum Monthly Advance'),
+                        // Content(
+                        //     content:
+                        //         'On maturity, “ Gold Jewellery & Gold Coin” can be purchased '
+                        //         'in this scheme with a wavier of up to 18% VA (Value Addition)'
+                        //         'or on actuals, whichever is lower.'),
+                        // Heading(heading: 'E. No. of Advance Payments'),
+                        // Content(
+                        //     content:
+                        //         'At the end of the 330 days (i.e., joining date + 329 days) '
+                        //         'Example: A customer joins Swarna Sakthi on 15th January + '
+                        //         '329 days I.e., 10th December of the same year will be the redemption date.'),
+                        // Heading(heading: 'F. Swarna Sakthi Order Redemption'),
+                        // Content(
+                        //     content:
+                        //         'At the end of the 330 days (i.e., joining date + 329 days) Example: A '
+                        //         'customer joins Swarna Sakthi on 15th January + 329 days I.e., 10th December '
+                        //         'of the same year will be the redemption date.'),
+                        // Heading(heading: 'G. Maturity'),
+                        // Content(
+                        //     content:
+                        //         'Maturity is on completion of the 330 days and this tenure of 330'
+                        //         ' days cannot be extended under any circumstances. '),
+                        // Heading(heading: 'H. Refund'),
+                        // Content(
+                        //     content:
+                        //         'Refund is not permitted in this plan under any circumstances as EMA'
+                        //         ' is converted to gold weight at the time of payment itself.'),
+                        // Heading(heading: 'I. GST & other Levies'),
+                        // Content(
+                        //     content:
+                        //         'GST & other Levies will be charged extra as er government norms.'),
+                        // Heading(heading: 'J. Eligibility'),
+                        // Content(
+                        //     content:
+                        //         'Wavier of upto 18% VA will be given only if EMA payments are paid'
+                        //         ' continuously without any default.'),
+                        // Heading(heading: 'K. After-maturity Benefits'),
+                        // Content(
+                        //     content:
+                        //         'In case of default, eligible benefit will be based on the number of'
+                        //         ' EMAs (complete minimum period of 90 days). Customer will get '
+                        //         'benefit of 1% VA for each EMA paid month. Customer can avail maximum'
+                        //         ' of upto 10% on VA. Please refer to the table below.'),
+                      ],
+                    ),
                   ),
-                  // Heading(heading: 'A. VA Waiver'),
-                  // Content(
-                  //     content:
-                  //         'On maturity, “ Gold Jewellery & Gold Coin” can be purchased in '
-                  //         ' this scheme with a wavier of up to 18% VA (Value Addition) or '
-                  //         ' on actuals, whichever is lower.'),
-                  // Heading(heading: 'B. No. of Advance Payments'),
-                  // Content(content: '11 Equated Monthly advances.'),
-                  // Heading(heading: 'C. Tenure'),
-                  // Content(content: '330 Days'),
-                  // Heading(heading: 'D. Minimum Monthly Advance'),
-                  // Content(
-                  //     content:
-                  //         'On maturity, “ Gold Jewellery & Gold Coin” can be purchased '
-                  //         'in this scheme with a wavier of up to 18% VA (Value Addition)'
-                  //         'or on actuals, whichever is lower.'),
-                  // Heading(heading: 'E. No. of Advance Payments'),
-                  // Content(
-                  //     content:
-                  //         'At the end of the 330 days (i.e., joining date + 329 days) '
-                  //         'Example: A customer joins Swarna Sakthi on 15th January + '
-                  //         '329 days I.e., 10th December of the same year will be the redemption date.'),
-                  // Heading(heading: 'F. Swarna Sakthi Order Redemption'),
-                  // Content(
-                  //     content:
-                  //         'At the end of the 330 days (i.e., joining date + 329 days) Example: A '
-                  //         'customer joins Swarna Sakthi on 15th January + 329 days I.e., 10th December '
-                  //         'of the same year will be the redemption date.'),
-                  // Heading(heading: 'G. Maturity'),
-                  // Content(
-                  //     content:
-                  //         'Maturity is on completion of the 330 days and this tenure of 330'
-                  //         ' days cannot be extended under any circumstances. '),
-                  // Heading(heading: 'H. Refund'),
-                  // Content(
-                  //     content:
-                  //         'Refund is not permitted in this plan under any circumstances as EMA'
-                  //         ' is converted to gold weight at the time of payment itself.'),
-                  // Heading(heading: 'I. GST & other Levies'),
-                  // Content(
-                  //     content:
-                  //         'GST & other Levies will be charged extra as er government norms.'),
-                  // Heading(heading: 'J. Eligibility'),
-                  // Content(
-                  //     content:
-                  //         'Wavier of upto 18% VA will be given only if EMA payments are paid'
-                  //         ' continuously without any default.'),
-                  // Heading(heading: 'K. After-maturity Benefits'),
-                  // Content(
-                  //     content:
-                  //         'In case of default, eligible benefit will be based on the number of'
-                  //         ' EMAs (complete minimum period of 90 days). Customer will get '
-                  //         'benefit of 1% VA for each EMA paid month. Customer can avail maximum'
-                  //         ' of upto 10% on VA. Please refer to the table below.'),
-                ],
-              ),
-            ),
 
             //MATURITY BENIFITS IMAGE
             // Padding(

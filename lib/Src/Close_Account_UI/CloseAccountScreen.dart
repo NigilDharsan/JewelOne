@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:jewelone/Common_Widgets/Common_Button.dart';
 import 'package:jewelone/Common_Widgets/Custom_App_Bar.dart';
 import 'package:jewelone/Common_Widgets/Image_Path.dart';
 import 'package:jewelone/Src/FAQ_Ui/FAQ_Screen.dart';
-import 'package:jewelone/Src/My_SSP_Ui/My_SSP_Screen.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
 
@@ -198,13 +196,13 @@ class _CloseAccountScreenState extends ConsumerState<CloseAccountScreen> {
                         }),
                   ),
 
-                  //HELP CONTAINER
-                  HelpContainer(context, Color: grey5),
+                  // //HELP CONTAINER
+                  // HelpContainer(context, Color: grey5),
 
-                  //BUTTON
-                  CommonContainerButton(context, onPress: () {
-                    Navigator.pop(context);
-                  }, titleName: "Back"),
+                  // //BUTTON
+                  // CommonContainerButton(context, onPress: () {
+                  //   Navigator.pop(context);
+                  // }, titleName: "Back"),
                 ],
               ),
             ),

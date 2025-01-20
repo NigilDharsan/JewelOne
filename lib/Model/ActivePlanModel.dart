@@ -32,13 +32,13 @@ class Data {
   int? numberOfAdvance;
   bool? allowPendingDue;
   int? numberOfPendingDue;
-  int? particularAmount;
   bool? convertToWeight;
   bool? status;
   bool? allowJoin;
   bool? unpaidAsDef;
   bool? allowDue;
   int? totalInstalment;
+  int? schemeVis;
   String? createdOn;
   String? updatedOn;
   int? schIdMetal;
@@ -46,6 +46,7 @@ class Data {
   int? schIdPurity;
   int? createdBy;
   int? updatedBy;
+  double? minimumAmount;
 
   Data(
       {this.schemeId,
@@ -58,20 +59,21 @@ class Data {
       this.numberOfAdvance,
       this.allowPendingDue,
       this.numberOfPendingDue,
-      this.particularAmount,
       this.convertToWeight,
       this.status,
       this.allowJoin,
       this.unpaidAsDef,
       this.allowDue,
       this.totalInstalment,
+      this.schemeVis,
       this.createdOn,
       this.updatedOn,
       this.schIdMetal,
       this.schClassification,
       this.schIdPurity,
       this.createdBy,
-      this.updatedBy});
+      this.updatedBy,
+      this.minimumAmount});
 
   Data.fromJson(Map<String, dynamic> json) {
     schemeId = json['scheme_id'] ?? 0;
@@ -84,13 +86,14 @@ class Data {
     numberOfAdvance = json['number_of_advance'];
     allowPendingDue = json['allow_pending_due'];
     numberOfPendingDue = json['number_of_pending_due'];
-    particularAmount = json['particular_amount'];
     convertToWeight = json['convert_to_weight'];
     status = json['status'];
     allowJoin = json['allow_join'];
     unpaidAsDef = json['unpaid_as_def'];
     allowDue = json['allow_due'];
     totalInstalment = json['total_instalment'];
+    schemeVis = json['scheme_vis'];
+
     createdOn = json['created_on'] ?? "";
     updatedOn = json['updated_on'] ?? "";
     schIdMetal = json['sch_id_metal'];
@@ -98,6 +101,7 @@ class Data {
     schIdPurity = json['sch_id_purity'];
     createdBy = json['created_by'];
     updatedBy = json['updated_by'];
+    minimumAmount = json['minimum_amount'];
   }
 
   Map<String, dynamic> toJson() {
@@ -112,13 +116,13 @@ class Data {
     data['number_of_advance'] = this.numberOfAdvance;
     data['allow_pending_due'] = this.allowPendingDue;
     data['number_of_pending_due'] = this.numberOfPendingDue;
-    data['particular_amount'] = this.particularAmount;
     data['convert_to_weight'] = this.convertToWeight;
     data['status'] = this.status;
     data['allow_join'] = this.allowJoin;
     data['unpaid_as_def'] = this.unpaidAsDef;
     data['allow_due'] = this.allowDue;
     data['total_instalment'] = this.totalInstalment;
+    data['scheme_vis'] = this.schemeVis;
     data['created_on'] = this.createdOn;
     data['updated_on'] = this.updatedOn;
     data['sch_id_metal'] = this.schIdMetal;
@@ -126,6 +130,8 @@ class Data {
     data['sch_id_purity'] = this.schIdPurity;
     data['created_by'] = this.createdBy;
     data['updated_by'] = this.updatedBy;
+    data['minimum_amount'] = this.minimumAmount;
+
     return data;
   }
 }
