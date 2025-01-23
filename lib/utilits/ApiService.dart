@@ -122,17 +122,16 @@ class ApiService {
     return Forgot_Password_Model();
   }
 
-  Future<Forgot_Password_Model> BuyNewPlanapi(
-      Map<String, dynamic> formData) async {
+  Future<SignUpModel> BuyNewPlanapi(Map<String, dynamic> formData) async {
     final result = await requestPOST(
         url: ConstantApi.buynewplanUrl, formData: formData, dio: _dio);
     if (result["success"] == true) {
       print("resultOTP:$result");
       print("resultOTPsss:${result["success"]}");
-      return Forgot_Password_Model?.fromJson(result["response"]);
+      return SignUpModel?.fromJson(result["response"]);
     } else {
       try {
-        var resultval = Forgot_Password_Model.fromJson(result["response"]);
+        var resultval = SignUpModel.fromJson(result["response"]);
         // Toast.show(resultval.message.toString(), context);
         print(result["response"]);
         return resultval;
@@ -141,7 +140,7 @@ class ApiService {
         // Toast.show(result["response"], context);
       }
     }
-    return Forgot_Password_Model();
+    return SignUpModel();
   }
 
   //BANNER IMAGE
@@ -357,5 +356,28 @@ class ApiService {
       }
     }
     return PaymentCreateModel();
+  }
+
+  //PAYEMNT API
+  Future<ClosedAccountModel> PaymentSuccessApi(
+      Map<String, dynamic> formData) async {
+    final result = await requestPOST(
+        url: ConstantApi.paymentSuccessUrl, formData: formData, dio: _dio);
+    if (result["success"] == true) {
+      print("resultOTP:$result");
+      print("resultOTPsss:${result["success"]}");
+      return ClosedAccountModel?.fromJson(result["response"]);
+    } else {
+      try {
+        var resultval = ClosedAccountModel.fromJson(result["response"]);
+        // Toast.show(resultval.message.toString(), context);
+        print(result["response"]);
+        return resultval;
+      } catch (e) {
+        print(result["response"]);
+        // Toast.show(result["response"], context);
+      }
+    }
+    return ClosedAccountModel();
   }
 }

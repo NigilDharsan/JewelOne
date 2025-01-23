@@ -9,12 +9,14 @@ import 'package:flutter_cashfree_pg_sdk/utils/cfenums.dart';
 import 'package:flutter_cashfree_pg_sdk/utils/cfexceptions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 import 'package:jewelone/Common_Widgets/Common_Button.dart';
 import 'package:jewelone/Common_Widgets/Common_Model_Bottom_Sheet.dart';
 import 'package:jewelone/Common_Widgets/Custom_App_Bar.dart';
 import 'package:jewelone/Common_Widgets/Image_Path.dart';
 import 'package:jewelone/Model/MyPlanModel.dart';
 import 'package:jewelone/Src/Home_DashBoard_Ui/Home_DashBoard_Screen.dart';
+import 'package:jewelone/Src/Success_UI/PayemntSuccess.dart';
 import 'package:jewelone/utilits/ApiProvider.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
 import 'package:jewelone/utilits/Generic.dart';
@@ -103,6 +105,7 @@ class _Online_Emi_Payment_ScreenState
                 (amount * (data?.data?[selectIndex].incrementCount ?? 0)) -
                     ((data?.data?[selectIndex].discountValue ?? 0) + taxAmount);
 
+            data?.data?[selectIndex].totalTaxAmount = "$taxAmount";
             data?.data?[selectIndex].enterAmount = "$amount";
             data?.data?[selectIndex].totalAmount =
                 finalAmount.toStringAsFixed(2);
@@ -118,6 +121,9 @@ class _Online_Emi_Payment_ScreenState
                 (amount * (data?.data?[selectIndex].incrementCount ?? 0)) -
                     (dicountAmout + taxAmount);
 
+            data?.data?[selectIndex].totalTaxAmount = "$taxAmount";
+            data?.data?[selectIndex].totalDiscountAmount = "$dicountAmout";
+
             data?.data?[selectIndex].enterAmount = "$amount";
 
             data?.data?[selectIndex].totalAmount =
@@ -130,6 +136,7 @@ class _Online_Emi_Payment_ScreenState
                 (amount * (data?.data?[selectIndex].incrementCount ?? 0)) -
                     taxAmount;
 
+            data?.data?[selectIndex].totalTaxAmount = "$taxAmount";
             data?.data?[selectIndex].enterAmount = "$amount";
 
             data?.data?[selectIndex].totalAmount =
@@ -164,6 +171,7 @@ class _Online_Emi_Payment_ScreenState
                   (amount + taxAmount).toStringAsFixed(2);
               data?.data?[selectIndex].totalAmount =
                   (finalAmount + taxAmount).toStringAsFixed(2);
+              data?.data?[selectIndex].totalTaxAmount = "$taxAmount";
             } else {
               data?.data?[selectIndex].enterAmount = amount.toStringAsFixed(2);
               data?.data?[selectIndex].totalAmount =
@@ -187,8 +195,11 @@ class _Online_Emi_Payment_ScreenState
                   (amount + taxAmount).toStringAsFixed(2);
               data?.data?[selectIndex].totalAmount =
                   (finalAmount + taxAmount).toStringAsFixed(2);
+              data?.data?[selectIndex].totalTaxAmount = "$taxAmount";
+              data?.data?[selectIndex].totalDiscountAmount = "$dicountAmout";
             } else {
               data?.data?[selectIndex].enterAmount = amount.toStringAsFixed(2);
+              data?.data?[selectIndex].totalDiscountAmount = "$dicountAmout";
 
               data?.data?[selectIndex].totalAmount =
                   finalAmount.toStringAsFixed(2);
@@ -204,6 +215,7 @@ class _Online_Emi_Payment_ScreenState
                     taxAmount;
 
             data?.data?[selectIndex].enterAmount = amount.toStringAsFixed(2);
+            data?.data?[selectIndex].totalTaxAmount = "$taxAmount";
 
             data?.data?[selectIndex].totalAmount =
                 finalAmount.toStringAsFixed(2);
@@ -220,6 +232,8 @@ class _Online_Emi_Payment_ScreenState
           data?.data?[selectIndex].totalAmount = "0";
           data?.data?[selectIndex].selectedAmount = "";
           data?.data?[selectIndex].incrementCount = 1;
+          data?.data?[selectIndex].totalDiscountAmount = "";
+          data?.data?[selectIndex].totalTaxAmount = "";
 
           data?.data?[selectIndex].selectedGram = null;
 
@@ -1224,6 +1238,7 @@ class _Online_Emi_Payment_ScreenState
                             context,
                             onPress: () {
                               SingleTon().plandata = data?.data ?? [];
+
                               showModalBottomSheet(
                                 context: context,
                                 builder: (BuildContext context) {
@@ -1234,68 +1249,56 @@ class _Online_Emi_Payment_ScreenState
                                       for (int i = 0;
                                           i < (SingleTon().plandata.length);
                                           i++) {
+                                        var now = DateTime.now();
+                                        var formatter =
+                                            DateFormat('yyyy-MM-dd');
+                                        String formattedDate =
+                                            formatter.format(now);
                                         if (SingleTon().plandata[i].isChecked ==
                                             true) {
-                                          // final dataDetails = {
-                                          //   "actual_trans_amt": SingleTon()
-                                          //       .plandata[i]
-                                          //       .totalAmount,
-                                          //   "advance": 1,
-                                          //   "discountAmt": SingleTon()
-                                          //       .plandata[i]
-                                          //       .discountValue,
-                                          //   "id_branch": SingleTon()
-                                          //       .plandata[i]
-                                          //       .idBranch,
-                                          //   "id_payGateway": 1,
-                                          //   "id_scheme_account": SingleTon()
-                                          //       .plandata[i]
-                                          //       .idSchemeAccount,
-                                          //   "installment": SingleTon()
-                                          //       .plandata[i]
-                                          //       .paidInstallments,
-                                          //   "metal_rate": SingleTon()
-                                          //       .plandata[i]
-                                          //       .todaysRate,
-                                          //   "metal_weight": SingleTon()
-                                          //       .plandata[i]
-                                          //       .paidWeight,
-                                          //   "net_amount": SingleTon()
-                                          //       .plandata[i]
-                                          //       .totalAmount,
-                                          //   "paid_through": 2,
-                                          //   "payment_amount": SingleTon()
-                                          //       .plandata[i]
-                                          //       .totalAmount,
-                                          //   "total_net_amount": SingleTon()
-                                          //       .plandata[i]
-                                          //       .totalAmount,
-                                          //   "tax_type": 1,
-                                          //   "payment_charges": 0,
-                                          // };
                                           data.add({
                                             "advance": 1,
-                                            "id_scheme_account": 1,
-                                            "trans_date": "2024-11-05",
-                                            "date_payment": "2024-11-05",
+                                            "id_scheme_account": SingleTon()
+                                                .plandata[i]
+                                                .idSchemeAccount,
+                                            "trans_date": formattedDate,
+                                            "date_payment": formattedDate,
                                             "payment_charges": 0,
                                             "payment_status": 1,
                                             "paid_through": 2,
-                                            "installment": 1,
-                                            "id_branch": "2",
+                                            "installment": SingleTon()
+                                                .plandata[i]
+                                                .incrementCount,
+                                            "id_branch": SingleTon()
+                                                .plandata[i]
+                                                .idBranch,
                                             "id_payGateway": 1,
-                                            "payment_amount": "1000",
-                                            "tax_amount": 0,
-                                            "net_amount": "1000.00",
-                                            "total_net_amount": "1000.00",
-                                            "discountAmt": "0.00",
+                                            "payment_amount": totalAmount,
+                                            "tax_amount": SingleTon()
+                                                .plandata[i]
+                                                .totalTaxAmount,
+                                            "net_amount": SingleTon()
+                                                .plandata[i]
+                                                .totalAmount,
+                                            "total_net_amount": SingleTon()
+                                                .plandata[i]
+                                                .totalAmount,
+                                            "discountAmt": SingleTon()
+                                                .plandata[i]
+                                                .totalDiscountAmount,
                                             "actual_trans_amt": 0,
                                             "ref_trans_id": null,
                                             "trans_id": null,
-                                            "metal_weight": 0,
-                                            "metal_rate": 7000,
-                                            "tax_type": 3,
-                                            "tax_id": 1
+                                            "metal_weight": SingleTon()
+                                                .plandata[i]
+                                                .totalWeight,
+                                            "metal_rate": SingleTon()
+                                                .plandata[i]
+                                                .todaysRate,
+                                            "tax_type":
+                                                SingleTon().plandata[i].taxType,
+                                            "tax_id":
+                                                SingleTon().plandata[i].taxId
                                           });
                                         }
                                       }
@@ -1309,8 +1312,10 @@ class _Online_Emi_Payment_ScreenState
                                           "Payment Created successfully.") {
                                         // ShowToastMessage(result?.message ?? "");
                                         // await createOrder();
+                                        Navigator.pop(context);
+
                                         await initiatePay(
-                                            orderId: result?.message ?? "",
+                                            orderId: result?.orderId ?? "",
                                             paymentSessionId:
                                                 result?.paymentSessionId ?? "");
                                       } else {
@@ -1549,11 +1554,45 @@ class _Online_Emi_Payment_ScreenState
       var cfPaymentGateway = CFPaymentGatewayService();
 
       cfPaymentGateway.setCallback(
-        (orderId) async {
-          print('Payment successful for Order ID: $orderId');
+        (resultsMsg) async {
+          print('Payment successful for Order ID: $resultsMsg');
+
+          Map<String, dynamic> data = {
+            "type": "Success",
+            "order_id": orderId,
+          };
+
+          final result = await ref.read(paymentSuccessProvider(data).future);
+
+          LoadingOverlay.forcedStop();
+          if (result?.status == true) {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => PaymentSuccess(
+                          isPaymentSuccess: true,
+                          paymentStatusMsg: result?.message ?? "",
+                        )));
+          } else {
+            // Handle failure
+            ShowToastMessage(result?.message ?? "");
+          }
         },
-        (error, orderId) {
-          print('Payment error: ${error.getMessage()}');
+        (error, resultsMsg) async {
+          Map<String, dynamic> data = {
+            "type": "Failure",
+            "order_id": orderId,
+          };
+
+          final result = await ref.read(paymentSuccessProvider(data).future);
+
+          LoadingOverlay.forcedStop();
+          if (result?.status == false) {
+            ShowToastMessage(result?.message ?? "");
+          } else {
+            // Handle failure
+            ShowToastMessage(result?.message ?? "");
+          }
         },
       );
 

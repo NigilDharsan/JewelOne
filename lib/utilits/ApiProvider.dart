@@ -67,7 +67,7 @@ final MyplanProvider = FutureProvider.autoDispose<MyPlanModel?>((ref) async {
 
 //Buy New Plan
 final buyplanProvider =
-    FutureProvider.family<Forgot_Password_Model?, Map<String, dynamic>>(
+    FutureProvider.family<SignUpModel?, Map<String, dynamic>>(
         (ref, body) async {
   return ref.watch(apiServiceProvider).BuyNewPlanapi(body);
 });
@@ -99,4 +99,9 @@ final paymentPostProvider = FutureProvider.autoDispose
     .family<PaymentCreateModel?, List<Map<String, dynamic>>>(
         (ref, formData) async {
   return ref.watch(apiServiceProvider).PaymentApi(formData);
+});
+
+final paymentSuccessProvider = FutureProvider.autoDispose
+    .family<ClosedAccountModel?, Map<String, dynamic>>((ref, formData) async {
+  return ref.watch(apiServiceProvider).PaymentSuccessApi(formData);
 });

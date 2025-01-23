@@ -68,6 +68,8 @@ class MyPlanData {
   String? totalAmount;
   String? selectedGram;
   String? selectedAmount;
+  String? totalTaxAmount;
+  String? totalDiscountAmount;
 
   MyPlanData(
       {this.idScheme,

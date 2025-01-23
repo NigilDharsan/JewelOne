@@ -14,6 +14,9 @@ class ConstantApi {
   static String activeplanUrl = SERVER_ONE + "scheme/list/?status";
   static String paymenthistoryUrl = SERVER_ONE + "payment/payment_history/";
   static String paymentUrl = SERVER_ONE + "payment/scheme_payment/";
+  static String paymentSuccessUrl =
+      SERVER_ONE + "payment/payment_status_update/";
+
   static String buynewplanUrl = SERVER_ONE + "managescheme/scheme_account/";
 
   static String accountCloseUrl =

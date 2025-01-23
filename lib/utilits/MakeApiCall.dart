@@ -85,13 +85,13 @@ Future<dynamic> requestPOST(
     String? accessToken = await getToken();
 
     final headers = {
-      'Accept': 'application/json',
-      // 'Content-Type': 'application/json',
+      // 'Accept': 'application/json',
+      'Content-Type': 'application/json',
       'Authorization': 'Token $accessToken'
     };
 
-    final response =
-        await dio.post(Uri.parse(url), headers: headers, body: formData);
+    final response = await dio.post(Uri.parse(url),
+        headers: headers, body: jsonEncode(formData));
     print(response);
     switch (response.statusCode) {
       case 200:

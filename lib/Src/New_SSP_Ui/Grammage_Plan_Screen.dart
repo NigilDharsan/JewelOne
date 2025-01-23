@@ -5,6 +5,7 @@ import 'package:jewelone/Common_Widgets/Custom_App_Bar.dart';
 import 'package:jewelone/Common_Widgets/Image_Path.dart';
 import 'package:jewelone/Common_Widgets/Text_Form_Field.dart';
 import 'package:jewelone/Src/FAQ_Ui/FAQ_Screen.dart';
+import 'package:jewelone/Src/Online_Emi_Payment_Ui/Online_Emi_Payment_Screen.dart';
 import 'package:jewelone/utilits/ApiProvider.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
 import 'package:jewelone/utilits/Generic.dart';
@@ -276,10 +277,10 @@ class _Grammage_Plan_ScreenState extends ConsumerState<Grammage_Plan_Screen> {
                       ShowToastMessage("Select your branch");
                     } else {
                       Map<String, dynamic> formData = {
-                        "account_name": "",
+                        "account_name": customerNameController.text,
                         "acc_scheme_id":
                             SingleTon().selectedActivePlan?.schemeId ?? "",
-                        "id_customer": await getCustomer_Id(),
+                        "id_customer": "${await getCustomer_Id()}",
                         "id_branch": branch_id,
                         "added_by": 1,
                         "scheme_acc_number": null
@@ -288,12 +289,21 @@ class _Grammage_Plan_ScreenState extends ConsumerState<Grammage_Plan_Screen> {
                           await ref.read(buyplanProvider(formData).future);
                       LoadingOverlay.forcedStop();
                       // Handle the result
-                      if (result?.errorDetail == true) {
-                        // ShowToastMessage(result?.message ?? "");
-                      } else {
-                        // Handle failure
-                        ShowToastMessage("Invalid Email");
-                      }
+                      ShowToastMessage(result?.message ?? "");
+
+                      Navigator.pop(context);
+                      Navigator.pop(context);
+                      Navigator.pop(context);
+                      ref.refresh(MyplanProvider);
+
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Online_Emi_Payment_Screen(
+                                    selectedIndex: null,
+                                  ))).then((onValue) {
+                        ref.refresh(MyplanProvider);
+                      });
                     }
                   }
                 }, titleName: 'Proceed to Buy'),

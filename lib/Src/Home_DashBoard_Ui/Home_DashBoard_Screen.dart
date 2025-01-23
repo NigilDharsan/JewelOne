@@ -303,10 +303,11 @@ class _Home_DashBoard_ScreenState extends ConsumerState<Home_DashBoard_Screen> {
 
                     bannerimagedata.when(data: (data) {
                       List<Widget> carouselItems =
-                          data!.data!.map<Widget>((item) {
-                        return _carouselImg(context,
-                            item.bannerImg); // Pass the item to your _carouselImg method
-                      }).toList();
+                          data?.data?.map<Widget>((item) {
+                                return _carouselImg(context,
+                                    item.bannerImg); // Pass the item to your _carouselImg method
+                              }).toList() ??
+                              [];
 
                       return
                           //CAROSEL BANNER
