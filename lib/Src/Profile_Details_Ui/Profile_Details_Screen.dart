@@ -178,6 +178,9 @@ class _Profile_Details_ScreenState extends State<Profile_Details_Screen> {
                   children: [
 
                     //DATE OF BIRTH
+                    Expanded(
+                      flex: 1,
+                      child:
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -227,9 +230,12 @@ class _Profile_Details_ScreenState extends State<Profile_Details_Screen> {
                           },
                         ),
                       ],
-                    ),
+                    ),),
 
                     //WEDDING DATE
+                    Expanded(
+                        flex: 1,
+                        child:
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -279,7 +285,7 @@ class _Profile_Details_ScreenState extends State<Profile_Details_Screen> {
                           },
                         ),
                       ],
-                    )
+                    )),
                   ],
                 ),
 

@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -24,6 +23,7 @@ import '../Payment_History_Ui/payment_History_Screen.dart';
 
 class Home_DashBoard_Screen extends ConsumerStatefulWidget {
   Customer? customer;
+
   Home_DashBoard_Screen({super.key, this.customer});
 
   @override
@@ -118,64 +118,68 @@ class _Home_DashBoard_ScreenState extends ConsumerState<Home_DashBoard_Screen> {
                   children: [
                     //CARD
                     myplandata.when(data: (data) {
-                      return Container(
-                        width: MediaQuery.sizeOf(context).width,
-                        height: 238,
-                        child: ListView.builder(
-                            itemCount: data?.data?.length ?? 0,
-                            physics: ScrollPhysics(),
-                            scrollDirection: Axis.horizontal,
-                            shrinkWrap: true,
-                            itemBuilder: (BuildContext context, int index) {
-                              final cardWidth = data?.data?.length == 1
-                                  ? MediaQuery.sizeOf(context).width / 1.1
-                                  : MediaQuery.sizeOf(context).width / 1.2;
-                              return Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 10, bottom: 10),
-                                child: Wallet_Card(
-                                  width: cardWidth,
-                                  context,
-                                  customername:
-                                      "${data?.data?[index].accountName ?? ""}",
-                                  Acnumval:
-                                      "${data?.data?[index].idSchemeAccount ?? ""}",
-                                  totalpaidval: '₹' +
-                                      "${data?.data?[index].paidAmount?.toStringAsFixed(2) ?? ""}",
-                                  totaccval: data?.data?[index].paidWeight
-                                          ?.toStringAsFixed(3) ??
-                                      "",
-                                  noofpaidval:
-                                      "${data?.data?[index].paidInstallments ?? ""}",
-                                  paynow: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                Online_Emi_Payment_Screen(
-                                                  selectedIndex: index,
-                                                ))).then((onValue) {
-                                      ref.refresh(MyplanProvider);
-                                    });
-                                  },
-                                  payMentHistory: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                Purchase_Plan_detail_Screeen(
-                                                  schemeAccountID: data
-                                                          ?.data?[index]
-                                                          .idSchemeAccount ??
-                                                      0,
-                                                )));
-                                  },
-                                ),
-                              );
-                            }),
-                      );
+                      if (data?.data?.isNotEmpty ?? false) {
+                        return Container (
+                          width: MediaQuery.sizeOf(context).width,
+                          height: 238,
+                          child: ListView.builder(
+                              itemCount: data?.data?.length ?? 0,
+                              physics: ScrollPhysics(),
+                              scrollDirection: Axis.horizontal,
+                              shrinkWrap: true,
+                              itemBuilder: (BuildContext context, int index) {
+                                final cardWidth = data?.data?.length == 1
+                                    ? MediaQuery.sizeOf(context).width / 1.1
+                                    : MediaQuery.sizeOf(context).width / 1.2;
+                                return Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 10, bottom: 10),
+                                  child: Wallet_Card(
+                                    width: cardWidth,
+                                    context,
+                                    customername:
+                                        "${data?.data?[index].accountName ?? ""}",
+                                    Acnumval:
+                                        "${data?.data?[index].idSchemeAccount ?? ""}",
+                                    totalpaidval: '₹' +
+                                        "${data?.data?[index].paidAmount?.toStringAsFixed(2) ?? ""}",
+                                    totaccval: data?.data?[index].paidWeight
+                                            ?.toStringAsFixed(3) ??
+                                        "",
+                                    noofpaidval:
+                                        "${data?.data?[index].paidInstallments ?? ""}",
+                                    paynow: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  Online_Emi_Payment_Screen(
+                                                    selectedIndex: index,
+                                                  ))).then((onValue) {
+                                        ref.refresh(MyplanProvider);
+                                      });
+                                    },
+                                    payMentHistory: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  Purchase_Plan_detail_Screeen(
+                                                    schemeAccountID: data
+                                                            ?.data?[index]
+                                                            .idSchemeAccount ??
+                                                        0,
+                                                  )));
+                                    },
+                                  ),
+                                );
+                              }),
+                        );
+                      } else {
+                        return const SizedBox(height: 10);
+                      }
                     }, error: (Object error, StackTrace stackTrace) {
-                      return Text('ERROR');
+                      return Text('');
                     }, loading: () {
                       return CircularProgressIndicator();
                     }),
@@ -300,7 +304,6 @@ class _Home_DashBoard_ScreenState extends ConsumerState<Home_DashBoard_Screen> {
                         ],
                       ),
                     ),
-
                     bannerimagedata.when(data: (data) {
                       List<Widget> carouselItems =
                           data?.data?.map<Widget>((item) {
@@ -372,7 +375,7 @@ class _Home_DashBoard_ScreenState extends ConsumerState<Home_DashBoard_Screen> {
       ),
     );
   }
-  //LOCATION DROPDOWN
+//LOCATION DROPDOWN
 // Widget _Location_Dropdown(){
 //     return  Padding(
 //       padding: const EdgeInsets.only(top: 10,bottom: 10),
@@ -416,6 +419,7 @@ Widget _carouselImg(context, imageURL) {
 
 class GoldScrollPriceWidget extends ConsumerStatefulWidget {
   GoldRateModel? data;
+
   GoldScrollPriceWidget({required this.data});
 
   @override
@@ -462,13 +466,19 @@ class _GoldScrollPriceWidgetState extends ConsumerState<GoldScrollPriceWidget> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            '1 GM (22KT) Gold : ',
-            style: gramST,
-          ),
-          Text(
-            '₹ ${widget.data?.data?.gold22ct ?? ""} ',
-            style: gramrateST,
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                '1 GM (22KT) Gold',
+                style: gramST, // Style for the title
+              ),
+              Text(
+                '₹ ${widget.data?.data?.gold22ct ?? ""}', // Display the price
+                style: gramrateST, // Style for the price
+              ),
+            ],
           ),
           double.parse((widget.data?.data?.goldRateDifference ?? "0.0")
                       .replaceAll(',', '')) <
@@ -483,16 +493,20 @@ class _GoldScrollPriceWidgetState extends ConsumerState<GoldScrollPriceWidget> {
                   color: Colors.red,
                   size: 18,
                 ),
-
           const Spacer(),
-
-          Text(
-            '1 (GM) Silver : ',
-            style: gramST,
-          ),
-          Text(
-            '₹ ${widget.data?.data?.silverG ?? ""}',
-            style: gramrateST,
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                '1 (GM) Silver',
+                style: gramST,
+              ),
+              Text(
+                '₹ ${widget.data?.data?.silverG ?? ""}',
+                style: gramrateST,
+              ),
+            ],
           ),
           double.parse(widget.data?.data?.silverRateDifference ?? "0.0") < 0
               ? Icon(

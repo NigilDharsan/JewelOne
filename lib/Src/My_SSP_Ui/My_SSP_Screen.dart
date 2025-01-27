@@ -68,7 +68,7 @@ class _My_SSP_ScreenState extends ConsumerState<My_SSP_Screen> {
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: data?.data?.length ?? 0,
                   itemBuilder: (context, index) {
-                    return Padding(
+                    return  Padding(
                       padding: const EdgeInsets.only(top: 10, bottom: 10),
                       child: Container(
                         width: MediaQuery.sizeOf(context).width,
@@ -138,7 +138,7 @@ class _My_SSP_ScreenState extends ConsumerState<My_SSP_Screen> {
                                 ],
                               ),
                             ),
-                            tilePadding: EdgeInsets.only(left: 20, right: 0),
+                            tilePadding: EdgeInsets.only(left: 15, right: 0),
                             children: [
                               Padding(
                                 padding: const EdgeInsets.all(15),

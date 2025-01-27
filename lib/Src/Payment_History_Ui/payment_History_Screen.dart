@@ -63,8 +63,8 @@ class _payment_History_ScreenState
                                   color: white1,
                                   borderRadius: BorderRadius.circular(10)),
                               child: Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 15, right: 15, top: 10, bottom: 10),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 1,vertical: 10),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.start,

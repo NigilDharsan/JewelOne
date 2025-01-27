@@ -37,7 +37,7 @@ class _New_SSP_Plan1_ScreenState extends State<New_SSP_Plan1_Screen> {
       //BOTTOM BAR
       bottomNavigationBar: Container(
         height: 150,
-        width: MediaQuery.sizeOf(context).width,
+        width: double.infinity    ,
         color: white1,
         child: Padding(
           padding: const EdgeInsets.all(20),
@@ -47,11 +47,11 @@ class _New_SSP_Plan1_ScreenState extends State<New_SSP_Plan1_Screen> {
               border: Border.all(width: 1, color: gradient3),
               borderRadius: BorderRadius.circular(10),
             ),
-            child: Row(
+            child:Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 10, bottom: 10),
+                  padding: const EdgeInsets.only(left: 10, bottom: 10,right: 10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -61,12 +61,15 @@ class _New_SSP_Plan1_ScreenState extends State<New_SSP_Plan1_Screen> {
                         style: rate2,
                       ),
                       SingleTon().selectedActivePlan?.schemeType == 0
-                          ? Container(
+                          ?
+
+                      Container(
                               width: MediaQuery.sizeOf(context).width / 2.8,
                               child: Text(
                                 'EMA from ₹${SingleTon().selectedActivePlan?.minimumAmount} /month',
                                 style: lighttext,
-                              ))
+                              )
+                      )
                           : Container(
                               width: MediaQuery.sizeOf(context).width / 2.8,
                               child: Text(
@@ -81,11 +84,10 @@ class _New_SSP_Plan1_ScreenState extends State<New_SSP_Plan1_Screen> {
                   ),
                 ),
 
-                const Spacer(),
+                // const Spacer(),
 
                 //BOTTOM BAR CONTENTS
-                Padding(
-                  padding: const EdgeInsets.only(right: 5),
+                Flexible(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [

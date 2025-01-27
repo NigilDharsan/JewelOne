@@ -28,6 +28,7 @@ Widget Plan_Card(context, {required String Img, required String planT}) {
                 style: planST,
                 maxLines: 2,
                 textAlign: TextAlign.center,
+
               )),
         ),
       ],
@@ -47,7 +48,7 @@ Widget Wallet_Card(
   required void Function()? paynow,
   required void Function()? payMentHistory,
 }) {
-  return Padding(
+  return  Padding(
     padding: const EdgeInsets.only(left: 10),
     child: Card(
       elevation: 5,
@@ -77,7 +78,7 @@ Widget Wallet_Card(
                     ),
                     Container(
                       width: 60,
-                      child: Divider(
+                      child: const Divider(
                         thickness: 2,
                         color: gradient2,
                       ),
@@ -90,7 +91,7 @@ Widget Wallet_Card(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Container(
-                          width: (MediaQuery.sizeOf(context).width / 2) - 50,
+                          width: (MediaQuery.sizeOf(context).width / 2) - 45,
                           child: Row(
                             children: [
                               Container(
@@ -155,15 +156,13 @@ Widget Wallet_Card(
                         ),
                       ],
                     ),
-
                     const SizedBox(height: 15),
-
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
-                          width: (MediaQuery.sizeOf(context).width / 2) - 50,
+                          width: (MediaQuery.sizeOf(context).width / 2) - 45,
                           child: Row(
                             children: [
                               Container(
@@ -197,7 +196,7 @@ Widget Wallet_Card(
                         ),
                         Row(
                           children: [
-                            Icon(Icons.balance_sharp, color: Colors.white),
+                            const Icon(Icons.balance_sharp, color: Colors.white),
                             Padding(
                               padding: const EdgeInsets.only(left: 5, right: 5),
                               child: Container(
@@ -230,7 +229,7 @@ Widget Wallet_Card(
               ),
               Column(
                 children: [
-                  Divider(thickness: 1.5, color: Colors.white),
+                  const Divider(thickness: 1.5, color: Colors.white),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
@@ -320,7 +319,7 @@ Widget New_SSP_Image_Content(
             text,
             style: Content1,
           ),
-          Column(
+          const Column(
             children: [],
           )
         ],

@@ -14,6 +14,7 @@ import 'package:jewelone/utilits/Common_Colors.dart';
 import 'package:jewelone/utilits/Generic.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
 
+
 class Menu_Screen extends ConsumerStatefulWidget {
   Menu_Screen({
     super.key,
@@ -147,7 +148,7 @@ class _Menu_ScreenState extends ConsumerState<Menu_Screen> {
                             children: [
                               NavContainer(
                                   image1: 'notification2.svg',
-                                  text: 'Notifications',
+                                  planST: 'Notifications',
                                   onTap: () {
                                     Navigator.push(
                                         context,
@@ -169,7 +170,7 @@ class _Menu_ScreenState extends ConsumerState<Menu_Screen> {
                               Divider(),
                               NavContainer(
                                   image1: 'ema.svg',
-                                  text: 'Pay EMA',
+                                  planST: 'Pay EMA',
                                   onTap: () {
                                     Navigator.push(
                                         context,
@@ -182,7 +183,7 @@ class _Menu_ScreenState extends ConsumerState<Menu_Screen> {
                               Divider(),
                               NavContainer(
                                   image1: 'history.svg',
-                                  text: 'Payment History',
+                                  planST: 'Payment History',
                                   onTap: () {
                                     Navigator.push(
                                         context,
@@ -193,7 +194,7 @@ class _Menu_ScreenState extends ConsumerState<Menu_Screen> {
                               Divider(),
                               NavContainer(
                                   image1: 'settings.svg',
-                                  text: 'Settings',
+                                  planST: 'Settings',
                                   onTap: () {
                                     Navigator.push(
                                         context,
@@ -222,7 +223,7 @@ class _Menu_ScreenState extends ConsumerState<Menu_Screen> {
                             children: [
                               NavContainer(
                                   image1: 'storeL.svg',
-                                  text: 'Store Locator',
+                                  planST: 'Store Locator',
                                   onTap: () {
                                     Navigator.push(
                                         context,
@@ -233,7 +234,7 @@ class _Menu_ScreenState extends ConsumerState<Menu_Screen> {
                               Divider(),
                               NavContainer(
                                   image1: 'contact.svg',
-                                  text: 'Contact Us',
+                                  planST: 'Contact Us',
                                   onTap: () {
                                     Navigator.push(
                                         context,
@@ -326,7 +327,9 @@ class _Menu_ScreenState extends ConsumerState<Menu_Screen> {
                     Padding(
                       padding:
                           const EdgeInsets.only(left: 20, right: 20, top: 20),
-                      child: buttonIcon(context, onPress: () {
+                      child: buttonIcon(context, onPress: ()  {
+                        // SharedPreferences prefs = await SharedPreferences.getInstance();
+                        // await prefs.clear();
                         {
                           Routes("false");
                           Navigator.push(
@@ -387,7 +390,7 @@ Widget Settingscontainer(context,
 
 Widget NavContainer(
     {required String image1,
-    required String text,
+    required String planST,
     required void Function()? onTap}) {
   return Padding(
     padding: const EdgeInsets.only(top: 10, bottom: 10),
@@ -398,7 +401,12 @@ Widget NavContainer(
           ImgPathSvg(image1),
           Padding(
             padding: const EdgeInsets.only(left: 15),
-            child: Text(text),
+            child: Text(planST,
+              style:  TextStyle(
+                fontSize: 14,
+                color: Colors.black,
+                fontWeight: FontWeight.bold, // Optional for emphasis
+              ),),
           ),
           const Spacer(),
           ImgPathSvg('rightarrow2.svg')

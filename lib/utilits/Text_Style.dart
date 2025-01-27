@@ -62,17 +62,17 @@ TextStyle bottomotext = TextStyle(
 
 //USER NAME ST
 TextStyle UserST = TextStyle(
-    fontFamily: 'Inter',
+    fontFamily: 'Metropolis',
     fontSize: 16,
     color: Color.fromRGBO(255, 255, 255, 1),
-    fontWeight: FontWeight.w600);
+    fontWeight: FontWeight.w800);
 
 //PLAN STYLE
 TextStyle planST = TextStyle(
     fontFamily: 'Inter',
     fontSize: 12,
     color: Color.fromRGBO(45, 45, 45, 1),
-    fontWeight: FontWeight.w600);
+    fontWeight: FontWeight.bold);
 
 TextStyle planST2 = TextStyle(
     fontFamily: 'Inter',
@@ -87,7 +87,7 @@ TextStyle walletT2 = TextStyle(
     fontWeight: FontWeight.w500);
 
 TextStyle walletT3 = TextStyle(
-    fontFamily: 'Metropolis',
+    fontFamily: 'Inter',
     fontSize: 12,
     color: Color.fromRGBO(255, 255, 255, 1),
     fontWeight: FontWeight.w500);
@@ -103,13 +103,13 @@ TextStyle gramST = TextStyle(
     fontFamily: 'Inter',
     fontSize: 12,
     color: Colors.black,
-    fontWeight: FontWeight.w500);
+    fontWeight: FontWeight.bold);
 
 TextStyle gramrateST = TextStyle(
     fontFamily: 'Inter',
     fontSize: 12,
-    color: green1,
-    fontWeight: FontWeight.w500);
+    color: Colors.green,
+    fontWeight: FontWeight.w700);
 
 //RADIO T
 TextStyle radioST = TextStyle(
@@ -242,9 +242,9 @@ TextStyle detailsT = TextStyle(
 
 TextStyle Plan_Style = TextStyle(
     fontFamily: 'Metropolis',
-    fontSize: 20,
+    fontSize: 17,
     color: Color.fromRGBO(145, 26, 29, 1),
-    fontWeight: FontWeight.w600);
+    fontWeight: FontWeight.w500);
 
 TextStyle Tamount = TextStyle(
     fontFamily: 'Inter',

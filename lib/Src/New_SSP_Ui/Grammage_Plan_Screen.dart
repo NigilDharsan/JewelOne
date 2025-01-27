@@ -224,46 +224,72 @@ class _Grammage_Plan_ScreenState extends ConsumerState<Grammage_Plan_Screen> {
                     children: [
                       ImgPathSvg('info2.svg'),
                       Padding(
-                        padding: const EdgeInsets.only(
-                          left: 5,
-                        ),
+                        padding: const EdgeInsets.only(left: 1,),
                         child: Text(
                           'Tenure for the scheme completion is 11 month',
                           style: radioST,
                           maxLines: 2,
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),
 
                 //CHECK BOX
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Checkbox(
+                    mainAxisAlignment: MainAxisAlignment.start, // Align everything to the left
+                    children: [
+                      Checkbox(
                         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        visualDensity: VisualDensity(
-                            horizontal: -4,
-                            vertical:
-                                -4), // Optionally shrink the tap target size
+                        visualDensity: VisualDensity(horizontal: -4, vertical: -4),
                         side: BorderSide(width: 1, color: checkbox),
                         value: isCheked,
                         activeColor: gradient1,
                         onChanged: (newvalue) {
                           setState(() {
-                            isCheked = newvalue;
+                            isCheked = newvalue!;
                           });
-                        }),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    Text(
-                      'I agree with terms & conditions',
-                      style: radioST,
-                    ),
-                  ],
-                ),
+                        },
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 1,),
+                        child: Text(
+                          'I agree with terms & conditions',
+                          style: radioST,
+                        ),
+                      ),
+                    ],
+                  ),
+
+
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.start,
+                //   children: [
+                //     Padding(
+                //       padding: const EdgeInsets.only(left: 1,),
+                //    child:  Checkbox(
+                //         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                //         visualDensity: VisualDensity(
+                //             horizontal: -4,
+                //             vertical:
+                //                 -4), // Optionally shrink the tap target size
+                //         side: BorderSide(width: 1, color: checkbox),
+                //         value: isCheked,
+                //         activeColor: gradient1,
+                //         onChanged: (newvalue) {
+                //           setState(() {
+                //             isCheked = newvalue;
+                //           });
+                //         }),
+                //     const SizedBox(
+                //       width: 5,
+                //     ),
+                //     Text(
+                //       'I agree with terms & conditions',
+                //       style: radioST,
+                //     ),),
+                //   ],
+                // ),
 
                 const SizedBox(
                   height: 100,
