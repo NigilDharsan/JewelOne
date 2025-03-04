@@ -13,6 +13,7 @@ import 'package:jewelone/Src/Store_Locator_Ui/Store_Locator_Screen.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
 import 'package:jewelone/utilits/Generic.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class Menu_Screen extends ConsumerStatefulWidget {
@@ -41,6 +42,17 @@ class _Menu_ScreenState extends ConsumerState<Menu_Screen> {
     // TODO: implement initState
     super.initState();
     getDetails();
+  }
+
+
+  void _clearSearch() {
+    setState(() {
+    });
+  }
+  Future<void> _handleLogout() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+    _clearSearch();
   }
 
   @override
@@ -132,7 +144,6 @@ class _Menu_ScreenState extends ConsumerState<Menu_Screen> {
                           MaterialPageRoute(
                               builder: (context) => Home_DashBoard_Screen()));
                     }),
-
                     Padding(
                       padding: const EdgeInsets.only(top: 10, bottom: 10),
                       child: Container(
@@ -207,7 +218,6 @@ class _Menu_ScreenState extends ConsumerState<Menu_Screen> {
                         ),
                       ),
                     ),
-
                     Padding(
                       padding: const EdgeInsets.only(top: 10, bottom: 10),
                       child: Container(
@@ -322,20 +332,18 @@ class _Menu_ScreenState extends ConsumerState<Menu_Screen> {
                     //     ],
                     //   ),
                     // ),
-
                     //BUTTON
                     Padding(
                       padding:
                           const EdgeInsets.only(left: 20, right: 20, top: 20),
                       child: buttonIcon(context, onPress: ()  {
-                        // SharedPreferences prefs = await SharedPreferences.getInstance();
-                        // await prefs.clear();
+                        _handleLogout;
                         {
                           Routes("false");
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => LoginScreen()));
+                          Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(builder: (context) => LoginScreen()),
+                                (Route<dynamic> route) => false, // Removes all previous routes
+                          );
                         }
                       }, titleName: 'Logout'),
                     ),
