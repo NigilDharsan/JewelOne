@@ -4,6 +4,7 @@ import 'package:jewelone/Model/ActiveLocationMOdel.dart';
 import 'package:jewelone/Model/ActivePlanModel.dart';
 import 'package:jewelone/Model/BannerModel.dart';
 import 'package:jewelone/Model/ClosedAccountModel.dart';
+import 'package:jewelone/Model/CompanyListModel.dart';
 import 'package:jewelone/Model/ForgotPasswwordModel.dart';
 import 'package:jewelone/Model/GoldRateMmodel.dart';
 import 'package:jewelone/Model/LoginModel.dart';
@@ -205,6 +206,27 @@ class ApiService {
       }
     }
     return ActiveLocationModel();
+  }
+
+  //ACTIVE LOCATION
+  Future<CompanyListModel> CompanyListApi() async {
+    final result = await requestGET(url: ConstantApi.companyListUrl, dio: _dio);
+    if (result["success"] == true) {
+      print("resultOTP:$result");
+      print("resultOTPsss:${result["success"]}");
+      return CompanyListModel?.fromJson(result["response"]);
+    } else {
+      try {
+        var resultval = CompanyListModel.fromJson(result["response"]);
+        // Toast.show(resultval.message.toString(), context);
+        print(result["response"]);
+        return resultval;
+      } catch (e) {
+        print(result["response"]);
+        // Toast.show(result["response"], context);
+      }
+    }
+    return CompanyListModel();
   }
 
   //MY PLANS

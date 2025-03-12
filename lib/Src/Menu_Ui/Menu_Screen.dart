@@ -15,7 +15,6 @@ import 'package:jewelone/utilits/Generic.dart';
 import 'package:jewelone/utilits/Text_Style.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 class Menu_Screen extends ConsumerStatefulWidget {
   Menu_Screen({
     super.key,
@@ -44,12 +43,12 @@ class _Menu_ScreenState extends ConsumerState<Menu_Screen> {
     getDetails();
   }
 
-
   void _clearSearch() {
-    setState(() {
-    });
+    setState(() {});
   }
+
   Future<void> _handleLogout() async {
+    await accessToken("");
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.clear();
     _clearSearch();
@@ -336,13 +335,15 @@ class _Menu_ScreenState extends ConsumerState<Menu_Screen> {
                     Padding(
                       padding:
                           const EdgeInsets.only(left: 20, right: 20, top: 20),
-                      child: buttonIcon(context, onPress: ()  {
+                      child: buttonIcon(context, onPress: () {
                         _handleLogout;
                         {
                           Routes("false");
                           Navigator.of(context).pushAndRemoveUntil(
-                            MaterialPageRoute(builder: (context) => LoginScreen()),
-                                (Route<dynamic> route) => false, // Removes all previous routes
+                            MaterialPageRoute(
+                                builder: (context) => LoginScreen()),
+                            (Route<dynamic> route) =>
+                                false, // Removes all previous routes
                           );
                         }
                       }, titleName: 'Logout'),
@@ -409,12 +410,14 @@ Widget NavContainer(
           ImgPathSvg(image1),
           Padding(
             padding: const EdgeInsets.only(left: 15),
-            child: Text(planST,
-              style:  TextStyle(
+            child: Text(
+              planST,
+              style: TextStyle(
                 fontSize: 14,
                 color: Colors.black,
                 fontWeight: FontWeight.bold, // Optional for emphasis
-              ),),
+              ),
+            ),
           ),
           const Spacer(),
           ImgPathSvg('rightarrow2.svg')

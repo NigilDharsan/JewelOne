@@ -51,6 +51,8 @@ dependencies:
   flutter_cashfree_pg_sdk: 
   url_launcher: ^6.3.0
   flutter_html: ^3.0.0-beta.2
+  flutter_screenutil: 
+  shared_preferences:
 
 dev_dependencies:
   flutter_test:

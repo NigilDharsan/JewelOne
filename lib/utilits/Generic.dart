@@ -77,7 +77,7 @@ Future<dynamic> getCustomer_name() async {
   final String? customerName =
       await _secureStorage.read(key: name!, aOptions: _androidOptions());
   print("valu:$customerName");
-  return customerName!;
+  return customerName ?? "";
 }
 
 UserRole(dynamic val) async {

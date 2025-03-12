@@ -247,10 +247,17 @@ class _Settings_ScreenState extends ConsumerState<Settings_Screen> {
             //BUTTON
             Padding(
               padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
-              child: buttonIcon(context, onPress: () {
+              child: buttonIcon(context, onPress: () async {
                 {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => LoginScreen()));
+                  await accessToken("");
+
+                  Routes("false");
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const LoginScreen()),
+                    (Route<dynamic> route) => false,
+                  );
                 }
               }, titleName: 'Logout'),
             ),

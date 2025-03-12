@@ -3,6 +3,7 @@ import 'package:jewelone/Model/ActiveLocationMOdel.dart';
 import 'package:jewelone/Model/ActivePlanModel.dart';
 import 'package:jewelone/Model/BannerModel.dart';
 import 'package:jewelone/Model/ClosedAccountModel.dart';
+import 'package:jewelone/Model/CompanyListModel.dart';
 import 'package:jewelone/Model/ForgotPasswwordModel.dart';
 import 'package:jewelone/Model/GoldRateMmodel.dart';
 import 'package:jewelone/Model/LoginModel.dart';
@@ -58,6 +59,11 @@ final GoldrateProvider = FutureProvider<GoldRateModel?>((ref) async {
 final ActivelocationProvider =
     FutureProvider<ActiveLocationModel?>((ref) async {
   return ref.watch(apiServiceProvider).ActivelocationApi();
+});
+
+//Company List
+final CompanyListProvider = FutureProvider<CompanyListModel?>((ref) async {
+  return ref.watch(apiServiceProvider).CompanyListApi();
 });
 
 //MY PLAN

@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:jewelone/Common_Widgets/Custom_App_Bar.dart';
-import 'package:jewelone/Common_Widgets/Image_Path.dart';
+import 'package:jewelone/Model/CompanyListModel.dart';
 import 'package:jewelone/Src/Home_DashBoard_Ui/Home_DashBoard_Screen.dart';
+import 'package:jewelone/utilits/ApiProvider.dart';
 import 'package:jewelone/utilits/Common_Colors.dart';
 
 import '../../utilits/Text_Style.dart';
 
-class Contact_Us_Screen extends StatefulWidget {
+class Contact_Us_Screen extends ConsumerStatefulWidget {
   const Contact_Us_Screen({super.key});
 
   @override
-  State<Contact_Us_Screen> createState() => _Contact_Us_ScreenState();
+  ConsumerState<Contact_Us_Screen> createState() => _Contact_Us_ScreenState();
 }
 
-class _Contact_Us_ScreenState extends State<Contact_Us_Screen> {
+class _Contact_Us_ScreenState extends ConsumerState<Contact_Us_Screen> {
   @override
   Widget build(BuildContext context) {
+    final companyListData = ref.watch(CompanyListProvider);
+
     return Scaffold(
       backgroundColor: white2,
       appBar: Custom_AppBar(
@@ -32,56 +36,47 @@ class _Contact_Us_ScreenState extends State<Contact_Us_Screen> {
       ),
       body: Padding(
         padding: const EdgeInsets.only(
-          top: 20,
           left: 20,
           right: 20,
         ),
         child: SingleChildScrollView(
           //MAINBODY
-          child: _Mainbody(),
+          child: companyListData.when(
+              data: (data) {
+                return _Mainbody(data!);
+              },
+              loading: () {
+                return Center(child: CircularProgressIndicator());
+              },
+              error: (Object error, StackTrace stackTrace) {}),
         ),
       ),
     );
   }
 
-  Widget _Mainbody() {
+  Widget _Mainbody(CompanyListModel data) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        //TIMING
-        Text(
-          'Business Timings',
-          style: texts2,
-        ),
-        Text(
-          'Monday - Saturday   10:00 AM - 06:30 PM',
-          style: lighttext,
-        ),
-        //DIVIDER
-        Padding(
-          padding: const EdgeInsets.only(top: 20),
-          child: SizedBox(
-              width: MediaQuery.sizeOf(context).width,
-              child: ImgPathSvg('dottedline.svg')),
-        ),
         //ADDRESS CONTAINER
-        Address(context),
+        Address(context, data),
 
         Contactustext(),
 
-        //SCHEME RELATED ENQUIRE
-        Scheme(context),
+        // //SCHEME RELATED ENQUIRE
+        // Scheme(context),
 
         //GENDRAL ENQUIRE
         contactus(context,
-            heading: 'General Enquiries', number: '1800 1033916'),
+            heading: 'General Enquiries', number: data.mobile ?? ""),
 
         //WHATSAPP US
-        contactus(context, heading: 'WhatsApp Us', number: '+91 73972 73272'),
+        if ((data.whatsappNo ?? "") != "")
+          contactus(context,
+              heading: 'WhatsApp Us', number: data.whatsappNo ?? ""),
 
         //MAIL US
-        contactus(context,
-            heading: 'Mail Us', number: 'retail.crm@ejindia.com'),
+        contactus(context, heading: 'Mail Us', number: data.email ?? ""),
 
         const SizedBox(
           height: 30,
@@ -136,7 +131,7 @@ Widget contactus(context, {required String heading, required String number}) {
 
 Widget Contactustext() {
   return Padding(
-    padding: const EdgeInsets.only(bottom: 15, top: 15),
+    padding: const EdgeInsets.only(top: 15),
     child: Text(
       'Contact Us',
       style: texts2,
@@ -144,7 +139,7 @@ Widget Contactustext() {
   );
 }
 
-Widget Address(context) {
+Widget Address(context, CompanyListModel data) {
   return Padding(
     padding: const EdgeInsets.only(
       top: 20,
@@ -161,14 +156,14 @@ Widget Address(context) {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Shaining Dawn Corporate Office:',
+              "${data.companyName ?? ""}:",
               style: texts2,
             ),
             Divider(
               endIndent: 10,
             ),
             Text(
-              '231, 1, E TV Swamy Rd, R.S. Puram, Coimbatore,Tamil Nadu 642002',
+              '${data.address1 ?? ""},${data.address2 ?? ""} - ${data.pincode ?? ""}',
               style: lighttext,
             )
           ],
